@@ -2,13 +2,16 @@ import React from "react";
 import "./styles/css/App.css";
 import { Link } from "react-router-dom";
 // Component imports
-import MainHeader from "./components/MainHeader";
+import Header from "./components/sections/Header";
+import Categories from "./components/sections/Categories";
 function App() {
   return (
+    // index #7 layout
     <main className="App">
-      <MainHeader />
+      <Header />
+      <Categories />
     </main>
-  )
+  );
 }
 
 export default App;

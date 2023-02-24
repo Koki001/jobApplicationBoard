@@ -49,3 +49,22 @@
     transform: scale(0.95);
   }
 }
+.scrollToTop {
+  position: fixed;
+  z-index: 100;
+  bottom: 20px;
+  right: 20px;
+  font-size: 0.6rem;
+  border-radius: 50%;
+  transition: all 0.3s linear;
+  span {
+    display: block;
+    padding: 2px 0;
+  }
+}
+.scrollVisible {
+  opacity: 1;
+}
+.scrollHidden {
+  opacity: 0;
+}

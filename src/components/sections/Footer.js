@@ -5,7 +5,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 
 const Footer = () => {
   return (
-    <footer className="footerMain wrapper">
+    <footer id="contact" className="footerMain wrapper">
       <div className="footerTop">
         <div className="footerLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />

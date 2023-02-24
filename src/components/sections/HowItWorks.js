@@ -12,7 +12,7 @@ const HowItWorks = () => {
     setExpanded(newExpanded ? panel : false);
   };
   return (
-    <section className="howItWorks wrapper">
+    <section id="about" className="howItWorks wrapper">
       <h2>How does it work?</h2>
       <div className="howToSteps">
         <div className="howToAccount">

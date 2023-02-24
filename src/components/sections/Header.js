@@ -1,25 +1,25 @@
 const Header = () => {
   return (
-    <header className="mainHeader navWrapper">
+    <header id="home" className="mainHeader navWrapper">
       <nav>
         <div className="navLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
         </div>
         <ul className="navMenu">
           <li>
-            <a href="#">home</a>
+            <a href="#home">home</a>
           </li>
           <li>
-            <a href="#">jobs</a>
+            <a href="#jobs">jobs</a>
           </li>
           <li>
-            <a href="#">explore</a>
+            <a href="#about">about us</a>
           </li>
           <li>
-            <a href="#">contact</a>
+            <a href="#faq">FAQ</a>
           </li>
           <li>
-            <a href="#">pages</a>
+            <a href="#contact">contact</a>
           </li>
         </ul>
         <div className="navButtons">
@@ -58,13 +58,22 @@ const Header = () => {
 
       <div className="companyUserLogos">
         <div>
-          <img src="../assets/header/google.png" alt="company logo for Google" />
+          <img
+            src="../assets/header/google.png"
+            alt="company logo for Google"
+          />
         </div>
         <div>
-          <img src="../assets/header/shipbob.png" alt="company logo for Shipbob" />
+          <img
+            src="../assets/header/shipbob.png"
+            alt="company logo for Shipbob"
+          />
         </div>
         <div>
-          <img src="../assets/header/dribble.png" alt="company logo for Dribble" />
+          <img
+            src="../assets/header/dribble.png"
+            alt="company logo for Dribble"
+          />
         </div>
         <div>
           <img src="../assets/header/slack.png" alt="company logo for Slack" />
@@ -73,7 +82,10 @@ const Header = () => {
           <img src="../assets/header/vine.png" alt="company logo for Vine" />
         </div>
         <div>
-          <img src="../assets/header/airbnb.png" alt="company logo for Air B and B" />
+          <img
+            src="../assets/header/airbnb.png"
+            alt="company logo for Air B and B"
+          />
         </div>
       </div>
     </header>

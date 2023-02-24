@@ -1,6 +1,6 @@
 const Categories = () => {
   return (
-    <section className="categories">
+    <section id="jobs" className="categories">
       <div className="categoriesWrapped wrapper">
         <div className="categoriesExplore">
           <h2>In Demand Categories</h2>

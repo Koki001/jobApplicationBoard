@@ -13,7 +13,7 @@ const FAQ = () => {
     setExpanded(newExpanded ? panel : false);
   };
   return (
-    <section className="faq wrapper">
+    <section id="faq" className="faq wrapper">
       <h2>
         <span>Frequently Asked</span> Questions
       </h2>

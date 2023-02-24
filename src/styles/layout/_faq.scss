@@ -1,0 +1,41 @@
+@use "../base/variables" as *;
+
+.faq {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span {
+    display: block;
+  }
+  h2 {
+    text-align: center;
+    line-height: 2rem;
+  }
+}
+.faqAccordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 50px 0;
+  .css-6bxxch-MuiPaper-root-MuiAccordion-root.Mui-expanded::before {
+    opacity: 1;
+  }
+}
+.faqLink {
+  font-size: 0.7rem;
+  background-color: $greenBg;
+  padding: 8px 25px;
+  border-radius: 10px;
+  a {
+    margin-left: 5px;
+    color: $lightGreen;
+    border-bottom: 1px solid $lightGreen;
+    &:hover {
+      color: $brown;
+      border-bottom: 2px solid $brown;
+    }
+  }
+}

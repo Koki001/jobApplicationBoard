@@ -932,4 +932,46 @@ h1 * {
   width: 100%;
 }
 
+.faq {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.faq span {
+  display: block;
+}
+.faq h2 {
+  text-align: center;
+  line-height: 2rem;
+}
+
+.faqAccordion {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+  margin: 50px 0;
+}
+.faqAccordion .css-6bxxch-MuiPaper-root-MuiAccordion-root.Mui-expanded::before {
+  opacity: 1;
+}
+
+.faqLink {
+  font-size: 0.7rem;
+  background-color: #EFF6F3;
+  padding: 8px 25px;
+  border-radius: 10px;
+}
+.faqLink a {
+  margin-left: 5px;
+  color: #00BF58;
+  border-bottom: 1px solid #00BF58;
+}
+.faqLink a:hover {
+  color: #755146;
+  border-bottom: 2px solid #755146;
+}
+
 /*# sourceMappingURL=App.css.map */

@@ -4,7 +4,7 @@
   font-style: normal;
   font-weight: normal;
   src: local("Gordita Regular"),
-    url("../../fonts/Gordita Regular.woff") format("woff");
+    url("../fonts/Gordita Regular.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Regular Italic";
@@ -18,7 +18,7 @@
   font-style: normal;
   font-weight: normal;
   src: local("Gordita Thin"),
-    url("../../fonts/Gordita Thin.woff") format("woff");
+    url("../fonts/Gordita Thin.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Thin Italic";
@@ -46,7 +46,7 @@
   font-style: normal;
   font-weight: normal;
   src: local("Gordita Medium"),
-    url("../../fonts/Gordita Medium.woff") format("woff");
+    url("../fonts/Gordita Medium.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Medium Italic";
@@ -60,7 +60,7 @@
   font-style: normal;
   font-weight: normal;
   src: local("Gordita Bold"),
-    url("../../fonts/Gordita Bold.woff") format("woff");
+    url("../fonts/Gordita Bold.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Bold Italic";
@@ -101,4 +101,7 @@
 // Typography styles
 body * {
   font-family: "Gordita Regular", serif;
+}
+h1 * {
+  font-family: "Gordita Medium", serif;
 }

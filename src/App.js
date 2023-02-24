@@ -1,5 +1,4 @@
 import React from "react";
-import "./styles/css/App.css";
 import { Link } from "react-router-dom";
 // Component imports
 import Header from "./components/sections/Header";

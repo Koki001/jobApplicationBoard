@@ -240,11 +240,33 @@ p {
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.navWrapper {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
 @font-face {
   font-family: "Gordita Regular";
   font-style: normal;
   font-weight: normal;
-  src: local("Gordita Regular"), url("../../fonts/Gordita Regular.woff") format("woff");
+  src: local("Gordita Regular"), url("../fonts/Gordita Regular.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Regular Italic";
@@ -256,7 +278,7 @@ p {
   font-family: "Gordita Thin";
   font-style: normal;
   font-weight: normal;
-  src: local("Gordita Thin"), url("../../fonts/Gordita Thin.woff") format("woff");
+  src: local("Gordita Thin"), url("../fonts/Gordita Thin.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Thin Italic";
@@ -280,7 +302,7 @@ p {
   font-family: "Gordita Medium";
   font-style: normal;
   font-weight: normal;
-  src: local("Gordita Medium"), url("../../fonts/Gordita Medium.woff") format("woff");
+  src: local("Gordita Medium"), url("../fonts/Gordita Medium.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Medium Italic";
@@ -292,7 +314,7 @@ p {
   font-family: "Gordita Bold";
   font-style: normal;
   font-weight: normal;
-  src: local("Gordita Bold"), url("../../fonts/Gordita Bold.woff") format("woff");
+  src: local("Gordita Bold"), url("../fonts/Gordita Bold.woff") format("woff");
 }
 @font-face {
   font-family: "Gordita Bold Italic";
@@ -328,42 +350,183 @@ body * {
   font-family: "Gordita Regular", serif;
 }
 
-.wrapper {
-  max-width: 1200px;
-  width: 85%;
-  margin: 0 auto;
+h1 * {
+  font-family: "Gordita Medium", serif;
 }
 
-.navWrapper {
-  max-width: 1200px;
-  width: 90%;
-  margin: 0 auto;
+.buttonRoundClear {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonRoundClear:hover {
+  background-color: #755146;
+  border: 1px solid transparent;
+  color: white;
+}
+.buttonRoundClear:active {
+  transform: scale(0.95);
+}
+
+.buttonRoundGreen {
+  background-color: #00BF58;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonRoundGreen:hover {
+  background-color: #755146;
+}
+.buttonRoundGreen:active {
+  transform: scale(0.95);
+}
+
+.buttonSquareGreen {
+  background-color: #00BF58;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonSquareGreen:hover {
+  background-color: #755146;
+}
+.buttonSquareGreen:active {
+  transform: scale(0.95);
 }
 
 .mainHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  background-image: url("../assets/header/background.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 50px 0;
 }
 .mainHeader nav {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.mainHeader .navLogo {
+  min-width: 20%;
+}
+.mainHeader .navLogo img {
+  width: 90px;
 }
 .mainHeader .navMenu {
+  min-width: 40%;
+  text-transform: capitalize;
+  font-size: 0.8rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+}
+.mainHeader .navMenu li {
+  transition: all 0.1s linear;
+  margin: 0 12px;
+  border-bottom: 2px solid transparent;
+}
+.mainHeader .navMenu li:hover, .mainHeader .navMenu li:focus {
+  transform: scale(1.3);
+  border-bottom: 2px solid #00BF58;
+}
+.mainHeader .navButtons {
+  min-width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+.mainHeader .navButtons .buttonRoundGreen {
+  margin-left: 10px;
+}
+.mainHeader .headerCenter {
+  min-height: 50vh;
+  min-width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .mainHeader h1 {
   text-align: center;
+  font-size: 3.4rem;
 }
 .mainHeader h1 span {
   display: block;
 }
+.mainHeader .dreamText {
+  padding: 50px 0;
+}
 .mainHeader .headerSearchContainer {
-  width: 60%;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  border: 2px solid black;
+  padding: 20px;
+  border-radius: 5px;
+  margin-bottom: 40px;
+}
+.mainHeader .headerSearchContainer label {
+  font-size: 0.8rem;
+  color: rgb(170, 170, 170);
+  margin-bottom: 10px;
+}
+.mainHeader .headerSearchContainer input,
+.mainHeader .headerSearchContainer select {
+  font-size: 0.8rem;
+  text-transform: capitalize;
+}
+.mainHeader .headerSearchContainer select {
+  background-color: transparent;
+  border: none;
+}
+.mainHeader .headerSearchContainer input[type=text] {
+  border: none;
+}
+.mainHeader .headerSearchLeft {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgb(170, 170, 170);
+  padding-right: 20px;
+}
+.mainHeader .headerSearchMiddle {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px;
+}
+.mainHeader .headerSearchRight {
+  height: 100%;
+}
+.mainHeader .headerSearchRight button {
+  text-transform: uppercase;
+  padding: 20px 30px;
+}
+.mainHeader .popularTag {
+  font-size: 0.8rem;
+  color: rgb(170, 170, 170);
+}
+.mainHeader .popularTag span {
+  font-weight: bold;
+  color: black;
+  margin-right: 10px;
 }
 .mainHeader .headerStats {
   width: 80%;
@@ -373,12 +536,27 @@ body * {
   justify-content: center;
 }
 .mainHeader .companyUserLogos {
-  width: 100%;
+  width: 95%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.mainHeader .companyUserLogos div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
 }
 
 .categories {
+  background-color: #EFF6F3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.categories .categoriesWrapped {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -396,6 +574,9 @@ body * {
 }
 .categories .categoriesCards li {
   width: calc(25% - 20px);
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;

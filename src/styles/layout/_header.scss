@@ -1,26 +1,126 @@
+@use "../base/variables" as *;
+
 .mainHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  background-image: url("../assets/header/background.png");
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 50px 0;
   nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  .navLogo {
+    min-width: 20%;
+    img {
+      width: 90px;
+    }
   }
   .navMenu {
+    min-width: 40%;
+    text-transform: capitalize;
+    font-size: 0.8rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    li {
+      transition: all 0.1s linear;
+      margin: 0 12px;
+      border-bottom: 2px solid transparent;
+      &:hover,
+      &:focus {
+        transform: scale(1.3);
+        border-bottom: 2px solid $lightGreen;
+      }
+    }
+  }
+  .navButtons {
+    min-width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    .buttonRoundGreen {
+      margin-left: 10px;
+    }
+  }
+  .headerCenter {
+    min-height: 50vh;
+    min-width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
   h1 {
     text-align: center;
+    font-size: 3.4rem;
     span {
       display: block;
     }
   }
+  .dreamText {
+    padding: 50px 0;
+  }
   .headerSearchContainer {
-    width: 60%;
+    width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    border: 2px solid black;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 40px;
+    label {
+      font-size: 0.8rem;
+      color: $darkGrey;
+      margin-bottom: 10px;
+    }
+    input,
+    select {
+      font-size: 0.8rem;
+      text-transform: capitalize;
+    }
+    select {
+      background-color: transparent;
+      border: none;
+    }
+    input[type=text] {
+      border: none;
+    }
+  }
+  .headerSearchLeft {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid $darkGrey;
+    padding-right: 20px;
+  }
+  .headerSearchMiddle {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+  }
+  .headerSearchRight {
+    height: 100%;
+    button {
+      text-transform: uppercase;
+      padding: 20px 30px;
+    }
+  }
+  .popularTag {
+    font-size: 0.8rem;
+    color: $darkGrey;
+    span {
+      font-weight: bold;
+      color: black;
+      margin-right: 10px;
+    }
   }
   .headerStats {
     width: 80%;
@@ -30,8 +130,15 @@
     justify-content: center;
   }
   .companyUserLogos {
-    width: 100%;
+    width: 95%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
   }
 }

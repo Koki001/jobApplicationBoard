@@ -1,8 +1,18 @@
+@use "../base/variables" as *;
+
 .categories {
+  background-color: $greenBg;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  .categoriesWrapped {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
   .categoriesExplore {
     width: 100%;
     display: flex;
@@ -14,6 +24,9 @@
     justify-content: space-between;
     li {
       width: calc(100% / 4 - 20px);
+      background-color: white;
+      padding: 30px;
+      border-radius: 5px;
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 20px;

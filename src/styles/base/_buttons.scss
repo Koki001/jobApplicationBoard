@@ -1,0 +1,51 @@
+@use "variables" as *;
+
+.buttonRoundClear {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $brown;
+    border: 1px solid transparent;
+    color: white;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+.buttonRoundGreen {
+  background-color: $lightGreen;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $brown;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
+.buttonSquareGreen {
+  background-color: $lightGreen;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $brown;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}

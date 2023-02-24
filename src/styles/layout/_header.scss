@@ -10,12 +10,16 @@
   background-size: contain;
   background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 50px 0;
+  padding-bottom: 50px;
   nav {
     width: 100%;
+    padding: 50px 0;
+    background-color: rgba(255, 255, 255, 0.85);
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: sticky;
+    top: 0;
   }
   .navLogo {
     min-width: 20%;

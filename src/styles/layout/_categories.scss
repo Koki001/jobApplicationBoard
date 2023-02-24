@@ -17,19 +17,79 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+    a {
+      font-size: 0.7rem;
+      color: $lightGreen;
+      padding: 5px 0;
+      border-bottom: 2px solid $lightGreen;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.1s linear;
+      &:hover {
+        color: $brown;
+        border-bottom: 2px solid $brown;
+      }
+    }
   }
   .categoriesCards {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    font-size: 0.9rem;
     li {
       width: calc(100% / 4 - 20px);
       background-color: white;
-      padding: 30px;
+      padding: 40px 30px;
       border-radius: 5px;
       display: flex;
       flex-wrap: wrap;
       margin-bottom: 20px;
+    }
+    .categoryVacancies {
+      font-size: 0.7rem;
+      color: $darkGrey;
+      padding-top: 20px;
+    }
+    .categoriesText {
+      padding: 20px 0;
+      width: 80%;
+      line-height: 1.4rem;
+    }
+    .logo {
+      width: 60px;
+    }
+    .categoriesFinalCard {
+      background-color: $lightGreen;
+      color: white;
+      h3 {
+        font-family: "EB Garamond", serif;
+        font-weight: lighter;
+        font-size: 4rem;
+      }
+      p {
+        font-size: 0.8rem;
+      }
+    }
+    .finalCardIcons {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: flex-end;
+      padding-top: 30px;
+    }
+    .linesArt {
+      width: 40px;
+      height: 40px;
+      margin: 0 25px 25px 0;
+      transform: rotate(-15deg);
+    }
+    .arrowArt {
+      width: 70px;
+      height: 70px;
+      margin-left: 20px;
     }
   }
 }

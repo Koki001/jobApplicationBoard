@@ -416,13 +416,17 @@ h1 * {
   background-size: contain;
   background-repeat: no-repeat;
   min-height: 100vh;
-  padding: 50px 0;
+  padding-bottom: 50px;
 }
 .mainHeader nav {
   width: 100%;
+  padding: 50px 0;
+  background-color: rgba(255, 255, 255, 0.85);
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
 }
 .mainHeader .navLogo {
   min-width: 20%;
@@ -566,20 +570,80 @@ h1 * {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  padding-bottom: 50px;
+}
+.categories .categoriesExplore a {
+  font-size: 0.7rem;
+  color: #00BF58;
+  padding: 5px 0;
+  border-bottom: 2px solid #00BF58;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s linear;
+}
+.categories .categoriesExplore a:hover {
+  color: #755146;
+  border-bottom: 2px solid #755146;
 }
 .categories .categoriesCards {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  font-size: 0.9rem;
 }
 .categories .categoriesCards li {
   width: calc(25% - 20px);
   background-color: white;
-  padding: 30px;
+  padding: 40px 30px;
   border-radius: 5px;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 20px;
+}
+.categories .categoriesCards .categoryVacancies {
+  font-size: 0.7rem;
+  color: rgb(170, 170, 170);
+  padding-top: 20px;
+}
+.categories .categoriesCards .categoriesText {
+  padding: 20px 0;
+  width: 80%;
+  line-height: 1.4rem;
+}
+.categories .categoriesCards .logo {
+  width: 60px;
+}
+.categories .categoriesCards .categoriesFinalCard {
+  background-color: #00BF58;
+  color: white;
+}
+.categories .categoriesCards .categoriesFinalCard h3 {
+  font-family: "EB Garamond", serif;
+  font-weight: lighter;
+  font-size: 4rem;
+}
+.categories .categoriesCards .categoriesFinalCard p {
+  font-size: 0.8rem;
+}
+.categories .categoriesCards .finalCardIcons {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding-top: 30px;
+}
+.categories .categoriesCards .linesArt {
+  width: 40px;
+  height: 40px;
+  margin: 0 25px 25px 0;
+  transform: rotate(-15deg);
+}
+.categories .categoriesCards .arrowArt {
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
 }
 
 .howItWorks {

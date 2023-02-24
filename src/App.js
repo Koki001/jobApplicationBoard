@@ -8,6 +8,8 @@ import Reviews from "./components/sections/Reviews";
 import FAQ from "./components/sections/FAQ";
 import JobGuides from "./components/sections/JobGuides";
 import Footer from "./components/sections/Footer";
+// MUI imports
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 function App() {
   const [showButton, setShowButton] = useState(false);
   const handleScrollToTop = () => {
@@ -15,7 +17,7 @@ function App() {
   };
   useEffect(() => {
     const handleVisibility = () => {
-      window.pageYOffset > 1000 ? setShowButton(true) : setShowButton(false);
+      window.pageYOffset > 2000 ? setShowButton(true) : setShowButton(false);
     };
     window.addEventListener("scroll", handleVisibility);
     return () => {
@@ -35,7 +37,7 @@ function App() {
               : `scrollToTop buttonRoundGreen scrollHidden`
           }
         >
-          <span>Scroll</span> To <span>Top</span>
+          <KeyboardArrowUpIcon/>
         </button>
         <Header />
         <Categories />

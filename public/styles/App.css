@@ -410,23 +410,30 @@ h1 * {
 .scrollToTop {
   position: fixed;
   z-index: 100;
-  bottom: 20px;
-  right: 20px;
+  bottom: 0;
+  right: 50%;
+  transform: translate(50%, -50%);
   font-size: 0.6rem;
-  border-radius: 50%;
-  transition: all 0.3s linear;
+  border-radius: 10px;
+  background-color: #00BF58;
+  opacity: 0.7;
+  padding: 0 10px;
+  color: black;
 }
-.scrollToTop span {
-  display: block;
-  padding: 2px 0;
+.scrollToTop:hover {
+  color: white;
+  background-color: #755146;
+}
+.scrollToTop:active {
+  transform: translate(50%, -50%);
 }
 
 .scrollVisible {
-  opacity: 1;
+  display: block;
 }
 
 .scrollHidden {
-  opacity: 0;
+  display: none;
 }
 
 .mainHeader {

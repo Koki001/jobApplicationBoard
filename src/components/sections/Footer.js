@@ -10,63 +10,63 @@ const Footer = () => {
         <div className="footerLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
         </div>
-        <ul className="footerProducts">
-          <li>
-            <h4>Products</h4>
-          </li>
-          <li>
-            <a href="#">Take the tour</a>
-          </li>
-          <li>
-            <a href="#">Live chat</a>
-          </li>
-          <li>
-            <a href="#">Self-service</a>
-          </li>
-          <li>
-            <a href="#">Mobile</a>
-          </li>
-          <li>
-            <a href="#">Collaboration</a>
-          </li>
-          <li>
-            <a href="#">Reviews</a>
-          </li>
-        </ul>
-        <ul className="footerLinks">
-          <li>
-            <h4>Links</h4>
-          </li>
-          <li>
-            <a href="#">Pricing</a>
-          </li>
-          <li>
-            <a href="#">About us</a>
-          </li>
-          <li>
-            <a href="#">Careers</a>
-          </li>
-          <li>
-            <a href="#">Blog</a>
-          </li>
-        </ul>
-        <ul className="footerLegal">
-          <li>
-            <h4>Legal</h4>
-          </li>
-          <li>
-            <a href="#">Terms of use</a>
-          </li>
-          <li>
-            <a href="#">Terms & conditions</a>
-          </li>
-          <li>
-            <a href="#">Privacy</a>
-          </li>
-          <li>
-            <a href="#">Cookie policy</a>
-          </li>
-        </ul>
+        <div>
+          <h4>Products</h4>
+          <ul className="footerProducts">
+            <li>
+              <a href="#">Take the tour</a>
+            </li>
+            <li>
+              <a href="#">Live chat</a>
+            </li>
+            <li>
+              <a href="#">Self-service</a>
+            </li>
+            <li>
+              <a href="#">Mobile</a>
+            </li>
+            <li>
+              <a href="#">Collaboration</a>
+            </li>
+            <li>
+              <a href="#">Reviews</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <ul className="footerLinks">
+            <li>
+              <a href="#">Pricing</a>
+            </li>
+            <li>
+              <a href="#">About us</a>
+            </li>
+            <li>
+              <a href="#">Careers</a>
+            </li>
+            <li>
+              <a href="#">Blog</a>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <ul className="footerLegal">
+            <li>
+              <a href="#">Terms of use</a>
+            </li>
+            <li>
+              <a href="#">Terms & conditions</a>
+            </li>
+            <li>
+              <a href="#">Privacy</a>
+            </li>
+            <li>
+              <a href="#">Cookie policy</a>
+            </li>
+          </ul>
+        </div>
         <div className="footerNewsletter">
           <h4>Newsletter</h4>
           <p>Join & get important updates</p>

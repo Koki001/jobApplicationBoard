@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <header className="mainHeader">
-      <nav>
+      <nav className="navWrapper">
         <div className="navLogo">
           <p>jobi logo</p>
         </div>
@@ -19,15 +19,13 @@ const Header = () => {
         </div>
       </nav>
       <h1>
-        <span>Find & Hire Experts</span>{" "}<span>for any Job.</span>
+        <span>Find & Hire</span> <span>Experts for any Job.</span>
       </h1>
-      <p>Unlock your potential with quality jobs & earn from world leading brands</p>
+      <p>
+        Unlock your potential with quality jobs & earn from world leading brands
+      </p>
       <div className="headerSearchContainer">
         <div className="headerSearchLeft">
-          <label htmlFor="keyword">Your job title, keyword or company</label>
-          <input id="keyword" type="text" />
-        </div>
-        <div className="headerSearchMiddle">
           <label htmlFor="category">Category</label>
           <select name="category" id="category">
             <option value="">something</option>
@@ -35,6 +33,10 @@ const Header = () => {
             <option value="">something3</option>
             <option value="">something4</option>
           </select>
+        </div>
+        <div className="headerSearchMiddle">
+          <label htmlFor="keyword">keyword or company</label>
+          <input id="keyword" type="text" />
         </div>
         <div className="headerSearchRight">
           <button>Search</button>

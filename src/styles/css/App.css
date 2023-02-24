@@ -324,5 +324,98 @@ p {
   font-weight: normal;
   src: local("Gordita Ultra Italic"), url("../../fonts/Gordita Ultra Italic.woff") format("woff");
 }
+body * {
+  font-family: "Gordita Regular", serif;
+}
+
+.wrapper {
+  max-width: 1200px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.navWrapper {
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+}
+
+.mainHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mainHeader nav {
+  display: flex;
+  justify-content: space-between;
+}
+.mainHeader .navMenu {
+  display: flex;
+  justify-content: space-between;
+}
+.mainHeader h1 {
+  text-align: center;
+}
+.mainHeader h1 span {
+  display: block;
+}
+.mainHeader .headerSearchContainer {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.mainHeader .headerStats {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.mainHeader .companyUserLogos {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.categories .categoriesExplore {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.categories .categoriesCards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.categories .categoriesCards li {
+  width: calc(25% - 20px);
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.howItWorks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.howItWorks .howToSteps {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.howItWorks .howToTalent {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
 
 /*# sourceMappingURL=App.css.map */

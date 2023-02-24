@@ -13,7 +13,7 @@ const NavBar = () => {
     }
   }, [location]);
   return (
-    <nav>
+    <nav className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
         <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 // MUI imports
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -37,10 +38,12 @@ const Footer = () => {
           <h4>Links</h4>
           <ul className="footerLinks">
             <li>
-              <a href="#">Pricing</a>
+              <Link to={"/pricing"}>Pricing</Link>
+              {/* <a href="#">Pricing</a> */}
             </li>
             <li>
-              <a href="#">About us</a>
+              <Link to={"/#about"}>About us</Link>
+              {/* <a href="#">About us</a> */}
             </li>
             <li>
               <a href="#">Careers</a>

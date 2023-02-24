@@ -407,6 +407,23 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonPriceGreen {
+  background-color: #31795A;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  padding: 20px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonPriceGreen:hover {
+  background-color: #755146;
+}
+.buttonPriceGreen:active {
+  transform: scale(0.95);
+}
+
 .scrollToTop {
   position: fixed;
   z-index: 100;
@@ -1058,7 +1075,7 @@ h1 * {
 
 .footerBottom {
   width: 100%;
-  padding-bottom: 100px;
+  padding-bottom: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1099,55 +1116,140 @@ h1 * {
   color: #755146;
 }
 
-.aboutUs {
+.pricingHeader {
   background-color: #EFF6F3;
-}
-
-.aboutUsHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 50px;
+  padding-bottom: 100px;
 }
-.aboutUsHeader nav {
+.pricingHeader h2 {
+  margin-bottom: 20px;
+}
+.pricingHeader nav {
   width: 100%;
   padding: 50px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
 }
-.aboutUsHeader .navLogo {
+.pricingHeader .navLogo {
   min-width: 20%;
 }
-.aboutUsHeader .navLogo img {
+.pricingHeader .navLogo img {
   width: 90px;
 }
-.aboutUsHeader .navMenu {
+.pricingHeader .navMenu {
   min-width: 40%;
   text-transform: capitalize;
   font-size: 0.8rem;
   display: flex;
   justify-content: center;
 }
-.aboutUsHeader .navMenu li {
+.pricingHeader .navMenu li {
   transition: all 0.1s linear;
   margin: 0 12px;
   border-bottom: 2px solid transparent;
 }
-.aboutUsHeader .navMenu li:hover, .aboutUsHeader .navMenu li:focus {
+.pricingHeader .navMenu li:hover, .pricingHeader .navMenu li:focus {
   transform: scale(1.3);
   border-bottom: 2px solid #00BF58;
 }
-.aboutUsHeader .navButtons {
+.pricingHeader .navButtons {
   min-width: 20%;
   display: flex;
   justify-content: flex-end;
 }
-.aboutUsHeader .navButtons .buttonRoundGreen {
+.pricingHeader .navButtons .buttonRoundGreen {
   margin-left: 10px;
+}
+
+.pricingPlan {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
+.pricingPlan h2 {
+  margin-bottom: 50px;
+}
+
+.pricingCards {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pricingCards li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: calc(33.3333333333% - 20px);
+  border: 2px solid #31795A;
+  border-radius: 20px;
+  padding: 40px 30px;
+}
+.pricingCards h5 {
+  margin-bottom: 30px;
+}
+.pricingCards h4 {
+  text-align: center;
+  font-size: 3rem;
+  position: relative;
+  width: 50%;
+  min-width: 130px;
+}
+.pricingCards .dollarSign {
+  position: absolute;
+  top: 10px;
+  left: 0;
+  font-size: 1rem;
+}
+.pricingCards .cents {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  font-size: 1rem;
+}
+.pricingCards .popular {
+  position: relative;
+  background-color: #F8FDE4;
+  border: 2px solid #D2F34C;
+}
+.pricingCards .popular button {
+  background-color: #D2F34C;
+  color: #31795A;
+}
+.pricingCards .popular button:hover {
+  background-color: #755146;
+  color: white;
+}
+.pricingCards .popularBanner {
+  position: absolute;
+  top: 30px;
+  left: -5px;
+}
+.pricingCards .popularBanner p {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+.pricingCards .planDetails {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 0;
+  line-height: 2.2rem;
+}
+.pricingCards button {
+  width: 100%;
 }
 
 /*# sourceMappingURL=App.css.map */

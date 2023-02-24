@@ -154,8 +154,8 @@ const HowItWorks = () => {
               </AccordionDetails>
             </Accordion>
           </div>
-          <Link to={"/about"}>
-            <button className="buttonRoundGreen">Learn more</button>
+          <Link to={"/pricing"}>
+            <button className="buttonRoundGreen">See pricing</button>
           </Link>
         </div>
       </div>

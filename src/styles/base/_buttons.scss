@@ -49,12 +49,28 @@
     transform: scale(0.95);
   }
 }
+.buttonPriceGreen {
+  background-color: $green;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 30px;
+  font-size: 0.8rem;
+  padding: 20px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $brown;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
 .scrollToTop {
   position: fixed;
   z-index: 100;
   bottom: 0;
   right: 50%;
-  transform: translate(50%,-50%);
+  transform: translate(50%, -50%);
   font-size: 0.6rem;
   border-radius: 10px;
   background-color: $lightGreen;
@@ -63,10 +79,10 @@
   color: black;
   &:hover {
     color: white;
-  background-color: $brown;
+    background-color: $brown;
   }
   &:active {
-    transform: translate(50%,-50%);
+    transform: translate(50%, -50%);
   }
 }
 .scrollVisible {

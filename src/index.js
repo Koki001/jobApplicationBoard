@@ -5,7 +5,7 @@ import { store } from './redux/store';
 import App from './App';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-import AboutUs from './components/AboutUs';
+import Pricing from './components/Pricing';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -18,8 +18,8 @@ const router = createBrowserRouter([
     element: <App />,
   },
   {
-    path: "/about",
-    element: <AboutUs />,
+    path: "/pricing",
+    element: <Pricing />,
   },
   {
     path: "/login",

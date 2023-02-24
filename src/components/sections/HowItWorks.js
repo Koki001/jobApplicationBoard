@@ -60,7 +60,7 @@ const HowItWorks = () => {
       </div>
       <div className="howToTalent">
         <div className="howToLeft">
-          <img src="../assets/howItWorks/leftTemplate.png" alt="" />
+          <img src="../assets/jobGuides/blogPlaceholder.png" alt="" />
         </div>
         <div className="howToRight">
           <div>

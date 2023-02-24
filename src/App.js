@@ -16,9 +16,9 @@ function App() {
         <Header />
         <Categories />
         <HowItWorks />
+        <JobGuides />
         <Reviews />
         <FAQ />
-        <JobGuides />
       </main>
       <Footer />
     </div>

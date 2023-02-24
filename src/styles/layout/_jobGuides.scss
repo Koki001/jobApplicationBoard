@@ -1,0 +1,116 @@
+@use "../base/variables" as *;
+.jobGuides {
+  background-color: $greenBg;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
+.jobGuidesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.jobGuidesTop {
+  width: 100%;
+  h2 {
+    padding-bottom: 60px;
+  }
+}
+.jobGuidesHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    font-size: 0.7rem;
+    color: $lightGreen;
+    padding: 5px 0;
+    border-bottom: 2px solid $lightGreen;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s linear;
+    &:hover {
+      color: $brown;
+      border-bottom: 2px solid $brown;
+    }
+  }
+}
+.jobGuidesBlogs {
+  display: flex;
+  justify-content: space-between;
+  li {
+    width: calc(100% / 2 - 30px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .blogImage {
+    position: relative;
+    button {
+      position: absolute;
+      bottom: 30px;
+      left: 30px;
+      text-transform: uppercase;
+      font-size: 0.7rem;
+    }
+  }
+}
+.blogCard {
+  p, a {
+    align-self: flex-start;
+    font-size: 0.7rem;
+  }
+  .publishedText {
+    padding: 20px 0;
+    color: $darkGrey;
+  }
+  .blogHeading {
+    font-size: 1rem;
+  }
+  .blogLink {
+    padding: 20px 0;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    svg {
+      margin-left: 20px;
+    }
+    &:hover {
+      color: $lightGreen;
+    }
+  }
+}
+.jobGuidesBottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 150px 0;
+}
+.cvUploadLeft {
+  width: calc(50% - 30px);
+}
+.cvUploadRight {
+  width: calc(50% - 30px);
+  h2 span {
+    display: block;
+  }
+  p {
+    padding: 30px 0;
+    line-height: 1.3rem;
+    font-size: 0.8rem;
+    width: 80%;
+  }
+  button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    img {
+      width: 20px;
+      margin-right: 10px;
+    }
+  }
+}

@@ -1,0 +1,78 @@
+@use "../base/variables" as *;
+
+.reviews {
+  min-height: 100vh;
+  padding: 100px 0;
+}
+.reviewsHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  span {
+    display: block;
+  }
+}
+.reviewsCarousel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 0;
+}
+.reviewsCarouselButtons button {
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    transform: scale(1.2);
+    color: $lightGreen;
+  }
+  &:active {
+    transform: scale(1);
+    color: $brown;
+  }
+}
+.reviewsCard {
+  width: calc(100% / 2 - 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 40px;
+  border-radius: 15px;
+  color: white;
+  height: 500px;
+}
+.reviewsCard.first {
+  background-color: $lightGreen;
+}
+.reviewsCard.second {
+  background-color: $brown;
+}
+.reviewsLogo {
+  width: 100px;
+}
+.reviewsText {
+  line-height: 1.5rem;
+  padding-top: 50px;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+.reviewsAuthor {
+  font-size: 0.7rem;
+  padding: 50px 0;
+  border-bottom: 1px solid white;
+  width: 100%;
+  span {
+    font-weight: bold;
+  }
+}
+.reviewsRating {
+  padding-top: 50px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

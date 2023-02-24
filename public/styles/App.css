@@ -694,9 +694,14 @@ h1 * {
 }
 .howItWorks .howToTalent {
   padding: 100px 0;
+  min-height: 675px;
 }
 .howItWorks .howToLeft {
   width: 50%;
+  object-fit: contain;
+}
+.howItWorks .howToLeft img {
+  height: 100%;
 }
 .howItWorks .howToRight {
   width: 50%;
@@ -716,6 +721,215 @@ h1 * {
 }
 .howItWorks button {
   align-self: flex-start;
+}
+
+.jobGuides {
+  background-color: #EFF6F3;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 100px 0;
+}
+
+.jobGuidesWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.jobGuidesTop {
+  width: 100%;
+}
+.jobGuidesTop h2 {
+  padding-bottom: 60px;
+}
+
+.jobGuidesHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobGuidesHeading a {
+  font-size: 0.7rem;
+  color: #00BF58;
+  padding: 5px 0;
+  border-bottom: 2px solid #00BF58;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s linear;
+}
+.jobGuidesHeading a:hover {
+  color: #755146;
+  border-bottom: 2px solid #755146;
+}
+
+.jobGuidesBlogs {
+  display: flex;
+  justify-content: space-between;
+}
+.jobGuidesBlogs li {
+  width: calc(50% - 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.jobGuidesBlogs .blogImage {
+  position: relative;
+}
+.jobGuidesBlogs .blogImage button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.blogCard p, .blogCard a {
+  align-self: flex-start;
+  font-size: 0.7rem;
+}
+.blogCard .publishedText {
+  padding: 20px 0;
+  color: rgb(170, 170, 170);
+}
+.blogCard .blogHeading {
+  font-size: 1rem;
+}
+.blogCard .blogLink {
+  padding: 20px 0;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.blogCard .blogLink svg {
+  margin-left: 20px;
+}
+.blogCard .blogLink:hover {
+  color: #00BF58;
+}
+
+.jobGuidesBottom {
+  display: flex;
+  justify-content: space-between;
+  padding: 150px 0;
+}
+
+.cvUploadLeft {
+  width: calc(50% - 30px);
+}
+
+.cvUploadRight {
+  width: calc(50% - 30px);
+}
+.cvUploadRight h2 span {
+  display: block;
+}
+.cvUploadRight p {
+  padding: 30px 0;
+  line-height: 1.3rem;
+  font-size: 0.8rem;
+  width: 80%;
+}
+.cvUploadRight button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.cvUploadRight button img {
+  width: 20px;
+  margin-right: 10px;
+}
+
+.reviews {
+  min-height: 100vh;
+  padding: 100px 0;
+}
+
+.reviewsHeading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.reviewsHeading span {
+  display: block;
+}
+
+.reviewsCarousel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 50px 0;
+}
+
+.reviewsCarouselButtons button {
+  margin-left: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.reviewsCarouselButtons button:hover {
+  transform: scale(1.2);
+  color: #00BF58;
+}
+.reviewsCarouselButtons button:active {
+  transform: scale(1);
+  color: #755146;
+}
+
+.reviewsCard {
+  width: calc(50% - 30px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 50px 40px;
+  border-radius: 15px;
+  color: white;
+  height: 500px;
+}
+
+.reviewsCard.first {
+  background-color: #00BF58;
+}
+
+.reviewsCard.second {
+  background-color: #755146;
+}
+
+.reviewsLogo {
+  width: 100px;
+}
+
+.reviewsText {
+  line-height: 1.5rem;
+  padding-top: 50px;
+  font-size: 1rem;
+  font-weight: bolder;
+}
+
+.reviewsAuthor {
+  font-size: 0.7rem;
+  padding: 50px 0;
+  border-bottom: 1px solid white;
+  width: 100%;
+}
+.reviewsAuthor span {
+  font-weight: bold;
+}
+
+.reviewsRating {
+  padding-top: 50px;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 /*# sourceMappingURL=App.css.map */

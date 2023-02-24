@@ -47,9 +47,14 @@
   }
   .howToTalent {
     padding: 100px 0;
+    min-height: 675px;
   }
   .howToLeft {
     width: 50%;
+    object-fit: contain;
+    img {
+      height: 100%;
+    }
   }
   .howToRight {
     width: 50%;

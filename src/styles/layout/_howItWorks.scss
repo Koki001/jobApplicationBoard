@@ -1,16 +1,73 @@
+@use "../base/variables" as *;
+
 .howItWorks {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 100px 0;
+  min-height: 100vh;
   .howToSteps {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    padding: 100px 0;
+    border-bottom: 1px solid $darkGrey;
+    div {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    h5 {
+      padding: 20px 0;
+    }
+    p {
+      font-size: 0.7rem;
+      line-height: 1.2rem;
+    }
+  }
+  .howToArrow {
+    align-self: flex-start;
+    width: 12%;
+  }
+  .howToIcon {
+    width: 60px;
   }
   .howToTalent {
     width: 100%;
     display: flex;
     justify-content: space-between;
+  }
+  .howToAccount,
+  .howToProfile,
+  .howToApply {
+    width: 20%;
+    min-width: 200px;
+  }
+  .howToTalent {
+    padding: 100px 0;
+  }
+  .howToLeft {
+    width: 50%;
+  }
+  .howToRight {
+    width: 50%;
+    padding-left: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .whyUs {
+    font-size: 0.7rem;
+    color: $lightGreen;
+    padding-bottom: 15px;
+  }
+  .howToAccordion {
+    padding: 50px 0;
+  }
+  button {
+    align-self: flex-start;
   }
 }

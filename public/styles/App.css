@@ -650,17 +650,72 @@ h1 * {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  padding: 100px 0;
+  min-height: 100vh;
 }
 .howItWorks .howToSteps {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding: 100px 0;
+  border-bottom: 1px solid rgb(170, 170, 170);
+}
+.howItWorks .howToSteps div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.howItWorks .howToSteps h5 {
+  padding: 20px 0;
+}
+.howItWorks .howToSteps p {
+  font-size: 0.7rem;
+  line-height: 1.2rem;
+}
+.howItWorks .howToArrow {
+  align-self: flex-start;
+  width: 12%;
+}
+.howItWorks .howToIcon {
+  width: 60px;
 }
 .howItWorks .howToTalent {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+.howItWorks .howToAccount,
+.howItWorks .howToProfile,
+.howItWorks .howToApply {
+  width: 20%;
+  min-width: 200px;
+}
+.howItWorks .howToTalent {
+  padding: 100px 0;
+}
+.howItWorks .howToLeft {
+  width: 50%;
+}
+.howItWorks .howToRight {
+  width: 50%;
+  padding-left: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.howItWorks .whyUs {
+  font-size: 0.7rem;
+  color: #00BF58;
+  padding-bottom: 15px;
+}
+.howItWorks .howToAccordion {
+  padding: 50px 0;
+}
+.howItWorks button {
+  align-self: flex-start;
 }
 
 /*# sourceMappingURL=App.css.map */

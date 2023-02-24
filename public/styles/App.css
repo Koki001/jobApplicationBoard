@@ -846,7 +846,7 @@ h1 * {
 }
 
 .reviews {
-  min-height: 100vh;
+  min-height: 90vh;
   padding: 100px 0;
 }
 
@@ -933,7 +933,7 @@ h1 * {
 }
 
 .faq {
-  min-height: 100vh;
+  min-height: 50vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -972,6 +972,101 @@ h1 * {
 .faqLink a:hover {
   color: #755146;
   border-bottom: 2px solid #755146;
+}
+
+.footerMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerTop {
+  padding: 100px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.footerTop h4 {
+  padding: 10px 0;
+  margin-bottom: 20px;
+  font-size: 0.8rem;
+}
+.footerTop li {
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+  transition: all 0.1s linear;
+}
+.footerTop li:hover {
+  transform: scale(1.1);
+}
+.footerTop li:hover a {
+  color: #00BF58;
+}
+
+.footerNewsletter p {
+  font-size: 0.8rem;
+}
+.footerNewsletter span {
+  font-size: 0.6rem;
+  color: rgb(170, 170, 170);
+}
+
+.newsletterInputs {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 20px;
+}
+.newsletterInputs input {
+  border: none;
+}
+
+.footerBottom {
+  width: 100%;
+  padding-bottom: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footerBottomLeft {
+  font-size: 0.6rem;
+  font-weight: bold;
+  width: 200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.footerBottomLeft a {
+  transition: all 0.1s linear;
+}
+.footerBottomLeft a:hover {
+  transform: scale(1.1);
+  color: #00BF58;
+}
+
+.footerBottom p {
+  font-size: 0.6rem;
+  color: rgb(170, 170, 170);
+}
+
+.footerBottomRight {
+  display: flex;
+  width: 200px;
+  justify-content: space-between;
+  align-items: center;
+}
+.footerBottomRight a {
+  transition: all 0.1s linear;
+}
+.footerBottomRight a:hover {
+  transform: scale(1.2);
+  color: #755146;
 }
 
 /*# sourceMappingURL=App.css.map */

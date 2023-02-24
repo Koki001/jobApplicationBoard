@@ -1,35 +1,83 @@
+// MUI imports
+import PinterestIcon from "@mui/icons-material/Pinterest";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import InstagramIcon from "@mui/icons-material/Instagram";
+
 const Footer = () => {
   return (
-    <footer className="footerMain">
+    <footer className="footerMain wrapper">
       <div className="footerTop">
         <div className="footerLogo">
-          <p>logo</p>
-          <p>image</p>
+          <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
         </div>
         <ul className="footerProducts">
-          <li>Take the tour</li>
-          <li>Live chat</li>
-          <li>Self-service</li>
-          <li>Mobile</li>
-          <li>Collaboration</li>
-          <li>Reviews</li>
+          <li>
+            <h4>Products</h4>
+          </li>
+          <li>
+            <a href="#">Take the tour</a>
+          </li>
+          <li>
+            <a href="#">Live chat</a>
+          </li>
+          <li>
+            <a href="#">Self-service</a>
+          </li>
+          <li>
+            <a href="#">Mobile</a>
+          </li>
+          <li>
+            <a href="#">Collaboration</a>
+          </li>
+          <li>
+            <a href="#">Reviews</a>
+          </li>
         </ul>
         <ul className="footerLinks">
-          <li>Pricing</li>
-          <li>About us</li>
-          <li>Careers</li>
-          <li>Blog</li>
+          <li>
+            <h4>Links</h4>
+          </li>
+          <li>
+            <a href="#">Pricing</a>
+          </li>
+          <li>
+            <a href="#">About us</a>
+          </li>
+          <li>
+            <a href="#">Careers</a>
+          </li>
+          <li>
+            <a href="#">Blog</a>
+          </li>
         </ul>
         <ul className="footerLegal">
-          <li>Terms of use</li>
-          <li>Terms & conditions</li>
-          <li>Privacy</li>
-          <li>Cookie policy</li>
+          <li>
+            <h4>Legal</h4>
+          </li>
+          <li>
+            <a href="#">Terms of use</a>
+          </li>
+          <li>
+            <a href="#">Terms & conditions</a>
+          </li>
+          <li>
+            <a href="#">Privacy</a>
+          </li>
+          <li>
+            <a href="#">Cookie policy</a>
+          </li>
         </ul>
         <div className="footerNewsletter">
-          <p>Newsletter</p>
-          <p>join us</p>
-          <input type="text" />
+          <h4>Newsletter</h4>
+          <p>Join & get important updates</p>
+          <div className="newsletterInputs">
+            <label className="sr-only" htmlFor="newsEmail">
+              Please enter your e-mail
+            </label>
+            <input id="newsEmail" placeholder="Enter your email" type="email" />
+            <button className="buttonSquareGreen">Send</button>
+          </div>
+          <span>We only send interesting and relevant emails.</span>
         </div>
       </div>
       <div className="footerBottom">
@@ -37,15 +85,21 @@ const Footer = () => {
           <a href="#">Privacy & Terms</a>
           <a href="#">Contact Us</a>
         </div>
-        <p>Copyright</p>
+        <p>Copyright© 2023 jobi inc.</p>
         <div className="footerBottomRight">
-          <p>facebook</p>
-          <p>insta</p>
-          <p>pintrest</p>
+          <a href="#">
+            <FacebookIcon />
+          </a>
+          <a href="#">
+            <InstagramIcon />
+          </a>
+          <a href="#">
+            <PinterestIcon />
+          </a>
         </div>
       </div>
     </footer>
   );
-}
+};
 
-export default Footer
+export default Footer;

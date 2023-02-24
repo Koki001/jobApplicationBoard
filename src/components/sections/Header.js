@@ -1,7 +1,9 @@
+import NavBar from "../helpers/NavBar";
+
 const Header = () => {
   return (
     <header id="home" className="mainHeader navWrapper">
-      <nav>
+      {/* <nav>
         <div className="navLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
         </div>
@@ -27,7 +29,8 @@ const Header = () => {
 
           <button className="buttonRoundGreen">Post a job</button>
         </div>
-      </nav>
+      </nav> */}
+      <NavBar />
       <div className="headerCenter">
         <h1>
           <span>Find & Hire</span> <span>Experts for any Job.</span>

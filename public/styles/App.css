@@ -749,7 +749,7 @@ h1 * {
 .howItWorks .howToAccordion {
   padding: 50px 0;
 }
-.howItWorks button {
+.howItWorks a {
   align-self: flex-start;
 }
 
@@ -1097,6 +1097,57 @@ h1 * {
 .footerBottomRight a:hover {
   transform: scale(1.2);
   color: #755146;
+}
+
+.aboutUs {
+  background-color: #EFF6F3;
+}
+
+.aboutUsHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 50px;
+}
+.aboutUsHeader nav {
+  width: 100%;
+  padding: 50px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+.aboutUsHeader .navLogo {
+  min-width: 20%;
+}
+.aboutUsHeader .navLogo img {
+  width: 90px;
+}
+.aboutUsHeader .navMenu {
+  min-width: 40%;
+  text-transform: capitalize;
+  font-size: 0.8rem;
+  display: flex;
+  justify-content: center;
+}
+.aboutUsHeader .navMenu li {
+  transition: all 0.1s linear;
+  margin: 0 12px;
+  border-bottom: 2px solid transparent;
+}
+.aboutUsHeader .navMenu li:hover, .aboutUsHeader .navMenu li:focus {
+  transform: scale(1.3);
+  border-bottom: 2px solid #00BF58;
+}
+.aboutUsHeader .navButtons {
+  min-width: 20%;
+  display: flex;
+  justify-content: flex-end;
+}
+.aboutUsHeader .navButtons .buttonRoundGreen {
+  margin-left: 10px;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -153,7 +154,9 @@ const HowItWorks = () => {
               </AccordionDetails>
             </Accordion>
           </div>
-          <button className="buttonRoundGreen">Learn more</button>
+          <Link to={"/about"}>
+            <button className="buttonRoundGreen">Learn more</button>
+          </Link>
         </div>
       </div>
     </section>

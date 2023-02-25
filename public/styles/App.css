@@ -1110,6 +1110,16 @@ h1 span {
 .footerTop li:hover a {
   color: #00BF58;
 }
+.footerTop li .legalList {
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-size: 0.7rem;
+  transition: all 0.1s linear;
+}
+.footerTop li .legalList:hover {
+  transform: scale(1.1);
+  color: #00BF58;
+}
 
 .footerNewsletter p {
   font-size: 0.8rem;

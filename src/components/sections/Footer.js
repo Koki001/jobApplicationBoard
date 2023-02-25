@@ -1,10 +1,35 @@
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { ParagraphGenerator } from "../helpers/Faker";
 // MUI imports
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 
 const Footer = () => {
+  const [terms, setTerms] = useState(false);
+  const [conditions, setConditions] = useState(false);
+  const [privacy, setPrivacy] = useState(false);
+  const [cookies, setCookies] = useState(false);
+  const [text, setText] = useState("");
+  useEffect(() => {
+    setText(ParagraphGenerator(5));
+  }, []);
+
+  const handleOpenTerms = () => setTerms(true);
+  const handleCloseTerms = () => setTerms(false);
+  const handleOpenConditions = () => setConditions(true);
+  const handleCloseConditions = () => setConditions(false);
+  const handleOpenPrivacy = () => setPrivacy(true);
+  const handleClosePrivacy = () => setPrivacy(false);
+  const handleOpenCookies = () => setCookies(true);
+  const handleCloseCookies = () => setCookies(false);
   return (
     <footer id="contact" className="footerMain wrapper">
       <div className="footerTop">
@@ -29,9 +54,6 @@ const Footer = () => {
             <li>
               <a href="#">Collaboration</a>
             </li>
-            <li>
-              <a href="#">Reviews</a>
-            </li>
           </ul>
         </div>
         <div>
@@ -39,11 +61,9 @@ const Footer = () => {
           <ul className="footerLinks">
             <li>
               <Link to={"/pricing"}>Pricing</Link>
-              {/* <a href="#">Pricing</a> */}
             </li>
             <li>
               <Link to={"/#about"}>About us</Link>
-              {/* <a href="#">About us</a> */}
             </li>
             <li>
               <a href="#">Careers</a>
@@ -57,16 +77,114 @@ const Footer = () => {
           <h4>Legal</h4>
           <ul className="footerLegal">
             <li>
-              <a href="#">Terms of use</a>
+              <p className="legalList" onClick={handleOpenTerms}>
+                Terms of Use
+              </p>
+              <Dialog
+                open={terms}
+                onClose={handleCloseTerms}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Terms of Use"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {text}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button color="success" onClick={handleCloseTerms} autoFocus>
+                    Ok
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </li>
             <li>
-              <a href="#">Terms & conditions</a>
+              <p className="legalList" onClick={handleOpenConditions}>
+                Terms & Conditions
+              </p>
+              <Dialog
+                open={conditions}
+                onClose={handleCloseConditions}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Terms & Conditions"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {text}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    color="success"
+                    onClick={handleCloseConditions}
+                    autoFocus
+                  >
+                    Ok
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </li>
             <li>
-              <a href="#">Privacy</a>
+              <p className="legalList" onClick={handleOpenPrivacy}>
+                Privacy
+              </p>
+              <Dialog
+                open={privacy}
+                onClose={handleClosePrivacy}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">{"Privacy"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {text}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    color="success"
+                    onClick={handleClosePrivacy}
+                    autoFocus
+                  >
+                    Ok
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </li>
             <li>
-              <a href="#">Cookie policy</a>
+              <p className="legalList" onClick={handleOpenCookies}>
+                Cookie Policy
+              </p>
+              <Dialog
+                open={cookies}
+                onClose={handleCloseCookies}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+              >
+                <DialogTitle id="alert-dialog-title">
+                  {"Cookie Policy"}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText id="alert-dialog-description">
+                    {text}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    color="success"
+                    onClick={handleCloseCookies}
+                    autoFocus
+                  >
+                    Ok
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </li>
           </ul>
         </div>

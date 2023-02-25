@@ -524,7 +524,7 @@ nav {
   left: -199px;
   transition: all 0.3s linear;
   overflow: hidden;
-  border: 2px solid #755146;
+  border: 1px solid #00BF58;
   border-radius: 5px;
   display: flex;
   justify-content: center;

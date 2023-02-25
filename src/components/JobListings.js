@@ -13,8 +13,8 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 
 const JobListings = () => {
-  const [expanded, setExpanded] = useState(true);
-  const [salary, setSalary] = useState([0, 70000]);
+  const [expanded, setExpanded] = useState(false);
+  const [salary, setSalary] = useState([30000, 70000]);
   const handleExpand = () => {
     setExpanded(!expanded);
   };
@@ -26,7 +26,7 @@ const JobListings = () => {
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
-
+  const fakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
   return (
     <div>
       <section className="jobListings">
@@ -136,11 +136,15 @@ const JobListings = () => {
                         <div className="salaryRange">
                           <p>{"$" + salary[0].toLocaleString() + " CAD"}</p>
                           <span>-</span>
-                          <p>{"$" + salary[1].toLocaleString() + " CAD"}</p>
+                          <p>
+                            {salary[1] === 150000
+                              ? "$" + salary[1].toLocaleString() + " CAD+"
+                              : "$" + salary[1].toLocaleString() + " CAD"}
+                          </p>
                         </div>
                         <Box
                           sx={{
-                            width: 230,
+                            width: 250,
                             "& .MuiSlider-thumb": {
                               backgroundColor: "#00BF58",
 
@@ -183,12 +187,19 @@ const JobListings = () => {
               </AccordionDetails>
             </Accordion>
           </div>
-          <ul>
-            <li>1</li>
-            <li>2</li>
-            <li>3</li>
-            <li>4</li>
-            <li>5</li>
+          <div className="jobsSort">
+            <p>
+              Total of <span>1,811</span> jobs found
+            </p>
+            <div className="sortGroup">
+              <p>Sort:</p>
+              <button>select</button>
+            </div>
+          </div>
+          <ul className="jobsHolder">
+            {fakeArray.map((item) => {
+              return <li className="jobCard">JOB CARD {item}</li>;
+            })}
           </ul>
         </div>
       </section>

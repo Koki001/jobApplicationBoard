@@ -87,6 +87,9 @@
     font-size: 0.7rem;
     font-weight: bold;
   }
+  input:checked {
+    accent-color: $lightGreen;
+  }
 }
 .filtersType {
   min-width: 175px;
@@ -115,19 +118,22 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 0;
   .salaryRange {
-    width: 250px;
+    width: 270px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
     p {
       font-weight: normal;
-      width: 115px;
+      text-align: center;
+      width: 130px;
     }
     span {
-      width: 20px;
+      width: 10px;
       font-size: 0.7rem;
+      text-align: center;
     }
   }
 }

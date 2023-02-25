@@ -40,6 +40,10 @@
     }
   }
 }
+span.fakeTextBreaks {
+  display: block;
+  padding: 25px 0;
+}
 .footerNewsletter {
   p {
     font-size: 0.8rem;
@@ -63,7 +67,7 @@
 }
 .footerBottom {
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;

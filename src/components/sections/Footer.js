@@ -90,8 +90,13 @@ const Footer = () => {
                   {"Terms of Use"}
                 </DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {text}
+                  <DialogContentText
+                    sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
+                    id="alert-dialog-description"
+                  >
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -115,8 +120,14 @@ const Footer = () => {
                   {"Terms & Conditions"}
                 </DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {text}
+                  <DialogContentText
+                    sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
+                    id="alert-dialog-description"
+                    id="alert-dialog-description"
+                  >
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -142,8 +153,14 @@ const Footer = () => {
               >
                 <DialogTitle id="alert-dialog-title">{"Privacy"}</DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {text}
+                  <DialogContentText
+                    sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
+                    id="alert-dialog-description"
+                    id="alert-dialog-description"
+                  >
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -171,8 +188,14 @@ const Footer = () => {
                   {"Cookie Policy"}
                 </DialogTitle>
                 <DialogContent>
-                  <DialogContentText id="alert-dialog-description">
-                    {text}
+                  <DialogContentText
+                    sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
+                    id="alert-dialog-description"
+                    id="alert-dialog-description"
+                  >
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
+                    <span className="fakeTextBreaks">{text}</span>
                   </DialogContentText>
                 </DialogContent>
                 <DialogActions>

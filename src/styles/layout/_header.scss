@@ -96,7 +96,7 @@ nav {
     visibility: visible;
     height: 250px;
     li {
-      width: 100%;
+      width: 90%;
       text-align: center;
       a {
         display: block;
@@ -151,11 +151,17 @@ h1 {
     text-transform: capitalize;
   }
   select {
+    cursor: pointer;
     background-color: transparent;
     border: none;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      border-bottom: 2px solid $lightGreen;
+    }
   }
   input[type="text"] {
     border: none;
+     border-bottom: 2px solid transparent;
   }
 }
 .headerSearchLeft {
@@ -170,6 +176,12 @@ h1 {
   display: flex;
   flex-direction: column;
   padding: 0 20px;
+  input {
+    border-bottom: 2px solid transparent;
+    &:hover {
+      border-bottom: 2px solid $lightGreen;
+    }
+  }
 }
 .headerSearchRight {
   height: 100%;

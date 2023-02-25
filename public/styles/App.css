@@ -260,7 +260,7 @@ img {
 
 .navWrapper {
   max-width: 1200px;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
 }
 
@@ -466,7 +466,8 @@ h1 * {
   min-height: 100vh;
   padding-bottom: 50px;
 }
-.mainHeader nav {
+
+nav {
   width: 100%;
   padding: 50px 0;
   background-color: rgba(255, 255, 255, 0.85);
@@ -476,13 +477,15 @@ h1 * {
   position: sticky;
   top: 0;
 }
-.mainHeader .navLogo {
+
+.navLogo {
   min-width: 20%;
 }
-.mainHeader .navLogo img {
+.navLogo img {
   width: 90px;
 }
-.mainHeader .navMenu {
+
+.navMenu {
   min-width: 40%;
   text-transform: capitalize;
   font-size: 0.8rem;
@@ -490,16 +493,16 @@ h1 * {
   justify-content: center;
   align-items: center;
 }
-.mainHeader .navMenu li {
+.navMenu li {
   transition: all 0.1s linear;
   margin: 0 12px;
   border-bottom: 2px solid transparent;
 }
-.mainHeader .navMenu li:hover:not(.subMenuParent), .mainHeader .navMenu li:focus:not(.subMenuParent) {
+.navMenu li:hover:not(.subMenuParent), .navMenu li:focus:not(.subMenuParent) {
   transform: scale(1.3);
   border-bottom: 2px solid #00BF58;
 }
-.mainHeader .navMenu .subMenuParent {
+.navMenu .subMenuParent {
   position: relative;
   cursor: pointer;
   background-color: #EFF6F3;
@@ -507,10 +510,10 @@ h1 * {
   border-radius: 5px;
   border: 2px solid transparent;
 }
-.mainHeader .navMenu .subMenuParent:hover {
+.navMenu .subMenuParent:hover {
   border: 2px solid #00BF58;
 }
-.mainHeader .navMenu .subMenu {
+.navMenu .subMenu {
   visibility: hidden;
   padding: 15px 5px;
   height: 0;
@@ -529,28 +532,30 @@ h1 * {
   align-items: center;
   width: 480px;
 }
-.mainHeader .navMenu .subMenu li {
+.navMenu .subMenu li {
   padding: 5px 0;
   margin: 5px 0;
   border-bottom: 2px solid transparent;
 }
-.mainHeader .navMenu .subMenu li:hover {
+.navMenu .subMenu li:hover {
   transform: scale(1.05);
   border-bottom: 2px solid #00BF58;
 }
-.mainHeader .navMenu .slideOut {
+.navMenu .slideOut {
   visibility: visible;
-  height: 200px;
+  height: 250px;
 }
-.mainHeader .navButtons {
+
+.navButtons {
   min-width: 20%;
   display: flex;
   justify-content: flex-end;
 }
-.mainHeader .navButtons .buttonRoundGreen {
+.navButtons .buttonRoundGreen {
   margin-left: 10px;
 }
-.mainHeader .headerCenter {
+
+.headerCenter {
   min-height: 50vh;
   min-width: 60%;
   display: flex;
@@ -558,17 +563,20 @@ h1 * {
   align-items: center;
   justify-content: center;
 }
-.mainHeader h1 {
+
+h1 {
   text-align: center;
   font-size: 3.4rem;
 }
-.mainHeader h1 span {
+h1 span {
   display: block;
 }
-.mainHeader .dreamText {
+
+.dreamText {
   padding: 50px 0;
 }
-.mainHeader .headerSearchContainer {
+
+.headerSearchContainer {
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -578,66 +586,72 @@ h1 * {
   border-radius: 5px;
   margin-bottom: 40px;
 }
-.mainHeader .headerSearchContainer label {
+.headerSearchContainer label {
   font-size: 0.8rem;
   color: rgb(170, 170, 170);
   margin-bottom: 10px;
 }
-.mainHeader .headerSearchContainer input,
-.mainHeader .headerSearchContainer select {
+.headerSearchContainer input,
+.headerSearchContainer select {
   font-size: 0.8rem;
   text-transform: capitalize;
 }
-.mainHeader .headerSearchContainer select {
+.headerSearchContainer select {
   background-color: transparent;
   border: none;
 }
-.mainHeader .headerSearchContainer input[type=text] {
+.headerSearchContainer input[type=text] {
   border: none;
 }
-.mainHeader .headerSearchLeft {
+
+.headerSearchLeft {
   width: 40%;
   display: flex;
   flex-direction: column;
   border-right: 1px solid rgb(170, 170, 170);
   padding-right: 20px;
 }
-.mainHeader .headerSearchMiddle {
+
+.headerSearchMiddle {
   width: 40%;
   display: flex;
   flex-direction: column;
   padding: 0 20px;
 }
-.mainHeader .headerSearchRight {
+
+.headerSearchRight {
   height: 100%;
 }
-.mainHeader .headerSearchRight button {
+.headerSearchRight button {
   text-transform: uppercase;
   padding: 20px 30px;
 }
-.mainHeader .popularTag {
+
+.popularTag {
   font-size: 0.8rem;
   color: rgb(170, 170, 170);
 }
-.mainHeader .popularTag span {
+.popularTag span {
   font-weight: bold;
   color: black;
   margin-right: 10px;
 }
-.mainHeader .headerStats {
+
+.headerStats {
   width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
-.mainHeader .companyUserLogos {
+
+.companyUserLogos {
   width: 95%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.mainHeader .companyUserLogos div {
+.companyUserLogos div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1162,96 +1176,21 @@ h1 * {
 }
 
 .pricingHeader {
-  background-color: #EFF6F3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   padding-bottom: 100px;
-}
-.pricingHeader h1 {
-  margin-bottom: 20px;
+  background-color: #EFF6F3;
 }
 .pricingHeader nav {
-  width: 100%;
-  padding: 50px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.pricingHeader .navLogo {
-  min-width: 20%;
-}
-.pricingHeader .navLogo img {
-  width: 90px;
-}
-.pricingHeader .navMenu {
-  min-width: 40%;
-  text-transform: capitalize;
-  font-size: 0.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.pricingHeader .navMenu li {
-  transition: all 0.1s linear;
-  margin: 0 12px;
-  border-bottom: 2px solid transparent;
-}
-.pricingHeader .navMenu li:hover:not(.subMenuParent), .pricingHeader .navMenu li:focus:not(.subMenuParent) {
-  transform: scale(1.3);
-  border-bottom: 2px solid #00BF58;
-}
-.pricingHeader .subMenuParent {
   position: relative;
-  cursor: pointer;
+  z-index: 100;
   background-color: #EFF6F3;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 2px solid transparent;
 }
-.pricingHeader .subMenuParent:hover {
-  border: 2px solid #00BF58;
-}
-.pricingHeader .subMenu {
-  visibility: hidden;
-  padding: 15px 5px;
-  height: 0;
-  background-color: #EFF6F3;
-  position: absolute;
-  height: 0px;
-  top: 40px;
-  left: -199px;
-  transition: all 0.3s linear;
-  overflow: hidden;
-  border: 2px solid #755146;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 480px;
-}
-.pricingHeader .subMenu li {
-  padding: 5px 0;
-  margin: 5px 0;
-  border-bottom: 2px solid transparent;
-}
-.pricingHeader .subMenu li:hover {
-  transform: scale(1.05);
-  border-bottom: 2px solid #00BF58;
-}
-.pricingHeader .slideOut {
-  visibility: visible;
-  height: 200px;
-}
-.pricingHeader .navButtons {
-  min-width: 20%;
-  display: flex;
-  justify-content: flex-end;
-}
-.pricingHeader .navButtons .buttonRoundGreen {
-  margin-left: 10px;
+
+h1 {
+  margin-bottom: 20px;
 }
 
 .pricingPlan {
@@ -1342,94 +1281,16 @@ h1 * {
 }
 
 .contactHeader {
-  background-color: #EFF6F3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background-color: #EFF6F3;
 }
 .contactHeader nav {
-  width: 100%;
-  padding: 50px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   position: relative;
   z-index: 100;
-}
-.contactHeader .navLogo {
-  min-width: 20%;
-}
-.contactHeader .navLogo img {
-  width: 90px;
-}
-.contactHeader .navMenu {
-  min-width: 40%;
-  text-transform: capitalize;
-  font-size: 0.8rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.contactHeader .navMenu li {
-  transition: all 0.1s linear;
-  margin: 0 12px;
-  border-bottom: 2px solid transparent;
-}
-.contactHeader .navMenu li:hover:not(.subMenuParent), .contactHeader .navMenu li:focus:not(.subMenuParent) {
-  transform: scale(1.3);
-  border-bottom: 2px solid #00BF58;
-}
-.contactHeader .subMenuParent {
-  position: relative;
-  cursor: pointer;
   background-color: #EFF6F3;
-  padding: 5px 10px;
-  border-radius: 5px;
-  border: 2px solid transparent;
-}
-.contactHeader .subMenuParent:hover {
-  border: 2px solid #00BF58;
-}
-.contactHeader .subMenu {
-  visibility: hidden;
-  padding: 15px 5px;
-  height: 0;
-  background-color: #EFF6F3;
-  position: absolute;
-  height: 0px;
-  top: 40px;
-  left: -199px;
-  transition: all 0.3s linear;
-  overflow: hidden;
-  border: 2px solid #755146;
-  border-radius: 5px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  width: 480px;
-}
-.contactHeader .subMenu li {
-  padding: 5px 0;
-  margin: 5px 0;
-  border-bottom: 2px solid transparent;
-}
-.contactHeader .subMenu li:hover {
-  transform: scale(1.05);
-  border-bottom: 2px solid #00BF58;
-}
-.contactHeader .slideOut {
-  visibility: visible;
-  height: 200px;
-}
-.contactHeader .navButtons {
-  min-width: 20%;
-  display: flex;
-  justify-content: flex-end;
-}
-.contactHeader .navButtons .buttonRoundGreen {
-  margin-left: 10px;
 }
 
 .contactUsMap {

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+// Helper functions
+import {UserGenerator, CompanyGenerator} from "./components/helpers/Faker";
 // Component imports
 import Header from "./components/sections/Header";
 import Categories from "./components/sections/Categories";
@@ -10,8 +11,10 @@ import JobGuides from "./components/sections/JobGuides";
 import Footer from "./components/sections/Footer";
 // MUI imports
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 function App() {
   const [showButton, setShowButton] = useState(false);
+
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -23,7 +26,9 @@ function App() {
     return () => {
       window.removeEventListener("scroll", handleVisibility);
     };
-  });
+  }, []);
+  // UserGenerator()
+  // CompanyGenerator()
   return (
     // index #7 layout
     <div className="App">
@@ -36,7 +41,7 @@ function App() {
               : `scrollToTop buttonRoundGreen scrollHidden`
           }
         >
-          <KeyboardArrowUpIcon/>
+          <KeyboardArrowUpIcon />
         </button>
         <Header />
         <Categories />

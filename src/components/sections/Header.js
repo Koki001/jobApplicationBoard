@@ -2,7 +2,7 @@ import NavBar from "../helpers/NavBar";
 
 const Header = () => {
   return (
-    <header id="home" className="mainHeader navWrapper">
+    <header id="home" className="mainHeader">
       {/* <nav>
         <div className="navLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />

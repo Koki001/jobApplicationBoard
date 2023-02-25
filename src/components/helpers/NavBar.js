@@ -36,22 +36,16 @@ const NavBar = () => {
       <ul className="navMenu">
         <li>
           <Link to={"/#home"}>home</Link>
-          {/* <a href="#home">home</a> */}
         </li>
         <li>
-          <Link to={"/#jobs"}>jobs</Link>
-          {/* <a href="#jobs">jobs</a> */}
+          <Link to={"/jobs"}>jobs</Link>
         </li>
         <li
           ref={menuRef}
           className="subMenuParent"
           onClick={handleOpenLinks}
-          // onMouseLeave={handleCloseLinks}
         >
-          {/* <Link to={"/#about"}>About</Link> */}
           About
-          {/* <a href="#about">about us</a> */}
-          {/* {submenu && ( */}
           <ul
             className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
           >
@@ -65,18 +59,19 @@ const NavBar = () => {
               <Link to={"/#reviews"}>Testimonials</Link>
             </li>
             <li>
+              <Link to={"/#faq"}>FAQ</Link>
+            </li>
+            <li>
               <Link to={"/#contact"}>Newsletter</Link>
             </li>
           </ul>
-          {/* )} */}
         </li>
         <li>
-          <Link to={"/#faq"}>FAQ</Link>
-          {/* <a href="#faq">FAQ</a> */}
+          <Link to={"/pricing"}>Plans</Link>
         </li>
         <li>
           <Link to={"/contactUs"}>contact</Link>
-          {/* <a href="#contact">contact</a> */}
+
         </li>
       </ul>
       <div className="navButtons">

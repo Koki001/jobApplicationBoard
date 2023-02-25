@@ -4,12 +4,30 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 const NavBar = () => {
   const location = useLocation();
   const [submenu, setSubmenu] = useState(false);
+  const [lastEvent, setLastEvent] = useState("");
   const ref = useRef(null);
   const menuRef = useRef(null);
   const handleOpenLinks = (e) => {
     e.stopPropagation();
-
     setSubmenu(!submenu);
+  };
+  const handleOpenLinksKey = (e) => {
+    if (e.code === "Enter") {
+      setSubmenu(!submenu);
+      setLastEvent("");
+    }
+  };
+  const handleOpenLinksHover = (e) => {
+    setSubmenu(true);
+    if (lastEvent === "") {
+      setLastEvent("hover");
+    }
+  };
+  const handleCloseLinksHover = () => {
+    if (lastEvent === "hover") {
+      setSubmenu(false);
+      setLastEvent("");
+    }
   };
   useEffect(() => {
     const handleCloseLinks = (e) => {
@@ -28,7 +46,7 @@ const NavBar = () => {
     }
   }, [location]);
   return (
-    <nav className="navWrapper">
+    <nav tabIndex={1} className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
         <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
@@ -41,9 +59,14 @@ const NavBar = () => {
           <Link to={"/jobs"}>jobs</Link>
         </li>
         <li
+          tabIndex={0}
           ref={menuRef}
-          className="subMenuParent"
+          className={`subMenuParent`}
           onClick={handleOpenLinks}
+          onKeyDown={handleOpenLinksKey}
+          onMouseEnter={handleOpenLinksHover}
+          onMouseLeave={handleCloseLinksHover}
+
         >
           About
           <ul
@@ -71,7 +94,6 @@ const NavBar = () => {
         </li>
         <li>
           <Link to={"/contactUs"}>contact</Link>
-
         </li>
       </ul>
       <div className="navButtons">

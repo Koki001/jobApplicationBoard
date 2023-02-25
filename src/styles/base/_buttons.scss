@@ -91,8 +91,12 @@
   border-radius: 10px;
   background-color: $lightGreen;
   opacity: 0.7;
-  padding: 0 10px;
+  padding: 0 40px;
   color: black;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     color: white;
     background-color: $brown;
@@ -102,8 +106,8 @@
   }
 }
 .scrollVisible {
-  display: block;
+  visibility: visible;
 }
 .scrollHidden {
-  display: none;
+  visibility: hidden;
 }

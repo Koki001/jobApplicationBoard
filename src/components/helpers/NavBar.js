@@ -67,7 +67,7 @@ const NavBar = () => {
           onMouseEnter={handleOpenLinksHover}
           onMouseLeave={handleCloseLinksHover}
         >
-          <div className="subMenuTitle">About</div>
+          <div className="subMenuTitle">Explore</div>
           <ul
             className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
           >

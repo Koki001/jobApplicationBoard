@@ -221,6 +221,7 @@ html {
   font-size: 125%;
   scroll-behavior: smooth;
   min-width: 950px;
+  min-height: 100vh;
 }
 
 h1,
@@ -452,8 +453,12 @@ h1 * {
   border-radius: 10px;
   background-color: #00BF58;
   opacity: 0.7;
-  padding: 0 10px;
+  padding: 0 40px;
   color: black;
+  height: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .scrollToTop:hover {
   color: white;
@@ -464,11 +469,11 @@ h1 * {
 }
 
 .scrollVisible {
-  display: block;
+  visibility: visible;
 }
 
 .scrollHidden {
-  display: none;
+  visibility: hidden;
 }
 
 .mainHeader {
@@ -567,7 +572,7 @@ nav {
   height: 250px;
 }
 .navMenu .slideOut li {
-  width: 100%;
+  width: 90%;
   text-align: center;
 }
 .navMenu .slideOut li a {
@@ -626,11 +631,17 @@ h1 span {
   text-transform: capitalize;
 }
 .headerSearchContainer select {
+  cursor: pointer;
   background-color: transparent;
   border: none;
+  border-bottom: 2px solid transparent;
+}
+.headerSearchContainer select:hover {
+  border-bottom: 2px solid #00BF58;
 }
 .headerSearchContainer input[type=text] {
   border: none;
+  border-bottom: 2px solid transparent;
 }
 
 .headerSearchLeft {
@@ -646,6 +657,12 @@ h1 span {
   display: flex;
   flex-direction: column;
   padding: 0 20px;
+}
+.headerSearchMiddle input {
+  border-bottom: 2px solid transparent;
+}
+.headerSearchMiddle input:hover {
+  border-bottom: 2px solid #00BF58;
 }
 
 .headerSearchRight {
@@ -1150,6 +1167,11 @@ h1 span {
   color: #00BF58;
 }
 
+span.fakeTextBreaks {
+  display: block;
+  padding: 25px 0;
+}
+
 .footerNewsletter p {
   font-size: 0.8rem;
 }
@@ -1173,7 +1195,7 @@ h1 span {
 
 .footerBottom {
   width: 100%;
-  padding-bottom: 50px;
+  padding-bottom: 40px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1587,6 +1609,11 @@ h1 {
   font-size: 0.7rem;
   font-weight: bold;
 }
+.filtersType input:checked,
+.filtersExperience input:checked,
+.filtersSalary input:checked {
+  accent-color: #00BF58;
+}
 
 .filtersType {
   min-width: 175px;
@@ -1621,9 +1648,10 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: 0;
 }
 .salaryGroup .salaryRange {
-  width: 250px;
+  width: 270px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1631,11 +1659,13 @@ h1 {
 }
 .salaryGroup .salaryRange p {
   font-weight: normal;
-  width: 115px;
+  text-align: center;
+  width: 130px;
 }
 .salaryGroup .salaryRange span {
-  width: 20px;
+  width: 10px;
   font-size: 0.7rem;
+  text-align: center;
 }
 
 /*# sourceMappingURL=App.css.map */

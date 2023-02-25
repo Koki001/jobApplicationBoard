@@ -1306,8 +1306,8 @@ h1 {
 .contactUsMap {
   background-color: #EFF6F3;
   width: 100%;
-  min-height: 460px;
-  height: 600px;
+  min-height: 400px;
+  height: 400px;
   max-width: 2000px;
 }
 .contactUsMap img {

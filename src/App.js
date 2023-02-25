@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // Helper functions
-import {UserGenerator, CompanyGenerator} from "./components/helpers/Faker";
+import { UserGenerator, CompanyGenerator } from "./components/helpers/Faker";
 // Component imports
 import Header from "./components/sections/Header";
 import Categories from "./components/sections/Categories";
@@ -18,10 +18,12 @@ function App() {
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
   useEffect(() => {
     const handleVisibility = () => {
       window.pageYOffset > 1500 ? setShowButton(true) : setShowButton(false);
     };
+
     window.addEventListener("scroll", handleVisibility);
     return () => {
       window.removeEventListener("scroll", handleVisibility);

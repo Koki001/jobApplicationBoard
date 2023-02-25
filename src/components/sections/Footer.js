@@ -31,7 +31,7 @@ const Footer = () => {
   const handleOpenCookies = () => setCookies(true);
   const handleCloseCookies = () => setCookies(false);
   return (
-    <footer id="contact" className="footerMain wrapper">
+    <footer id="contact" className="footerMain navWrapper">
       <div className="footerTop">
         <div className="footerLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
@@ -123,7 +123,7 @@ const Footer = () => {
                   <DialogContentText
                     sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                     id="alert-dialog-description"
-                    id="alert-dialog-description"
+           
                   >
                     <span className="fakeTextBreaks">{text}</span>
                     <span className="fakeTextBreaks">{text}</span>
@@ -156,7 +156,7 @@ const Footer = () => {
                   <DialogContentText
                     sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                     id="alert-dialog-description"
-                    id="alert-dialog-description"
+              
                   >
                     <span className="fakeTextBreaks">{text}</span>
                     <span className="fakeTextBreaks">{text}</span>
@@ -191,7 +191,7 @@ const Footer = () => {
                   <DialogContentText
                     sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                     id="alert-dialog-description"
-                    id="alert-dialog-description"
+                
                   >
                     <span className="fakeTextBreaks">{text}</span>
                     <span className="fakeTextBreaks">{text}</span>

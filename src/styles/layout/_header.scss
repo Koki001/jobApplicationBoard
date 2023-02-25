@@ -19,8 +19,8 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
+  // position: sticky;
+  // top: 0;
 }
 .navLogo {
   min-width: 20%;
@@ -49,12 +49,19 @@ nav {
     position: relative;
     cursor: pointer;
     pointer-events: all;
-    background-color: $greenBg;
     padding: 5px 10px;
-    border-radius: 5px;
-    border: 2px solid transparent;
+    .subMenuTitle {
+      border-left: 2px solid transparent;
+      border-right: 2px solid transparent;
+      transition: all 0.1s linear;
+      padding: 0 2px;
+    }
     &:hover {
-      border: 2px solid $lightGreen;
+      .subMenuTitle {
+        border-left: 2px solid $lightGreen;
+        border-right: 2px solid $lightGreen;
+        transform: scale(1.3);
+      }
     }
   }
   .subMenu {
@@ -68,7 +75,7 @@ nav {
     left: -199px;
     transition: all 0.3s linear;
     overflow: hidden;
-    border: 1px solid $lightGreen;
+    border: 1px solid $darkGreen;
     border-radius: 5px;
     display: flex;
     justify-content: center;

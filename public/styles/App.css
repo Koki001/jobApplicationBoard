@@ -491,8 +491,6 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: sticky;
-  top: 0;
 }
 
 .navLogo {
@@ -523,13 +521,18 @@ nav {
   position: relative;
   cursor: pointer;
   pointer-events: all;
-  background-color: #EFF6F3;
   padding: 5px 10px;
-  border-radius: 5px;
-  border: 2px solid transparent;
 }
-.navMenu .subMenuParent:hover {
-  border: 2px solid #00BF58;
+.navMenu .subMenuParent .subMenuTitle {
+  border-left: 2px solid transparent;
+  border-right: 2px solid transparent;
+  transition: all 0.1s linear;
+  padding: 0 2px;
+}
+.navMenu .subMenuParent:hover .subMenuTitle {
+  border-left: 2px solid #00BF58;
+  border-right: 2px solid #00BF58;
+  transform: scale(1.3);
 }
 .navMenu .subMenu {
   visibility: hidden;
@@ -542,7 +545,7 @@ nav {
   left: -199px;
   transition: all 0.3s linear;
   overflow: hidden;
-  border: 1px solid #00BF58;
+  border: 1px solid #244034;
   border-radius: 5px;
   display: flex;
   justify-content: center;
@@ -1497,6 +1500,21 @@ h1 {
   z-index: 100;
   background-color: #EFF6F3;
 }
+.jobsHeader span {
+  margin-bottom: 60px;
+}
+
+.jobsMain {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.jobsFilter {
+  width: 100%;
+  margin: 100px 0;
+}
 
 .filtersForm {
   display: flex;
@@ -1504,23 +1522,120 @@ h1 {
   align-items: center;
   justify-content: center;
 }
+.filtersForm label {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
 
 .filtersTop {
+  margin-top: 20px;
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .filtersBottom {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  margin: 40px 0;
 }
 
 .filterButtons {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  padding-top: 20px;
+  border-top: 1px solid rgb(170, 170, 170);
+}
+.filterButtons button {
+  text-transform: uppercase;
+  font-size: 0.7rem;
+}
+
+.filtersKeyword,
+.filtersCategories,
+.filtersLocation {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: calc(33.3333333333% - 30px);
+}
+.filtersKeyword input,
+.filtersCategories input,
+.filtersLocation input {
+  width: 80%;
+  min-width: 230px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.7rem;
+  padding: 5px;
+}
+
+.filtersType,
+.filtersExperience,
+.filtersSalary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.filtersType p,
+.filtersExperience p,
+.filtersSalary p {
+  font-size: 0.7rem;
+  font-weight: bold;
+}
+
+.filtersType {
+  min-width: 175px;
+}
+
+.filtersExperience {
+  min-width: 275px;
+}
+
+.typeGroup div,
+.experienceGroup div,
+.salaryGroup div {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.typeGroup div label,
+.experienceGroup div label,
+.salaryGroup div label {
+  font-weight: normal;
+  margin-left: 4px;
+}
+
+.typeGroup,
+.experienceGroup,
+.salaryGroup {
+  margin-left: 12px;
+}
+
+.salaryGroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.salaryGroup .salaryRange {
+  width: 250px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.salaryGroup .salaryRange p {
+  font-weight: normal;
+  width: 115px;
+}
+.salaryGroup .salaryRange span {
+  width: 20px;
+  font-size: 0.7rem;
 }
 
 /*# sourceMappingURL=App.css.map */

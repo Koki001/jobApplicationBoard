@@ -14,7 +14,7 @@ import Slider from "@mui/material/Slider";
 
 const JobListings = () => {
   const [expanded, setExpanded] = useState(true);
-  const [salary, setSalary] = useState([30000, 150000]);
+  const [salary, setSalary] = useState([0, 70000]);
   const handleExpand = () => {
     setExpanded(!expanded);
   };
@@ -32,10 +32,10 @@ const JobListings = () => {
       <section className="jobListings">
         <header className="jobsHeader">
           <NavBar />
+          <h1>Job Listings</h1>
+          <span>Discover your future Dream Career</span>
         </header>
         <div className="jobsMain wrapper">
-          <h2>Job Listing</h2>
-          <p>Discover your next Dream Career</p>
           <div className="jobsFilter">
             <Accordion
               expanded={expanded}
@@ -59,11 +59,10 @@ const JobListings = () => {
               >
                 <Typography
                   sx={{
-                    fontSize: "0.8rem",
-                    fontWeight: "bold",
+                    fontSize: "1.1rem",
                   }}
                 >
-                  Job Filters
+                  Filters
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
@@ -132,18 +131,40 @@ const JobListings = () => {
                       </div>
                     </div>
                     <div className="filtersSalary">
-                      <p>Salary Range:</p>
+                      <p>Salary:</p>
                       <div className="salaryGroup">
                         <div className="salaryRange">
-                          <p>{"$ " + salary[0].toLocaleString() + " CAD"}</p>
-                          <p>{"$ " + salary[1].toLocaleString() + " CAD"}</p>
+                          <p>{"$" + salary[0].toLocaleString() + " CAD"}</p>
+                          <span>-</span>
+                          <p>{"$" + salary[1].toLocaleString() + " CAD"}</p>
                         </div>
-                        <Box sx={{ width: 300 }}>
+                        <Box
+                          sx={{
+                            width: 230,
+                            "& .MuiSlider-thumb": {
+                              backgroundColor: "#00BF58",
+
+                              "&:hover": {
+                                backgroundColor: "#755146",
+                                boxShadow: "none",
+                              },
+                            },
+                            "& .MuiSlider-mark": {
+                              display: "none",
+                            },
+                            "& .MuiSlider-rail": {
+                              color: "#244034",
+                            },
+                            "& .MuiSlider-track": {
+                              color: "#00BF58",
+                            },
+                          }}
+                        >
                           <Slider
-                            getAriaLabel={() => "Temperature range"}
+                            getAriaLabel={() => "Salary range"}
                             value={salary}
                             onChange={handleSalaryChange}
-                            valueLabelDisplay="auto"
+                            // valueLabelDisplay="auto"
                             step={5000}
                             marks
                             min={0}
@@ -155,8 +176,9 @@ const JobListings = () => {
                   </div>
                 </form>
                 <div className="filterButtons">
-                  <button className="buttonSquareGreen">clear filters</button>
-                  <button className="buttonSquareGreen">apply filters</button>
+                  <button className="buttonRoundClear">clear filters</button>
+
+                  <button className="buttonRoundClear">apply filters</button>
                 </div>
               </AccordionDetails>
             </Accordion>

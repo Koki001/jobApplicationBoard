@@ -3,10 +3,26 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 
 const NavBar = () => {
   const location = useLocation();
-  // const [linkScroll, setLinkScroll] = useState(location.hash)
-  // const navigate = useNavigate()
-  const ref = useRef(null);
+  const [submenu, setSubmenu] = useState(false);
 
+  const ref = useRef(null);
+  const menuRef = useRef(null);
+  const handleOpenLinks = (e) => {
+    e.stopPropagation();
+
+    setSubmenu(!submenu);
+  };
+  useEffect(() => {
+    const handleCloseLinks = (e) => {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setSubmenu(false);
+      }
+    };
+    document.addEventListener("mousedown", handleCloseLinks);
+    return () => {
+      document.removeEventListener("mousedown", handleCloseLinks);
+    };
+  }, [menuRef]);
   useEffect(() => {
     if (location.pathname === "/" && location.hash !== "") {
       ref.current?.click();
@@ -27,9 +43,33 @@ const NavBar = () => {
           <Link to={"/#jobs"}>jobs</Link>
           {/* <a href="#jobs">jobs</a> */}
         </li>
-        <li>
-          <Link to={"/#about"}>about</Link>
+        <li
+          ref={menuRef}
+          className="subMenuParent"
+          onClick={handleOpenLinks}
+          // onMouseLeave={handleCloseLinks}
+        >
+          {/* <Link to={"/#about"}>About</Link> */}
+          About
           {/* <a href="#about">about us</a> */}
+          {/* {submenu && ( */}
+          <ul
+            className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
+          >
+            <li>
+              <a href="#about">Get started</a>
+            </li>
+            <li>
+              <a href="#blog">Guides / Blog</a>
+            </li>
+            <li>
+              <a href="#reviews">Testimonials</a>
+            </li>
+            <li>
+              <a href="#contact">Newsletter</a>
+            </li>
+          </ul>
+          {/* )} */}
         </li>
         <li>
           <Link to={"/#faq"}>FAQ</Link>

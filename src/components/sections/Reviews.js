@@ -4,7 +4,7 @@ import WestIcon from "@mui/icons-material/West";
 
 const Reviews = () => {
   return (
-    <section className="reviews wrapper">
+    <section id="reviews" className="reviews wrapper">
       <div className="reviewsHeading">
         <h2>
           <span>Trusted by leading</span> startups.

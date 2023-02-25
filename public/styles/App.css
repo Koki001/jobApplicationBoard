@@ -408,6 +408,23 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonSquareBrown {
+  background-color: #755146;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonSquareBrown:hover {
+  background-color: #244034;
+}
+.buttonSquareBrown:active {
+  transform: scale(0.95);
+}
+
 .buttonPriceGreen {
   background-color: #31795A;
   border: 1px solid transparent;
@@ -505,6 +522,7 @@ nav {
 .navMenu .subMenuParent {
   position: relative;
   cursor: pointer;
+  pointer-events: all;
   background-color: #EFF6F3;
   padding: 5px 10px;
   border-radius: 5px;
@@ -520,7 +538,7 @@ nav {
   background-color: #EFF6F3;
   position: absolute;
   height: 0px;
-  top: 40px;
+  top: 30px;
   left: -199px;
   transition: all 0.3s linear;
   overflow: hidden;
@@ -544,6 +562,14 @@ nav {
 .navMenu .slideOut {
   visibility: visible;
   height: 250px;
+}
+.navMenu .slideOut li {
+  width: 100%;
+  text-align: center;
+}
+.navMenu .slideOut li a {
+  display: block;
+  width: 100%;
 }
 
 .navButtons {
@@ -800,7 +826,7 @@ h1 span {
 }
 .howItWorks .howToTalent {
   padding: 100px 0;
-  min-height: 675px;
+  min-height: 750px;
 }
 .howItWorks .howToLeft {
   width: 50%;
@@ -1227,16 +1253,21 @@ h1 {
   justify-content: center;
   align-items: center;
   width: calc(33.3333333333% - 20px);
+  min-width: 320px;
+  flex-wrap: wrap;
   border: 2px solid #31795A;
   border-radius: 20px;
-  padding: 40px 30px;
+  padding: 40px 20px;
+}
+.pricingCards li p {
+  font-size: 0.9rem;
 }
 .pricingCards h5 {
   margin-bottom: 30px;
 }
 .pricingCards h4 {
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.5rem;
   position: relative;
   width: 50%;
   min-width: 130px;
@@ -1452,6 +1483,44 @@ h1 {
 }
 .contactUs .contactUsBottom button:active {
   transform: scale(0.95);
+}
+
+.jobsHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #EFF6F3;
+}
+.jobsHeader nav {
+  position: relative;
+  z-index: 100;
+  background-color: #EFF6F3;
+}
+
+.filtersForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.filtersTop {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filtersBottom {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.filterButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
 }
 
 /*# sourceMappingURL=App.css.map */

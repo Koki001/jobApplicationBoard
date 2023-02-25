@@ -49,6 +49,22 @@
     transform: scale(0.95);
   }
 }
+.buttonSquareBrown {
+  background-color: $brown;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $darkGreen;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
 .buttonPriceGreen {
   background-color: $green;
   border: 1px solid transparent;

@@ -48,6 +48,7 @@ nav {
   .subMenuParent {
     position: relative;
     cursor: pointer;
+    pointer-events: all;
     background-color: $greenBg;
     padding: 5px 10px;
     border-radius: 5px;
@@ -63,7 +64,7 @@ nav {
     background-color: $greenBg;
     position: absolute;
     height: 0px;
-    top: 40px;
+    top: 30px;
     left: -199px;
     transition: all 0.3s linear;
     overflow: hidden;
@@ -87,6 +88,14 @@ nav {
   .slideOut {
     visibility: visible;
     height: 250px;
+    li {
+      width: 100%;
+      text-align: center;
+      a {
+        display: block;
+        width: 100%;
+      }
+    }
   }
 }
 .navButtons {

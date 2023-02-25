@@ -9,7 +9,7 @@ const NavBar = () => {
   const menuRef = useRef(null);
   const handleOpenLinks = (e) => {
     e.stopPropagation();
-    setSubmenu(!submenu);
+    setSubmenu(true);
   };
   const handleOpenLinksKey = (e) => {
     if (e.code === "Enter") {
@@ -49,7 +49,7 @@ const NavBar = () => {
     <nav tabIndex={1} className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
-        <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
+        <img src={"../assets/header/jobiLogo.png"} alt="jobi company logo" />
       </div>
       <ul className="navMenu">
         <li>
@@ -66,9 +66,8 @@ const NavBar = () => {
           onKeyDown={handleOpenLinksKey}
           onMouseEnter={handleOpenLinksHover}
           onMouseLeave={handleCloseLinksHover}
-
         >
-          About
+          <div className="subMenuTitle">About</div>
           <ul
             className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
           >

@@ -20,7 +20,7 @@ function App() {
   };
   useEffect(() => {
     const handleVisibility = () => {
-      window.pageYOffset > 2000 ? setShowButton(true) : setShowButton(false);
+      window.pageYOffset > 1500 ? setShowButton(true) : setShowButton(false);
     };
     window.addEventListener("scroll", handleVisibility);
     return () => {

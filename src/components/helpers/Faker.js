@@ -17,7 +17,6 @@ const UserGenerator = () => {
     });
   }
 };
-
 const CompanyGenerator = () => {
   for (let i = 0; i < 10; i++) {
     push(ref(db, `/data/fakeCompanies/`), {
@@ -31,5 +30,8 @@ const CompanyGenerator = () => {
     });
   }
 };
+const ParagraphGenerator = (num) => {
+  return faker.lorem.paragraphs(num);
+};
 
-export { UserGenerator, CompanyGenerator };
+export { UserGenerator, CompanyGenerator, ParagraphGenerator };

@@ -28,6 +28,17 @@
       }
     }
   }
+  li .legalList {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 0.7rem;
+    transition: all 0.1s linear;
+    &:hover {
+      transform: scale(1.1);
+
+      color: $lightGreen;
+    }
+  }
 }
 .footerNewsletter {
   p {

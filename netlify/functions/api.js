@@ -1,21 +1,16 @@
 import axios from "axios";
 
+// exports.handler = async function (event, context) {
+//   const apiKey = process.env.MY_IMPORTANT_VARIABLE;
+//   const data = await axios.get(
+//     `https://www.mapquestapi.com/staticmap/v5/map?key=${apiKey}&locations=483 Queen St, M5V 2A9&defaultMarker=marker-sm-3B5998-22407F&size=1100,500@2x`
+//   )
+//   return {
+//     statusCode: 200,
+//     body: JSON.stringify(data)
+//   };
+// };
+
 exports.handler = async function (event, context) {
-  console.log(event);
-  console.log(context);
-  try {
-    const { id } = event.queryStringParameters;
-    const response = await axios.get(
-      `${process.env.REACT_APP_MAP_QUEST_API}/${id}`
-    );
-    return {
-      statusCode: 200,
-      body: JSON.stringify({ title: response.data.title }),
-    };
-  } catch (err) {
-    return {
-      statusCode: 404,
-      body: err.toString(),
-    };
-  }
+  return console.log("hello")
 };

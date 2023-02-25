@@ -49,7 +49,7 @@ const Footer = () => {
               <a href="#">Careers</a>
             </li>
             <li>
-              <a href="#">Blog</a>
+              <a href="#blog">Blog</a>
             </li>
           </ul>
         </div>
@@ -86,7 +86,7 @@ const Footer = () => {
       <div className="footerBottom">
         <div className="footerBottomLeft">
           <a href="#">Privacy & Terms</a>
-          <a href="#">Contact Us</a>
+          <Link to={"/contactUs"}>Contact Us</Link>
         </div>
         <p>Copyright© 2023 jobi inc.</p>
         <div className="footerBottomRight">

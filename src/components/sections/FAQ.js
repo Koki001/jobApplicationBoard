@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -298,7 +299,7 @@ const FAQ = () => {
         </Accordion>
       </div>
       <p className="faqLink">
-        Didn't find the answer? We can help. <a href="#">Click here</a>
+        Didn't find the answer? We can help. <Link to={"/contactUs"}>Click here</Link>
       </p>
     </section>
   );

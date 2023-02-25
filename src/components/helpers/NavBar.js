@@ -36,7 +36,7 @@ const NavBar = () => {
           {/* <a href="#faq">FAQ</a> */}
         </li>
         <li>
-          <Link to={"/#contact"}>contact</Link>
+          <Link to={"/contactUs"}>contact</Link>
           {/* <a href="#contact">contact</a> */}
         </li>
       </ul>

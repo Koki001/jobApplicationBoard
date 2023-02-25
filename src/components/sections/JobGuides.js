@@ -3,7 +3,7 @@ import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const JobGuides = () => {
   return (
-    <section className="jobGuides">
+    <section id="blog" className="jobGuides">
       <div className="jobGuidesWrapper wrapper">
         <div className="jobGuidesTop">
           <div className="jobGuidesHeading">

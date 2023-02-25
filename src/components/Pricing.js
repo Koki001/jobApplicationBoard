@@ -13,7 +13,7 @@ const Pricing = () => {
       <section className="pricing" id="pricing">
         <header className="pricingHeader">
           <NavBar />
-          <h2>Pricing</h2>
+          <h1>Pricing</h1>
           <p>Choose your membership</p>
         </header>
         <div className="pricingPlan wrapper">

@@ -6,6 +6,7 @@ import App from './App';
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Pricing from './components/Pricing';
+import Contact from './components/Contact';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
   {
     path: "/pricing",
     element: <Pricing />,
+  },
+  {
+    path: "/contactUs",
+    element: <Contact />,
   },
   {
     path: "/login",

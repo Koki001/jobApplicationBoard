@@ -24,7 +24,6 @@ function App() {
       window.removeEventListener("scroll", handleVisibility);
     };
   });
-
   return (
     // index #7 layout
     <div className="App">

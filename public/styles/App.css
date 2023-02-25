@@ -220,6 +220,7 @@ template {
 html {
   font-size: 125%;
   scroll-behavior: smooth;
+  min-width: 950px;
 }
 
 h1,

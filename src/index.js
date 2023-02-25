@@ -7,6 +7,7 @@ import Login from "./components/Login";
 import Signup from "./components/Signup";
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
+import JobListings from './components/JobListings';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/pricing",
     element: <Pricing />,
+  },
+  {
+    path: "/jobs",
+    element: <JobListings />,
   },
   {
     path: "/contactUs",

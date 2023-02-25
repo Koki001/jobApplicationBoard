@@ -4,7 +4,6 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 const NavBar = () => {
   const location = useLocation();
   const [submenu, setSubmenu] = useState(false);
-
   const ref = useRef(null);
   const menuRef = useRef(null);
   const handleOpenLinks = (e) => {
@@ -57,16 +56,16 @@ const NavBar = () => {
             className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
           >
             <li>
-              <a href="#about">Get started</a>
+              <Link to={"/#about"}>Get started</Link>
             </li>
             <li>
-              <a href="#blog">Guides / Blog</a>
+              <Link to={"/#blog"}>Guides / Blog</Link>
             </li>
             <li>
-              <a href="#reviews">Testimonials</a>
+              <Link to={"/#reviews"}>Testimonials</Link>
             </li>
             <li>
-              <a href="#contact">Newsletter</a>
+              <Link to={"/#contact"}>Newsletter</Link>
             </li>
           </ul>
           {/* )} */}

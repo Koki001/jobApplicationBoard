@@ -15,14 +15,13 @@
 }
 .jobGuidesTop {
   width: 100%;
-  h2 {
-    padding-bottom: 60px;
-  }
+  
 }
 .jobGuidesHeading {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 50px;
   a {
     font-size: 0.7rem;
     color: $lightGreen;

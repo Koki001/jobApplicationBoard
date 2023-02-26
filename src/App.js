@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // Helper functions
-import { UserGenerator, CompanyGenerator } from "./components/helpers/Faker";
+import { UserGenerator, CompanyGenerator, JobGenerator } from "./components/helpers/Faker";
 // Component imports
 import Header from "./components/sections/Header";
 import Categories from "./components/sections/Categories";
@@ -29,8 +29,12 @@ function App() {
       window.removeEventListener("scroll", handleVisibility);
     };
   }, []);
-  // UserGenerator()
-  // CompanyGenerator()
+  // useEffect(() => {
+  //   // UserGenerator()
+  //   // CompanyGenerator()
+    // JobGenerator(5)
+
+  // },[])
   return (
     // index #7 layout
     <div className="App">

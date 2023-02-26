@@ -27,6 +27,9 @@ const JobListings = () => {
   const [page, setPage] = useState(1);
 
   const scrollRef = useRef();
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.key]);
 
   useEffect(() => {
     const dbRef = ref(db);
@@ -66,9 +69,6 @@ const JobListings = () => {
     e.preventDefault();
     
   };
-  useEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-  }, [location.key]);
   const handlePageChange = (e) => {
     setTimeout(() => {
       scrollRef.current.scrollIntoView({

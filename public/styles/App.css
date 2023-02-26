@@ -1741,10 +1741,10 @@ h1 {
 }
 
 .pagePagination {
-  max-width: 400px;
+  width: 320px;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   font-size: 0.7rem;
   margin: 10px 0;
 }

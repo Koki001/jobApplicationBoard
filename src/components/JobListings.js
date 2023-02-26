@@ -5,7 +5,7 @@ import Footer from "./sections/Footer";
 import axios from "axios";
 import db from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
-
+import Pagination from "@mui/material/Pagination";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -67,16 +67,13 @@ const JobListings = () => {
   const handleApply = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    
   };
-  const handlePageChange = (e) => {
-    setTimeout(() => {
-      scrollRef.current.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-      setPage(e.target.value);
-    }, 100);
+  const handlePageChange = (e, val) => {
+    scrollRef.current.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+    setPage(val);
   };
   return (
     <div>
@@ -244,6 +241,9 @@ const JobListings = () => {
               <p>
                 Total of <span>{jobList.length}</span> jobs found
               </p>
+              <p>
+                Page {page} of {Math.ceil(jobList.length / 10)}
+              </p>
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
                 <select name="sort" id="sort">
@@ -254,7 +254,6 @@ const JobListings = () => {
                 </select>
               </div>
             </div>
-
             <ul className="jobsHolder">
               {loader === false
                 ? jobList.map((item, index) => {
@@ -320,15 +319,15 @@ const JobListings = () => {
                 : null}
             </ul>
             <div className="pagePagination">
-              <p>Pages:</p>
-              <div>
-                {jobList?.map((item, index) => {
+              {/* <p>Pages:</p> */}
+              {/* <div> */}
+              {/* {jobList?.map((item, index) => {
                   if (index % 10 === 0) {
                     return (
                       <div key={"pageKey" + index / 10} className="pageNumbers">
                         <input
                           defaultChecked={index / 10 + 1 === 1}
-                          onChange={handlePageChange}
+                          // onChange={handlePageChange}
                           id={"page" + index / 10}
                           value={index / 10 + 1}
                           className="sr-only"
@@ -341,8 +340,17 @@ const JobListings = () => {
                       </div>
                     );
                   }
-                })}
-              </div>
+                })} */}
+              <Pagination
+                sx={{ padding: "0", width: "auto" }}
+                size={"small"}
+                onChange={handlePageChange}
+                count={Math.ceil(jobList.length / 10)}
+                defaultPage={1}
+                variant="outlined"
+                color="success"
+              />
+              {/* </div> */}
             </div>
           </div>
         ) : (

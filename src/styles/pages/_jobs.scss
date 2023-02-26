@@ -137,3 +137,121 @@
     }
   }
 }
+.jobsHolder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 300px;
+}
+.jobsSort {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  p {
+    font-size: 0.7rem;
+    color: $darkGrey;
+  }
+  span {
+    color: black;
+    font-weight: bold;
+  }
+  .sortGroup {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    label {
+      font-size: 0.7rem;
+    }
+    select {
+      font-size: 0.7rem;
+      border: none;
+      border-radius: 5px;
+      padding: 5px;
+    }
+    option {
+      border: none;
+    }
+  }
+}
+.jobCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid $darkGrey;
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  position: relative;
+  &:hover {
+    border: 1px solid $darkGreen;
+    transform: scale(1.003);
+    background-color: $greenBg;
+  }
+  .jobCardHeading {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 350px;
+  }
+  .jobCardLogo {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    img {
+      border-radius: 5px;
+    }
+  }
+  h5 {
+    font-size: 0.7rem;
+    font-weight: lighter;
+    margin-bottom: 10px;
+  }
+  h6 {
+    font-size: 0.6rem;
+    font-weight: lighter;
+    text-transform: capitalize;
+  }
+  .topText {
+    margin-bottom: 10px;
+    text-transform: capitalize;
+  }
+  .bottomText {
+    font-size: 0.6rem;
+  }
+  .jobCardLocation {
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .jobCardType {
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .buttonRoundGreen {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    padding: 5 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .jobCardButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 110px;
+  }
+}

@@ -548,7 +548,7 @@ nav {
   height: 0px;
   top: 30px;
   left: -199px;
-  transition: all 0.3s linear;
+  transition: all 0.1s linear;
   overflow: hidden;
   border: 1px solid #244034;
   border-radius: 5px;
@@ -895,14 +895,12 @@ h1 span {
 .jobGuidesTop {
   width: 100%;
 }
-.jobGuidesTop h2 {
-  padding-bottom: 60px;
-}
 
 .jobGuidesHeading {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding-bottom: 50px;
 }
 .jobGuidesHeading a {
   font-size: 0.7rem;
@@ -1667,6 +1665,127 @@ h1 {
   width: 10px;
   font-size: 0.7rem;
   text-align: center;
+}
+
+.jobsHolder {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.jobsSort {
+  margin: 20px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobsSort p {
+  font-size: 0.7rem;
+  color: rgb(170, 170, 170);
+}
+.jobsSort span {
+  color: black;
+  font-weight: bold;
+}
+.jobsSort .sortGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobsSort .sortGroup label {
+  font-size: 0.7rem;
+}
+.jobsSort .sortGroup select {
+  font-size: 0.7rem;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+.jobsSort .sortGroup option {
+  border: none;
+}
+
+.jobCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid rgb(170, 170, 170);
+  border-radius: 5px;
+  margin: 10px 0;
+  font-size: 0.7rem;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  position: relative;
+}
+.jobCard:hover {
+  border: 1px solid #244034;
+  transform: scale(1.003);
+  background-color: #EFF6F3;
+}
+.jobCard .jobCardHeading {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 350px;
+}
+.jobCard .jobCardLogo {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+.jobCard .jobCardLogo img {
+  border-radius: 5px;
+}
+.jobCard h5 {
+  font-size: 0.7rem;
+  font-weight: lighter;
+  margin-bottom: 10px;
+}
+.jobCard h6 {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  text-transform: capitalize;
+}
+.jobCard .topText {
+  margin-bottom: 10px;
+  text-transform: capitalize;
+}
+.jobCard .bottomText {
+  font-size: 0.6rem;
+}
+.jobCard .jobCardLocation {
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.jobCard .jobCardType {
+  width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.jobCard .buttonRoundGreen {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  padding: 5 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.jobCard .jobCardButtons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 110px;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -2,6 +2,9 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import NavBar from "./helpers/NavBar";
 import Footer from "./sections/Footer";
+import axios from "axios";
+import db from "../firebase";
+import { ref, child, get, remove } from "firebase/database";
 
 // MUI imports
 import Accordion from "@mui/material/Accordion";
@@ -11,22 +14,52 @@ import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const JobListings = () => {
+  const location = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
+  const [jobList, setJobList] = useState([]);
+  const [jobId, setJobId] = useState([]);
+  const [loader, setLoader] = useState(true);
+
+  useEffect(() => {
+    const dbRef = ref(db);
+    // remove(dbRef)
+    get(child(dbRef, `data/jobs`))
+      .then((snapshot) => {
+        let dataArray = [];
+        let idArray = [];
+        if (snapshot.exists()) {
+          snapshot.forEach((item) => {
+            dataArray.push(item.val());
+            idArray.push(item.key);
+          });
+          setJobList(dataArray);
+          setJobId(idArray);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .then(() => {
+        setLoader(false);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
   const handleExpand = () => {
     setExpanded(!expanded);
   };
   const handleSalaryChange = (e, val) => {
     setSalary(val);
   };
-  const location = useLocation();
-
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
-  const fakeArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+  console.log(jobList[1]);
+  // console.log(jobId)
   return (
     <div>
       <section className="jobListings">
@@ -189,17 +222,64 @@ const JobListings = () => {
           </div>
           <div className="jobsSort">
             <p>
-              Total of <span>1,811</span> jobs found
+              Total of <span>{jobList.length}</span> jobs found
             </p>
             <div className="sortGroup">
-              <p>Sort:</p>
-              <button>select</button>
+              <label htmlFor="sort">Sort: </label>
+              <select name="sort" id="sort">
+                <option value="">Latest</option>
+                <option value="">Salary Desc</option>
+                <option value="">Salary Asc</option>
+                <option value="">Job Title</option>
+              </select>
             </div>
           </div>
           <ul className="jobsHolder">
-            {fakeArray.map((item) => {
-              return <li className="jobCard">JOB CARD {item}</li>;
-            })}
+            {loader === false
+              ? jobList.map((item, index) => {
+                  return (
+                    <li key={jobId[index]} className="jobCard">
+                      <div className="jobCardHeading">
+                        <div className="jobCardLogo">
+                          <img src={item.logo} alt="company logo" />
+                        </div>
+                        <div className="jobCardText">
+                          <h5>{item.title}</h5>
+                          <h6>{item.experience}</h6>
+                        </div>
+                      </div>
+                      <div className="jobCardType">
+                        <p className="topText">{item.type}</p>
+                        <p className="bottomText">
+                          Salary: ${Number(item.salary).toLocaleString("en")}
+                        </p>
+                      </div>
+                      <div className="jobCardLocation">
+                        <p className="topText">
+                          {item.city}, {item.country}
+                        </p>
+                        <p className="bottomText">{item.category}</p>
+                      </div>
+                      <div className="jobCardButtons">
+                        <BookmarkBorderIcon
+                        // sx={{
+                        //   "&:hover": {
+
+                        //     transform: "scale(1.3)",
+                        //   },
+                        //   borderRadius: "50%",
+                        //   fontSize: "24px",
+                        //   transition: "all 0.1s linear",
+                        //   // padding: "10px"
+                        //   margin: "0 5px",
+                        // }}
+                        />
+                        <button className="buttonRoundGreen">apply</button>
+                      </div>
+                    </li>
+                  );
+                })
+              : null}
           </ul>
         </div>
       </section>

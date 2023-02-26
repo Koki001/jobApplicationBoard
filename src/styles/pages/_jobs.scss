@@ -165,6 +165,7 @@
     align-items: center;
     label {
       font-size: 0.7rem;
+      margin-right: 10px;
     }
     select {
       font-size: 0.7rem;
@@ -175,6 +176,32 @@
     option {
       border: none;
     }
+  }
+}
+.pagePagination {
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  margin: 10px 0;
+  p {
+    color: $darkGrey;
+    margin-right: 5px;
+  }
+  label {
+    margin: 0 5px;
+    padding: 0 5px;
+    cursor: pointer;
+    transition: all 0.1s linear;
+    border-bottom: 2px solid transparent;
+    &:hover {
+      color: $lightGreen;
+    }
+  }
+  input:checked + label {
+    border-bottom: 2px solid $lightGreen;
+    color: $lightGreen;
   }
 }
 .jobCard {

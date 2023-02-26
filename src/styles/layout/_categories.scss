@@ -63,15 +63,29 @@
       width: 60px;
     }
     .categoriesFinalCard {
+      cursor: pointer;
       background-color: $lightGreen;
       color: white;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.1s linear;
+      &:hover {
+        background-color: $darkGreen;
+      }
+      a {
+        padding: 40px 30px;
+      }
       h3 {
         font-family: "EB Garamond", serif;
         font-weight: lighter;
         font-size: 4rem;
+        color: white;
       }
       p {
         font-size: 0.8rem;
+        color: white;
       }
     }
     .finalCardIcons {

@@ -23,10 +23,10 @@ const JobListings = () => {
   const [jobList, setJobList] = useState([]);
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const dbRef = ref(db);
-    // remove(dbRef)
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
@@ -58,8 +58,9 @@ const JobListings = () => {
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
-  console.log(jobList[1]);
-  // console.log(jobId)
+  const handlePageChange = function (e) {
+    setPage(e.target.value);
+  };
   return (
     <div>
       <section className="jobListings">
@@ -225,7 +226,7 @@ const JobListings = () => {
               Total of <span>{jobList.length}</span> jobs found
             </p>
             <div className="sortGroup">
-              <label htmlFor="sort">Sort: </label>
+              <label htmlFor="sort">Sort by: </label>
               <select name="sort" id="sort">
                 <option value="">Latest</option>
                 <option value="">Salary Desc</option>
@@ -234,53 +235,104 @@ const JobListings = () => {
               </select>
             </div>
           </div>
+
           <ul className="jobsHolder">
             {loader === false
               ? jobList.map((item, index) => {
-                  return (
-                    <li key={jobId[index]} className="jobCard">
-                      <div className="jobCardHeading">
-                        <div className="jobCardLogo">
-                          <img src={item.logo} alt="company logo" />
+                  if (index > page * 10 - 11 && index < page * 10) {
+                    return (
+                      <li key={jobId[index]} className="jobCard">
+                        <div className="jobCardHeading">
+                          <div className="jobCardLogo">
+                            <img src={item.logo} alt="company logo" />
+                          </div>
+                          <div className="jobCardText">
+                            <h5>{item.title}</h5>
+                            <h6>{item.experience}</h6>
+                          </div>
                         </div>
-                        <div className="jobCardText">
-                          <h5>{item.title}</h5>
-                          <h6>{item.experience}</h6>
+                        <div className="jobCardType">
+                          <p className="topText">{item.type}</p>
+                          <p className="bottomText">
+                            Salary:{" "}
+                            <span>
+                              ${Number(item.salary).toLocaleString("en")}
+                            </span>
+                          </p>
                         </div>
-                      </div>
-                      <div className="jobCardType">
-                        <p className="topText">{item.type}</p>
-                        <p className="bottomText">
-                          Salary: ${Number(item.salary).toLocaleString("en")}
-                        </p>
-                      </div>
-                      <div className="jobCardLocation">
-                        <p className="topText">
-                          {item.city}, {item.country}
-                        </p>
-                        <p className="bottomText">{item.category}</p>
-                      </div>
-                      <div className="jobCardButtons">
-                        <BookmarkBorderIcon
-                        // sx={{
-                        //   "&:hover": {
+                        <div className="jobCardLocation">
+                          <p className="topText">
+                            {item.city}, {item.country}
+                          </p>
+                          <p className="bottomText">{item.category}</p>
+                        </div>
+                        <div className="jobCardButtons">
+                          <BookmarkBorderIcon
+                          // sx={{
+                          //   "&:hover": {
 
-                        //     transform: "scale(1.3)",
-                        //   },
-                        //   borderRadius: "50%",
-                        //   fontSize: "24px",
-                        //   transition: "all 0.1s linear",
-                        //   // padding: "10px"
-                        //   margin: "0 5px",
-                        // }}
-                        />
-                        <button className="buttonRoundGreen">apply</button>
-                      </div>
-                    </li>
-                  );
+                          //     transform: "scale(1.3)",
+                          //   },
+                          //   borderRadius: "50%",
+                          //   fontSize: "24px",
+                          //   transition: "all 0.1s linear",
+                          //   // padding: "10px"
+                          //   margin: "0 5px",
+                          // }}
+                          />
+                          <button className="buttonRoundGreen">apply</button>
+                        </div>
+                      </li>
+                    );
+                  }
                 })
               : null}
           </ul>
+          {/* <div className="pagePagination">
+            <p>Page:</p>
+            {jobList?.map((item, index) => {
+              if (index % 10 === 0) {
+                return (
+                  <div className="pageNumbers">
+                    <input
+                      onChange={handlePageChange}
+                      id={"page" + index / 10}
+                      value={index / 10 + 1}
+                      className="sr-only"
+                      name="game-pages"
+                      type="radio"
+                    />
+                    <label htmlFor={"page" + index / 10}>
+                      {index / 10 + 1}
+                    </label>
+                  </div>
+                );
+              }
+            })}
+          </div> */}
+          <div className="pagePagination">
+            <p>Pages:</p>
+            {jobList?.map((item, index) => {
+              if (index % 10 === 0) {
+                return (
+                  <div className="pageNumbers">
+                    <input
+                      defaultChecked={index / 10 + 1 === 1}
+                      onChange={handlePageChange}
+                      id={"page" + index / 10}
+                      value={index / 10 + 1}
+                      className="sr-only"
+                      name="game-pages"
+                      type="radio"
+                    />
+                    <label htmlFor={"page" + index / 10}>
+                      {index / 10 + 1}
+                    </label>
+                  </div>
+                );
+              }
+            })}
+          </div>
         </div>
       </section>
       <Footer />

@@ -15,6 +15,15 @@
     margin-bottom: 60px;
   }
 }
+.jobListings {
+  .loader {
+    width: 100%;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
 .jobsMain {
   display: flex;
   flex-direction: column;
@@ -144,6 +153,9 @@
   align-items: flex-start;
   justify-content: center;
   min-height: 300px;
+  a {
+    width: 100%;
+  }
 }
 .jobsSort {
   margin: 20px 0;
@@ -175,6 +187,7 @@
     }
     option {
       border: none;
+      font-family: "Gordita Regular", sans-serif;
     }
   }
 }
@@ -182,15 +195,19 @@
   max-width: 400px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 0.7rem;
   margin: 10px 0;
+  div:first-of-type {
+    display: flex;
+    flex-wrap: wrap;
+  }
   p {
     color: $darkGrey;
     margin-right: 5px;
   }
   label {
-    margin: 0 5px;
+    margin: 0 5px 5px 5px;
     padding: 0 5px;
     cursor: pointer;
     transition: all 0.1s linear;
@@ -202,6 +219,12 @@
   input:checked + label {
     border-bottom: 2px solid $lightGreen;
     color: $lightGreen;
+  }
+  .pageNumbers {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 .jobCard {
@@ -232,9 +255,14 @@
     width: 50px;
     height: 50px;
     margin-right: 20px;
+    background-color: $greenBg;
     img {
       border-radius: 5px;
     }
+  }
+  .defaultLoad {
+    background-image: url('../assets/jobList/logoLoad.gif');
+    background-size: contain;
   }
   h5 {
     font-size: 0.7rem;
@@ -249,6 +277,7 @@
   .topText {
     margin-bottom: 10px;
     text-transform: capitalize;
+    font-weight: bold;
   }
   .bottomText {
     font-size: 0.6rem;

@@ -8,6 +8,7 @@ import Signup from "./components/Signup";
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import JobListings from './components/JobListings';
+import JobDetails from './components/JobDetails';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
   {
     path: "/jobs",
     element: <JobListings />,
+  },
+  {
+    path: "/jobs/:id",
+    element: <JobDetails />,
   },
   {
     path: "/contactUs",

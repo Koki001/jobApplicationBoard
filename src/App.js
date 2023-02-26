@@ -32,7 +32,7 @@ function App() {
   // useEffect(() => {
   //   // UserGenerator()
   //   // CompanyGenerator()
-    // JobGenerator(5)
+    // JobGenerator(2)
 
   // },[])
   return (

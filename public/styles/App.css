@@ -769,16 +769,30 @@ h1 span {
   width: 60px;
 }
 .categories .categoriesCards .categoriesFinalCard {
+  cursor: pointer;
   background-color: #00BF58;
   color: white;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.1s linear;
+}
+.categories .categoriesCards .categoriesFinalCard:hover {
+  background-color: #244034;
+}
+.categories .categoriesCards .categoriesFinalCard a {
+  padding: 40px 30px;
 }
 .categories .categoriesCards .categoriesFinalCard h3 {
   font-family: "EB Garamond", serif;
   font-weight: lighter;
   font-size: 4rem;
+  color: white;
 }
 .categories .categoriesCards .categoriesFinalCard p {
   font-size: 0.8rem;
+  color: white;
 }
 .categories .categoriesCards .finalCardIcons {
   width: 100%;
@@ -1130,6 +1144,10 @@ h1 span {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+}
+
+.footerLogo {
+  width: 90px;
 }
 
 .footerTop {
@@ -1698,6 +1716,7 @@ h1 {
 }
 .jobsSort .sortGroup label {
   font-size: 0.7rem;
+  margin-right: 10px;
 }
 .jobsSort .sortGroup select {
   font-size: 0.7rem;
@@ -1707,6 +1726,33 @@ h1 {
 }
 .jobsSort .sortGroup option {
   border: none;
+}
+
+.pagePagination {
+  max-width: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  margin: 10px 0;
+}
+.pagePagination p {
+  color: rgb(170, 170, 170);
+  margin-right: 5px;
+}
+.pagePagination label {
+  margin: 0 5px;
+  padding: 0 5px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  border-bottom: 2px solid transparent;
+}
+.pagePagination label:hover {
+  color: #00BF58;
+}
+.pagePagination input:checked + label {
+  border-bottom: 2px solid #00BF58;
+  color: #00BF58;
 }
 
 .jobCard {

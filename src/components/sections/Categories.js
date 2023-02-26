@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Categories = () => {
   return (
     <section id="jobs" className="categories">
@@ -79,12 +81,22 @@ const Categories = () => {
             <p className="categoryVacancies">100 vacancies</p>
           </li>
           <li className="categoriesFinalCard">
-            <h3>13k+</h3>
-            <p>Jobs posted</p>
-            <div className="finalCardIcons">
-              <img className="linesArt" src="../assets/categories/lines.png" alt="two curved lines" />
-              <img className="arrowArt" src="../assets/categories/arrow.png" alt="an arrow within a circle" />
-            </div>
+            <Link to={"/jobs"}>
+              <h3>13k+</h3>
+              <p>Jobs posted</p>
+              <div className="finalCardIcons">
+                <img
+                  className="linesArt"
+                  src="../assets/categories/lines.png"
+                  alt="two curved lines"
+                />
+                <img
+                  className="arrowArt"
+                  src="../assets/categories/arrow.png"
+                  alt="an arrow within a circle"
+                />
+              </div>
+            </Link>
           </li>
         </ul>
       </div>

@@ -1,5 +1,5 @@
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import NavBar from "./helpers/NavBar";
 import Footer from "./sections/Footer";
 import axios from "axios";
@@ -15,6 +15,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const JobListings = () => {
   const location = useLocation();
@@ -24,6 +25,8 @@ const JobListings = () => {
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
   const [page, setPage] = useState(1);
+
+  const scrollRef = useRef();
 
   useEffect(() => {
     const dbRef = ref(db);
@@ -55,11 +58,25 @@ const JobListings = () => {
   const handleSalaryChange = (e, val) => {
     setSalary(val);
   };
+  const handleLogoDisplay = (e) => {
+    e.target.style.visibility = "visible";
+  };
+  const handleApply = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    
+  };
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
-  const handlePageChange = function (e) {
-    setPage(e.target.value);
+  const handlePageChange = (e) => {
+    setTimeout(() => {
+      scrollRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      setPage(e.target.value);
+    }, 100);
   };
   return (
     <div>
@@ -69,271 +86,270 @@ const JobListings = () => {
           <h1>Job Listings</h1>
           <span>Discover your future Dream Career</span>
         </header>
-        <div className="jobsMain wrapper">
-          <div className="jobsFilter">
-            <Accordion
-              expanded={expanded}
-              onChange={handleExpand}
-              sx={{
-                boxShadow: "none",
-                backgroundColor: "#EFF6F3",
-                borderRadius: "20px",
-              }}
-            >
-              <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
+        {loader === false ? (
+          <div className="jobsMain wrapper">
+            <div ref={scrollRef} className="jobsFilter">
+              <Accordion
+                expanded={expanded}
+                onChange={handleExpand}
                 sx={{
-                  "& .MuiSvgIcon-root": {
-                    backgroundColor: "white",
-                    borderRadius: "50%",
-                  },
+                  boxShadow: "none",
+                  backgroundColor: "#EFF6F3",
+                  borderRadius: "20px",
                 }}
-                aria-controls="panel1a-content"
-                id="panel1a-header"
               >
-                <Typography
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
                   sx={{
-                    fontSize: "1.1rem",
+                    "& .MuiSvgIcon-root": {
+                      backgroundColor: "white",
+                      borderRadius: "50%",
+                    },
                   }}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
                 >
-                  Filters
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <form className="filtersForm" action="">
-                  <div className="filtersTop">
-                    <div className="filtersKeyword">
-                      <label htmlFor="keyword">Keyword or Title</label>
-                      <input id="keyword" type="text" />
-                    </div>
-                    <div className="filtersCategories">
-                      <label htmlFor="categories">Categories</label>
-                      <input id="categories" type="text" />
-                    </div>
-                    <div className="filtersLocation">
-                      <label htmlFor="location">Location</label>
-                      <input id="location" type="text" />
-                    </div>
-                  </div>
-                  <div className="filtersBottom">
-                    <div className="filtersType">
-                      <p>Job Type:</p>
-                      <div className="typeGroup">
-                        <div>
-                          <input name="type" type="checkbox" id="fulltime" />
-                          <label htmlFor="fulltime">Full-time</label>
-                        </div>
-                        <div>
-                          <input name="type" type="checkbox" id="parttime" />
-                          <label htmlFor="parttime">Part-time</label>
-                        </div>
-                        <div>
-                          <input name="type" type="checkbox" id="contract" />
-                          <label htmlFor="contract">Contract</label>
-                        </div>
+                  <Typography
+                    sx={{
+                      fontSize: "1.1rem",
+                    }}
+                  >
+                    Filters
+                  </Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <form className="filtersForm" action="">
+                    <div className="filtersTop">
+                      <div className="filtersKeyword">
+                        <label htmlFor="keyword">Keyword or Title</label>
+                        <input id="keyword" type="text" />
+                      </div>
+                      <div className="filtersCategories">
+                        <label htmlFor="categories">Categories</label>
+                        <input id="categories" type="text" />
+                      </div>
+                      <div className="filtersLocation">
+                        <label htmlFor="location">Location</label>
+                        <input id="location" type="text" />
                       </div>
                     </div>
-                    <div className="filtersExperience">
-                      <p>Experience:</p>
-                      <div className="experienceGroup">
-                        <div>
-                          <input
-                            name="experience"
-                            type="checkbox"
-                            id="Junior"
-                          />
-                          <label htmlFor="Junior">{"Junior (0-2 yrs)"}</label>
-                        </div>
-                        <div>
-                          <input
-                            name="experience"
-                            type="checkbox"
-                            id="Intermediate"
-                          />
-                          <label htmlFor="Intermediate">
-                            {"Intermediate (2-5 yrs)"}
-                          </label>
-                        </div>
-                        <div>
-                          <input
-                            name="experience"
-                            type="checkbox"
-                            id="Senior"
-                          />
-                          <label htmlFor="Senior">{"Senior (5+ yrs)"}</label>
+                    <div className="filtersBottom">
+                      <div className="filtersType">
+                        <p>Job Type:</p>
+                        <div className="typeGroup">
+                          <div>
+                            <input name="type" type="checkbox" id="fulltime" />
+                            <label htmlFor="fulltime">Full-time</label>
+                          </div>
+                          <div>
+                            <input name="type" type="checkbox" id="parttime" />
+                            <label htmlFor="parttime">Part-time</label>
+                          </div>
+                          <div>
+                            <input name="type" type="checkbox" id="contract" />
+                            <label htmlFor="contract">Contract</label>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                    <div className="filtersSalary">
-                      <p>Salary:</p>
-                      <div className="salaryGroup">
-                        <div className="salaryRange">
-                          <p>{"$" + salary[0].toLocaleString() + " CAD"}</p>
-                          <span>-</span>
-                          <p>
-                            {salary[1] === 150000
-                              ? "$" + salary[1].toLocaleString() + " CAD+"
-                              : "$" + salary[1].toLocaleString() + " CAD"}
-                          </p>
+                      <div className="filtersExperience">
+                        <p>Experience:</p>
+                        <div className="experienceGroup">
+                          <div>
+                            <input
+                              name="experience"
+                              type="checkbox"
+                              id="Junior"
+                            />
+                            <label htmlFor="Junior">{"Junior (0-2 yrs)"}</label>
+                          </div>
+                          <div>
+                            <input
+                              name="experience"
+                              type="checkbox"
+                              id="Intermediate"
+                            />
+                            <label htmlFor="Intermediate">
+                              {"Intermediate (2-5 yrs)"}
+                            </label>
+                          </div>
+                          <div>
+                            <input
+                              name="experience"
+                              type="checkbox"
+                              id="Senior"
+                            />
+                            <label htmlFor="Senior">{"Senior (5+ yrs)"}</label>
+                          </div>
                         </div>
-                        <Box
-                          sx={{
-                            width: 250,
-                            "& .MuiSlider-thumb": {
-                              backgroundColor: "#00BF58",
+                      </div>
+                      <div className="filtersSalary">
+                        <p>Salary:</p>
+                        <div className="salaryGroup">
+                          <div className="salaryRange">
+                            <p>{"$" + salary[0].toLocaleString() + " CAD"}</p>
+                            <span>-</span>
+                            <p>
+                              {salary[1] === 150000
+                                ? "$" + salary[1].toLocaleString() + " CAD+"
+                                : "$" + salary[1].toLocaleString() + " CAD"}
+                            </p>
+                          </div>
+                          <Box
+                            sx={{
+                              width: 250,
+                              "& .MuiSlider-thumb": {
+                                backgroundColor: "#00BF58",
 
-                              "&:hover": {
-                                backgroundColor: "#755146",
-                                boxShadow: "none",
+                                "&:hover": {
+                                  backgroundColor: "#755146",
+                                  boxShadow: "none",
+                                },
                               },
-                            },
-                            "& .MuiSlider-mark": {
-                              display: "none",
-                            },
-                            "& .MuiSlider-rail": {
-                              color: "#244034",
-                            },
-                            "& .MuiSlider-track": {
-                              color: "#00BF58",
-                            },
-                          }}
-                        >
-                          <Slider
-                            getAriaLabel={() => "Salary range"}
-                            value={salary}
-                            onChange={handleSalaryChange}
-                            // valueLabelDisplay="auto"
-                            step={5000}
-                            marks
-                            min={0}
-                            max={150000}
-                          />
-                        </Box>
+                              "& .MuiSlider-mark": {
+                                display: "none",
+                              },
+                              "& .MuiSlider-rail": {
+                                color: "#244034",
+                              },
+                              "& .MuiSlider-track": {
+                                color: "#00BF58",
+                              },
+                            }}
+                          >
+                            <Slider
+                              getAriaLabel={() => "Salary range"}
+                              value={salary}
+                              onChange={handleSalaryChange}
+                              // valueLabelDisplay="auto"
+                              step={5000}
+                              marks
+                              min={0}
+                              max={150000}
+                            />
+                          </Box>
+                        </div>
                       </div>
                     </div>
+                  </form>
+                  <div className="filterButtons">
+                    <button className="buttonRoundClear">clear filters</button>
+
+                    <button className="buttonRoundClear">apply filters</button>
                   </div>
-                </form>
-                <div className="filterButtons">
-                  <button className="buttonRoundClear">clear filters</button>
-
-                  <button className="buttonRoundClear">apply filters</button>
-                </div>
-              </AccordionDetails>
-            </Accordion>
-          </div>
-          <div className="jobsSort">
-            <p>
-              Total of <span>{jobList.length}</span> jobs found
-            </p>
-            <div className="sortGroup">
-              <label htmlFor="sort">Sort by: </label>
-              <select name="sort" id="sort">
-                <option value="">Latest</option>
-                <option value="">Salary Desc</option>
-                <option value="">Salary Asc</option>
-                <option value="">Job Title</option>
-              </select>
+                </AccordionDetails>
+              </Accordion>
             </div>
-          </div>
 
-          <ul className="jobsHolder">
-            {loader === false
-              ? jobList.map((item, index) => {
-                  if (index > page * 10 - 11 && index < page * 10) {
+            <div className="jobsSort">
+              <p>
+                Total of <span>{jobList.length}</span> jobs found
+              </p>
+              <div className="sortGroup">
+                <label htmlFor="sort">Sort by: </label>
+                <select name="sort" id="sort">
+                  <option value="">Latest</option>
+                  <option value="">Salary Desc</option>
+                  <option value="">Salary Asc</option>
+                  <option value="">Job Title</option>
+                </select>
+              </div>
+            </div>
+
+            <ul className="jobsHolder">
+              {loader === false
+                ? jobList.map((item, index) => {
+                    if (index > page * 10 - 11 && index < page * 10) {
+                      return (
+                        <Link to={`/jobs/${jobId[index]}`} key={jobId[index]}>
+                          <li className="jobCard">
+                            <div className="jobCardHeading">
+                              <div className="jobCardLogo defaultLoad">
+                                <img
+                                  onLoad={handleLogoDisplay}
+                                  src={item.logo}
+                                  alt="company logo"
+                                />
+                              </div>
+                              <div className="jobCardText">
+                                <h5>{item.title}</h5>
+                                <h6>{item.experience}</h6>
+                              </div>
+                            </div>
+                            <div className="jobCardType">
+                              <p
+                                className="topText"
+                                style={
+                                  item.type === "contract"
+                                    ? { color: "#9CA89D" }
+                                    : item.type === "full-time"
+                                    ? { color: "#00BF58" }
+                                    : item.type === "part-time"
+                                    ? { color: "#FF6060" }
+                                    : null
+                                }
+                              >
+                                {item.type}
+                              </p>
+                              <p className="bottomText">
+                                Salary:{" "}
+                                <span>
+                                  ${Number(item.salary).toLocaleString("en")}
+                                </span>
+                              </p>
+                            </div>
+                            <div className="jobCardLocation">
+                              <p className="topText">
+                                {item.city}, {item.country}
+                              </p>
+                              <p className="bottomText">{item.category}</p>
+                            </div>
+                            <div className="jobCardButtons">
+                              <BookmarkBorderIcon />
+                              <button
+                                onClick={handleApply}
+                                className="buttonRoundGreen"
+                              >
+                                apply
+                              </button>
+                            </div>
+                          </li>
+                        </Link>
+                      );
+                    }
+                  })
+                : null}
+            </ul>
+            <div className="pagePagination">
+              <p>Pages:</p>
+              <div>
+                {jobList?.map((item, index) => {
+                  if (index % 10 === 0) {
                     return (
-                      <li key={jobId[index]} className="jobCard">
-                        <div className="jobCardHeading">
-                          <div className="jobCardLogo">
-                            <img src={item.logo} alt="company logo" />
-                          </div>
-                          <div className="jobCardText">
-                            <h5>{item.title}</h5>
-                            <h6>{item.experience}</h6>
-                          </div>
-                        </div>
-                        <div className="jobCardType">
-                          <p className="topText">{item.type}</p>
-                          <p className="bottomText">
-                            Salary:{" "}
-                            <span>
-                              ${Number(item.salary).toLocaleString("en")}
-                            </span>
-                          </p>
-                        </div>
-                        <div className="jobCardLocation">
-                          <p className="topText">
-                            {item.city}, {item.country}
-                          </p>
-                          <p className="bottomText">{item.category}</p>
-                        </div>
-                        <div className="jobCardButtons">
-                          <BookmarkBorderIcon
-                          // sx={{
-                          //   "&:hover": {
-
-                          //     transform: "scale(1.3)",
-                          //   },
-                          //   borderRadius: "50%",
-                          //   fontSize: "24px",
-                          //   transition: "all 0.1s linear",
-                          //   // padding: "10px"
-                          //   margin: "0 5px",
-                          // }}
-                          />
-                          <button className="buttonRoundGreen">apply</button>
-                        </div>
-                      </li>
+                      <div key={"pageKey" + index / 10} className="pageNumbers">
+                        <input
+                          defaultChecked={index / 10 + 1 === 1}
+                          onChange={handlePageChange}
+                          id={"page" + index / 10}
+                          value={index / 10 + 1}
+                          className="sr-only"
+                          name="game-pages"
+                          type="radio"
+                        />
+                        <label htmlFor={"page" + index / 10}>
+                          {index / 10 + 1}
+                        </label>
+                      </div>
                     );
                   }
-                })
-              : null}
-          </ul>
-          {/* <div className="pagePagination">
-            <p>Page:</p>
-            {jobList?.map((item, index) => {
-              if (index % 10 === 0) {
-                return (
-                  <div className="pageNumbers">
-                    <input
-                      onChange={handlePageChange}
-                      id={"page" + index / 10}
-                      value={index / 10 + 1}
-                      className="sr-only"
-                      name="game-pages"
-                      type="radio"
-                    />
-                    <label htmlFor={"page" + index / 10}>
-                      {index / 10 + 1}
-                    </label>
-                  </div>
-                );
-              }
-            })}
-          </div> */}
-          <div className="pagePagination">
-            <p>Pages:</p>
-            {jobList?.map((item, index) => {
-              if (index % 10 === 0) {
-                return (
-                  <div className="pageNumbers">
-                    <input
-                      defaultChecked={index / 10 + 1 === 1}
-                      onChange={handlePageChange}
-                      id={"page" + index / 10}
-                      value={index / 10 + 1}
-                      className="sr-only"
-                      name="game-pages"
-                      type="radio"
-                    />
-                    <label htmlFor={"page" + index / 10}>
-                      {index / 10 + 1}
-                    </label>
-                  </div>
-                );
-              }
-            })}
+                })}
+              </div>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="loader">
+            <CircularProgress size={"60px"} color="success" />
+          </div>
+        )}
       </section>
       <Footer />
     </div>

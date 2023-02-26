@@ -1543,6 +1543,14 @@ h1 {
   margin-bottom: 60px;
 }
 
+.jobListings .loader {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .jobsMain {
   display: flex;
   flex-direction: column;
@@ -1693,6 +1701,9 @@ h1 {
   justify-content: center;
   min-height: 300px;
 }
+.jobsHolder a {
+  width: 100%;
+}
 
 .jobsSort {
   margin: 20px 0;
@@ -1726,22 +1737,27 @@ h1 {
 }
 .jobsSort .sortGroup option {
   border: none;
+  font-family: "Gordita Regular", sans-serif;
 }
 
 .pagePagination {
   max-width: 400px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   font-size: 0.7rem;
   margin: 10px 0;
+}
+.pagePagination div:first-of-type {
+  display: flex;
+  flex-wrap: wrap;
 }
 .pagePagination p {
   color: rgb(170, 170, 170);
   margin-right: 5px;
 }
 .pagePagination label {
-  margin: 0 5px;
+  margin: 0 5px 5px 5px;
   padding: 0 5px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -1753,6 +1769,12 @@ h1 {
 .pagePagination input:checked + label {
   border-bottom: 2px solid #00BF58;
   color: #00BF58;
+}
+.pagePagination .pageNumbers {
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .jobCard {
@@ -1784,9 +1806,14 @@ h1 {
   width: 50px;
   height: 50px;
   margin-right: 20px;
+  background-color: #EFF6F3;
 }
 .jobCard .jobCardLogo img {
   border-radius: 5px;
+}
+.jobCard .defaultLoad {
+  background-image: url("../assets/jobList/logoLoad.gif");
+  background-size: contain;
 }
 .jobCard h5 {
   font-size: 0.7rem;
@@ -1801,6 +1828,7 @@ h1 {
 .jobCard .topText {
   margin-bottom: 10px;
   text-transform: capitalize;
+  font-weight: bold;
 }
 .jobCard .bottomText {
   font-size: 0.6rem;
@@ -1832,6 +1860,14 @@ h1 {
   justify-content: space-between;
   align-items: center;
   width: 110px;
+}
+
+.jobDetails {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=App.css.map */

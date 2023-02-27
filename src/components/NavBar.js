@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-
-const NavBar = () => {
+import Login from "./helpers/Login";
+import Signup from "./helpers/Signup";
+import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
+import { useSelector, useDispatch } from "react-redux";
+const NavBar = (props) => {
+  const popups = useSelector((state) => state.popups);
+  const dispatch = useDispatch();
   const location = useLocation();
   const [submenu, setSubmenu] = useState(false);
   const [lastEvent, setLastEvent] = useState("");
@@ -29,6 +34,28 @@ const NavBar = () => {
       setLastEvent("");
     }
   };
+  const handleLogin = () => {
+    dispatch(POP_UP_LOG(true));
+  };
+  const handleExitLogin = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(POP_UP_LOG(false));
+    dispatch(POP_UP_REG(false))
+  };
+  const handleExitSignup = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(POP_UP_REG(false));
+  };
+  useEffect(() => {
+    if (popups.login || popups.signup) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [popups.login]);
+
   useEffect(() => {
     const handleCloseLinks = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -40,11 +67,14 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleCloseLinks);
     };
   }, [menuRef]);
+
   useEffect(() => {
     if (location.pathname === "/" && location.hash !== "") {
       ref.current?.click();
     }
+    dispatch(POP_UP_LOG(false));
   }, [location]);
+
   return (
     <nav tabIndex={1} className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
@@ -96,9 +126,28 @@ const NavBar = () => {
         </li>
       </ul>
       <div className="navButtons">
-        <button className="buttonRoundClear">Login/Sign up</button>
-
+        <button onClick={handleLogin} className="buttonRoundClear">
+          Login/Sign up
+        </button>
         <button className="buttonRoundGreen">Post a job</button>
+      </div>
+      {/* {loginPopup.popup ? ( */}
+      <div
+        onClick={handleExitLogin}
+        aria-hidden={popups.login ? false : true}
+        className={
+          popups.login === true || popups.signup === true
+            ? "popupContainer popupActive"
+            : "popupContainer"
+        }
+      >
+        {
+          popups.login === true ?
+          <Login />
+          : popups.signup === true ?
+          <Signup />
+          : null
+        }
       </div>
     </nav>
   );

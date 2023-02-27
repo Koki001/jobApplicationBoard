@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useLocation, Link } from "react-router-dom";
-import NavBar from "./helpers/NavBar";
+import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
-import db from "../firebase";
+import {db} from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import { useEffect, useState } from "react";
 

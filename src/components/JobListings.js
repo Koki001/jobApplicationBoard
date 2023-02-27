@@ -1,11 +1,12 @@
 import { useLocation, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
-import NavBar from "./helpers/NavBar";
+import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
-import axios from "axios";
-import db from "../firebase";
+import {db} from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
+import { useSelector, useDispatch } from "react-redux";
+import { pagination, PAGINATION_RESET } from "../redux/slices/paginationSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -19,14 +20,23 @@ import CircularProgress from "@mui/material/CircularProgress";
 
 const JobListings = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const pageSelectorDefault = useSelector((state) => state.pagination.default);
+  const pageSelectorCurrent = useSelector((state) => state.pagination.current);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobList, setJobList] = useState([]);
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [page, setPage] = useState(1);
 
   const scrollRef = useRef();
+  useEffect(() => {
+    if (pageSelectorCurrent > Math.ceil(jobList.length / 10)) {
+      dispatch(pagination(1));
+    } else if (!pageSelectorCurrent){
+      dispatch(pagination(1))
+    }
+  }, []);
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
@@ -35,7 +45,7 @@ const JobListings = () => {
       behavior: "smooth",
       block: "start",
     });
-  }, [page]);
+  }, [pageSelectorCurrent]);
 
   useEffect(() => {
     const dbRef = ref(db);
@@ -76,11 +86,8 @@ const JobListings = () => {
     e.preventDefault();
   };
   const handlePageChange = (e, val) => {
-    // scrollRef.current.scrollIntoView({
-    //   behavior: "smooth",
-    //   block: "start",
-    // });
-    setPage(val);
+    // setPage(val);
+    dispatch(pagination(Number(val)));
   };
   return (
     <div>
@@ -249,7 +256,7 @@ const JobListings = () => {
                 Total of <span>{jobList.length}</span> jobs found
               </p>
               <p>
-                Page {page} of {Math.ceil(jobList.length / 10)}
+                Page {pageSelectorCurrent || pageSelectorDefault} of {Math.ceil(jobList.length / 10)}
               </p>
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
@@ -264,7 +271,10 @@ const JobListings = () => {
             <ul className="jobsHolder">
               {loader === false
                 ? jobList.map((item, index) => {
-                    if (index > page * 10 - 11 && index < page * 10) {
+                    if (
+                      index > pageSelectorCurrent * 10 - 11 &&
+                      index < pageSelectorCurrent * 10
+                    ) {
                       return (
                         <Link to={`/jobs/${jobId[index]}`} key={jobId[index]}>
                           <li className="jobCard">
@@ -338,7 +348,7 @@ const JobListings = () => {
                 size={"small"}
                 onChange={handlePageChange}
                 count={Math.ceil(jobList.length / 10)}
-                defaultPage={1}
+                page={pageSelectorCurrent}
                 variant="outlined"
                 color="success"
               />

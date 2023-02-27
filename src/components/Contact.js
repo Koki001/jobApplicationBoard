@@ -1,4 +1,4 @@
-import NavBar from "./helpers/NavBar";
+import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import axios from "axios";
 import { useEffect, useState } from "react";

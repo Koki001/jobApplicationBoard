@@ -1,4 +1,4 @@
-import db from "../../firebase";
+import {db} from "../../firebase";
 import { ref, set, push, onValue } from "firebase/database";
 import { faker } from "@faker-js/faker";
 import BuzzWords from "./BuzzWords";

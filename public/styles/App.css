@@ -375,6 +375,24 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonSquareClear {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonSquareClear:hover {
+  background-color: #755146;
+  border: 1px solid transparent;
+  color: white;
+}
+.buttonSquareClear:active {
+  transform: scale(0.95);
+}
+
 .buttonRoundGreen {
   background-color: #00BF58;
   border: 1px solid transparent;
@@ -1272,6 +1290,279 @@ span.fakeTextBreaks {
 .footerBottomRight a:hover {
   transform: scale(1.2);
   color: #755146;
+}
+
+.popupContainer {
+  overflow: hidden;
+  visibility: hidden;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+
+.popupActive {
+  visibility: visible;
+  opacity: 1;
+}
+
+.loginMain {
+  position: relative;
+  padding: 40px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 600px;
+}
+.loginMain .closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: all 0.1s linear;
+}
+.loginMain .closeIcon:hover {
+  color: #00BF58;
+  transform: scale(0.8);
+}
+.loginMain .loginHeadings {
+  text-align: center;
+}
+.loginMain .loginHeadings h2 {
+  margin-bottom: 20px;
+}
+.loginMain .loginHeadings p {
+  font-size: 1rem;
+}
+.loginMain .loginHeadings p a {
+  color: #00BF58;
+}
+.loginMain .loginHeadings p a:hover {
+  color: #D2F34C;
+}
+.loginMain .loginName {
+  width: 100%;
+  margin: 30px 0;
+}
+.loginMain .loginPassword {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.loginMain form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.loginMain form input {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #EFF6F3;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+.loginMain form label {
+  font-size: 0.7rem;
+  color: rgb(170, 170, 170);
+}
+.loginMain .loginOptions {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+}
+.loginMain .loginOptions a {
+  color: #00BF58;
+  border-bottom: 1px solid #00BF58;
+}
+.loginMain .loginOptions input {
+  margin-right: 10px;
+  cursor: pointer;
+}
+.loginMain .loginButton {
+  width: 100%;
+  padding: 10px 0;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  margin-top: 30px;
+}
+.loginMain .authLogin {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.loginMain .authLogin button {
+  width: 45%;
+}
+
+.noAcc {
+  font-size: 0.7rem;
+  color: rgb(170, 170, 170);
+}
+.noAcc a {
+  color: #00BF58;
+  margin-left: 10px;
+}
+.noAcc a:hover {
+  color: #D2F34C;
+}
+
+.loginBreak {
+  margin: 20px 0;
+  background-color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+.loginBreak p {
+  position: relative;
+  z-index: 10;
+  background-color: white;
+  padding: 0 10px;
+  width: 50px;
+}
+
+.loginBreak:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px rgb(170, 170, 170);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  z-index: 1;
+}
+
+.signupContainer {
+  overflow: hidden;
+  visibility: hidden;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+
+.signupActive {
+  visibility: visible;
+  opacity: 1;
+}
+
+.signupMain {
+  position: relative;
+  padding: 40px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 600px;
+}
+.signupMain .closeIcon {
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  transition: all 0.1s linear;
+}
+.signupMain .closeIcon:hover {
+  color: #00BF58;
+  transform: scale(0.8);
+}
+.signupMain form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.signupMain form div {
+  width: 100%;
+  margin-top: 15px;
+}
+.signupMain form input {
+  width: 100%;
+  margin-top: 5px;
+  background-color: #EFF6F3;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+.signupMain form label {
+  font-size: 0.7rem;
+  color: rgb(170, 170, 170);
+}
+.signupMain form .nameGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signupMain form .nameGroup div {
+  width: calc(50% - 10px);
+}
+
+.signupBreak {
+  margin: 20px 0;
+  background-color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+.signupBreak p {
+  position: relative;
+  z-index: 10;
+  background-color: white;
+  padding: 0 10px;
+  width: 50px;
+}
+
+.signupBreak:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px rgb(170, 170, 170);
+  position: absolute;
+  left: 0;
+  top: 10px;
+  z-index: 1;
 }
 
 .pricingHeader {

@@ -3,8 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
 import App from './App';
-import Login from "./components/Login";
-import Signup from "./components/Signup";
+// import Signup from "./components/Signup";
 import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import JobListings from './components/JobListings';
@@ -36,14 +35,10 @@ const router = createBrowserRouter([
     path: "/contactUs",
     element: <Contact />,
   },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Signup />,
-  },
+  // {
+  //   path: "/register",
+  //   element: <Signup />,
+  // },
 ]);
 
 root.render(

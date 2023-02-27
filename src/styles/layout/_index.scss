@@ -1,7 +1,9 @@
-@use "header";
-@use "categories";
-@use "howItWorks";
-@use "jobGuides";
-@use "reviews";
-@use "faq";
-@use "footer";
+@forward "header";
+@forward "categories";
+@forward "howItWorks";
+@forward "jobGuides";
+@forward "reviews";
+@forward "faq";
+@forward "footer";
+@forward "login";
+@forward "signup";

@@ -17,6 +17,23 @@
     transform: scale(0.95);
   }
 }
+.buttonSquareClear {
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $brown;
+    border: 1px solid transparent;
+    color: white;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
 .buttonRoundGreen {
   background-color: $lightGreen;
   border: 1px solid transparent;

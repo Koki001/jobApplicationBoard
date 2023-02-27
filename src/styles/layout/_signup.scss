@@ -1,0 +1,107 @@
+@use "../base/variables" as *;
+
+.signupContainer {
+  overflow: hidden;
+  visibility: hidden;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s linear;
+}
+.signupActive {
+  visibility: visible;
+  opacity: 1;
+}
+
+.signupMain {
+  position: relative;
+  padding: 40px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  width: 450px;
+  height: 600px;
+  .closeIcon {
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition: all 0.1s linear;
+    &:hover {
+      color: $lightGreen;
+      transform: scale(0.8);
+    }
+  }
+  form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    div {
+      width: 100%;
+      margin-top: 15px;
+    }
+    input {
+      width: 100%;
+      margin-top: 5px;
+      background-color: $greenBg;
+      border: none;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+    }
+    label {
+      font-size: 0.7rem;
+      color: $darkGrey;
+    }
+    .nameGroup {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      div {
+        width: calc(100% / 2 - 10px);
+      }
+    }
+  }
+}
+.signupBreak {
+  margin: 20px 0;
+  background-color: white;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  p {
+    position: relative;
+    z-index: 10;
+    background-color: white;
+    padding: 0 10px;
+    width: 50px;
+  }
+}
+.signupBreak:after {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px $darkGrey;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  z-index: 1;
+}

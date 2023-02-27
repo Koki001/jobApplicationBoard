@@ -66,6 +66,7 @@ nav {
   }
   .subMenu {
     visibility: hidden;
+    opacity: 0;
     padding: 15px 5px;
     height: 0;
     background-color: $greenBg;
@@ -94,6 +95,7 @@ nav {
   }
   .slideOut {
     visibility: visible;
+    opacity: 1;
     height: 250px;
     li {
       width: 90%;

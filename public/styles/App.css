@@ -426,6 +426,23 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonRoundBrown {
+  background-color: #755146;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonRoundBrown:hover {
+  background-color: #00BF58;
+}
+.buttonRoundBrown:active {
+  transform: scale(0.95);
+}
+
 .buttonPriceGreen {
   background-color: #31795A;
   border: 1px solid transparent;
@@ -541,6 +558,7 @@ nav {
 }
 .navMenu .subMenu {
   visibility: hidden;
+  opacity: 0;
   padding: 15px 5px;
   height: 0;
   background-color: #EFF6F3;
@@ -569,6 +587,7 @@ nav {
 }
 .navMenu .slideOut {
   visibility: visible;
+  opacity: 1;
   height: 250px;
 }
 .navMenu .slideOut li {
@@ -1151,7 +1170,9 @@ h1 span {
 }
 
 .footerTop {
-  padding: 100px 0;
+  padding: 50px 0;
+  margin-top: 50px;
+  border-top: 2px solid #EFF6F3;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -1568,6 +1589,7 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid rgb(170, 170, 170);
 }
 .filtersForm label {
   font-size: 0.7rem;
@@ -1575,7 +1597,7 @@ h1 {
 }
 
 .filtersTop {
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -1741,12 +1763,12 @@ h1 {
 }
 
 .pagePagination {
-  width: 320px;
+  max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.7rem;
-  margin: 10px 0;
+  margin: 20px 0;
 }
 .pagePagination div:first-of-type {
   display: flex;
@@ -1790,11 +1812,12 @@ h1 {
   cursor: pointer;
   transition: all 0.1s linear;
   position: relative;
+  background-color: #EFF6F3;
 }
 .jobCard:hover {
   border: 1px solid #244034;
   transform: scale(1.003);
-  background-color: #EFF6F3;
+  background-color: white;
 }
 .jobCard .jobCardHeading {
   display: flex;
@@ -1862,12 +1885,159 @@ h1 {
   width: 110px;
 }
 
+.jobDetailsSection header {
+  background-color: #EFF6F3;
+  padding-bottom: 50px;
+}
+.jobDetailsSection header nav {
+  background-color: #EFF6F3;
+}
+
 .jobDetails {
-  min-height: 50vh;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 100px 0 50px 0;
+}
+.jobDetails .detailsOverview,
+.jobDetails .detailsDescription,
+.jobDetails .detailsResponsibilities,
+.jobDetails .detailsRequired,
+.jobDetails .detailsBenefits {
+  margin: 20px 0;
+}
+.jobDetails ul {
+  list-style: circle;
+  margin-left: 20px;
+}
+.jobDetails ul li {
+  padding: 5px 0;
+  font-size: 0.7rem;
+}
+.jobDetails h3 {
+  padding: 20px 0;
+  font-size: 0.8rem;
+}
+.jobDetails p {
+  font-size: 0.7rem;
+}
+.jobDetails .detailsSocials {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.jobDetailsLeft {
+  width: 60%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+}
+.jobDetailsLeft p {
+  line-height: 1rem;
+}
+.jobDetailsLeft a {
+  margin-top: 50px;
+}
+
+.jobDetailsRight {
+  position: sticky;
+  right: 0;
+  top: 40px;
+  padding: 30px 20px;
+  width: 35%;
+  background-color: #EFF6F3;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.jobDetailsRight h4 {
+  font-size: 0.9rem;
+  font-weight: lighter;
+}
+.jobDetailsRight h5 {
+  font-size: 0.6rem;
+  font-weight: lighter;
+  color: rgb(170, 170, 170);
+}
+.jobDetailsRight p {
+  font-size: 0.6rem;
+  text-transform: capitalize;
+  margin-top: 5px;
+}
+.jobDetailsRight .jobDetailsCompanyTop {
+  padding-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid rgb(170, 170, 170);
+  width: 100%;
+}
+.jobDetailsRight .jobDetailsCompanyTop .buttonRoundGreen {
+  background-color: #244034;
+}
+.jobDetailsRight .jobDetailsCompanyTop .buttonRoundGreen:hover {
+  background-color: #755146;
+}
+.jobDetailsRight .jobDetailsCompanyTop h4 {
+  margin-top: 10px;
+}
+.jobDetailsRight .jobDetailsCompanyTop a {
+  margin-top: 20px;
+  font-size: 0.6rem;
+}
+.jobDetailsRight .companyLogo {
+  width: 80px;
+  height: 80px;
+}
+.jobDetailsRight .companyLogo img {
+  border-radius: 50%;
+}
+.jobDetailsRight .jobDetailsCompanyBottom {
+  padding-top: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.jobDetailsRight .jobDetailsCompanyBottom .companyDetails {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.jobDetailsRight .jobDetailsCompanyBottom .companyDetails div {
+  width: calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.jobDetailsRight .jobDetailsCompanyBottom button {
+  width: 100%;
+}
+
+.companyBuzzWords {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px 0;
+}
+.companyBuzzWords h5 {
+  font-size: 0.7rem;
+  padding: 5px;
+  border: 1px solid rgb(170, 170, 170);
+  border-radius: 10px;
+  margin: 2px;
 }
 
 /*# sourceMappingURL=App.css.map */

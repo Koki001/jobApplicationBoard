@@ -10,7 +10,9 @@
   width: 90px;
 }
 .footerTop {
-  padding: 100px 0;
+  padding: 50px 0;
+  margin-top: 50px;
+  border-top: 2px solid $greenBg;
   width: 100%;
   display: flex;
   justify-content: space-between;

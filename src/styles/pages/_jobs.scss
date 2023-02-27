@@ -39,13 +39,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  border-top: 1px solid $darkGrey;
   label {
     font-size: 0.7rem;
     font-weight: bold;
   }
 }
 .filtersTop {
-  margin-top: 20px;
+  margin-top: 30px;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
@@ -192,12 +193,12 @@
   }
 }
 .pagePagination {
-  width: 320px;
+  max-width: 350px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-size: 0.7rem;
-  margin: 10px 0;
+  margin: 20px 0;
   div:first-of-type {
     display: flex;
     flex-wrap: wrap;
@@ -240,10 +241,11 @@
   cursor: pointer;
   transition: all 0.1s linear;
   position: relative;
+  background-color: $greenBg;
   &:hover {
     border: 1px solid $darkGreen;
     transform: scale(1.003);
-    background-color: $greenBg;
+    background-color: white;
   }
   .jobCardHeading {
     display: flex;

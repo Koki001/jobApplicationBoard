@@ -30,9 +30,16 @@ const JobListings = () => {
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [page]);
 
   useEffect(() => {
     const dbRef = ref(db);
+    // remove(dbRef)
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
@@ -69,10 +76,10 @@ const JobListings = () => {
     e.preventDefault();
   };
   const handlePageChange = (e, val) => {
-    scrollRef.current.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
+    // scrollRef.current.scrollIntoView({
+    //   behavior: "smooth",
+    //   block: "start",
+    // });
     setPage(val);
   };
   return (
@@ -85,7 +92,7 @@ const JobListings = () => {
         </header>
         {loader === false ? (
           <div className="jobsMain wrapper">
-            <div ref={scrollRef} className="jobsFilter">
+            <div className="jobsFilter">
               <Accordion
                 expanded={expanded}
                 onChange={handleExpand}
@@ -237,7 +244,7 @@ const JobListings = () => {
               </Accordion>
             </div>
 
-            <div className="jobsSort">
+            <div ref={scrollRef} className="jobsSort">
               <p>
                 Total of <span>{jobList.length}</span> jobs found
               </p>
@@ -319,30 +326,15 @@ const JobListings = () => {
                 : null}
             </ul>
             <div className="pagePagination">
-              {/* <p>Pages:</p> */}
-              {/* <div> */}
-              {/* {jobList?.map((item, index) => {
-                  if (index % 10 === 0) {
-                    return (
-                      <div key={"pageKey" + index / 10} className="pageNumbers">
-                        <input
-                          defaultChecked={index / 10 + 1 === 1}
-                          // onChange={handlePageChange}
-                          id={"page" + index / 10}
-                          value={index / 10 + 1}
-                          className="sr-only"
-                          name="game-pages"
-                          type="radio"
-                        />
-                        <label htmlFor={"page" + index / 10}>
-                          {index / 10 + 1}
-                        </label>
-                      </div>
-                    );
-                  }
-                })} */}
               <Pagination
-                sx={{ padding: "0", width: "auto" }}
+                sx={{
+                  padding: "0",
+                  width: "auto",
+
+                  "& li": {
+                    margin: "0 3px",
+                  },
+                }}
                 size={"small"}
                 onChange={handlePageChange}
                 count={Math.ceil(jobList.length / 10)}
@@ -350,7 +342,6 @@ const JobListings = () => {
                 variant="outlined"
                 color="success"
               />
-              {/* </div> */}
             </div>
           </div>
         ) : (

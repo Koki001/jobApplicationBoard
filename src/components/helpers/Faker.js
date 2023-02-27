@@ -2,7 +2,7 @@ import db from "../../firebase";
 import { ref, set, push, onValue } from "firebase/database";
 import { faker } from "@faker-js/faker";
 import BuzzWords from "./BuzzWords";
-
+import * as dayjs from "dayjs";
 const Shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -49,6 +49,25 @@ const JobGenerator = (num) => {
     push(ref(db, `/data/jobs`), {
       title: faker.name.jobTitle(),
       description: faker.lorem.paragraphs(3),
+      overview: faker.lorem.paragraphs(1),
+      responsibilities: [
+        faker.lorem.sentences(2),
+        faker.lorem.sentences(2),
+        faker.lorem.sentences(2),
+        faker.lorem.sentences(2),
+      ],
+      required: [
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+      ],
+      benefits: [
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+        faker.lorem.sentences(1),
+      ],
       category: faker.name.jobType(),
       type: typeArray[Math.floor(Math.random() * typeArray.length)],
       salary: salary,
@@ -60,6 +79,7 @@ const JobGenerator = (num) => {
       experience: expArray[Math.floor(Math.random() * expArray.length)],
       skills: Shuffle(BuzzWords),
       logo: faker.image.abstract(100, 100, true),
+      createdOn: dayjs().format("dddd/MM/YYYY"),
     });
   }
 };

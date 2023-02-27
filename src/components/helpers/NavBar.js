@@ -81,10 +81,10 @@ const NavBar = () => {
               <Link to={"/#reviews"}>Testimonials</Link>
             </li>
             <li>
-              <Link to={"/#faq"}>FAQ</Link>
+              <Link to={"/#contact"}>About Us</Link>
             </li>
             <li>
-              <Link to={"/#contact"}>Newsletter</Link>
+              <Link to={"/#faq"}>FAQ</Link>
             </li>
           </ul>
         </li>

@@ -1,9 +1,154 @@
 @use "../base/variables" as *;
 
+.jobDetailsSection header {
+  background-color: $greenBg;
+  padding-bottom: 50px;
+  nav {
+    background-color: $greenBg;
+  }
+}
 .jobDetails {
-  min-height: 50vh;
+  min-height: 80vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 100px 0 50px 0;
+
+  .detailsOverview,
+  .detailsDescription,
+  .detailsResponsibilities,
+  .detailsRequired,
+  .detailsBenefits {
+    margin: 20px 0;
+  }
+  ul {
+    list-style: circle;
+    margin-left: 20px;
+    li {
+      padding: 5px 0;
+      font-size: 0.7rem;
+    }
+  }
+  h3 {
+    padding: 20px 0;
+    font-size: 0.8rem;
+  }
+  p {
+    font-size: 0.7rem;
+  }
+  .detailsSocials {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+}
+.jobDetailsLeft {
+  width: 60%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  p {
+    line-height: 1rem;
+  }
+  a {
+    margin-top: 50px;
+  }
+}
+.jobDetailsRight {
+
+  position: sticky;
+  right: 0;
+  top: 40px;
+  padding: 30px 20px;
+  width: 35%;
+  background-color: $greenBg;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+    h4 {
+    font-size: 0.9rem;
+    font-weight: lighter;
+  }
+  h5 {
+    font-size: 0.6rem;
+    font-weight: lighter;
+    color: $darkGrey;
+  }
+  p {
+    font-size: 0.6rem;
+    text-transform: capitalize;
+    margin-top: 5px;
+  }
+  .jobDetailsCompanyTop {
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid $darkGrey;
+    width: 100%;
+    .buttonRoundGreen {
+      background-color: $darkGreen;
+      &:hover {
+        background-color: $brown;
+      }
+    }
+    h4 {
+      margin-top: 10px;
+    }
+    a {
+      margin-top: 20px;
+      font-size: 0.6rem;
+    }
+  }
+  .companyLogo {
+    width: 80px;
+    height: 80px;
+    img {
+      border-radius: 50%;
+    }
+  }
+  .jobDetailsCompanyBottom {
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .companyDetails {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      div {
+        width: calc(100% / 2 - 20px);
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        margin-bottom: 10px;
+      }
+    }
+    button {
+      width: 100%;
+    }
+  }
+}
+.companyBuzzWords {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 20px 0;
+  h5 {
+    font-size: 0.7rem;
+    padding: 5px;
+    border: 1px solid $darkGrey;
+    border-radius: 10px;
+    margin: 2px;
+  }
 }

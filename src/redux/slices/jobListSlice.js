@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   details: {},
-  list: {},
+  list: [],
+  id: [],
   active: false
 };
 
@@ -16,6 +17,9 @@ export const jobListSlice = createSlice({
     JOB_LIST: (state, action) => {
       state.list = action.payload;
     },
+    JOB_ID: (state, action) => {
+      state.id = action.payload;
+    },
     JOB_ACTIVE: (state, action) => {
       state.active = action.payload;
     },
@@ -23,6 +27,6 @@ export const jobListSlice = createSlice({
   },
 });
 
-export const { JOB_DETAILS, JOB_LIST, JOB_RESET, JOB_ACTIVE } = jobListSlice.actions;
+export const { JOB_DETAILS, JOB_LIST, JOB_RESET, JOB_ACTIVE, JOB_ID } = jobListSlice.actions;
 
 export default jobListSlice.reducer;

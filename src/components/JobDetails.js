@@ -15,25 +15,26 @@ const JobDetails = () => {
   const location = useLocation();
   const [details, setDetails] = useState(jobDetails);
   const { id } = useParams();
-
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
-
-  // useEffect(() => {
-  //   const dbRef = ref(db);
-  //   get(child(dbRef, `data/jobs/${id}`))
-  //     .then((snapshot) => {
-  //       if (snapshot.exists()) {
-  //         setDetails(snapshot.val());
-  //       } else {
-  //         console.log("No data available");
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.error(error);
-  //     });
-  // }, []);
+  useEffect(() => {
+    const dbRef = ref(db);
+    if (Object.keys(jobDetails).length === 0){
+      console.log("firebase details")
+      get(child(dbRef, `data/jobs/${id}`))
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setDetails(snapshot.val());
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, []);
   return (
     <div className="jobDetailsSection">
       <header>

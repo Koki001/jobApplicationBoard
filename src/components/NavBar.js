@@ -5,6 +5,7 @@ import Signup from "./helpers/Signup";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
 import { pagination, PAGINATION_MAX } from "../redux/slices/paginationSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
 const NavBar = (props) => {
   const popups = useSelector((state) => state.popups);
   const dispatch = useDispatch();
@@ -76,6 +77,7 @@ const NavBar = (props) => {
     }
     if (!location.pathname.includes("jobs")) {
       dispatch(pagination(1))
+      dispatch(JOB_ACTIVE(false))
     }
     dispatch(POP_UP_LOG(false));
   }, [location]);

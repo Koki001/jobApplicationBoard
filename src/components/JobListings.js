@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { ref, child, get } from "firebase/database";
+import { ref, child, get, onValue } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -13,7 +13,7 @@ import {
   PAGINATION_MAX,
 } from "../redux/slices/paginationSlice";
 import { POP_UP_LOG } from "../redux/slices/popupSlice";
-import { JOB_DETAILS } from "../redux/slices/jobListSlice";
+import { JOB_DETAILS, JOB_LIST, JOB_ACTIVE, JOB_ID } from "../redux/slices/jobListSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";

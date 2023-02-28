@@ -1,5 +1,9 @@
 @use "../base/variables" as *;
 
+.signupActive {
+  visibility: visible;
+  opacity: 1;
+}
 .signupContainer {
   overflow: hidden;
   visibility: hidden;
@@ -17,11 +21,6 @@
   align-items: center;
   transition: all 0.2s linear;
 }
-.signupActive {
-  visibility: visible;
-  opacity: 1;
-}
-
 .signupMain {
   position: relative;
   padding: 20px 40px;
@@ -60,7 +59,7 @@
       transform: scale(0.8);
     }
   }
-  form {
+  .popupForm {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -70,6 +69,45 @@
     div {
       width: 100%;
       margin-top: 5px;
+    }
+    .signupPassword {
+      position: relative;
+      .passwordPopup {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        position: absolute;
+        font-size: 0.5rem;
+        width: 175px;
+        padding: 5px;
+        margin: 0;
+        background-color: $cream;
+        border-radius: 5px;
+        top: 10px;
+        left: -180px;
+        border: 2px solid black;
+      }
+      .passwordPopupItem {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0;
+      }
+    }
+    .passVisibility {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 30px;
+      top: 25px;
+      right: 10px;
+      cursor: pointer;
+      color: $darkGrey;
+      * {
+        pointer-events: none;
+      }
     }
     input {
       width: 100%;
@@ -84,6 +122,10 @@
       &:focus {
         border: 2px solid $green;
       }
+    }
+    .signupConfirm input:disabled {
+      background-color: rgba(128, 128, 128, 0.473);
+      filter: blur(5px);
     }
     label {
       font-size: 0.7rem;
@@ -112,7 +154,7 @@
       width: 50%;
       height: 30px;
       border-radius: 20px;
-      background-color: $brown;
+      background-color: $lightGreen;
       z-index: 5;
       transition: all 0.1s linear;
       top: 0;

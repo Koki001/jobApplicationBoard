@@ -68,7 +68,7 @@ const Contact = () => {
               <a href="#">www.robo-chat-jobi.com</a>
             </li>
           </ul>
-          <form action="">
+          <form className="contactForm" action="">
             <div className="contactUsTop">
               <div className="contactUsName">
                 <label htmlFor="contactUsName">Name*</label>

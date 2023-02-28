@@ -1379,14 +1379,14 @@ span.fakeTextBreaks {
   width: 100%;
   margin-bottom: 20px;
 }
-.loginMain form {
+.loginMain .popupForm {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.loginMain form input {
+.loginMain .popupForm input {
   width: 100%;
   margin-top: 5px;
   background-color: #EFF6F3;
@@ -1395,7 +1395,7 @@ span.fakeTextBreaks {
   font-size: 0.8rem;
   padding: 5px 10px;
 }
-.loginMain form label {
+.loginMain .popupForm label {
   font-size: 0.7rem;
   color: rgb(170, 170, 170);
 }
@@ -1478,6 +1478,11 @@ span.fakeTextBreaks {
   z-index: 1;
 }
 
+.signupActive {
+  visibility: visible;
+  opacity: 1;
+}
+
 .signupContainer {
   overflow: hidden;
   visibility: hidden;
@@ -1494,11 +1499,6 @@ span.fakeTextBreaks {
   justify-content: center;
   align-items: center;
   transition: all 0.2s linear;
-}
-
-.signupActive {
-  visibility: visible;
-  opacity: 1;
 }
 
 .signupMain {
@@ -1540,7 +1540,7 @@ span.fakeTextBreaks {
   color: #00BF58;
   transform: scale(0.8);
 }
-.signupMain form {
+.signupMain .popupForm {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1548,11 +1548,50 @@ span.fakeTextBreaks {
   align-items: center;
   margin-top: 10px;
 }
-.signupMain form div {
+.signupMain .popupForm div {
   width: 100%;
   margin-top: 5px;
 }
-.signupMain form input {
+.signupMain .popupForm .signupPassword {
+  position: relative;
+}
+.signupMain .popupForm .signupPassword .passwordPopup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  position: absolute;
+  font-size: 0.5rem;
+  width: 175px;
+  padding: 5px;
+  margin: 0;
+  background-color: #F8FDE4;
+  border-radius: 5px;
+  top: 10px;
+  left: -180px;
+  border: 2px solid black;
+}
+.signupMain .popupForm .signupPassword .passwordPopupItem {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+}
+.signupMain .popupForm .passVisibility {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  top: 25px;
+  right: 10px;
+  cursor: pointer;
+  color: rgb(170, 170, 170);
+}
+.signupMain .popupForm .passVisibility * {
+  pointer-events: none;
+}
+.signupMain .popupForm input {
   width: 100%;
   margin-top: 5px;
   background-color: #EFF6F3;
@@ -1563,19 +1602,23 @@ span.fakeTextBreaks {
   outline: none;
   border: 2px solid transparent;
 }
-.signupMain form input:focus {
+.signupMain .popupForm input:focus {
   border: 2px solid #31795A;
 }
-.signupMain form label {
+.signupMain .popupForm .signupConfirm input:disabled {
+  background-color: rgba(128, 128, 128, 0.473);
+  filter: blur(5px);
+}
+.signupMain .popupForm label {
   font-size: 0.7rem;
   color: rgb(170, 170, 170);
 }
-.signupMain form .nameGroup {
+.signupMain .popupForm .nameGroup {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.signupMain form .nameGroup div {
+.signupMain .popupForm .nameGroup div {
   width: calc(50% - 10px);
 }
 .signupMain .accountType {
@@ -1593,7 +1636,7 @@ span.fakeTextBreaks {
   width: 50%;
   height: 30px;
   border-radius: 20px;
-  background-color: #755146;
+  background-color: #00BF58;
   z-index: 5;
   transition: all 0.1s linear;
   top: 0;
@@ -1797,7 +1840,7 @@ h1 {
 }
 .contactHeader nav {
   position: relative;
-  z-index: 100;
+  z-index: 10;
   background-color: #EFF6F3;
 }
 
@@ -1875,7 +1918,7 @@ h1 {
   width: 100px;
 }
 
-.contactUs form {
+.contactUs .contactForm {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -1883,14 +1926,14 @@ h1 {
   align-items: center;
   padding: 100px 0;
 }
-.contactUs form input,
-.contactUs form textarea {
+.contactUs .contactForm input,
+.contactUs .contactForm textarea {
   border: none;
   background-color: #f2f2f2;
   border-radius: 10px;
   padding: 10px;
 }
-.contactUs form label {
+.contactUs .contactForm label {
   font-size: 0.7rem;
   margin-bottom: 10px;
   color: rgb(170, 170, 170);

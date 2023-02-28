@@ -34,7 +34,7 @@ const Login = () => {
           </button>{" "}
         </p>
       </div>
-      <form action="">
+      <form className="popupForm" action="">
         <div className="loginName">
           <label htmlFor="name">Name or Email*</label>
           <input id="name" type="text" />
@@ -60,7 +60,10 @@ const Login = () => {
         <button className="buttonSquareClear">facebook</button>
       </div>
       <p className="noAcc">
-        Don't have an account? <button className="buttonSquareBrown" onClick={handleRegPopup}>Sign up</button>{" "}
+        Don't have an account?{" "}
+        <button className="buttonSquareBrown" onClick={handleRegPopup}>
+          Sign up
+        </button>{" "}
       </p>
     </div>
   );

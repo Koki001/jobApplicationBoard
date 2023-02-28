@@ -40,6 +40,9 @@ const NavBar = (props) => {
   const handleLogin = () => {
     dispatch(POP_UP_LOG(true));
   };
+    const handleSignUp = () => {
+      dispatch(POP_UP_REG(true));
+    };
   const handleExitLogin = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -134,9 +137,9 @@ const NavBar = (props) => {
       </ul>
       <div className="navButtons">
         <button onClick={handleLogin} className="buttonRoundClear">
-          Login/Sign up
+          Log In
         </button>
-        <button className="buttonRoundGreen">Post a job</button>
+        <button onClick={handleSignUp} className="buttonRoundGreen">Sign Up</button>
       </div>
       {/* {loginPopup.popup ? ( */}
       <div

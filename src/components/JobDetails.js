@@ -5,33 +5,35 @@ import Footer from "./sections/Footer";
 import {db} from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 
 // MUI imports
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const JobDetails = () => {
+  const jobDetails = useSelector((state) => state.jobs.details);
   const location = useLocation();
-  const [details, setDetails] = useState({});
+  const [details, setDetails] = useState(jobDetails);
   const { id } = useParams();
 
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
 
-  useEffect(() => {
-    const dbRef = ref(db);
-    get(child(dbRef, `data/jobs/${id}`))
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          setDetails(snapshot.val());
-        } else {
-          console.log("No data available");
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   const dbRef = ref(db);
+  //   get(child(dbRef, `data/jobs/${id}`))
+  //     .then((snapshot) => {
+  //       if (snapshot.exists()) {
+  //         setDetails(snapshot.val());
+  //       } else {
+  //         console.log("No data available");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }, []);
   return (
     <div className="jobDetailsSection">
       <header>

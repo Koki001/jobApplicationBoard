@@ -30,6 +30,7 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
+  const storeJobList = useSelector((state) => state.jobs.list)
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobList, setJobList] = useState([]);
@@ -57,9 +58,10 @@ const JobListings = () => {
       block: "start",
     });
   }, [pageSelectorCurrent]);
-
+  console.log(storeJobList)
   useEffect(() => {
     const dbRef = ref(db);
+    // if (storeJobList.length === 0)
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
@@ -73,6 +75,7 @@ const JobListings = () => {
           });
           setJobList(dataArray);
           setJobId(idArray);
+          dispatch(JOB_LIST(dataArray))
         } else {
           console.log("No data available");
         }

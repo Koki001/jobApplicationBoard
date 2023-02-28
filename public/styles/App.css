@@ -1578,6 +1578,9 @@ span.fakeTextBreaks {
   align-items: center;
   margin: 0;
 }
+.signupMain .popupForm .signupPassword .passwordPopupItem span {
+  margin: 0;
+}
 .signupMain .popupForm .passVisibility {
   position: absolute;
   top: 0;

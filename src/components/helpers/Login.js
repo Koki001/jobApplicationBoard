@@ -29,8 +29,8 @@ const Login = () => {
         <h2>Please Log In</h2>
         <p>
           New user?{" "}
-          <button className="buttonRoundGreen" onClick={handleRegPopup}>
-            Sign up
+          <button className="buttonSignUp" onClick={handleRegPopup}>
+            Create Account
           </button>{" "}
         </p>
       </div>
@@ -60,7 +60,7 @@ const Login = () => {
         <button className="buttonSquareClear">facebook</button>
       </div>
       <p className="noAcc">
-        Don't have an account? <button onClick={handleRegPopup}>Sign up</button>{" "}
+        Don't have an account? <button className="buttonSquareBrown" onClick={handleRegPopup}>Sign up</button>{" "}
       </p>
     </div>
   );

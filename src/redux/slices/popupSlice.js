@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   login: false,
-  signup: true,
+  signup: false,
 };
 
 export const popupSlice = createSlice({

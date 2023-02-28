@@ -3,6 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import Login from "./helpers/Login";
 import Signup from "./helpers/Signup";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
+import { pagination, PAGINATION_MAX } from "../redux/slices/paginationSlice";
 import { useSelector, useDispatch } from "react-redux";
 const NavBar = (props) => {
   const popups = useSelector((state) => state.popups);
@@ -16,6 +17,7 @@ const NavBar = (props) => {
     e.stopPropagation();
     setSubmenu(true);
   };
+
   const handleOpenLinksKey = (e) => {
     if (e.code === "Enter") {
       setSubmenu(!submenu);
@@ -51,10 +53,10 @@ const NavBar = (props) => {
   useEffect(() => {
     if (popups.login || popups.signup) {
       document.body.style.overflow = "hidden";
-    } else {
+    } else if (!popups.login && !popups.signup){
       document.body.style.overflow = "unset";
     }
-  }, [popups.login]);
+  }, [popups.login, popups.signup]);
 
   useEffect(() => {
     const handleCloseLinks = (e) => {
@@ -72,11 +74,14 @@ const NavBar = (props) => {
     if (location.pathname === "/" && location.hash !== "") {
       ref.current?.click();
     }
+    if (!location.pathname.includes("jobs")) {
+      dispatch(pagination(1))
+    }
     dispatch(POP_UP_LOG(false));
   }, [location]);
 
   return (
-    <nav tabIndex={1} className="navWrapper">
+    <nav tabIndex={0} className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
         <img src={"../assets/header/jobiLogo.png"} alt="jobi company logo" />
@@ -134,7 +139,7 @@ const NavBar = (props) => {
       {/* {loginPopup.popup ? ( */}
       <div
         onClick={handleExitLogin}
-        aria-hidden={popups.login ? false : true}
+        aria-hidden={popups.login || popups.signup ? false : true}
         className={
           popups.login === true || popups.signup === true
             ? "popupContainer popupActive"

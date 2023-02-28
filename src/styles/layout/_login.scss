@@ -15,16 +15,16 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.2s linear;
+  transition: all 0.1s linear;
 }
 .popupActive {
   visibility: visible;
   opacity: 1;
-
+  z-index: 100;
 }
 .loginMain {
   position: relative;
-  padding: 40px;
+  padding: 20px 40px;
   background-color: white;
   border-radius: 20px;
   display: flex;
@@ -33,6 +33,23 @@
   align-items: center;
   width: 450px;
   height: 600px;
+  .buttonSquareBrown {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    margin-left: 10px;
+  }
+  .buttonSignUp {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: $lightGreen;
+    border-bottom: 1px solid $lightGreen;
+    &:hover {
+      color: $brown;
+      border-bottom: 1px solid $brown;
+    }
+  }
   .closeIcon {
     cursor: pointer;
     position: absolute;
@@ -45,21 +62,21 @@
     }
   }
   .loginHeadings {
-  text-align: center;
-  h2 {
-    margin-bottom: 20px;
-  }
-  p {
-    font-size: 1rem;
-    
-    a {
-      color: $lightGreen;
-      &:hover {
-        color: $limeGreen;
+    text-align: center;
+    h2 {
+      margin-bottom: 20px;
+    }
+    p {
+      font-size: 1rem;
+
+      a {
+        color: $lightGreen;
+        &:hover {
+          color: $limeGreen;
+        }
       }
     }
   }
-}
   .loginName {
     width: 100%;
     margin: 30px 0;
@@ -97,6 +114,10 @@
     a {
       color: $lightGreen;
       border-bottom: 1px solid $lightGreen;
+      &:hover {
+        color: $brown;
+        border-bottom: 1px solid $brown;
+      }
     }
     input {
       margin-right: 10px;
@@ -162,4 +183,3 @@
   top: 10px;
   z-index: 1;
 }
-

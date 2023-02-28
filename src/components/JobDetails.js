@@ -6,6 +6,9 @@ import {db} from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import { useEffect, useState } from "react";
 
+// MUI imports
+import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
+
 const JobDetails = () => {
   const location = useLocation();
   const [details, setDetails] = useState({});
@@ -37,7 +40,9 @@ const JobDetails = () => {
       </header>
       {details !== {} && (
         <div className="jobDetails wrapper">
-          {/* <Link to={"/jobs"}><button>go back</button></Link> */}
+          <div className="annoyingLink">
+            <Link to={"/jobs"}><KeyboardBackspaceIcon /> back</Link>
+          </div>
           <div className="jobDetailsLeft">
             <div className="detailsTitle">
               <p>{details.createdOn}</p>

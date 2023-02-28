@@ -2,11 +2,12 @@ import { useLocation, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
-import {db} from "../firebase";
-import { ref, child, get, remove } from "firebase/database";
+import {db, auth} from "../firebase";
+import { onAuthStateChanged } from "firebase/auth";
+import { ref, child, get} from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
-import { pagination, PAGINATION_RESET } from "../redux/slices/paginationSlice";
+import { pagination, PAGINATION_RESET, PAGINATION_MAX } from "../redux/slices/paginationSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -17,6 +18,7 @@ import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
 import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 import CircularProgress from "@mui/material/CircularProgress";
+import { POP_UP_LOG } from "../redux/slices/popupSlice";
 
 const JobListings = () => {
   const location = useLocation();
@@ -28,15 +30,17 @@ const JobListings = () => {
   const [jobList, setJobList] = useState([]);
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
+  const [loginReminder, setLoginReminder] = useState(false)
 
   const scrollRef = useRef();
+
   useEffect(() => {
-    if (pageSelectorCurrent > Math.ceil(jobList.length / 10)) {
+    if (pageSelectorCurrent > PAGINATION_MAX) {
       dispatch(pagination(1));
     } else if (!pageSelectorCurrent){
       dispatch(pagination(1))
     }
-  }, []);
+  }, [location]);
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
@@ -49,7 +53,6 @@ const JobListings = () => {
 
   useEffect(() => {
     const dbRef = ref(db);
-    // remove(dbRef)
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
@@ -67,6 +70,7 @@ const JobListings = () => {
       })
       .then(() => {
         setLoader(false);
+        dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
       })
       .catch((error) => {
         console.error(error);
@@ -84,11 +88,32 @@ const JobListings = () => {
   const handleApply = (e) => {
     e.stopPropagation();
     e.preventDefault();
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          console.log(user);
+        } else {
+          console.log("no user");
+          setLoginReminder(true)
+        }
+      });
   };
   const handlePageChange = (e, val) => {
-    // setPage(val);
     dispatch(pagination(Number(val)));
   };
+    const handlePropagation = (e) => {
+      e.stopPropagation();
+    };
+    const handleLoginRedirect = () => {
+      setLoginReminder(false)
+      dispatch(POP_UP_LOG(true))
+    }
+      useEffect(() => {
+        if (loginReminder) {
+          document.body.style.overflow = "hidden";
+        } else  {
+          document.body.style.overflow = "unset";
+        }
+      }, [loginReminder]);
   return (
     <div>
       <section className="jobListings">
@@ -256,7 +281,8 @@ const JobListings = () => {
                 Total of <span>{jobList.length}</span> jobs found
               </p>
               <p>
-                Page {pageSelectorCurrent || pageSelectorDefault} of {Math.ceil(jobList.length / 10)}
+                Page {pageSelectorCurrent || pageSelectorDefault} of{" "}
+                {Math.ceil(jobList.length / 10)}
               </p>
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
@@ -266,6 +292,21 @@ const JobListings = () => {
                   <option value="">Salary Asc</option>
                   <option value="">Job Title</option>
                 </select>
+              </div>
+            </div>
+            <div
+              onClick={() => setLoginReminder(false)}
+              aria-hidden={loginReminder ? false : true}
+              className={
+                loginReminder ? "popupContainer popupActive" : "popupContainer"
+              }
+            >
+              <div onClick={handlePropagation} className="loginReminder">
+                <p>You must be logged in to apply.</p>
+                <div>
+                  <button className="buttonRoundClear" onClick={() => setLoginReminder(false)}>Cancel</button>
+                  <button className="buttonRoundGreen" onClick={handleLoginRedirect}>Login</button>
+                </div>
               </div>
             </div>
             <ul className="jobsHolder">

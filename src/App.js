@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "./firebase";
 // Helper functions
-import { UserGenerator, CompanyGenerator, JobGenerator } from "./components/helpers/Faker";
+import {
+  UserGenerator,
+  CompanyGenerator,
+  JobGenerator,
+} from "./components/helpers/Faker";
 // Component imports
 import Header from "./components/sections/Header";
 import Categories from "./components/sections/Categories";
@@ -29,12 +35,16 @@ function App() {
       window.removeEventListener("scroll", handleVisibility);
     };
   }, []);
-  // useEffect(() => {
-  //   // UserGenerator()
-  //   // CompanyGenerator()
-    // JobGenerator(37)
 
-  // },[])
+  // useEffect(() => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       console.log("USER", user.email)
+  //     } else {
+  //       console.log("NO USER")
+  //     }
+  //   });
+  // },[auth.currentUser])
   return (
     // index #7 layout
     <div className="App">

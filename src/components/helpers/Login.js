@@ -1,13 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
+import { useState } from "react";
 
 const Login = () => {
+  const [userEmail, setUserEmail] = useState("")
+  const [userPass, setUserPass] = useState("")
 
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handlePropagation = (e) => {
     // e.preventDefault();
@@ -19,6 +25,21 @@ const Login = () => {
   const handleRegPopup = () => {
     dispatch(POP_UP_LOG(false));
     dispatch(POP_UP_REG(true));
+  }
+  const handleLogin = () => {
+    signInWithEmailAndPassword(auth, userEmail, userPass)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(POP_UP_LOG(false))
+        
+      }).then(() => {
+        navigate("/dashboard")
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   }
   return (
     <div onClick={handlePropagation} className="loginMain">
@@ -36,12 +57,20 @@ const Login = () => {
       </div>
       <form className="popupForm" action="">
         <div className="loginName">
-          <label htmlFor="name">Name or Email*</label>
-          <input id="name" type="text" />
+          <label htmlFor="name">Email*</label>
+          <input
+            onChange={(e) => setUserEmail(e.target.value)}
+            id="name"
+            type="text"
+          />
         </div>
         <div className="loginPassword">
           <label htmlFor="password">Password*</label>
-          <input id="password" type="password" />
+          <input
+            onChange={(e) => setUserPass(e.target.value)}
+            id="password"
+            type="password"
+          />
         </div>
       </form>
       <div className="loginOptions">
@@ -51,7 +80,9 @@ const Login = () => {
         </div>
         <a href="#">Forgot password?</a>
       </div>
-      <button className="loginButton buttonSquareGreen">login</button>
+      <button onClick={handleLogin} className="loginButton buttonSquareGreen">
+        login
+      </button>
       <div className="loginBreak">
         <p>or</p>
       </div>

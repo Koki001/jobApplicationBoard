@@ -533,9 +533,6 @@ nav {
   align-items: center;
 }
 
-.navLogo {
-  min-width: 20%;
-}
 .navLogo img {
   width: 90px;
 }
@@ -583,16 +580,16 @@ nav {
   position: absolute;
   height: 0px;
   top: 30px;
-  left: -199px;
+  left: -65px;
   transition: all 0.1s linear;
   overflow: hidden;
-  border: 1px solid #244034;
+  border: 2px solid #244034;
   border-radius: 5px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  width: 480px;
+  width: 210px;
 }
 .navMenu .subMenu li {
   padding: 5px 0;
@@ -606,7 +603,7 @@ nav {
 .navMenu .slideOut {
   visibility: visible;
   opacity: 1;
-  height: 250px;
+  height: 190px;
 }
 .navMenu .slideOut li {
   width: 90%;
@@ -2529,6 +2526,150 @@ h1 {
   border: 1px solid rgb(170, 170, 170);
   border-radius: 10px;
   margin: 2px;
+}
+
+.dashboardSection {
+  background-color: #EFF6F3;
+  min-height: 100vh;
+  display: flex;
+}
+.dashboardSection .dashboardWrapper {
+  width: 80%;
+}
+.dashboardSection .dashboardWrapper nav {
+  background-color: #EFF6F3;
+}
+.dashboardSection .dashboardWrapper .navLogo {
+  position: absolute;
+  left: 70px;
+  width: 100px;
+}
+
+.dashboardContainer {
+  position: relative;
+  height: 100%;
+  min-height: 50vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.dashboardContainer .dashboardNav {
+  position: sticky;
+  top: 0;
+  padding: 30px 10px;
+  border-radius: 20px;
+  background-color: white;
+  width: 20%;
+  min-width: 240px;
+  height: 100vh;
+  min-height: 650px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.dashboardContainer .avatar {
+  margin: 120px 0 30px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.dashboardContainer .avatar .avatarImage {
+  height: 80px;
+  width: 80px;
+  background-color: #00BF58;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+.dashboardContainer .dashboardOptions {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 0.8rem;
+}
+.dashboardContainer .dashboardOptions li {
+  margin: 5px 0;
+  border-radius: 20px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #244034;
+}
+.dashboardContainer .dashboardOptions label {
+  text-transform: capitalize;
+  border-radius: 20px;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.05s linear;
+}
+.dashboardContainer .dashboardOptions label:hover {
+  background-color: #31795A;
+  color: white;
+}
+.dashboardContainer .dashboardContent {
+  width: 100%;
+  padding: 30px;
+}
+.dashboardContainer .dashboardLogout {
+  text-transform: capitalize;
+  border-radius: 20px;
+  padding: 15px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.05s linear;
+}
+.dashboardContainer .dashboardLogout label {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.dashboardContainer .dashboardLogout:hover {
+  background-color: #31795A;
+  color: white;
+}
+.dashboardContainer .dashboardStats {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboardContainer .dashboardStats li {
+  border-radius: 20px;
+  background-color: white;
+  padding: 20px;
+  margin: 30px 0;
+  width: calc(25% - 30px);
+}
+.dashboardContainer .dashboardSummary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.dashboardContainer .summaryChart {
+  width: 55%;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: white;
+  height: 400px;
+}
+.dashboardContainer .recentlyApplied {
+  width: 40%;
+  border-radius: 20px;
+  padding: 20px;
+  background-color: white;
+  height: 400px;
 }
 
 /*# sourceMappingURL=App.css.map */

@@ -78,9 +78,10 @@ const Signup = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          // updateProfile(user, {
-          //   displayName: "HELLO???"
-          // })
+          updateProfile(user, {
+            displayName: "username",
+            accountType: accountType
+          })
           console.log(user);
           setNewUser((prev) => ({
             ...prev,

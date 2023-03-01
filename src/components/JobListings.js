@@ -58,7 +58,6 @@ const JobListings = () => {
       block: "start",
     });
   }, [pageSelectorCurrent]);
-  console.log(storeJobList)
   useEffect(() => {
     const dbRef = ref(db);
     // if (storeJobList.length === 0)

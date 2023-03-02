@@ -410,6 +410,23 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonRoundDarkGreen {
+  background-color: #31795A;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonRoundDarkGreen:hover {
+  background-color: #755146;
+}
+.buttonRoundDarkGreen:active {
+  transform: scale(0.95);
+}
+
 .buttonSquareGreen {
   background-color: #00BF58;
   border: 1px solid transparent;
@@ -533,6 +550,9 @@ nav {
   align-items: center;
 }
 
+.navLogo {
+  min-width: 20%;
+}
 .navLogo img {
   width: 90px;
 }
@@ -715,6 +735,24 @@ h1 span {
   font-weight: bold;
   color: black;
   margin-right: 10px;
+}
+
+.popupActive .logoutReminder {
+  width: 410px;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  background-color: white;
+}
+.popupActive .logoutReminder div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .headerStats {
@@ -1325,6 +1363,12 @@ span.fakeTextBreaks {
   width: 450px;
   height: 600px;
 }
+.loginMain h2,
+.loginMain p,
+.loginMain .remember,
+.loginMain .authLogin {
+  color: black;
+}
 .loginMain .buttonSquareBrown {
   font-size: 0.7rem;
   text-transform: uppercase;
@@ -1358,9 +1402,11 @@ span.fakeTextBreaks {
 }
 .loginMain .loginHeadings h2 {
   margin-bottom: 20px;
+  color: black;
 }
 .loginMain .loginHeadings p {
   font-size: 1rem;
+  color: black;
 }
 .loginMain .loginHeadings p a {
   color: #00BF58;
@@ -1431,6 +1477,8 @@ span.fakeTextBreaks {
 }
 .loginMain .authLogin button {
   width: 45%;
+  color: black;
+  border-color: black;
 }
 
 .noAcc {
@@ -1509,6 +1557,13 @@ span.fakeTextBreaks {
   align-items: center;
   width: 450px;
   height: 600px;
+}
+.signupMain h2,
+.signupMain h3,
+.signupMain p,
+.signupMain .remember,
+.signupMain .authLogin {
+  color: black;
 }
 .signupMain h3 {
   margin-bottom: 20px;
@@ -1683,6 +1738,8 @@ span.fakeTextBreaks {
 }
 .signupMain .authSignup button {
   width: 45%;
+  color: black;
+  border-color: black;
 }
 
 .signupBreak {
@@ -1727,12 +1784,24 @@ span.fakeTextBreaks {
   align-items: center;
   justify-content: space-between;
   padding-bottom: 100px;
-  background-color: #EFF6F3;
+  background-color: #244034;
+  color: white;
 }
 .pricingHeader nav {
   position: relative;
   z-index: 100;
-  background-color: #EFF6F3;
+  background-color: #244034;
+  color: white;
+}
+.pricingHeader .subMenuParent a {
+  color: black;
+}
+.pricingHeader a {
+  color: white;
+}
+.pricingHeader button {
+  color: white;
+  border-color: transparent;
 }
 
 h1 {
@@ -1836,12 +1905,23 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #EFF6F3;
+  background-color: #244034;
 }
 .contactHeader nav {
   position: relative;
   z-index: 10;
-  background-color: #EFF6F3;
+  background-color: #244034;
+  color: white;
+}
+.contactHeader .subMenuParent a {
+  color: black;
+}
+.contactHeader a {
+  color: white;
+}
+.contactHeader button {
+  color: white;
+  border-color: transparent;
 }
 
 .contactUsMap {
@@ -2000,12 +2080,24 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: #EFF6F3;
+  background-color: #244034;
+  color: white;
 }
 .jobsHeader nav {
   position: relative;
   z-index: 10;
-  background-color: #EFF6F3;
+  background-color: #244034;
+  color: white;
+}
+.jobsHeader .subMenuParent a {
+  color: black;
+}
+.jobsHeader a {
+  color: white;
+}
+.jobsHeader button {
+  color: white;
+  border-color: transparent;
 }
 .jobsHeader span {
   margin-bottom: 60px;
@@ -2189,7 +2281,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 300px;
 }
 .jobsHolder a {
@@ -2339,7 +2431,7 @@ h1 {
   align-items: flex-start;
   justify-content: center;
 }
-.jobCard .buttonRoundGreen {
+.jobCard .buttonRoundDarkGreen {
   font-size: 0.6rem;
   text-transform: uppercase;
   padding: 5 10px;
@@ -2543,6 +2635,7 @@ h1 {
   position: absolute;
   left: 70px;
   width: 100px;
+  min-width: 10%;
 }
 
 .dashboardContainer {

@@ -6,12 +6,23 @@
   align-items: center;
   justify-content: space-between;
   padding-bottom: 100px;
-  background-color: $greenBg;
+  background-color: $darkGreen;
+  color: white;
   nav {
     position: relative;
     z-index: 100;
-    background-color: $greenBg;
-
+    background-color: $darkGreen;
+    color: white;
+  }
+  .subMenuParent a {
+    color: black;
+  }
+  a {
+    color: white;
+  }
+  button {
+    color: white;
+    border-color: transparent;
   }
 }
 h1 {

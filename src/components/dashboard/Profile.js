@@ -1,5 +1,6 @@
 import NavBar from "../NavBar";
-
+import Dashboard from "./Dashboard";
+import MyProfile from "./MyProfile";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -7,7 +8,15 @@ import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
+import { useState } from "react";
 const Profile = () => {
+
+  const [dashPage, setDashPage] = useState("dashboard")
+  const dashItems = {
+    "dashboard": <Dashboard />,
+    "profile": <MyProfile />,
+  }
+
   return (
     <section className="dashboardSection">
       <div className="dashboardContainer wrapper">
@@ -23,22 +32,26 @@ const Profile = () => {
                 dashboard
               </label>
               <input
+              onChange={(e) => {setDashPage(e.target.value)}}
                 className="sr-only"
                 id="dashboard"
                 name="dashboard"
                 type="radio"
+                value={"dashboard"}
               />
             </li>
             <li>
               <label htmlFor="profile">
                 <PersonOutlineIcon sx={{ marginRight: "10px" }} />
-                profile
+                my profile
               </label>
               <input
+              onChange={(e) => {setDashPage(e.target.value)}}
                 className="sr-only"
                 id="profile"
                 name="dashboard"
                 type="radio"
+                value={"profile"}
               />
             </li>
             <li>
@@ -47,10 +60,12 @@ const Profile = () => {
                 resume
               </label>
               <input
+              onChange={(e) => {setDashPage(e.target.value)}}
                 className="sr-only"
                 id="resume"
                 name="dashboard"
                 type="radio"
+                value={"resume"}
               />
             </li>
             <li>
@@ -59,10 +74,12 @@ const Profile = () => {
                 saved jobs
               </label>
               <input
+              onChange={(e) => {setDashPage(e.target.value)}}
                 className="sr-only"
                 id="saved"
                 name="dashboard"
                 type="radio"
+                value={"bookmarks"}
               />
             </li>
             <li>
@@ -71,10 +88,12 @@ const Profile = () => {
                 settings
               </label>
               <input
+              onChange={(e) => {setDashPage(e.target.value)}}
                 className="sr-only"
                 id="settings"
                 name="dashboard"
                 type="radio"
+                value={"settings"}
               />
             </li>
           </ul>
@@ -93,19 +112,9 @@ const Profile = () => {
         </nav>
         <div className="dashboardWrapper">
           <NavBar />
-          <div className="dashboardContent">
-            <h2>Dashboard</h2>
-            <ul className="dashboardStats">
-              <li>Visitors</li>
-              <li>Shortlisted</li>
-              <li>Views</li>
-              <li>Applied Jobs</li>
-            </ul>
-            <div className="dashboardSummary">
-              <div className="summaryChart">chart</div>
-              <div className="recentlyApplied">recent applications</div>
-            </div>
-          </div>
+          {
+            dashItems[dashPage]
+          }
         </div>
       </div>
     </section>

@@ -13,7 +13,12 @@ import {
   PAGINATION_MAX,
 } from "../redux/slices/paginationSlice";
 import { POP_UP_LOG } from "../redux/slices/popupSlice";
-import { JOB_DETAILS, JOB_LIST, JOB_ACTIVE, JOB_ID } from "../redux/slices/jobListSlice";
+import {
+  JOB_DETAILS,
+  JOB_LIST,
+  JOB_ACTIVE,
+  JOB_ID,
+} from "../redux/slices/jobListSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -30,13 +35,22 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
-  const storeJobList = useSelector((state) => state.jobs.list)
+  const storeJobList = useSelector((state) => state.jobs.list);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobList, setJobList] = useState([]);
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
+  const [filters, setFilters] = useState({
+    keyword: "",
+    category: "",
+    locations: "",
+    type: "",
+    experience: "",
+    salaryMin: "",
+    salaryMax: "",
+  });
 
   const [jobObject, setJobObject] = useState({});
 
@@ -74,7 +88,7 @@ const JobListings = () => {
           });
           setJobList(dataArray);
           setJobId(idArray);
-          dispatch(JOB_LIST(dataArray))
+          dispatch(JOB_LIST(dataArray));
         } else {
           console.log("No data available");
         }
@@ -172,7 +186,16 @@ const JobListings = () => {
                     <div className="filtersTop">
                       <div className="filtersKeyword">
                         <label htmlFor="keyword">Keyword or Title</label>
-                        <input id="keyword" type="text" />
+                        <input
+                          onChange={(e) =>
+                            setFilters((prev) => ({
+                              ...prev,
+                              keyword: e.target.value,
+                            }))
+                          }
+                          id="keyword"
+                          type="text"
+                        />
                       </div>
                       <div className="filtersCategories">
                         <label htmlFor="categories">Categories</label>
@@ -335,74 +358,84 @@ const JobListings = () => {
             </div>
             <ul className="jobsHolder">
               {loader === false
-                ? jobList.map((item, index) => {
-                    if (
-                      index > pageSelectorCurrent * 10 - 11 &&
-                      index < pageSelectorCurrent * 10
-                    ) {
-                      return (
-                        <Link
-                          onClick={handleJobDetails}
-                          to={`/jobs/${jobId[index]}`}
-                          id={jobId[index]}
-                          key={jobId[index] + "key"}
-                        >
-                          <li className="jobCard">
-                            <div className="jobCardHeading">
-                              <div className="jobCardLogo defaultLoad">
-                                <img
-                                  onLoad={handleLogoDisplay}
-                                  src={item.logo}
-                                  alt="company logo"
-                                />
+                ? jobList
+                    .filter((keyword) => {
+                      if (
+                        keyword.title
+                          .toLowerCase()
+                          .includes(filters.keyword.toLowerCase())
+                      ) {
+                        return keyword;
+                      }
+                    })
+                    .map((item, index) => {
+                      if (
+                        index > pageSelectorCurrent * 10 - 11 &&
+                        index < pageSelectorCurrent * 10
+                      ) {
+                        return (
+                          <Link
+                            onClick={handleJobDetails}
+                            to={`/jobs/${jobId[index]}`}
+                            id={jobId[index]}
+                            key={jobId[index] + "key"}
+                          >
+                            <li className="jobCard">
+                              <div className="jobCardHeading">
+                                <div className="jobCardLogo defaultLoad">
+                                  <img
+                                    onLoad={handleLogoDisplay}
+                                    src={item.logo}
+                                    alt="company logo"
+                                  />
+                                </div>
+                                <div className="jobCardText">
+                                  <h5>{item.title}</h5>
+                                  <h6>{item.experience}</h6>
+                                </div>
                               </div>
-                              <div className="jobCardText">
-                                <h5>{item.title}</h5>
-                                <h6>{item.experience}</h6>
+                              <div className="jobCardType">
+                                <p
+                                  className="topText"
+                                  style={
+                                    item.type === "contract"
+                                      ? { color: "#9CA89D" }
+                                      : item.type === "full-time"
+                                      ? { color: "#00BF58" }
+                                      : item.type === "part-time"
+                                      ? { color: "#FF6060" }
+                                      : null
+                                  }
+                                >
+                                  {item.type}
+                                </p>
+                                <p className="bottomText">
+                                  Salary:{" "}
+                                  <span>
+                                    ${Number(item.salary).toLocaleString("en")}
+                                  </span>
+                                </p>
                               </div>
-                            </div>
-                            <div className="jobCardType">
-                              <p
-                                className="topText"
-                                style={
-                                  item.type === "contract"
-                                    ? { color: "#9CA89D" }
-                                    : item.type === "full-time"
-                                    ? { color: "#00BF58" }
-                                    : item.type === "part-time"
-                                    ? { color: "#FF6060" }
-                                    : null
-                                }
-                              >
-                                {item.type}
-                              </p>
-                              <p className="bottomText">
-                                Salary:{" "}
-                                <span>
-                                  ${Number(item.salary).toLocaleString("en")}
-                                </span>
-                              </p>
-                            </div>
-                            <div className="jobCardLocation">
-                              <p className="topText">
-                                {item.city}, {item.country}
-                              </p>
-                              <p className="bottomText">{item.category}</p>
-                            </div>
-                            <div className="jobCardButtons">
-                              <BookmarkBorderIcon />
-                              <button
-                                onClick={handleApply}
-                                className="buttonRoundGreen"
-                              >
-                                apply
-                              </button>
-                            </div>
-                          </li>
-                        </Link>
-                      );
-                    }
-                  })
+                              <div className="jobCardLocation">
+                                <p className="topText">
+                                  {item.city}, {item.country}
+                                </p>
+                                <p className="bottomText">{item.category}</p>
+                              </div>
+                              <div className="jobCardButtons">
+                                <BookmarkBorderIcon />
+                                <button
+                                  onClick={handleApply}
+                                  className="buttonRoundDarkGreen"
+                                >
+                                  apply
+                                </button>
+                              </div>
+                            </li>
+                          </Link>
+                        );
+                      }
+                    })
                 : null}
             </ul>
             <div className="pagePagination">

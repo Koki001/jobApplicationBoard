@@ -19,6 +19,7 @@ const NavBar = () => {
   const ref = useRef(null);
   const menuRef = useRef(null);
   const navigate = useNavigate();
+  const [popupLogout, setPopupLogout] = useState(false);
 
   const handleOpenLinks = (e) => {
     e.stopPropagation();
@@ -101,6 +102,16 @@ const NavBar = () => {
   }, [auth.currentUser]);
 
   const handleSignout = () => {
+    setPopupLogout(true);
+    // if (location.pathname === "/dashboard") {
+    //   navigate("/");
+    //   signOut(auth);
+    // } else {
+    //   signOut(auth);
+    // }
+  };
+  const handleSignoutFinal = () => {
+    setPopupLogout(false);
     if (location.pathname === "/dashboard") {
       navigate("/");
       signOut(auth);
@@ -108,14 +119,24 @@ const NavBar = () => {
       signOut(auth);
     }
   };
+  const handlePropagation = (e) => {
+    e.stopPropagation();
+  };
   const handleProfile = () => {
-    navigate("/dashboard")
+    navigate("/dashboard");
   };
   return (
     <nav tabIndex={0} className="navWrapper">
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
-        <img src={"../assets/header/jobiLogo.png"} alt="jobi company logo" />
+        {location.pathname === "/" || location.pathname === "/dashboard" ? (
+          <img src={"../assets/header/jobiLogo.png"} alt="jobi company logo" />
+        ) : (
+          <img
+            src={"../assets/header/jobiLogoDark.png"}
+            alt="jobi company logo"
+          />
+        )}
       </div>
       <ul className="navMenu">
         <li>
@@ -177,6 +198,28 @@ const NavBar = () => {
           </button>
         </div>
       )}
+      <div
+        onClick={() => setPopupLogout(false)}
+        aria-hidden={popupLogout ? false : true}
+        className={
+          popupLogout ? "popupContainer popupActive" : "popupContainer"
+        }
+      >
+        <div onClick={handlePropagation} className="logoutReminder">
+          <p>Are you sure you want to sign out?</p>
+          <div>
+            <button
+              className="buttonRoundClear"
+              onClick={() => setPopupLogout(false)}
+            >
+              Cancel
+            </button>
+            <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
+              Yes, sign out
+            </button>
+          </div>
+        </div>
+      </div>
       <div
         onClick={handleExitLogin}
         aria-hidden={popups.login || popups.signup ? false : true}

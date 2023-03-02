@@ -33,6 +33,12 @@
   align-items: center;
   width: 450px;
   height: 600px;
+  h2,
+  p,
+  .remember,
+  .authLogin {
+    color: black;
+  }
   .buttonSquareBrown {
     font-size: 0.7rem;
     text-transform: uppercase;
@@ -65,10 +71,11 @@
     text-align: center;
     h2 {
       margin-bottom: 20px;
+      color: black;
     }
     p {
       font-size: 1rem;
-
+      color: black;
       a {
         color: $lightGreen;
         &:hover {
@@ -138,6 +145,8 @@
     align-items: center;
     button {
       width: 45%;
+      color: black;
+      border-color: black;
     }
     margin-bottom: 30px;
   }

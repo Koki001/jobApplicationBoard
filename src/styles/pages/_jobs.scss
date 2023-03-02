@@ -5,11 +5,23 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: $greenBg;
+  background-color: $darkGreen;
+  color: white;
   nav {
     position: relative;
     z-index: 10;
-    background-color: $greenBg;
+    background-color: $darkGreen;
+    color: white;
+  }
+  .subMenuParent a {
+    color: black;
+  }
+  a {
+    color: white;
+  }
+  button {
+    color: white;
+    border-color: transparent;
   }
   span {
     margin-bottom: 60px;
@@ -173,7 +185,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
   min-height: 300px;
   a {
     width: 100%;
@@ -284,7 +296,7 @@
     }
   }
   .defaultLoad {
-    background-image: url('../assets/jobList/logoLoad.gif');
+    background-image: url("../assets/jobList/logoLoad.gif");
     background-size: contain;
   }
   h5 {
@@ -319,7 +331,7 @@
     align-items: flex-start;
     justify-content: center;
   }
-  .buttonRoundGreen {
+  .buttonRoundDarkGreen {
     font-size: 0.6rem;
     text-transform: uppercase;
     padding: 5 10px;
@@ -334,4 +346,3 @@
     width: 110px;
   }
 }
-

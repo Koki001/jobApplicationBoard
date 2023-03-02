@@ -26,26 +26,29 @@
   span {
     margin-bottom: 60px;
   }
-}
-.popupActive .loginReminder {
-  width: 450px;
-  height: 150px;
-  background-color: $greenBg;
-  padding: 35px;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  div {
-    width: 100%;
+  .popupActive .logoutReminder {
+    width: 410px;
+    border-radius: 20px;
+    padding: 30px;
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-  }
-  button {
-    width: 35%;
+    height: 180px;
+    background-color: white;
+    p {
+      color: black;
+    }
+    div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .buttonRoundClear {
+      color: black;
+      border-color: black;
+    }
   }
 }
 .jobListings {

@@ -2153,27 +2153,29 @@ h1 {
 .jobsHeader span {
   margin-bottom: 60px;
 }
-
-.popupActive .loginReminder {
-  width: 450px;
-  height: 150px;
-  background-color: #EFF6F3;
-  padding: 35px;
+.jobsHeader .popupActive .logoutReminder {
+  width: 410px;
   border-radius: 20px;
+  padding: 30px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  text-align: center;
+  height: 180px;
+  background-color: white;
 }
-.popupActive .loginReminder div {
+.jobsHeader .popupActive .logoutReminder p {
+  color: black;
+}
+.jobsHeader .popupActive .logoutReminder div {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
   align-items: center;
+  justify-content: space-between;
 }
-.popupActive .loginReminder button {
-  width: 35%;
+.jobsHeader .popupActive .logoutReminder .buttonRoundClear {
+  color: black;
+  border-color: black;
 }
 
 .jobListings .loader {

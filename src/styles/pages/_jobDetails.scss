@@ -1,11 +1,7 @@
 @use "../base/variables" as *;
 
-.jobDetailsSection header {
-  background-color: $greenBg;
-  padding-bottom: 50px;
-  nav {
-    background-color: $greenBg;
-  }
+.jobDetailsHeader {
+  padding-bottom: 60px;
 }
 .jobDetails {
   min-height: 80vh;

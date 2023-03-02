@@ -1,29 +1,6 @@
 @use "../base/variables" as *;
 
 .pricingHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 100px;
-  background-color: $darkGreen;
-  color: white;
-  nav {
-    position: relative;
-    z-index: 100;
-    background-color: $darkGreen;
-    color: white;
-  }
-  .subMenuParent a {
-    color: black;
-  }
-  a {
-    color: white;
-  }
-  button {
-    color: white;
-    border-color: transparent;
-  }
   .popupActive .logoutReminder {
     width: 410px;
     border-radius: 20px;

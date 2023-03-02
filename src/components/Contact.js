@@ -28,6 +28,8 @@ const Contact = () => {
       <section className="contactUs" id="contactUs">
         <header className="contactHeader">
           <NavBar />
+          <h1>Get in touch</h1>
+          <span>We would love to hear from you</span>
           <div
             className={
               image === undefined ? `flexed contactUsMap` : `contactUsMap`
@@ -41,7 +43,6 @@ const Contact = () => {
           </div>
         </header>
         <div className="contactDiv">
-          <h1>Get in touch</h1>
           <ul className="contactTypes">
             <li>
               <div className="contactIcons">

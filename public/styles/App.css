@@ -541,6 +541,58 @@ h1 * {
   padding-bottom: 50px;
 }
 
+.contactHeader,
+.jobsHeader,
+.pricingHeader,
+.jobDetailsHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #244034;
+}
+.contactHeader nav,
+.jobsHeader nav,
+.pricingHeader nav,
+.jobDetailsHeader nav {
+  position: relative;
+  z-index: 10;
+  background-color: #244034;
+  color: white;
+}
+.contactHeader .subMenuParent a,
+.jobsHeader .subMenuParent a,
+.pricingHeader .subMenuParent a,
+.jobDetailsHeader .subMenuParent a {
+  color: black;
+}
+.contactHeader a,
+.jobsHeader a,
+.pricingHeader a,
+.jobDetailsHeader a {
+  color: white;
+}
+.contactHeader button,
+.jobsHeader button,
+.pricingHeader button,
+.jobDetailsHeader button {
+  color: white;
+  border-color: transparent;
+}
+.contactHeader h1,
+.jobsHeader h1,
+.pricingHeader h1,
+.jobDetailsHeader h1 {
+  color: white;
+}
+.contactHeader span,
+.jobsHeader span,
+.pricingHeader span,
+.jobDetailsHeader span {
+  color: white;
+  margin-bottom: 60px;
+}
+
 nav {
   width: 100%;
   padding: 50px 0;
@@ -1781,31 +1833,6 @@ span.fakeTextBreaks {
   margin-top: 20px;
 }
 
-.pricingHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-bottom: 100px;
-  background-color: #244034;
-  color: white;
-}
-.pricingHeader nav {
-  position: relative;
-  z-index: 100;
-  background-color: #244034;
-  color: white;
-}
-.pricingHeader .subMenuParent a {
-  color: black;
-}
-.pricingHeader a {
-  color: white;
-}
-.pricingHeader button {
-  color: white;
-  border-color: transparent;
-}
 .pricingHeader .popupActive .logoutReminder {
   width: 410px;
   border-radius: 20px;
@@ -1927,29 +1954,6 @@ h1 {
   width: 100%;
 }
 
-.contactHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #244034;
-}
-.contactHeader nav {
-  position: relative;
-  z-index: 10;
-  background-color: #244034;
-  color: white;
-}
-.contactHeader .subMenuParent a {
-  color: black;
-}
-.contactHeader a {
-  color: white;
-}
-.contactHeader button {
-  color: white;
-  border-color: transparent;
-}
 .contactHeader .popupActive .logoutReminder {
   width: 410px;
   border-radius: 20px;
@@ -2126,33 +2130,6 @@ h1 {
   transform: scale(0.95);
 }
 
-.jobsHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #244034;
-  color: white;
-}
-.jobsHeader nav {
-  position: relative;
-  z-index: 10;
-  background-color: #244034;
-  color: white;
-}
-.jobsHeader .subMenuParent a {
-  color: black;
-}
-.jobsHeader a {
-  color: white;
-}
-.jobsHeader button {
-  color: white;
-  border-color: transparent;
-}
-.jobsHeader span {
-  margin-bottom: 60px;
-}
 .jobsHeader .popupActive .logoutReminder {
   width: 410px;
   border-radius: 20px;
@@ -2499,12 +2476,33 @@ h1 {
   width: 110px;
 }
 
-.jobDetailsSection header {
-  background-color: #EFF6F3;
-  padding-bottom: 50px;
+.popupActive .loginReminder {
+  width: 410px;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  background-color: white;
 }
-.jobDetailsSection header nav {
-  background-color: #EFF6F3;
+.popupActive .loginReminder p {
+  color: black;
+}
+.popupActive .loginReminder div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.popupActive .loginReminder .buttonRoundClear {
+  color: black;
+  border-color: black;
+}
+
+.jobDetailsHeader {
+  padding-bottom: 60px;
 }
 
 .jobDetails {

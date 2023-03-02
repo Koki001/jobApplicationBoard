@@ -37,7 +37,7 @@ const JobDetails = () => {
   }, []);
   return (
     <div className="jobDetailsSection">
-      <header>
+      <header className="jobDetailsHeader">
         <NavBar />
         <h1>Job Details</h1>
       </header>

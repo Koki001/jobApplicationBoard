@@ -14,7 +14,7 @@ const Pricing = () => {
         <header className="pricingHeader">
           <NavBar />
           <h1>Pricing</h1>
-          <p>Choose your membership</p>
+          <span>Choose your membership</span>
         </header>
         <div className="pricingPlan wrapper">
           <h2>Simple Plan for All</h2>

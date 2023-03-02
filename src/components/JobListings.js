@@ -113,14 +113,12 @@ const JobListings = () => {
   const handleApply = (e) => {
     e.stopPropagation();
     e.preventDefault();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user);
-      } else {
-        console.log("no user");
-        setLoginReminder(true);
-      }
-    });
+    if (auth.currentUser) {
+      setLoginReminder(false);
+    } else {
+      console.log("no user");
+      setLoginReminder(true);
+    }
   };
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));

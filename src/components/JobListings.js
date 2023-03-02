@@ -359,15 +359,15 @@ const JobListings = () => {
             <ul className="jobsHolder">
               {loader === false
                 ? jobList
-                    .filter((keyword) => {
-                      if (
-                        keyword.title
-                          .toLowerCase()
-                          .includes(filters.keyword.toLowerCase())
-                      ) {
-                        return keyword;
-                      }
-                    })
+                    // .filter((keyword) => {
+                    //   if (
+                    //     keyword.title
+                    //       .toLowerCase()
+                    //       .includes(filters.keyword.toLowerCase())
+                    //   ) {
+                    //     return keyword;
+                    //   }
+                    // })
                     .map((item, index) => {
                       if (
                         index > pageSelectorCurrent * 10 - 11 &&

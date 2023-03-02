@@ -82,7 +82,6 @@ const Signup = () => {
             displayName: "username",
             accountType: accountType
           })
-          console.log(user);
           setNewUser((prev) => ({
             ...prev,
             name: "",
@@ -117,6 +116,7 @@ const Signup = () => {
       email: "",
       password: "",
     }));
+    setPassConfirm("")
     if (e.target.id === "candidateAcc") {
       sliderRef.current.style.left = 0;
       sliderRef.current.style.backgroundColor = "#00BF58";

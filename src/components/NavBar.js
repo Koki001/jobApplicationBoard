@@ -130,9 +130,14 @@ const NavBar = () => {
       <a ref={ref} className="sr-only" href={location.hash}></a>
       <div className="navLogo">
         {location.pathname === "/" || location.pathname === "/dashboard" ? (
-          <img src={"../assets/header/jobiLogo.png"} alt="jobi company logo" />
+          <img
+            onClick={() => navigate("/")}
+            src={"../assets/header/jobiLogo.png"}
+            alt="jobi company logo"
+          />
         ) : (
           <img
+            onClick={() => navigate("/")}
             src={"../assets/header/jobiLogoDark.png"}
             alt="jobi company logo"
           />

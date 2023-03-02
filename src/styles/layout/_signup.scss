@@ -119,6 +119,9 @@
         pointer-events: none;
       }
     }
+    input[type=password] {
+      letter-spacing: 2px;
+    }
     input {
       width: 100%;
       margin-top: 5px;
@@ -135,7 +138,7 @@
     }
     .signupConfirm input:disabled {
       background-color: rgba(128, 128, 128, 0.473);
-      filter: blur(5px);
+      filter: blur(2px);
     }
     label {
       font-size: 0.7rem;

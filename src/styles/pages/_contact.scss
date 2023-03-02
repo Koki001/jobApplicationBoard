@@ -22,6 +22,30 @@
     color: white;
     border-color: transparent;
   }
+  .popupActive .logoutReminder {
+    width: 410px;
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 180px;
+    background-color: white;
+    p {
+      color: black;
+    }
+    div {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .buttonRoundClear {
+      color: black;
+      border-color: black;
+    }
+  }
 }
 .contactUsMap {
   background-color: $greenBg;

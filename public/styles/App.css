@@ -748,6 +748,9 @@ h1 span {
   height: 180px;
   background-color: white;
 }
+.popupActive .logoutReminder p {
+  color: black;
+}
 .popupActive .logoutReminder div {
   width: 100%;
   display: flex;
@@ -1803,6 +1806,30 @@ span.fakeTextBreaks {
   color: white;
   border-color: transparent;
 }
+.pricingHeader .popupActive .logoutReminder {
+  width: 410px;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  background-color: white;
+}
+.pricingHeader .popupActive .logoutReminder p {
+  color: black;
+}
+.pricingHeader .popupActive .logoutReminder div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.pricingHeader .popupActive .logoutReminder .buttonRoundClear {
+  color: black;
+  border-color: black;
+}
 
 h1 {
   margin-bottom: 20px;
@@ -1922,6 +1949,30 @@ h1 {
 .contactHeader button {
   color: white;
   border-color: transparent;
+}
+.contactHeader .popupActive .logoutReminder {
+  width: 410px;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 180px;
+  background-color: white;
+}
+.contactHeader .popupActive .logoutReminder p {
+  color: black;
+}
+.contactHeader .popupActive .logoutReminder div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.contactHeader .popupActive .logoutReminder .buttonRoundClear {
+  color: black;
+  border-color: black;
 }
 
 .contactUsMap {

@@ -162,10 +162,82 @@
 .myProfileBio,
 .myProfileSocials,
 .myProfileLocation {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
   border-radius: 20px;
   padding: 20px;
   background-color: white;
   height: 400px;
+  max-height: 800px;
+}
+.myProfileBio {
+  .bioPhoto {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 20px;
+    * {
+      margin-right: 20px;
+    }
+  }
+  .bioName {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    label {
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+    }
+    input {
+      width: 100%;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      border: 1px solid $darkGrey;
+      padding: 5px;
+    }
+  }
+  .bioImage {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    border-radius: 50%;
+  }
+  .bioBio {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    label {
+      font-size: 0.8rem;
+      margin-bottom: 5px;
+    }
+  }
+  .bioBioText {
+    width: 100%;
+    resize: none;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    border: 1px solid $darkGrey;
+    padding: 5px;
+  }
+}
+.profileSocialsLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 15px;
+  label {
+    margin-bottom: 5px;
+  }
+  input {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid $darkGrey;
+  }
+}
+.myProfileSocials button {
+  margin-top: 15px;
 }

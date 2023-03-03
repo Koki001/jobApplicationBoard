@@ -304,7 +304,7 @@ section,
 .jobListings,
 .pricing,
 .dashboardContent {
-  animation: fadeIn 0.5s;
+  animation: fadeIn 0.3s;
 }
 
 @keyframes fadeIn {
@@ -491,6 +491,24 @@ h1 * {
   background-color: #755146;
 }
 .buttonSquareGreen:active {
+  transform: scale(0.95);
+}
+
+.buttonSquareLimeGreen {
+  background-color: #D2F34C;
+  border: 1px solid transparent;
+  color: black;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonSquareLimeGreen:hover {
+  background-color: #31795A;
+  color: white;
+}
+.buttonSquareLimeGreen:active {
   transform: scale(0.95);
 }
 
@@ -769,6 +787,7 @@ h1 span {
 
 .headerSearchContainer {
   width: 100%;
+  max-width: 800px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2894,12 +2913,85 @@ h1 {
 .myProfileBio,
 .myProfileSocials,
 .myProfileLocation {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   width: 100%;
   border-radius: 20px;
   padding: 20px;
   background-color: white;
   height: 400px;
+  max-height: 800px;
+}
+
+.myProfileBio .bioPhoto {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.myProfileBio .bioPhoto * {
+  margin-right: 20px;
+}
+.myProfileBio .bioName {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.myProfileBio .bioName label {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+.myProfileBio .bioName input {
+  width: 100%;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid rgb(170, 170, 170);
+  padding: 5px;
+}
+.myProfileBio .bioImage {
+  width: 50px;
+  height: 50px;
+  background-color: black;
+  border-radius: 50%;
+}
+.myProfileBio .bioBio {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+.myProfileBio .bioBio label {
+  font-size: 0.8rem;
+  margin-bottom: 5px;
+}
+.myProfileBio .bioBioText {
+  width: 100%;
+  resize: none;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid rgb(170, 170, 170);
+  padding: 5px;
+}
+
+.profileSocialsLinks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-top: 15px;
+}
+.profileSocialsLinks label {
+  margin-bottom: 5px;
+}
+.profileSocialsLinks input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid rgb(170, 170, 170);
+}
+
+.myProfileSocials button {
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=App.css.map */

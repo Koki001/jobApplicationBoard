@@ -82,6 +82,23 @@
     transform: scale(0.95);
   }
 }
+.buttonSquareLimeGreen {
+  background-color: $limeGreen;
+  border: 1px solid transparent;
+  color: black;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+  &:hover {
+    background-color: $green;
+    color: white;
+  }
+  &:active {
+    transform: scale(0.95);
+  }
+}
 .buttonSquareBrown {
   background-color: $brown;
   border: 1px solid transparent;

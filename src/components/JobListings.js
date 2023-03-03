@@ -53,9 +53,9 @@ const JobListings = () => {
   });
 
   const [jobObject, setJobObject] = useState({});
-
+  // const jobsRef = useRef()
   const scrollRef = useRef();
-
+  // console.log(jobsRef)
   useEffect(() => {
     if (pageSelectorCurrent > PAGINATION_MAX) {
       dispatch(pagination(1));

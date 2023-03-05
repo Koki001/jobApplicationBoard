@@ -2913,13 +2913,61 @@ h1 {
 .myProfileBio,
 .myProfileSocials,
 .myProfileLocation {
+  position: relative;
   margin-bottom: 20px;
   width: 100%;
   border-radius: 20px;
   padding: 20px;
   background-color: white;
-  height: 400px;
+  height: auto;
   max-height: 800px;
+  overflow: auto;
+}
+.myProfileBio input,
+.myProfileSocials input,
+.myProfileLocation input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  padding: 10px;
+  background-color: #EFF6F3;
+  outline: 2px solid transparent;
+}
+.myProfileBio textarea,
+.myProfileSocials textarea,
+.myProfileLocation textarea {
+  outline: 2px solid transparent;
+  background-color: #EFF6F3;
+}
+.myProfileBio label,
+.myProfileSocials label,
+.myProfileLocation label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-bottom: 5px;
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.myProfileBio .editable,
+.myProfileSocials .editable,
+.myProfileLocation .editable {
+  border-color: rgb(170, 170, 170);
+  background-color: white;
+}
+.myProfileBio .editable:focus,
+.myProfileSocials .editable:focus,
+.myProfileLocation .editable:focus {
+  outline: 2px solid #244034;
+}
+.myProfileBio h3,
+.myProfileSocials h3,
+.myProfileLocation h3 {
+  margin-bottom: 20px;
 }
 
 .myProfileBio .bioPhoto {
@@ -2931,6 +2979,28 @@ h1 {
 .myProfileBio .bioPhoto * {
   margin-right: 20px;
 }
+.myProfileBio .editIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 0;
+}
+.myProfileBio .editIcon * {
+  margin-right: 0;
+}
+.myProfileBio .editIcon p {
+  font-size: 0.7rem;
+}
+.myProfileBio .editIcon svg {
+  transition: all 0.1s linear;
+  cursor: pointer;
+}
+.myProfileBio .editIcon svg:hover {
+  color: #00BF58;
+  transform: scale(1.3);
+}
 .myProfileBio .bioName {
   margin-bottom: 20px;
   display: flex;
@@ -2938,16 +3008,15 @@ h1 {
   justify-content: center;
   align-items: flex-start;
 }
-.myProfileBio .bioName label {
-  font-size: 0.8rem;
-  margin-bottom: 5px;
-}
 .myProfileBio .bioName input {
   width: 100%;
   font-size: 0.9rem;
   border-radius: 5px;
-  border: 1px solid rgb(170, 170, 170);
+  border: 1px solid transparent;
   padding: 5px;
+}
+.myProfileBio .bioName .editable {
+  border-color: rgb(170, 170, 170);
 }
 .myProfileBio .bioImage {
   width: 50px;
@@ -2962,6 +3031,7 @@ h1 {
   align-items: flex-start;
 }
 .myProfileBio .bioBio label {
+  width: 100%;
   font-size: 0.8rem;
   margin-bottom: 5px;
 }
@@ -2970,8 +3040,11 @@ h1 {
   resize: none;
   font-size: 0.9rem;
   border-radius: 5px;
-  border: 1px solid rgb(170, 170, 170);
+  border: 1px solid transparent;
   padding: 5px;
+}
+.myProfileBio .editable {
+  border-color: rgb(170, 170, 170);
 }
 
 .profileSocialsLinks {
@@ -2987,11 +3060,41 @@ h1 {
 .profileSocialsLinks input {
   width: 100%;
   border-radius: 5px;
-  border: 1px solid rgb(170, 170, 170);
+  border: 1px solid transparent;
+}
+.profileSocialsLinks .editable {
+  border-color: rgb(170, 170, 170);
 }
 
 .myProfileSocials button {
   margin-top: 15px;
+}
+
+.visibleButton {
+  transition: all 0.2s linear;
+  visibility: visible;
+  opacity: 1;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  text-transform: uppercase;
+}
+
+.hiddenButton {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.myProfileForm div {
+  margin-bottom: 15px;
+}
+.myProfileForm .addressMiddle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.myProfileForm .addressMiddle div {
+  width: calc(33.3333333333% - 20px);
 }
 
 /*# sourceMappingURL=App.css.map */

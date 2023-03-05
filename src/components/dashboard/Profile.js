@@ -1,6 +1,11 @@
 import NavBar from "../NavBar";
 import Dashboard from "./Dashboard";
 import MyProfile from "./MyProfile";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { ref, child, get, onValue } from "firebase/database";
+import { db, auth } from "../../firebase";
+import { signOut } from "firebase/auth";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -8,18 +13,67 @@ import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 const Profile = () => {
-
-  const [dashPage, setDashPage] = useState("dashboard")
+  const user = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [dashPage, setDashPage] = useState("dashboard");
+  const [popupLogout, setPopupLogout] = useState(false);
   const dashItems = {
-    "dashboard": <Dashboard />,
-    "profile": <MyProfile />,
-  }
+    dashboard: <Dashboard />,
+    profile: <MyProfile />,
+  };
+
+  const handleSignout = () => {
+    setPopupLogout(true);
+  };
+  const handleSignoutFinal = () => {
+    setPopupLogout(false);
+    if (location.pathname === "/dashboard") {
+      navigate("/");
+      signOut(auth);
+    } else {
+      signOut(auth);
+    }
+  };
+
+  const handlePropagation = (e) => {
+    e.stopPropagation();
+  };
+
+  // useEffect(() => {
+  //   const userID = auth.currentUser.uid
+  //   onValue(ref(db, "users/candidates/" + userID), (snapshot) => {
+  //     console.log(snapshot.val())
+  //   });
+  // }, []);
 
   return (
     <section className="dashboardSection">
       <div className="dashboardContainer wrapper">
+        <div
+          onClick={() => setPopupLogout(false)}
+          aria-hidden={popupLogout ? false : true}
+          className={
+            popupLogout ? "popupContainer popupActive" : "popupContainer"
+          }
+        >
+          <div onClick={handlePropagation} className="logoutReminder">
+            <p>Are you sure you want to sign out?</p>
+            <div>
+              <button
+                className="buttonRoundClear"
+                onClick={() => setPopupLogout(false)}
+              >
+                Cancel
+              </button>
+              <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
+                Yes, sign out
+              </button>
+            </div>
+          </div>
+        </div>
         <nav className="dashboardNav">
           <div className="avatar">
             <div className="avatarImage">{/* <img src="" alt="" /> */}</div>
@@ -32,7 +86,9 @@ const Profile = () => {
                 dashboard
               </label>
               <input
-              onChange={(e) => {setDashPage(e.target.value)}}
+                onChange={(e) => {
+                  setDashPage(e.target.value);
+                }}
                 className="sr-only"
                 id="dashboard"
                 name="dashboard"
@@ -46,7 +102,9 @@ const Profile = () => {
                 my profile
               </label>
               <input
-              onChange={(e) => {setDashPage(e.target.value)}}
+                onChange={(e) => {
+                  setDashPage(e.target.value);
+                }}
                 className="sr-only"
                 id="profile"
                 name="dashboard"
@@ -60,7 +118,9 @@ const Profile = () => {
                 resume
               </label>
               <input
-              onChange={(e) => {setDashPage(e.target.value)}}
+                onChange={(e) => {
+                  setDashPage(e.target.value);
+                }}
                 className="sr-only"
                 id="resume"
                 name="dashboard"
@@ -74,7 +134,9 @@ const Profile = () => {
                 saved jobs
               </label>
               <input
-              onChange={(e) => {setDashPage(e.target.value)}}
+                onChange={(e) => {
+                  setDashPage(e.target.value);
+                }}
                 className="sr-only"
                 id="saved"
                 name="dashboard"
@@ -88,7 +150,9 @@ const Profile = () => {
                 settings
               </label>
               <input
-              onChange={(e) => {setDashPage(e.target.value)}}
+                onChange={(e) => {
+                  setDashPage(e.target.value);
+                }}
                 className="sr-only"
                 id="settings"
                 name="dashboard"
@@ -98,7 +162,7 @@ const Profile = () => {
             </li>
           </ul>
           <div className="dashboardLogout">
-            <label htmlFor="log out">
+            <label onClick={handleSignout} htmlFor="log out">
               <LogoutOutlinedIcon sx={{ marginRight: "10px" }} />
               log out
             </label>
@@ -112,9 +176,7 @@ const Profile = () => {
         </nav>
         <div className="dashboardWrapper">
           <NavBar />
-          {
-            dashItems[dashPage]
-          }
+          {dashItems[dashPage]}
         </div>
       </div>
     </section>

@@ -4,6 +4,7 @@ import Login from "./helpers/Login";
 import Signup from "./helpers/Signup";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
 import { pagination, PAGINATION_MAX } from "../redux/slices/paginationSlice";
+import { USER_RESET } from "../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
 import { auth } from "../firebase";
@@ -97,6 +98,7 @@ const NavBar = () => {
         setUserActive(true);
       } else {
         setUserActive(false);
+        dispatch(USER_RESET());
       }
     });
   }, [auth.currentUser]);

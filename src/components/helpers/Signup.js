@@ -1,13 +1,16 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
+import { USER } from "../../redux/slices/userSlice";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { ref, child, set, onValue } from "firebase/database";
 
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const sliderRef = useRef();
@@ -22,7 +25,7 @@ const Signup = () => {
   });
   // pass must be 6 characters
   // include uppercase
-
+  const navigate = useNavigate();
   const regex = new RegExp("^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]))(?=.{8,})");
   // console.log(regex.test(""))
   const regexLower = new RegExp("^(?=.*[a-z])");
@@ -80,15 +83,30 @@ const Signup = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: "username",
-            accountType: accountType
-          })
+            accountType: accountType,
+          });
+          if (accountType === "candidate") {
+            set(ref(db, "users/candidates/" + user.uid), {
+              name: newUser.name,
+              email: newUser.email,
+            })
+          } else if (accountType === "employer") {
+            set(ref(db, "users/employers/" + user.uid), {
+              companyName: newUser.name,
+              email: newUser.email,
+            });
+          }
           setNewUser((prev) => ({
             ...prev,
             name: "",
             email: "",
             password: "",
           }));
-          setPassConfirm("")
+          setPassConfirm("");
+        })
+        .then(() => {
+          dispatch(POP_UP_REG(false));
+          navigate("/dashboard");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -116,7 +134,7 @@ const Signup = () => {
       email: "",
       password: "",
     }));
-    setPassConfirm("")
+    setPassConfirm("");
     if (e.target.id === "candidateAcc") {
       sliderRef.current.style.left = 0;
       sliderRef.current.style.backgroundColor = "#00BF58";

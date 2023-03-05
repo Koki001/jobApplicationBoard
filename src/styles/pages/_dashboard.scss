@@ -162,14 +162,51 @@
 .myProfileBio,
 .myProfileSocials,
 .myProfileLocation {
+  position: relative;
   margin-bottom: 20px;
   width: 100%;
   border-radius: 20px;
   padding: 20px;
   background-color: white;
-  height: 400px;
+  height: auto;
   max-height: 800px;
+  overflow: auto;
+  input {
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid transparent;
+    font-size: 0.8rem;
+    padding: 10px;
+    background-color: $greenBg;
+    outline: 2px solid transparent;
+  }
+  textarea {
+    outline: 2px solid transparent;
+    background-color: $greenBg;
+  }
+  label {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    margin-bottom: 5px;
+    padding: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+  .editable {
+    border-color: $darkGrey;
+    background-color: white;
+    &:focus {
+      outline: 2px solid $darkGreen;
+    }
+  }
+  h3 {
+    margin-bottom: 20px;
+  }
 }
+
 .myProfileBio {
   .bioPhoto {
     display: flex;
@@ -180,22 +217,43 @@
       margin-right: 20px;
     }
   }
+  .editIcon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 0;
+    * {
+      margin-right: 0;
+    }
+    p {
+      font-size: 0.7rem;
+    }
+    svg {
+      transition: all 0.1s linear;
+      cursor: pointer;
+      &:hover {
+        color: $lightGreen;
+        transform: scale(1.3);
+      }
+    }
+  }
   .bioName {
     margin-bottom: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    label {
-      font-size: 0.8rem;
-      margin-bottom: 5px;
-    }
     input {
       width: 100%;
       font-size: 0.9rem;
       border-radius: 5px;
-      border: 1px solid $darkGrey;
+      border: 1px solid transparent;
       padding: 5px;
+    }
+    .editable {
+      border-color: $darkGrey;
     }
   }
   .bioImage {
@@ -210,6 +268,7 @@
     justify-content: center;
     align-items: flex-start;
     label {
+      width: 100%;
       font-size: 0.8rem;
       margin-bottom: 5px;
     }
@@ -219,8 +278,11 @@
     resize: none;
     font-size: 0.9rem;
     border-radius: 5px;
-    border: 1px solid $darkGrey;
+    border: 1px solid transparent;
     padding: 5px;
+  }
+  .editable {
+    border-color: $darkGrey;
   }
 }
 .profileSocialsLinks {
@@ -235,9 +297,39 @@
   input {
     width: 100%;
     border-radius: 5px;
-    border: 1px solid $darkGrey;
+    border: 1px solid transparent;
+  }
+  .editable {
+    border-color: $darkGrey;
   }
 }
 .myProfileSocials button {
   margin-top: 15px;
+}
+.visibleButton {
+  transition: all 0.2s linear;
+  visibility: visible;
+  opacity: 1;
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  text-transform: uppercase;
+}
+.hiddenButton {
+  visibility: hidden;
+  opacity: 0;
+}
+.myProfileForm {
+  div {
+    margin-bottom: 15px;
+  }
+  .addressMiddle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    div {
+      width: calc(100% / 3 - 20px);
+    }
+  }
 }

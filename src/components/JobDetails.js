@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useLocation, Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
-import {db} from "../firebase";
+import { db } from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
@@ -20,8 +20,8 @@ const JobDetails = () => {
   }, [location.key]);
   useEffect(() => {
     const dbRef = ref(db);
-    if (Object.keys(jobDetails).length === 0){
-      console.log("firebase details")
+    if (Object.keys(jobDetails).length === 0) {
+      console.log("firebase details");
       get(child(dbRef, `data/jobs/${id}`))
         .then((snapshot) => {
           if (snapshot.exists()) {
@@ -35,7 +35,6 @@ const JobDetails = () => {
         });
     }
   }, []);
-  console.log(details)
   return (
     <div className="jobDetailsSection">
       <header className="jobDetailsHeader">
@@ -65,7 +64,7 @@ const JobDetails = () => {
             </div> */}
             <div className="detailsDescription">
               <h3>Job Description:</h3>
-              <p style={{whiteSpace: "pre-wrap"}}>{details.description}</p>
+              <p style={{ whiteSpace: "pre-wrap" }}>{details.description}</p>
             </div>
             <div className="detailsResponsibilies">
               <h3>Responsibilities:</h3>
@@ -104,7 +103,7 @@ const JobDetails = () => {
               <div className="companyLogo">
                 <img src={details.logo} alt="" />
               </div>
-              <h4>Company Name</h4>
+              <h4>{details.company ? details.company : "NO NAME"}</h4>
 
               <a
                 href="https://www.kokicodes.ca/"
@@ -139,7 +138,15 @@ const JobDetails = () => {
                 </div>
                 <div>
                   <h5>Experience</h5>
-                  <p>{details.experience}</p>
+                  <p>
+                    {details.experience < 2
+                      ? "junior"
+                      : details.experience >= 2 && details.experience <= 4
+                      ? "intermediate"
+                      : details.experience >= 5
+                      ? "senior"
+                      : details.experience}
+                  </p>
                 </div>
               </div>
               {details.skills ? (

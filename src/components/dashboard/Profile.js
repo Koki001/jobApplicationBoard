@@ -26,6 +26,9 @@ const Profile = () => {
   const accountType = useSelector((state) => state.type.type);
   const [dashPage, setDashPage] = useState("dashboard");
   const [popupLogout, setPopupLogout] = useState(false);
+  const handlePost = () => {
+    setDashPage("dashboard")
+  }
   const candidateItems = {
     dashboard: <Dashboard />,
     profile: <MyProfile />,
@@ -33,11 +36,11 @@ const Profile = () => {
   const employerItems = {
     dashboard: <Dashboard />,
     profile: <CompanyProfile />,
-    post: <JobPost />,
+    post: <JobPost posted={handlePost} />,
   };
 
   useEffect(() => {
-    if (account === "") {
+    if (account === "" && auth.currentUser) {
       onValue(
         ref(db, "users/candidates/" + auth.currentUser.uid),
         (snapshot) => {
@@ -48,6 +51,8 @@ const Profile = () => {
           }
         }
       );
+    } else {
+      alert("error")
     }
   }, []);
 

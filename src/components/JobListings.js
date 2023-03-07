@@ -109,6 +109,8 @@ const JobListings = () => {
   };
   const handleLogoDisplay = (e) => {
     e.target.style.visibility = "visible";
+    e.target.parentElement.classList.remove("defaultLoad");
+    console.log(e.target)
   };
   const handleApply = (e) => {
     e.stopPropagation();
@@ -383,7 +385,7 @@ const JobListings = () => {
                                 <div className="jobCardLogo defaultLoad">
                                   <img
                                     onLoad={handleLogoDisplay}
-                                    src={item.logo}
+                                    src={item.logo ? item.logo : "../assets/jobList/batman.gif"}
                                     alt="company logo"
                                   />
                                 </div>

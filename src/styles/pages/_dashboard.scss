@@ -95,27 +95,27 @@
     input {
       width: 100%;
       border-radius: 5px;
-      border: 1px solid transparent;
+      outline: 2px solid transparent;
+      border: 1px solid $darkGrey;
       font-size: 0.8rem;
       padding: 10px;
-      background-color: $greenBg;
-      outline: 2px solid transparent;
+      background-color: white;
     }
     textarea {
       outline: 2px solid transparent;
-      background-color: $greenBg;
+      background-color: white;
       width: 100%;
       resize: none;
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       border-radius: 5px;
-      border: 1px solid transparent;
+      border: 1px solid $darkGrey;
       padding: 5px;
     }
     label {
       font-size: 0.8rem;
       font-weight: bold;
-      margin-bottom: 20px;
-      margin-bottom: 5px;
+      // margin-bottom: 20px;
+      margin-bottom: 10px;
       padding: 3px;
       display: flex;
       justify-content: space-between;
@@ -125,13 +125,14 @@
     select {
       border-color: $darkGrey;
       background-color: white;
+      font-size: 0.8rem;
       &:focus {
         outline: 2px solid $darkGreen;
       }
     }
     .editable {
       border-color: $darkGrey;
-      background-color: white;
+      background-color: $greenBg;
       &:focus {
         outline: 2px solid $darkGreen;
       }
@@ -143,7 +144,7 @@
       display: list-item;
     }
     h3 {
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
   }
   .dashboardLogout {
@@ -264,13 +265,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    input {
-      width: 100%;
-      font-size: 0.9rem;
-      border-radius: 5px;
-      border: 1px solid transparent;
-      padding: 5px;
-    }
     .editable {
       border-color: $darkGrey;
     }
@@ -286,11 +280,11 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    label {
-      width: 100%;
-      font-size: 0.8rem;
-      margin-bottom: 5px;
-    }
+    // label {
+    //   width: 100%;
+    //   font-size: 0.8rem;
+    //   margin-bottom: 5px;
+    // }
   }
   .bioBioText {
     width: 100%;
@@ -310,14 +304,12 @@
   align-items: flex-start;
   justify-content: center;
   margin-top: 15px;
-  label {
-    margin-bottom: 5px;
-  }
-  input {
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid transparent;
-  }
+
+  // input {
+  //   width: 100%;
+  //   border-radius: 5px;
+  //   border: 1px solid transparent;
+  // }
   .editable {
     border-color: $darkGrey;
   }
@@ -350,5 +342,75 @@
     div {
       width: calc(100% / 3 - 20px);
     }
+  }
+}
+.jobPostDetails,
+.jobPostSkills,
+.jobPostLocation {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+.postDescription,
+.postResponsibilities,
+.postRequired,
+.postBenefits,
+.postMix {
+  margin: 20px 0;
+}
+
+.postMix {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  div {
+    width: calc(100% / 2 - 20px);
+  }
+  .postSkills {
+    width: 100%;
+  }
+  input {
+    max-width: 290px;
+    min-width: 250px;
+  }
+  select {
+    padding: 5px;
+    max-width: 290px;
+    min-width: 250px;
+  }
+  label {
+    margin-top: 20px;
+  }
+}
+.postSkills {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  
+  input {
+    min-width: 100px;
+    max-width: 100%;
+    width: 100%;
+  }
+  button {
+    height: 45px;
+    margin: 0 20px;
+  }
+  p {
+    font-size: 0.9rem;
+  }
+}
+.skillHolder {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  span {
+    font-size: 0.8rem;
+    background-color: $greenBg;
+    border-radius: 5px;
+    padding: 5px 10px;
+    margin-right: 20px;
   }
 }

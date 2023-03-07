@@ -51,10 +51,8 @@ const Profile = () => {
           }
         }
       );
-    } else {
-      alert("error")
     }
-  }, []);
+  }, [auth.currentUser]);
 
   const handleSignout = () => {
     setPopupLogout(true);

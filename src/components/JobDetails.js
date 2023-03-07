@@ -151,10 +151,9 @@ const JobDetails = () => {
               </div>
               {details.skills ? (
                 <div className="companyBuzzWords">
-                  <h5>{details.skills[1]}</h5>
-                  <h5>{details.skills[2]}</h5>
-                  <h5>{details.skills[3]}</h5>
-                  <h5>{details.skills[4]}</h5>
+                  {details.skills.slice(0, 4).map((item, index) => {
+                    return <h5 key={index + "skillDetails"}>{item}</h5>;
+                  })}
                 </div>
               ) : null}
               <button className="buttonRoundGreen">Apply Now</button>

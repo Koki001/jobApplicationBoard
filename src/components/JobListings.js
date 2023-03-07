@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { ref, child, get, onValue } from "firebase/database";
+import { ref, child, get, onValue, orderByChild, query, orderByKey, orderByValue } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -110,7 +110,6 @@ const JobListings = () => {
   const handleLogoDisplay = (e) => {
     e.target.style.visibility = "visible";
     e.target.parentElement.classList.remove("defaultLoad");
-    console.log(e.target)
   };
   const handleApply = (e) => {
     e.stopPropagation();
@@ -122,6 +121,13 @@ const JobListings = () => {
       setLoginReminder(true);
     }
   };
+  const handleFilterApply = (e) => {
+    // const dbRef = ref(db)
+    // const someRef = query(child(dbRef, "data/jobs/"), orderByChild("salary"))
+    // get(someRef).then((snapshot) => {
+    //   console.log(snapshot.val())
+    // })
+  }
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));
   };
@@ -307,7 +313,7 @@ const JobListings = () => {
                   <div className="filterButtons">
                     <button className="buttonRoundClear">clear filters</button>
 
-                    <button className="buttonRoundClear">apply filters</button>
+                    <button onClick={handleFilterApply} className="buttonRoundClear">apply filters</button>
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -385,13 +391,26 @@ const JobListings = () => {
                                 <div className="jobCardLogo defaultLoad">
                                   <img
                                     onLoad={handleLogoDisplay}
-                                    src={item.logo ? item.logo : "../assets/jobList/batman.gif"}
+                                    src={
+                                      item.logo
+                                        ? item.logo
+                                        : "../assets/jobList/batman.gif"
+                                    }
                                     alt="company logo"
                                   />
                                 </div>
                                 <div className="jobCardText">
                                   <h5>{item.title}</h5>
-                                  <h6>{item.experience}</h6>
+                                  <h6>
+                                    {item.experience < 2
+                                      ? "junior"
+                                      : item.experience >= 2 &&
+                                        item.experience <= 4
+                                      ? "intermediate"
+                                      : item.experience >= 5
+                                      ? "senior"
+                                      : item.experience}
+                                  </h6>
                                 </div>
                               </div>
                               <div className="jobCardType">

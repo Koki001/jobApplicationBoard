@@ -494,6 +494,23 @@ h1 * {
   transform: scale(0.95);
 }
 
+.buttonSquareDarkGreen {
+  background-color: #31795A;
+  border: 1px solid transparent;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  padding: 7px 15px;
+  cursor: pointer;
+  transition: all 0.1s linear;
+}
+.buttonSquareDarkGreen:hover {
+  background-color: #755146;
+}
+.buttonSquareDarkGreen:active {
+  transform: scale(0.95);
+}
+
 .buttonSquareLimeGreen {
   background-color: #D2F34C;
   border: 1px solid transparent;
@@ -2848,27 +2865,26 @@ h1 {
 .dashboardContainer .dashboardContent input {
   width: 100%;
   border-radius: 5px;
-  border: 1px solid transparent;
+  outline: 2px solid transparent;
+  border: 1px solid rgb(170, 170, 170);
   font-size: 0.8rem;
   padding: 10px;
-  background-color: #EFF6F3;
-  outline: 2px solid transparent;
+  background-color: white;
 }
 .dashboardContainer .dashboardContent textarea {
   outline: 2px solid transparent;
-  background-color: #EFF6F3;
+  background-color: white;
   width: 100%;
   resize: none;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   border-radius: 5px;
-  border: 1px solid transparent;
+  border: 1px solid rgb(170, 170, 170);
   padding: 5px;
 }
 .dashboardContainer .dashboardContent label {
   font-size: 0.8rem;
   font-weight: bold;
-  margin-bottom: 20px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   padding: 3px;
   display: flex;
   justify-content: space-between;
@@ -2878,13 +2894,14 @@ h1 {
 .dashboardContainer .dashboardContent select {
   border-color: rgb(170, 170, 170);
   background-color: white;
+  font-size: 0.8rem;
 }
 .dashboardContainer .dashboardContent select:focus {
   outline: 2px solid #244034;
 }
 .dashboardContainer .dashboardContent .editable {
   border-color: rgb(170, 170, 170);
-  background-color: white;
+  background-color: #EFF6F3;
 }
 .dashboardContainer .dashboardContent .editable:focus {
   outline: 2px solid #244034;
@@ -2896,7 +2913,7 @@ h1 {
   display: list-item;
 }
 .dashboardContainer .dashboardContent h3 {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .dashboardContainer .dashboardLogout {
   text-transform: capitalize;
@@ -3016,13 +3033,6 @@ h1 {
   justify-content: center;
   align-items: flex-start;
 }
-.myProfileBio .bioName input {
-  width: 100%;
-  font-size: 0.9rem;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  padding: 5px;
-}
 .myProfileBio .bioName .editable {
   border-color: rgb(170, 170, 170);
 }
@@ -3037,11 +3047,6 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-}
-.myProfileBio .bioBio label {
-  width: 100%;
-  font-size: 0.8rem;
-  margin-bottom: 5px;
 }
 .myProfileBio .bioBioText {
   width: 100%;
@@ -3061,14 +3066,6 @@ h1 {
   align-items: flex-start;
   justify-content: center;
   margin-top: 15px;
-}
-.profileSocialsLinks label {
-  margin-bottom: 5px;
-}
-.profileSocialsLinks input {
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid transparent;
 }
 .profileSocialsLinks .editable {
   border-color: rgb(170, 170, 170);
@@ -3103,6 +3100,79 @@ h1 {
 }
 .myProfileForm .addressMiddle div {
   width: calc(33.3333333333% - 20px);
+}
+
+.jobPostDetails,
+.jobPostSkills,
+.jobPostLocation {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+.postDescription,
+.postResponsibilities,
+.postRequired,
+.postBenefits,
+.postMix {
+  margin: 20px 0;
+}
+
+.postMix {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+.postMix div {
+  width: calc(50% - 20px);
+}
+.postMix .postSkills {
+  width: 100%;
+}
+.postMix input {
+  max-width: 290px;
+  min-width: 250px;
+}
+.postMix select {
+  padding: 5px;
+  max-width: 290px;
+  min-width: 250px;
+}
+.postMix label {
+  margin-top: 20px;
+}
+
+.postSkills {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+.postSkills input {
+  min-width: 100px;
+  max-width: 100%;
+  width: 100%;
+}
+.postSkills button {
+  height: 45px;
+  margin: 0 20px;
+}
+.postSkills p {
+  font-size: 0.9rem;
+}
+
+.skillHolder {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.skillHolder span {
+  font-size: 0.8rem;
+  background-color: #EFF6F3;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-right: 20px;
 }
 
 /*# sourceMappingURL=App.css.map */

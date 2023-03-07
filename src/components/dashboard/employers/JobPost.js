@@ -3,14 +3,14 @@ import { useRef, useState } from "react";
 import { auth, db } from "../../../firebase";
 import jobSectors from "../../helpers/jobSectors";
 import { useSelector } from "react-redux";
+import * as dayjs from "dayjs";
 
 const JobPost = (props) => {
   const user = useSelector((state) => state.user);
-  const [info, setInfo] = useState({});
+  const [info, setInfo] = useState({ skills: [] });
+  const [currentSkill, setCurrentSkill] = useState("");
   const regexNum = new RegExp("^[0-9]*$");
   // const resRef = useRef()
-  let skillsArray = [];
-  console.log(user);
   const handlePostJob = () => {
     if (
       info.title &&
@@ -21,7 +21,7 @@ const JobPost = (props) => {
       info.category &&
       info.type &&
       info.salary &&
-      // info.skills &&
+      info.skills &&
       info.experience &&
       info.address &&
       info.country &&
@@ -38,15 +38,17 @@ const JobPost = (props) => {
         category: info.category,
         type: info.type,
         salary: info.salary,
+        skills: info.skills,
         experience: info.experience,
         address: info.address,
         country: info.country,
         city: info.city,
         postal: info.postal,
+        createdOn: dayjs().format("dddd/MM/YYYY"),
       }).then(() => {
-        alert("job posted")
-        props.posted()
-      })
+        alert("job posted");
+        props.posted();
+      });
     } else {
       alert("fill out all fields");
     }
@@ -71,6 +73,23 @@ const JobPost = (props) => {
       e.target.value = "";
     }
   };
+  const handleSkills = (e) => {
+    setCurrentSkill(e.target.value);
+  };
+  const handleSkillsEnter = (e) => {
+    if (e.code === "Enter"){
+      handleAddSkill()
+    }
+  }
+  const handleAddSkill = () => {
+    if (currentSkill !== "") {
+      setCurrentSkill("");
+      setInfo((prev) => ({
+        ...prev,
+        skills: [...prev.skills, currentSkill],
+      }));
+    }
+  };
   return (
     <div className="dashboardContent">
       <h2>Post a new job</h2>
@@ -85,7 +104,6 @@ const JobPost = (props) => {
                 title: e.target.value,
               }))
             }
-            className="editable"
             id="jobPostTitle"
             type="text"
           />
@@ -100,7 +118,6 @@ const JobPost = (props) => {
               }))
             }
             rows={8}
-            className="editable"
             id="jobPostDescription"
             type="text"
           />
@@ -118,7 +135,6 @@ const JobPost = (props) => {
               }))
             }
             rows={8}
-            className="editable"
             id="jobPostResponsibilities"
             type="text"
           />
@@ -135,7 +151,6 @@ const JobPost = (props) => {
               }))
             }
             rows={8}
-            className="editable"
             id="jobPostRequired"
             type="text"
           />
@@ -152,7 +167,6 @@ const JobPost = (props) => {
               }))
             }
             rows={8}
-            className="editable"
             id="jobPostBenefits"
             type="text"
           />
@@ -203,56 +217,69 @@ const JobPost = (props) => {
               <option value="part-time">Part Time</option>
               <option value="contract">Contract</option>
             </select>
-            {/* <input className="editable" id="jobPostType" type="text" /> */}
+            {/* <input  id="jobPostType" type="text" /> */}
           </div>
           <div className="postSalary">
             <label htmlFor="jobPostSalary">Salary</label>
             <input
               placeholder="Numbers only..."
               onChange={handleSalary}
-              className="editable"
               id="jobPostSalary"
               type="text"
             />
           </div>
+          <div className="postExperience">
+            <label htmlFor="jobPostExperience">Experience Required</label>
+            <select
+              defaultValue={"experiencePlaceholder"}
+              onChange={(e) =>
+                setInfo((prev) => ({
+                  ...prev,
+                  experience: e.target.value,
+                }))
+              }
+              name="jobPostExperience"
+              id="jobPostExperience"
+            >
+              <option disabled value="experiencePlaceholder">
+                Please select one
+              </option>
+              <option value="0">Less than 1 year</option>
+              <option value="1">1 year</option>
+              <option value="2">2 years</option>
+              <option value="3">3 years</option>
+              <option value="4">4 years</option>
+              <option value="5">5 years</option>
+              <option value="6">6 years</option>
+              <option value="7">7 years</option>
+              <option value="8">8 years</option>
+              <option value="9">9 years</option>
+              <option value="10">10 years</option>
+              <option value="11">More than 10 years</option>
+            </select>
+          </div>
+          <div className="postSkills">
+            <div>
+              <label htmlFor="jobPostSkills">Skills</label>
+              <input
+                onChange={handleSkills}
+                onKeyDown={handleSkillsEnter}
+                value={currentSkill}
+                className=""
+                id="jobPostSkills"
+                type="text"
+              />
+            </div>
+            <button className="buttonSquareDarkGreen" onClick={handleAddSkill}>add</button>
+            <p>First 4 skills will be displayed on the job posting's details page.</p>
+          </div>
         </div>
-      </div>
-      <div className="jobPostSkills">
-        <h3>Skills & Experience</h3>
-        <div className="postSkills">
-          <label htmlFor="jobPostSkills">Skills</label>
-          <input disabled className="" id="jobPostSkills" type="text" />
-        </div>
-        <div className="postExperience">
-          <label htmlFor="jobPostExperience">Experience Required</label>
-          <select
-            defaultValue={"experiencePlaceholder"}
-            onChange={(e) =>
-              setInfo((prev) => ({
-                ...prev,
-                experience: e.target.value,
-              }))
-            }
-            className="editable"
-            name="jobPostExperience"
-            id="jobPostExperience"
-          >
-            <option disabled value="experiencePlaceholder">
-              Please select one
-            </option>
-            <option value="0">Less than 1 year</option>
-            <option value="1">1 year</option>
-            <option value="2">2 years</option>
-            <option value="3">3 years</option>
-            <option value="4">4 years</option>
-            <option value="5">5 years</option>
-            <option value="6">6 years</option>
-            <option value="7">7 years</option>
-            <option value="8">8 years</option>
-            <option value="9">9 years</option>
-            <option value="10">10 years</option>
-            <option value="11">More than 10 years</option>
-          </select>
+        <div className="skillHolder">
+          {info.skills.map((item, index) => {
+            return (
+              <span className="skillItem" key={index + "skillItem"}>{item}</span>
+            )
+          })}
         </div>
       </div>
       <div className="jobPostLocation">
@@ -267,7 +294,6 @@ const JobPost = (props) => {
                   address: e.target.value,
                 }))
               }
-              className="editable"
               id="postingStreet"
               type="text"
             />
@@ -282,7 +308,6 @@ const JobPost = (props) => {
                     country: e.target.value,
                   }))
                 }
-                className="editable"
                 id="postingCountry"
                 type="text"
               />
@@ -296,7 +321,6 @@ const JobPost = (props) => {
                     city: e.target.value,
                   }))
                 }
-                className="editable"
                 id="postingCity"
                 type="text"
               />
@@ -310,7 +334,6 @@ const JobPost = (props) => {
                     postal: e.target.value,
                   }))
                 }
-                className="editable"
                 id="postingPostal"
                 type="text"
               />

@@ -2647,6 +2647,7 @@ h1 {
 }
 .jobDetailsLeft p {
   line-height: 1rem;
+  white-space: pre-wrap;
 }
 .jobDetailsLeft a {
   margin-top: 50px;
@@ -2844,6 +2845,59 @@ h1 {
 .dashboardContainer .dashboardContent h2 {
   margin-bottom: 50px;
 }
+.dashboardContainer .dashboardContent input {
+  width: 100%;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  font-size: 0.8rem;
+  padding: 10px;
+  background-color: #EFF6F3;
+  outline: 2px solid transparent;
+}
+.dashboardContainer .dashboardContent textarea {
+  outline: 2px solid transparent;
+  background-color: #EFF6F3;
+  width: 100%;
+  resize: none;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  border: 1px solid transparent;
+  padding: 5px;
+}
+.dashboardContainer .dashboardContent label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  margin-bottom: 5px;
+  padding: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+.dashboardContainer .dashboardContent select {
+  border-color: rgb(170, 170, 170);
+  background-color: white;
+}
+.dashboardContainer .dashboardContent select:focus {
+  outline: 2px solid #244034;
+}
+.dashboardContainer .dashboardContent .editable {
+  border-color: rgb(170, 170, 170);
+  background-color: white;
+}
+.dashboardContainer .dashboardContent .editable:focus {
+  outline: 2px solid #244034;
+}
+.dashboardContainer .dashboardContent .editableList {
+  display: list-item;
+}
+.dashboardContainer .dashboardContent .editableList * {
+  display: list-item;
+}
+.dashboardContainer .dashboardContent h3 {
+  margin-bottom: 20px;
+}
 .dashboardContainer .dashboardLogout {
   text-transform: capitalize;
   border-radius: 20px;
@@ -2922,52 +2976,6 @@ h1 {
   height: auto;
   max-height: 800px;
   overflow: auto;
-}
-.myProfileBio input,
-.myProfileSocials input,
-.myProfileLocation input {
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid transparent;
-  font-size: 0.8rem;
-  padding: 10px;
-  background-color: #EFF6F3;
-  outline: 2px solid transparent;
-}
-.myProfileBio textarea,
-.myProfileSocials textarea,
-.myProfileLocation textarea {
-  outline: 2px solid transparent;
-  background-color: #EFF6F3;
-}
-.myProfileBio label,
-.myProfileSocials label,
-.myProfileLocation label {
-  font-size: 0.8rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  margin-bottom: 5px;
-  padding: 3px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-}
-.myProfileBio .editable,
-.myProfileSocials .editable,
-.myProfileLocation .editable {
-  border-color: rgb(170, 170, 170);
-  background-color: white;
-}
-.myProfileBio .editable:focus,
-.myProfileSocials .editable:focus,
-.myProfileLocation .editable:focus {
-  outline: 2px solid #244034;
-}
-.myProfileBio h3,
-.myProfileSocials h3,
-.myProfileLocation h3 {
-  margin-bottom: 20px;
 }
 
 .myProfileBio .bioPhoto {

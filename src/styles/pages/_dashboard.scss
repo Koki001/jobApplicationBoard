@@ -92,6 +92,59 @@
     h2 {
       margin-bottom: 50px;
     }
+    input {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      font-size: 0.8rem;
+      padding: 10px;
+      background-color: $greenBg;
+      outline: 2px solid transparent;
+    }
+    textarea {
+      outline: 2px solid transparent;
+      background-color: $greenBg;
+      width: 100%;
+      resize: none;
+      font-size: 0.9rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      padding: 5px;
+    }
+    label {
+      font-size: 0.8rem;
+      font-weight: bold;
+      margin-bottom: 20px;
+      margin-bottom: 5px;
+      padding: 3px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+    }
+    select {
+      border-color: $darkGrey;
+      background-color: white;
+      &:focus {
+        outline: 2px solid $darkGreen;
+      }
+    }
+    .editable {
+      border-color: $darkGrey;
+      background-color: white;
+      &:focus {
+        outline: 2px solid $darkGreen;
+      }
+    }
+    .editableList {
+      display: list-item;
+    }
+    .editableList * {
+      display: list-item;
+    }
+    h3 {
+      margin-bottom: 20px;
+    }
   }
   .dashboardLogout {
     text-transform: capitalize;
@@ -171,40 +224,6 @@
   height: auto;
   max-height: 800px;
   overflow: auto;
-  input {
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid transparent;
-    font-size: 0.8rem;
-    padding: 10px;
-    background-color: $greenBg;
-    outline: 2px solid transparent;
-  }
-  textarea {
-    outline: 2px solid transparent;
-    background-color: $greenBg;
-  }
-  label {
-    font-size: 0.8rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    margin-bottom: 5px;
-    padding: 3px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
-  .editable {
-    border-color: $darkGrey;
-    background-color: white;
-    &:focus {
-      outline: 2px solid $darkGreen;
-    }
-  }
-  h3 {
-    margin-bottom: 20px;
-  }
 }
 
 .myProfileBio {
@@ -327,7 +346,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     div {
       width: calc(100% / 3 - 20px);
     }

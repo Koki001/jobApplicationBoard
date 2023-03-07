@@ -1,11 +1,14 @@
 import NavBar from "../NavBar";
 import Dashboard from "./Dashboard";
-import MyProfile from "./MyProfile";
+import MyProfile from "./candidates/MyProfile";
+import CompanyProfile from "./employers/CompanyProfile";
+import JobPost from "./employers/JobPost";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ref, child, get, onValue } from "firebase/database";
 import { db, auth } from "../../firebase";
 import { signOut } from "firebase/auth";
+import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -15,15 +18,38 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useLocation, useNavigate } from "react-router-dom";
 const Profile = () => {
+  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const account = useSelector((state) => state.type.type);
   const navigate = useNavigate();
   const location = useLocation();
+  const accountType = useSelector((state) => state.type.type);
   const [dashPage, setDashPage] = useState("dashboard");
   const [popupLogout, setPopupLogout] = useState(false);
-  const dashItems = {
+  const candidateItems = {
     dashboard: <Dashboard />,
     profile: <MyProfile />,
   };
+  const employerItems = {
+    dashboard: <Dashboard />,
+    profile: <CompanyProfile />,
+    post: <JobPost />,
+  };
+
+  useEffect(() => {
+    if (account === "") {
+      onValue(
+        ref(db, "users/candidates/" + auth.currentUser.uid),
+        (snapshot) => {
+          if (snapshot.val() !== null) {
+            dispatch(ACC_TYPE("candidates"));
+          } else {
+            dispatch(ACC_TYPE("employers"));
+          }
+        }
+      );
+    }
+  }, []);
 
   const handleSignout = () => {
     setPopupLogout(true);
@@ -41,13 +67,6 @@ const Profile = () => {
   const handlePropagation = (e) => {
     e.stopPropagation();
   };
-
-  // useEffect(() => {
-  //   const userID = auth.currentUser.uid
-  //   onValue(ref(db, "users/candidates/" + userID), (snapshot) => {
-  //     console.log(snapshot.val())
-  //   });
-  // }, []);
 
   return (
     <section className="dashboardSection">
@@ -115,7 +134,7 @@ const Profile = () => {
             <li>
               <label htmlFor="resume">
                 <EventNoteOutlinedIcon sx={{ marginRight: "10px" }} />
-                resume
+                {accountType === "candidates" ? "resume" : "post job"}
               </label>
               <input
                 onChange={(e) => {
@@ -125,7 +144,7 @@ const Profile = () => {
                 id="resume"
                 name="dashboard"
                 type="radio"
-                value={"resume"}
+                value={accountType === "candidate" ? "resume" : "post"}
               />
             </li>
             <li>
@@ -176,7 +195,9 @@ const Profile = () => {
         </nav>
         <div className="dashboardWrapper">
           <NavBar />
-          {dashItems[dashPage]}
+          {accountType === "candidates"
+            ? candidateItems[dashPage]
+            : employerItems[dashPage]}
         </div>
       </div>
     </section>

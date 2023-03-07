@@ -6,7 +6,7 @@ import {db} from "../firebase";
 import { ref, child, get, remove } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import { convertFromRaw } from "draft-js";
 // MUI imports
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
@@ -35,6 +35,7 @@ const JobDetails = () => {
         });
     }
   }, []);
+  console.log(details)
   return (
     <div className="jobDetailsSection">
       <header className="jobDetailsHeader">
@@ -44,7 +45,9 @@ const JobDetails = () => {
       {details !== {} && (
         <div className="jobDetails wrapper">
           <div className="annoyingLink">
-            <Link to={"/jobs"}><KeyboardBackspaceIcon /> back</Link>
+            <Link to={"/jobs"}>
+              <KeyboardBackspaceIcon /> back
+            </Link>
           </div>
           <div className="jobDetailsLeft">
             <div className="detailsTitle">
@@ -56,38 +59,41 @@ const JobDetails = () => {
                 <div className="detailsLogo">Copy</div>
               </div>
             </div>
-            <div className="detailsOverview">
+            {/* <div className="detailsOverview">
               <h3>Overview:</h3>
               <p>{details.overview}</p>
-            </div>
+            </div> */}
             <div className="detailsDescription">
               <h3>Job Description:</h3>
-              <p>{details.description}</p>
+              <p style={{whiteSpace: "pre-wrap"}}>{details.description}</p>
             </div>
             <div className="detailsResponsibilies">
               <h3>Responsibilities:</h3>
-              <ul>
+              {/* <ul>
                 {details.responsibilities?.map((item, index) => {
                   return <li key={index}>{item}</li>;
                 })}
-              </ul>
+              </ul> */}
+              <p>{details.responsibilities}</p>
             </div>
             {/* CHANGE this once implemented, not it copies responsibilities */}
             <div className="detailsRequired">
               <h3>Required Skills:</h3>
-              <ul>
+              {/* <ul>
                 {details.responsibilities?.map((item, index) => {
                   return <li key={index}>{item}</li>;
                 })}
-              </ul>
+              </ul> */}
+              <p>{details.required}</p>
             </div>
             <div className="detailsBenefits">
               <h3>Benefits:</h3>
-              <ul>
+              {/* <ul>
                 {details.benefits?.map((item, index) => {
                   return <li key={index}>{item}</li>;
                 })}
-              </ul>
+              </ul> */}
+              <p>{details.benefits}</p>
             </div>
             <Link to={"/jobs"}>
               <button className="buttonRoundBrown">Back to Search</button>

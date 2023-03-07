@@ -1,46 +1,60 @@
 import { Link, useNavigate } from "react-router-dom";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
+import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+import { ref, child, get, onValue, update } from "firebase/database";
 
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
 
 const Login = () => {
-  const [userEmail, setUserEmail] = useState("")
-  const [userPass, setUserPass] = useState("")
+  const [userEmail, setUserEmail] = useState("");
+  const [userPass, setUserPass] = useState("");
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handlePropagation = (e) => {
     // e.preventDefault();
     e.stopPropagation();
   };
   const handleLoginClose = () => {
-    dispatch(POP_UP_LOG(false))
-  }
+    dispatch(POP_UP_LOG(false));
+  };
   const handleRegPopup = () => {
     dispatch(POP_UP_LOG(false));
     dispatch(POP_UP_REG(true));
-  }
+  };
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, userEmail, userPass)
       .then((userCredential) => {
         // Signed in
         const user = userCredential.user;
-        dispatch(POP_UP_LOG(false))
-        
-      }).then(() => {
-        navigate("/dashboard")
+        dispatch(POP_UP_LOG(false));
+      })
+      .then(() => {
+        onValue(
+          ref(db, "users/candidates/" + auth.currentUser.uid),
+          (snapshot) => {
+            if (snapshot.val() !== null) {
+              dispatch(ACC_TYPE("candidates"));
+            } else {
+              dispatch(ACC_TYPE("employers"));
+            }
+          }
+        );
+      })
+      .then(() => {
+        navigate("/dashboard");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-  }
+  };
   return (
     <div onClick={handlePropagation} className="loginMain">
       <div onClick={handleLoginClose} className="closeIcon">
@@ -98,5 +112,5 @@ const Login = () => {
       </p>
     </div>
   );
-}
+};
 export default Login;

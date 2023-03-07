@@ -1,16 +1,17 @@
-import { db, auth } from "../../firebase";
+import { db, auth } from "../../../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { ref, child, get, onValue, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { USER } from "../../redux/slices/userSlice";
+import { USER } from "../../../redux/slices/userSlice";
 
 // MUI imports
 import EditIcon from "@mui/icons-material/Edit";
 
-const MyProfile = () => {
+const CompanyProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
+  const accountType = useSelector((state) => state.type.type);
   const [editInfo, setEditInfo] = useState({});
 
   const [enableEdit, setEnableEdit] = useState(false);
@@ -18,24 +19,25 @@ const MyProfile = () => {
   useEffect(() => {
     if (enableEdit === false) {
       const userID = auth.currentUser.uid;
-      onValue(ref(db, "users/candidates/" + userID), (snapshot) => {
+      onValue(ref(db, `users/${accountType}/` + userID), (snapshot) => {
         dispatch(USER(snapshot.val()));
       });
     }
   }, [enableEdit]);
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
-      setEditInfo((prev) => ({ ...prev, bio: prev.bio + "\n" }));
+      setEditInfo((prev) => ({ ...prev, bio: prev.bio + " _lnbr " }));
     }
   };
   const handleSaveEdits = () => {
     setEnableEdit(false);
     const userID = auth.currentUser.uid;
-    update(ref(db, "users/candidates/" + userID), editInfo);
+    update(ref(db, `users/${accountType}/` + userID), editInfo);
   };
+
   return (
     <div className="dashboardContent">
-      <h2>My Profile</h2>
+      <h2>Profile</h2>
       <div className="myProfileBio">
         <div className="bioPhoto">
           <div className="bioImage"></div>
@@ -52,11 +54,11 @@ const MyProfile = () => {
 
         <div className="bioText">
           <div className="bioName">
-            <label htmlFor="bioName">Full Name </label>
+            <label htmlFor="bioName">Company Name</label>
             <input
               className={enableEdit ? "editable" : ""}
               readOnly={enableEdit ? false : true}
-              defaultValue={user?.name}
+              defaultValue={user?.name || user?.companyName}
               onChange={(e) =>
                 setEditInfo((prev) => ({ ...prev, name: e.target.value }))
               }
@@ -65,7 +67,7 @@ const MyProfile = () => {
             />
           </div>
           <div className="bioBio">
-            <label htmlFor="bioBio">Bio</label>
+            <label htmlFor="bioBio">About</label>
             <textarea
               className={enableEdit ? "editable bioBioText" : "bioBioText"}
               readOnly={enableEdit ? false : true}
@@ -114,7 +116,9 @@ const MyProfile = () => {
               id="profileStreet"
               type="text"
               defaultValue={user?.address}
-              onChange={(e) => setEditInfo((prev) => ({ ...prev, address: e.target.value }))}
+              onChange={(e) =>
+                setEditInfo((prev) => ({ ...prev, address: e.target.value }))
+              }
             />
           </div>
           <div className="addressMiddle">
@@ -126,7 +130,9 @@ const MyProfile = () => {
                 id="profileCountry"
                 type="text"
                 defaultValue={user?.country}
-                onChange={(e) => setEditInfo((prev) => ({ ...prev, country: e.target.value }))}
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, country: e.target.value }))
+                }
               />
             </div>
             <div className="profileCity">
@@ -137,7 +143,9 @@ const MyProfile = () => {
                 id="profileCity"
                 type="text"
                 defaultValue={user?.city}
-                onChange={(e) => setEditInfo((prev) => ({ ...prev, city: e.target.value }))}
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, city: e.target.value }))
+                }
               />
             </div>
             <div className="profilePostal">
@@ -148,7 +156,9 @@ const MyProfile = () => {
                 id="profilePostal"
                 type="text"
                 defaultValue={user?.postal}
-                onChange={(e) => setEditInfo((prev) => ({ ...prev, postal: e.target.value }))}
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, postal: e.target.value }))
+                }
               />
             </div>
           </div>
@@ -168,4 +178,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default CompanyProfile;

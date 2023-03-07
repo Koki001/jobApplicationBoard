@@ -89,11 +89,13 @@ const Signup = () => {
             set(ref(db, "users/candidates/" + user.uid), {
               name: newUser.name,
               email: newUser.email,
+              type: "candidate"
             })
           } else if (accountType === "employer") {
             set(ref(db, "users/employers/" + user.uid), {
               companyName: newUser.name,
               email: newUser.email,
+              type: "employer"
             });
           }
           setNewUser((prev) => ({

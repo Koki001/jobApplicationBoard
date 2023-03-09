@@ -110,7 +110,7 @@ const JobListings = () => {
       })
       .then(() => {
         setGeneralSort(currentSort)
-        dispatch(SORT("latest"))
+        // dispatch(SORT("latest"))
         // setLoader(false);
         dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
       })

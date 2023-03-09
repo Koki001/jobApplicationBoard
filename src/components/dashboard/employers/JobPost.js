@@ -47,7 +47,7 @@ const JobPost = (props) => {
         postal: info.postal,
         createdOn: dayjs().format("dddd/MM/YYYY"),
         dateMs: date.getTime(),
-        companyID: auth.currentUser.uid
+        uid: auth.currentUser.uid
       }).then(() => {
         alert("job posted");
         props.posted();

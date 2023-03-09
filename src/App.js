@@ -1,12 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "./firebase";
-// Helper functions
-import {
-  UserGenerator,
-  CompanyGenerator,
-  JobGenerator,
-} from "./components/helpers/Faker";
 // Component imports
 import Header from "./components/sections/Header";
 import Categories from "./components/sections/Categories";
@@ -23,7 +15,6 @@ function App() {
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // JobGenerator(7)
   };
 
   useEffect(() => {
@@ -37,15 +28,6 @@ function App() {
     };
   }, []);
 
-  // useEffect(() => {
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       console.log("USER", user.email)
-  //     } else {
-  //       console.log("NO USER")
-  //     }
-  //   });
-  // },[auth.currentUser])
   return (
     // index #7 layout
     <div className="App">

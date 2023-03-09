@@ -1,6 +1,5 @@
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 // MUI imports

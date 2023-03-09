@@ -40,10 +40,6 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <Profile />,
   },
-  // {
-  //   path: "/register",
-  //   element: <Signup />,
-  // },
 ]);
 
 root.render(

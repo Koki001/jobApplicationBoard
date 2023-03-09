@@ -3,12 +3,12 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import Login from "./helpers/Login";
 import Signup from "./helpers/Signup";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
-import { pagination, PAGINATION_MAX } from "../redux/slices/paginationSlice";
+import { pagination} from "../redux/slices/paginationSlice";
 import { USER_RESET } from "../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
 import { auth } from "../firebase";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 const NavBar = () => {
   const popups = useSelector((state) => state.popups);
@@ -105,12 +105,6 @@ const NavBar = () => {
 
   const handleSignout = () => {
     setPopupLogout(true);
-    // if (location.pathname === "/dashboard") {
-    //   navigate("/");
-    //   signOut(auth);
-    // } else {
-    //   signOut(auth);
-    // }
   };
   const handleSignoutFinal = () => {
     setPopupLogout(false);

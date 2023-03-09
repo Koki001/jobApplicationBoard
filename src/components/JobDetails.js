@@ -3,10 +3,9 @@ import { useLocation, Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db } from "../firebase";
-import { ref, child, get, remove } from "firebase/database";
+import { ref, child, get } from "firebase/database";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { convertFromRaw } from "draft-js";
+import { useSelector } from "react-redux";
 // MUI imports
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 

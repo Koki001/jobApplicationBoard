@@ -3,22 +3,15 @@ import { useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db, auth } from "../firebase";
-import { onAuthStateChanged } from "firebase/auth";
 import {
   ref,
   child,
   get,
-  onValue,
-  orderByChild,
-  query,
-  orderByKey,
-  orderByValue,
 } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import {
   pagination,
-  PAGINATION_RESET,
   PAGINATION_MAX,
   SORT,
 } from "../redux/slices/paginationSlice";
@@ -26,8 +19,6 @@ import { POP_UP_LOG } from "../redux/slices/popupSlice";
 import {
   JOB_DETAILS,
   JOB_LIST,
-  JOB_ACTIVE,
-  JOB_ID,
 } from "../redux/slices/jobListSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
@@ -46,11 +37,9 @@ const JobListings = () => {
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
   const currentSort = useSelector((state) => state.pagination.sort);
-  // const storeJobList = useSelector((state) => state.jobs.list);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobList, setJobList] = useState([]);
-  // const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
   const [generalSort, setGeneralSort] = useState(currentSort);
@@ -64,9 +53,7 @@ const JobListings = () => {
     salaryMax: "",
   });
   const [jobObject, setJobObject] = useState({});
-  // const jobsRef = useRef()
   const scrollRef = useRef();
-  // console.log(jobsRef)
   useEffect(() => {
     if (pageSelectorCurrent > PAGINATION_MAX) {
       dispatch(pagination(1));
@@ -85,33 +72,38 @@ const JobListings = () => {
   }, [pageSelectorCurrent]);
   useEffect(() => {
     const dbRef = ref(db);
-    // if (storeJobList.length === 0)
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
-        // let idArray = [];
-
         if (snapshot.exists()) {
           let i = 0;
           setJobObject(snapshot.val());
           snapshot.forEach((item) => {
             dataArray.push(item.val());
             dataArray[i].uid = item.key;
-            // idArray.push(item.key);
             i++;
           });
-          setJobList(dataArray);
-          // setJobId(idArray);
-          dispatch(JOB_LIST(dataArray));
-          setGeneralSort(currentSort);
+          if (currentSort === "title") {
+            dataArray.sort((a, b) => a.title.localeCompare(b.title));
+            setJobList(dataArray);
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
+          } else if (currentSort === "latest") {
+            dataArray.sort((a, b) => b.dateMs - a.dateMs);
+            setJobList(dataArray);
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
+          } else if (currentSort === "salary") {
+            dataArray.sort((a, b) => b.salary - a.salary);
+            setJobList(dataArray);
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
+          }
         } else {
           console.log("No data available");
         }
       })
       .then(() => {
-        setGeneralSort(currentSort)
-        // dispatch(SORT("latest"))
-        // setLoader(false);
         dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
       })
       .catch((error) => {
@@ -143,37 +135,31 @@ const JobListings = () => {
     e.preventDefault();
     console.log("EDIT");
   };
-  // const handleFilterAll = (e) => {
-  //   console.log(e.target.value)
-  // }
   const handleSort = (e) => {
     dispatch(SORT(e.target.value));
-    setGeneralSort(e.target.value);
   };
   useEffect(() => {
-    if (generalSort === "title") {
+    if (currentSort === "title") {
+      setGeneralSort("title");
       const titleSort = [...jobList];
       titleSort.sort((a, b) => a.title.localeCompare(b.title));
       setJobList(titleSort);
       setLoader(false);
-    } else if (generalSort === "latest") {
+    } else if (currentSort === "latest") {
+      setGeneralSort("latest");
       const latestSort = [...jobList];
       latestSort.sort((a, b) => b.dateMs - a.dateMs);
       setJobList(latestSort);
       setLoader(false);
-    } else if (generalSort === "salary") {
+    } else if (currentSort === "salary") {
+      setGeneralSort("salary");
       const salarySort = [...jobList];
       salarySort.sort((a, b) => b.salary - a.salary);
       setJobList(salarySort);
       setLoader(false);
     }
-  }, [generalSort]);
+  }, [currentSort]);
   const handleFilterApply = (e) => {
-    // const dbRef = ref(db)
-    // const someRef = query(child(dbRef, "data/jobs/"), orderByChild("salary"))
-    // get(someRef).then((snapshot) => {
-    //   console.log(snapshot.val())
-    // })
   };
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));
@@ -421,15 +407,6 @@ const JobListings = () => {
             <ul className="jobsHolder">
               {loader === false
                 ? jobList
-                    // .filter((keyword) => {
-                    //   if (
-                    //     keyword.title
-                    //       .toLowerCase()
-                    //       .includes(filters.keyword.toLowerCase())
-                    //   ) {
-                    //     return keyword;
-                    //   }
-                    // })
                     .map((item, index) => {
                       if (
                         index > pageSelectorCurrent * 10 - 11 &&

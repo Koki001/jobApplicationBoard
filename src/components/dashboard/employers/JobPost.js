@@ -11,6 +11,7 @@ const JobPost = (props) => {
   const [currentSkill, setCurrentSkill] = useState("");
   const regexNum = new RegExp("^[0-9]*$");
   // const resRef = useRef()
+  const date = new Date()
   const handlePostJob = () => {
     if (
       info.title &&
@@ -45,6 +46,8 @@ const JobPost = (props) => {
         city: info.city,
         postal: info.postal,
         createdOn: dayjs().format("dddd/MM/YYYY"),
+        dateMs: date.getTime(),
+        companyID: auth.currentUser.uid
       }).then(() => {
         alert("job posted");
         props.posted();

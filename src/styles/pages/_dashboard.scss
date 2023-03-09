@@ -414,3 +414,21 @@
     margin-right: 20px;
   }
 }
+.companyInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  .companyEmail,
+  .companySite,
+  .companyDate,
+  .companySize,
+  .companyNumber,
+  .companyCategory {
+    width: calc(100% / 2 - 20px);
+    label {
+      margin: 10px 0;
+    }
+  }
+}

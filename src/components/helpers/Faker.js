@@ -42,6 +42,7 @@ const ParagraphGenerator = (num) => {
   return faker.lorem.paragraphs(num);
 };
 const JobGenerator = (num) => {
+  const date = new Date()
   const typeArray = ["full-time", "part-time", "contract"];
   const expArray = ["junior", "intermediate", "senior"];
   for (let i = 0; i < num; i++) {
@@ -80,6 +81,7 @@ const JobGenerator = (num) => {
       skills: Shuffle(BuzzWords),
       logo: faker.image.abstract(100, 100, true),
       createdOn: dayjs().format("dddd/MM/YYYY"),
+      dateMs: date.getTime()
     });
   }
 };

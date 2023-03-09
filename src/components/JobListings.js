@@ -4,7 +4,16 @@ import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db, auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import { ref, child, get, onValue, orderByChild, query, orderByKey, orderByValue } from "firebase/database";
+import {
+  ref,
+  child,
+  get,
+  onValue,
+  orderByChild,
+  query,
+  orderByKey,
+  orderByValue,
+} from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -42,6 +51,7 @@ const JobListings = () => {
   const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
+  const [generalSort, setGeneralSort] = useState("latest");
   const [filters, setFilters] = useState({
     keyword: "",
     category: "",
@@ -86,6 +96,7 @@ const JobListings = () => {
             dataArray.push(item.val());
             idArray.push(item.key);
           });
+          dataArray.sort((a, b) => b.dateMs - a.dateMs);
           setJobList(dataArray);
           setJobId(idArray);
           dispatch(JOB_LIST(dataArray));
@@ -121,13 +132,33 @@ const JobListings = () => {
       setLoginReminder(true);
     }
   };
+  const handleEdit = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    console.log("EDIT");
+  };
+  // const handleFilterAll = (e) => {
+  //   console.log(e.target.value)
+  // }
+
+  useEffect(() => {
+    if (generalSort === "title") {
+      const titleSort = [...jobList];
+      titleSort.sort((a, b) => a.title.localeCompare(b.title));
+      setJobList(titleSort);
+    } else if (generalSort === "latest") {
+      const latestSort = [...jobList];
+      latestSort.sort((a, b) => b.dateMs - a.dateMs);
+      setJobList(latestSort);
+    }
+  }, [generalSort]);
   const handleFilterApply = (e) => {
     // const dbRef = ref(db)
     // const someRef = query(child(dbRef, "data/jobs/"), orderByChild("salary"))
     // get(someRef).then((snapshot) => {
     //   console.log(snapshot.val())
     // })
-  }
+  };
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));
   };
@@ -313,7 +344,12 @@ const JobListings = () => {
                   <div className="filterButtons">
                     <button className="buttonRoundClear">clear filters</button>
 
-                    <button onClick={handleFilterApply} className="buttonRoundClear">apply filters</button>
+                    <button
+                      onClick={handleFilterApply}
+                      className="buttonRoundClear"
+                    >
+                      apply filters
+                    </button>
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -329,11 +365,15 @@ const JobListings = () => {
               </p>
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
-                <select name="sort" id="sort">
-                  <option value="">Latest</option>
-                  <option value="">Salary Desc</option>
-                  <option value="">Salary Asc</option>
-                  <option value="">Job Title</option>
+                <select
+                  onChange={(e) => setGeneralSort(e.target.value)}
+                  name="sort"
+                  id="sort"
+                >
+                  <option value="latest">Latest</option>
+                  <option value="salaryD">Salary Desc</option>
+                  <option value="salaryA">Salary Asc</option>
+                  <option value="title">Job Title</option>
                 </select>
               </div>
             </div>
@@ -444,10 +484,18 @@ const JobListings = () => {
                               <div className="jobCardButtons">
                                 <BookmarkBorderIcon />
                                 <button
-                                  onClick={handleApply}
+                                  onClick={
+                                    item.companyID &&
+                                    item.companyID === auth.currentUser.uid
+                                      ? handleEdit
+                                      : handleApply
+                                  }
                                   className="buttonRoundDarkGreen"
                                 >
-                                  apply
+                                  {item.companyID &&
+                                  item.companyID === auth.currentUser.uid
+                                    ? "edit"
+                                    : "apply"}
                                 </button>
                               </div>
                             </li>

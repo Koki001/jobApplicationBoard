@@ -17,12 +17,12 @@ const CompanyProfile = () => {
   const [enableEdit, setEnableEdit] = useState(false);
 
   useEffect(() => {
-    if (enableEdit === false) {
-      const userID = auth.currentUser.uid;
-      onValue(ref(db, `users/${accountType}/` + userID), (snapshot) => {
-        dispatch(USER(snapshot.val()));
-      });
-    }
+    // if (enableEdit === false) {
+    const userID = auth.currentUser.uid;
+    onValue(ref(db, `users/${accountType}/` + userID), (snapshot) => {
+      dispatch(USER(snapshot.val()));
+    });
+    // }
   }, [enableEdit]);
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
@@ -65,6 +65,86 @@ const CompanyProfile = () => {
               id="bioName"
               type="text"
             />
+          </div>
+          <div className="companyInfo">
+            <div className="companyEmail">
+              <label htmlFor="companyEmail">Email</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, email: e.target.value }))
+                }
+                defaultValue={user?.email}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyEmail"
+                type="text"
+              />
+            </div>
+            <div className="companySite">
+              <label htmlFor="companySite">Website</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, site: e.target.value }))
+                }
+                defaultValue={user?.site}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companySite"
+                type="text"
+              />
+            </div>
+            <div className="companyDate">
+              <label htmlFor="companyDate">Date Founded</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, founded: e.target.value }))
+                }
+                defaultValue={user?.founded}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyDate"
+                type="text"
+              />
+            </div>
+            <div className="companySize">
+              <label htmlFor="companySize">Number of Employees</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, size: e.target.value }))
+                }
+                defaultValue={user?.size}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companySize"
+                type="text"
+              />
+            </div>
+            <div className="companyNumber">
+              <label htmlFor="companyNumber">Phone Number</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, phone: e.target.value }))
+                }
+                defaultValue={user?.phone}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyNumber"
+                type="text"
+              />
+            </div>
+            <div className="companyCategory">
+              <label htmlFor="companyCategory">Category</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, category: e.target.value }))
+                }
+                defaultValue={user?.category}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyCategory"
+                type="text"
+              />
+            </div>
           </div>
           <div className="bioBio">
             <label htmlFor="bioBio">About</label>

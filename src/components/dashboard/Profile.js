@@ -153,7 +153,7 @@ const Profile = () => {
             <li>
               <label htmlFor="saved">
                 <BookmarkBorderOutlinedIcon sx={{ marginRight: "10px" }} />
-                saved jobs
+                {accountType === "candidates" ? "saved jobs" : "applicants"}
               </label>
               <input
                 onChange={(e) => {

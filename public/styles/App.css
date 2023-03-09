@@ -286,13 +286,13 @@ img {
 }
 
 .wrapper {
-  max-width: 1200px;
+  max-width: 1400px;
   width: 85%;
   margin: 0 auto;
 }
 
 .navWrapper {
-  max-width: 1200px;
+  max-width: 1400px;
   width: 95%;
   margin: 0 auto;
 }
@@ -3173,6 +3173,30 @@ h1 {
   border-radius: 5px;
   padding: 5px 10px;
   margin-right: 20px;
+}
+
+.companyInfo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.companyInfo .companyEmail,
+.companyInfo .companySite,
+.companyInfo .companyDate,
+.companyInfo .companySize,
+.companyInfo .companyNumber,
+.companyInfo .companyCategory {
+  width: calc(50% - 20px);
+}
+.companyInfo .companyEmail label,
+.companyInfo .companySite label,
+.companyInfo .companyDate label,
+.companyInfo .companySize label,
+.companyInfo .companyNumber label,
+.companyInfo .companyCategory label {
+  margin: 10px 0;
 }
 
 /*# sourceMappingURL=App.css.map */

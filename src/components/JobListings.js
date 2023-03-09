@@ -100,7 +100,7 @@ const JobListings = () => {
             // idArray.push(item.key);
             i++;
           });
-          dataArray.sort((a, b) => b.dateMs - a.dateMs);
+          setGeneralSort("latest")
           setJobList(dataArray);
           // setJobId(idArray);
           dispatch(JOB_LIST(dataArray));
@@ -381,7 +381,7 @@ const JobListings = () => {
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
                 <select
-                  value={currentSort}
+                  value={generalSort}
                   onChange={handleSort}
                   name="sort"
                   id="sort"

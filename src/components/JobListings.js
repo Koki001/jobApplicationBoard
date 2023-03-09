@@ -20,6 +20,7 @@ import {
   pagination,
   PAGINATION_RESET,
   PAGINATION_MAX,
+  SORT,
 } from "../redux/slices/paginationSlice";
 import { POP_UP_LOG } from "../redux/slices/popupSlice";
 import {
@@ -44,14 +45,15 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
-  const storeJobList = useSelector((state) => state.jobs.list);
+  const currentSort = useSelector((state) => state.pagination.sort);
+  // const storeJobList = useSelector((state) => state.jobs.list);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobList, setJobList] = useState([]);
-  const [jobId, setJobId] = useState([]);
+  // const [jobId, setJobId] = useState([]);
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
-  const [generalSort, setGeneralSort] = useState("latest");
+  const [generalSort, setGeneralSort] = useState(currentSort);
   const [filters, setFilters] = useState({
     keyword: "",
     category: "",
@@ -61,7 +63,6 @@ const JobListings = () => {
     salaryMin: "",
     salaryMax: "",
   });
-
   const [jobObject, setJobObject] = useState({});
   // const jobsRef = useRef()
   const scrollRef = useRef();
@@ -88,24 +89,28 @@ const JobListings = () => {
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
-        let idArray = [];
+        // let idArray = [];
 
         if (snapshot.exists()) {
+          let i = 0;
           setJobObject(snapshot.val());
           snapshot.forEach((item) => {
             dataArray.push(item.val());
-            idArray.push(item.key);
+            dataArray[i].uid = item.key;
+            // idArray.push(item.key);
+            i++;
           });
           dataArray.sort((a, b) => b.dateMs - a.dateMs);
           setJobList(dataArray);
-          setJobId(idArray);
+          // setJobId(idArray);
           dispatch(JOB_LIST(dataArray));
+          setGeneralSort(currentSort);
         } else {
           console.log("No data available");
         }
       })
       .then(() => {
-        setLoader(false);
+        // setLoader(false);
         dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
       })
       .catch((error) => {
@@ -140,16 +145,26 @@ const JobListings = () => {
   // const handleFilterAll = (e) => {
   //   console.log(e.target.value)
   // }
-
+  const handleSort = (e) => {
+    dispatch(SORT(e.target.value));
+    setGeneralSort(e.target.value);
+  };
   useEffect(() => {
     if (generalSort === "title") {
       const titleSort = [...jobList];
       titleSort.sort((a, b) => a.title.localeCompare(b.title));
       setJobList(titleSort);
+      setLoader(false);
     } else if (generalSort === "latest") {
       const latestSort = [...jobList];
       latestSort.sort((a, b) => b.dateMs - a.dateMs);
       setJobList(latestSort);
+      setLoader(false);
+    } else if (generalSort === "salary") {
+      const salarySort = [...jobList];
+      salarySort.sort((a, b) => b.salary - a.salary);
+      setJobList(salarySort);
+      setLoader(false);
     }
   }, [generalSort]);
   const handleFilterApply = (e) => {
@@ -366,13 +381,13 @@ const JobListings = () => {
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
                 <select
-                  onChange={(e) => setGeneralSort(e.target.value)}
+                  value={currentSort}
+                  onChange={handleSort}
                   name="sort"
                   id="sort"
                 >
                   <option value="latest">Latest</option>
-                  <option value="salaryD">Salary Desc</option>
-                  <option value="salaryA">Salary Asc</option>
+                  <option value="salary">Salary</option>
                   <option value="title">Job Title</option>
                 </select>
               </div>
@@ -422,9 +437,9 @@ const JobListings = () => {
                         return (
                           <Link
                             onClick={handleJobDetails}
-                            to={`/jobs/${jobId[index]}`}
-                            id={jobId[index]}
-                            key={jobId[index] + "key"}
+                            to={`/jobs/${jobList[index].uid}`}
+                            id={jobList[index].uid}
+                            key={jobList[index].uid + "key"}
                           >
                             <li className="jobCard">
                               <div className="jobCardHeading">

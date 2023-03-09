@@ -2871,6 +2871,9 @@ h1 {
   padding: 10px;
   background-color: white;
 }
+.dashboardContainer .dashboardContent input:read-only {
+  pointer-events: none;
+}
 .dashboardContainer .dashboardContent textarea {
   outline: 2px solid transparent;
   background-color: white;
@@ -2880,6 +2883,9 @@ h1 {
   border-radius: 5px;
   border: 1px solid rgb(170, 170, 170);
   padding: 5px;
+}
+.dashboardContainer .dashboardContent textarea:read-only {
+  pointer-events: none;
 }
 .dashboardContainer .dashboardContent label {
   font-size: 0.8rem;
@@ -2895,9 +2901,16 @@ h1 {
   border-color: rgb(170, 170, 170);
   background-color: white;
   font-size: 0.8rem;
+  padding: 10px;
+  border-radius: 5px;
+  outline: 2px solid transparent;
+  border: 1px solid rgb(170, 170, 170);
 }
 .dashboardContainer .dashboardContent select:focus {
   outline: 2px solid #244034;
+}
+.dashboardContainer .dashboardContent option {
+  font-size: 1rem;
 }
 .dashboardContainer .dashboardContent .editable {
   border-color: rgb(170, 170, 170);

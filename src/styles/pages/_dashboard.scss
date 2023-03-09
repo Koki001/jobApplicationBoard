@@ -100,6 +100,9 @@
       font-size: 0.8rem;
       padding: 10px;
       background-color: white;
+      &:read-only {
+        pointer-events: none;
+      }
     }
     textarea {
       outline: 2px solid transparent;
@@ -110,6 +113,9 @@
       border-radius: 5px;
       border: 1px solid $darkGrey;
       padding: 5px;
+      &:read-only {
+        pointer-events: none;
+      }
     }
     label {
       font-size: 0.8rem;
@@ -126,9 +132,16 @@
       border-color: $darkGrey;
       background-color: white;
       font-size: 0.8rem;
+      padding: 10px;
+      border-radius: 5px;
+      outline: 2px solid transparent;
+      border: 1px solid $darkGrey;
       &:focus {
         outline: 2px solid $darkGreen;
       }
+    }
+    option {
+      font-size: 1rem;
     }
     .editable {
       border-color: $darkGrey;
@@ -388,7 +401,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: flex-end;
-  
+
   input {
     min-width: 100px;
     max-width: 100%;

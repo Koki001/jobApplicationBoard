@@ -81,7 +81,7 @@ const JobGenerator = (num) => {
       skills: Shuffle(BuzzWords),
       logo: faker.image.abstract(100, 100, true),
       createdOn: dayjs().format("dddd/MM/YYYY"),
-      dateMs: date.getTime()
+      dateMs: date.getTime(),
     });
   }
 };

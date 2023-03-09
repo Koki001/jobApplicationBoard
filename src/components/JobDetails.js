@@ -101,7 +101,7 @@ const JobDetails = () => {
           <div className="jobDetailsRight">
             <div className="jobDetailsCompanyTop">
               <div className="companyLogo">
-                <img src={details.logo} alt="" />
+                <img src={details.logo ? details.logo : ""} alt="company logo" />
               </div>
               <h4>{details.company ? details.company : "NO NAME"}</h4>
 

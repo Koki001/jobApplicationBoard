@@ -100,7 +100,6 @@ const JobListings = () => {
             // idArray.push(item.key);
             i++;
           });
-          setGeneralSort("latest")
           setJobList(dataArray);
           // setJobId(idArray);
           dispatch(JOB_LIST(dataArray));
@@ -110,6 +109,8 @@ const JobListings = () => {
         }
       })
       .then(() => {
+        setGeneralSort(currentSort)
+        dispatch(SORT("latest"))
         // setLoader(false);
         dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
       })

@@ -1,8 +1,19 @@
 import NavBar from "../NavBar";
+import jobSectors from "../helpers/jobSectors";
+import { useDispatch } from "react-redux";
+import {
+  FILTER_CATEGORY,
+  FILTER_KEYWORD,
+} from "../../redux/slices/jobFilterSlice";
+import { useState } from "react";
+// MUI imports
 
 const Header = () => {
+
+  const dispatch = useDispatch();
   return (
-    <header id="home" className="mainHeader wrapper">
+    <header id="home" className="mainHeader">
+
       {/* <nav>
         <div className="navLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
@@ -31,7 +42,7 @@ const Header = () => {
         </div>
       </nav> */}
       <NavBar />
-      <div className="headerCenter">
+      <div className="headerCenter wrapper">
         <h1>
           <span>Find & Hire</span> <span>Experts for any Job.</span>
         </h1>
@@ -39,16 +50,29 @@ const Header = () => {
         <div className="headerSearchContainer">
           <div className="headerSearchLeft">
             <label htmlFor="category">Job Categories</label>
-            <select name="category" id="category">
-              <option value="">something</option>
-              <option value="">something2</option>
-              <option value="">something3</option>
-              <option value="">something4</option>
+            <select
+              onChange={(e) => dispatch(FILTER_CATEGORY(e.target.value))}
+              defaultValue={"all"}
+              name="category"
+              id="category"
+            >
+              <option value="all">All Categories</option>
+              {jobSectors.map((item, index) => {
+                return (
+                  <option key={index + "jobCategory"} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
             </select>
           </div>
           <div className="headerSearchMiddle">
             <label htmlFor="keyword">Keywords or Title</label>
-            <input id="keyword" type="text" />
+            <input
+              onChange={(e) => dispatch(FILTER_KEYWORD(e.target.value))}
+              id="keyword"
+              type="text"
+            />
           </div>
           <div className="headerSearchRight">
             <button className="buttonSquareGreen">Search</button>
@@ -59,7 +83,7 @@ const Header = () => {
         </p>
       </div>
 
-      <div className="companyUserLogos">
+      <div className="companyUserLogos wrapper">
         <div>
           <img
             src="../assets/header/google.png"

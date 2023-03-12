@@ -73,7 +73,7 @@ const Profile = () => {
 
   return (
     <section className="dashboardSection">
-      <div className="dashboardContainer wrapper">
+      <div className="dashboardContainer navWrapper">
         <div
           onClick={() => setPopupLogout(false)}
           aria-hidden={popupLogout ? false : true}

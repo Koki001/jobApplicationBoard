@@ -4,6 +4,7 @@ import popupSlice from "./slices/popupSlice";
 import jobListSlice from "./slices/jobListSlice";
 import userSlice from "./slices/userSlice";
 import accTypeSlice from "./slices/accTypeSlice";
+import jobFilterSlice from "./slices/jobFilterSlice";
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     popups: popupSlice,
     jobs: jobListSlice,
     user: userSlice,
-    type: accTypeSlice
+    type: accTypeSlice,
+    filter: jobFilterSlice,
   },
 });

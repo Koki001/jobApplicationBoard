@@ -9,7 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
 import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import MenuIcon from "@mui/icons-material/Menu";
 const NavBar = () => {
   const popups = useSelector((state) => state.popups);
   const [userActive, setUserActive] = useState(false);
@@ -21,6 +22,7 @@ const NavBar = () => {
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const [popupLogout, setPopupLogout] = useState(false);
+  const [showNav, setShowNav] = useState(false)
 
   const handleOpenLinks = (e) => {
     e.stopPropagation();
@@ -82,6 +84,7 @@ const NavBar = () => {
   }, [menuRef]);
 
   useEffect(() => {
+    setShowNav(false)
     if (location.pathname === "/" && location.hash !== "") {
       ref.current?.click();
     }
@@ -122,121 +125,129 @@ const NavBar = () => {
     navigate("/dashboard");
   };
   return (
-    <nav tabIndex={0} className="navWrapper">
-      <a ref={ref} className="sr-only" href={location.hash}></a>
-      <div className="navLogo">
-        {location.pathname === "/" || location.pathname === "/dashboard" ? (
-          <img
-            onClick={() => navigate("/")}
-            src={"../assets/header/jobiLogo.png"}
-            alt="jobi company logo"
-          />
-        ) : (
-          <img
-            onClick={() => navigate("/")}
-            src={"../assets/header/jobiLogoDark.png"}
-            alt="jobi company logo"
-          />
-        )}
-      </div>
-      <ul className="navMenu">
-        <li>
-          <Link to={"/#home"}>home</Link>
-        </li>
-        <li>
-          <Link to={"/jobs"}>jobs</Link>
-        </li>
-        <li
-          tabIndex={0}
-          ref={menuRef}
-          className={`subMenuParent`}
-          onClick={handleOpenLinks}
-          onKeyDown={handleOpenLinksKey}
-          onMouseEnter={handleOpenLinksHover}
-          onMouseLeave={handleCloseLinksHover}
-        >
-          <div className="subMenuTitle">Explore</div>
-          <ul
-            className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
+    <div className={"navWrapper"}>
+      <button onClick={(e) => setShowNav(!showNav)} className="showNavButton">
+        <MenuIcon />
+      </button>
+      <nav tabIndex={0} className={showNav ? "mainNav" : "hideNav"}>
+        <a ref={ref} className="sr-only" href={location.hash}></a>
+        <div className="navLogo">
+          {location.pathname === "/" || location.pathname === "/dashboard" ? (
+            <img
+              onClick={() => navigate("/")}
+              src={"../assets/header/jobiLogo.png"}
+              alt="jobi company logo"
+            />
+          ) : (
+            <img
+              onClick={() => navigate("/")}
+              src={"../assets/header/jobiLogoDark.png"}
+              alt="jobi company logo"
+            />
+          )}
+        </div>
+
+        <ul className="navMenu">
+          <li>
+            <Link to={"/#home"}>home</Link>
+          </li>
+          <li>
+            <Link to={"/jobs"}>jobs</Link>
+          </li>
+          <li
+            tabIndex={0}
+            ref={menuRef}
+            className={`subMenuParent`}
+            onClick={handleOpenLinks}
+            onKeyDown={handleOpenLinksKey}
+            onMouseEnter={handleOpenLinksHover}
+            onMouseLeave={handleCloseLinksHover}
           >
-            <li>
-              <Link to={"/#about"}>About Us</Link>
-            </li>
-            <li>
-              <Link to={"/#blog"}>Guides / Blog</Link>
-            </li>
-            <li>
-              <Link to={"/#reviews"}>Testimonials</Link>
-            </li>
-            <li>
-              <Link to={"/#faq"}>FAQ</Link>
-            </li>
-          </ul>
-        </li>
-        <li>
-          <Link to={"/pricing"}>Plans</Link>
-        </li>
-        <li>
-          <Link to={"/contactUs"}>contact</Link>
-        </li>
-      </ul>
-      {!userActive ? (
-        <div className="navButtons">
-          <button onClick={handleLogin} className="buttonRoundClear">
-            Log In
-          </button>
-          <button onClick={handleSignUp} className="buttonRoundGreen">
-            Sign Up
-          </button>
-        </div>
-      ) : (
-        <div className="navButtons">
-          <button onClick={handleProfile} className="buttonRoundClear">
-            Profile
-          </button>
-          <button onClick={handleSignout} className="buttonRoundGreen">
-            Sign Out
-          </button>
-        </div>
-      )}
-      <div
-        onClick={() => setPopupLogout(false)}
-        aria-hidden={popupLogout ? false : true}
-        className={
-          popupLogout ? "popupContainer popupActive" : "popupContainer"
-        }
-      >
-        <div onClick={handlePropagation} className="logoutReminder">
-          <p>Are you sure you want to sign out?</p>
-          <div>
-            <button
-              className="buttonRoundClear"
-              onClick={() => setPopupLogout(false)}
+            <div className="subMenuTitle">
+              Explore <KeyboardArrowDownIcon />
+            </div>
+            <ul
+              className={submenu === true ? `subMenu slideOut` : `subMenu hide`}
             >
-              Cancel
+              <li>
+                <Link to={"/#about"}>About Us</Link>
+              </li>
+              <li>
+                <Link to={"/#blog"}>Guides / Blog</Link>
+              </li>
+              <li>
+                <Link to={"/#reviews"}>Testimonials</Link>
+              </li>
+              <li>
+                <Link to={"/#faq"}>FAQ</Link>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <Link to={"/pricing"}>Plans</Link>
+          </li>
+          <li>
+            <Link to={"/contactUs"}>contact</Link>
+          </li>
+        </ul>
+        {!userActive ? (
+          <div className="navButtons">
+            <button onClick={handleLogin} className="buttonRoundClear">
+              Log In
             </button>
-            <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
-              Yes, sign out
+            <button onClick={handleSignUp} className="buttonRoundGreen">
+              Sign Up
             </button>
           </div>
+        ) : (
+          <div className="navButtons">
+            <button onClick={handleProfile} className="buttonRoundClear">
+              Profile
+            </button>
+            <button onClick={handleSignout} className="buttonRoundGreen">
+              Sign Out
+            </button>
+          </div>
+        )}
+        <div
+          onClick={() => setPopupLogout(false)}
+          aria-hidden={popupLogout ? false : true}
+          className={
+            popupLogout ? "popupContainer popupActive" : "popupContainer"
+          }
+        >
+          <div onClick={handlePropagation} className="logoutReminder">
+            <p>Are you sure you want to sign out?</p>
+            <div>
+              <button
+                className="buttonRoundClear"
+                onClick={() => setPopupLogout(false)}
+              >
+                Cancel
+              </button>
+              <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
+                Yes, sign out
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-      <div
-        onClick={handleExitLogin}
-        aria-hidden={popups.login || popups.signup ? false : true}
-        className={
-          popups.login === true || popups.signup === true
-            ? "popupContainer popupActive"
-            : "popupContainer"
-        }
-      >
-        {popups.login === true ? (
-          <Login />
-        ) : popups.signup === true ? (
-          <Signup />
-        ) : null}
-      </div>
-    </nav>
+        <div
+          onClick={handleExitLogin}
+          aria-hidden={popups.login || popups.signup ? false : true}
+          className={
+            popups.login === true || popups.signup === true
+              ? "popupContainer popupActive"
+              : "popupContainer"
+          }
+        >
+          {popups.login === true ? (
+            <Login />
+          ) : popups.signup === true ? (
+            <Signup />
+          ) : null}
+        </div>
+      </nav>
+    </div>
   );
 };
 

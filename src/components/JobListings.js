@@ -3,11 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db, auth } from "../firebase";
-import {
-  ref,
-  child,
-  get,
-} from "firebase/database";
+import { ref, child, get } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -15,11 +11,17 @@ import {
   PAGINATION_MAX,
   SORT,
 } from "../redux/slices/paginationSlice";
-import { POP_UP_LOG } from "../redux/slices/popupSlice";
 import {
-  JOB_DETAILS,
-  JOB_LIST,
-} from "../redux/slices/jobListSlice";
+  FILTER_CATEGORY,
+  FILTER_KEYWORD,
+  FILTER_LOCATION,
+  FILTER_EXPERIENCE,
+  FILTER_SALARY,
+  FILTER_TYPE,
+  FILTER_ACTIVE,
+} from "../redux/slices/jobFilterSlice";
+import { POP_UP_LOG } from "../redux/slices/popupSlice";
+import { JOB_DETAILS, JOB_LIST } from "../redux/slices/jobListSlice";
 // MUI imports
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
@@ -36,6 +38,7 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
+  const filters = useSelector((state) => state.filter);
   const currentSort = useSelector((state) => state.pagination.sort);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
@@ -43,15 +46,15 @@ const JobListings = () => {
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
   const [generalSort, setGeneralSort] = useState(currentSort);
-  const [filters, setFilters] = useState({
-    keyword: "",
-    category: "",
-    locations: "",
-    type: "",
-    experience: "",
-    salaryMin: "",
-    salaryMax: "",
-  });
+  // const [filters, setFilters] = useState({
+  //   keyword: "",
+  //   category: "",
+  //   locations: "",
+  //   type: "",
+  //   experience: "",
+  //   salaryMin: "",
+  //   salaryMax: "",
+  // });
   const [jobObject, setJobObject] = useState({});
   const scrollRef = useRef();
   useEffect(() => {
@@ -71,50 +74,83 @@ const JobListings = () => {
     });
   }, [pageSelectorCurrent]);
   useEffect(() => {
-    const dbRef = ref(db);
-    get(child(dbRef, `data/jobs`))
-      .then((snapshot) => {
-        let dataArray = [];
-        if (snapshot.exists()) {
-          let i = 0;
-          setJobObject(snapshot.val());
-          snapshot.forEach((item) => {
-            dataArray.push(item.val());
-            dataArray[i].uid = item.key;
-            i++;
-          });
-          if (currentSort === "title") {
-            dataArray.sort((a, b) => a.title.localeCompare(b.title));
-            setJobList(dataArray);
-            dispatch(JOB_LIST(dataArray));
-            setLoader(false);
-          } else if (currentSort === "latest") {
-            dataArray.sort((a, b) => b.dateMs - a.dateMs);
-            setJobList(dataArray);
-            dispatch(JOB_LIST(dataArray));
-            setLoader(false);
-          } else if (currentSort === "salary") {
-            dataArray.sort((a, b) => b.salary - a.salary);
-            setJobList(dataArray);
-            dispatch(JOB_LIST(dataArray));
-            setLoader(false);
+    if (!filters.active) {
+      const dbRef = ref(db);
+      get(child(dbRef, `data/jobs`))
+        .then((snapshot) => {
+          let dataArray = [];
+          if (snapshot.exists()) {
+            let i = 0;
+            setJobObject(snapshot.val());
+            snapshot.forEach((item) => {
+              dataArray.push(item.val());
+              dataArray[i].uid = item.key;
+              i++;
+            });
+            if (currentSort === "title") {
+              dataArray.sort((a, b) => a.title.localeCompare(b.title));
+              setJobList(dataArray);
+              dispatch(JOB_LIST(dataArray));
+              setLoader(false);
+            } else if (currentSort === "latest") {
+              dataArray.sort((a, b) => b.dateMs - a.dateMs);
+              setJobList(dataArray);
+              dispatch(JOB_LIST(dataArray));
+              setLoader(false);
+            } else if (currentSort === "salary") {
+              dataArray.sort((a, b) => b.salary - a.salary);
+              setJobList(dataArray);
+              dispatch(JOB_LIST(dataArray));
+              setLoader(false);
+            }
+          } else {
+            console.log("No data available");
           }
-        } else {
-          console.log("No data available");
-        }
-      })
-      .then(() => {
-        dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }, []);
+        })
+        .then(() => {
+          dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    } else if (filters.active) {
+      const dbRef = ref(db);
+      get(child(dbRef, `data/jobs`))
+        .then((snapshot) => {
+          let dataArray = [];
+          if (snapshot.exists()) {
+            let i = 0;
+            snapshot.forEach((item) => {
+              if (
+                item
+                  .val()
+                  .title.toLowerCase()
+                  .includes(filters.keyword.toLowerCase())
+              ) {
+                dataArray.push(item.val());
+                dataArray[i].uid = item.key;
+                i++;
+              }
+            });
+            setJobList(dataArray);
+          } else {
+            console.log("No data available");
+          }
+        })
+        .then(() => {
+          dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [filters.active]);
   const handleExpand = () => {
     setExpanded(!expanded);
   };
   const handleSalaryChange = (e, val) => {
-    setSalary(val);
+    dispatch(FILTER_ACTIVE(true));
+    dispatch(FILTER_SALARY(val));
   };
   const handleLogoDisplay = (e) => {
     e.target.style.visibility = "visible";
@@ -160,6 +196,40 @@ const JobListings = () => {
     }
   }, [currentSort]);
   const handleFilterApply = (e) => {
+    dispatch(FILTER_ACTIVE(true));
+    console.log(filters);
+    const dbRef = ref(db);
+    get(child(dbRef, `data/jobs`))
+      .then((snapshot) => {
+        let dataArray = [];
+        if (snapshot.exists()) {
+          let i = 0;
+          snapshot.forEach((item) => {
+            if (
+              item
+                .val()
+                .title.toLowerCase()
+                .includes(filters.keyword.toLowerCase())
+            ) {
+              dataArray.push(item.val());
+              dataArray[i].uid = item.key;
+              i++;
+            }
+          });
+          setJobList(dataArray);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .then(() => {
+        dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
+  const handleFilterClear = () => {
+    dispatch(FILTER_ACTIVE(false));
   };
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));
@@ -227,22 +297,34 @@ const JobListings = () => {
                         <label htmlFor="keyword">Keyword or Title</label>
                         <input
                           onChange={(e) =>
-                            setFilters((prev) => ({
-                              ...prev,
-                              keyword: e.target.value,
-                            }))
+                            dispatch(FILTER_KEYWORD(e.target.value))
                           }
                           id="keyword"
                           type="text"
+                          value={filters.keyword}
                         />
                       </div>
                       <div className="filtersCategories">
                         <label htmlFor="categories">Categories</label>
-                        <input id="categories" type="text" />
+                        <input
+                          onChange={(e) =>
+                            dispatch(FILTER_CATEGORY(e.target.value))
+                          }
+                          id="categories"
+                          type="text"
+                          value={filters.category}
+                        />
                       </div>
                       <div className="filtersLocation">
                         <label htmlFor="location">Location</label>
-                        <input id="location" type="text" />
+                        <input
+                          onChange={(e) =>
+                            dispatch(FILTER_LOCATION(e.target.value))
+                          }
+                          id="location"
+                          type="text"
+                          value={filters.location}
+                        />
                       </div>
                     </div>
                     <div className="filtersBottom">
@@ -250,15 +332,37 @@ const JobListings = () => {
                         <p>Job Type:</p>
                         <div className="typeGroup">
                           <div>
-                            <input name="type" type="checkbox" id="fulltime" />
+                            <input
+                              onChange={(e) =>
+                                dispatch(FILTER_TYPE("full-time"))
+                              }
+                              name="type"
+                              type="checkbox"
+                              id="fulltime"
+                              
+                            />
                             <label htmlFor="fulltime">Full-time</label>
                           </div>
                           <div>
-                            <input name="type" type="checkbox" id="parttime" />
+                            <input
+                              onChange={(e) =>
+                                dispatch(FILTER_TYPE("part-time"))
+                              }
+                              name="type"
+                              type="checkbox"
+                              id="parttime"
+                            />
                             <label htmlFor="parttime">Part-time</label>
                           </div>
                           <div>
-                            <input name="type" type="checkbox" id="contract" />
+                            <input
+                              onChange={(e) =>
+                                dispatch(FILTER_TYPE("contract"))
+                              }
+                              name="type"
+                              type="checkbox"
+                              id="contract"
+                            />
                             <label htmlFor="contract">Contract</label>
                           </div>
                         </div>
@@ -268,6 +372,9 @@ const JobListings = () => {
                         <div className="experienceGroup">
                           <div>
                             <input
+                              onChange={(e) =>
+                                dispatch(FILTER_EXPERIENCE("junior"))
+                              }
                               name="experience"
                               type="checkbox"
                               id="Junior"
@@ -276,6 +383,9 @@ const JobListings = () => {
                           </div>
                           <div>
                             <input
+                              onChange={(e) =>
+                                dispatch(FILTER_EXPERIENCE("intermediate"))
+                              }
                               name="experience"
                               type="checkbox"
                               id="Intermediate"
@@ -286,6 +396,9 @@ const JobListings = () => {
                           </div>
                           <div>
                             <input
+                              onChange={(e) =>
+                                dispatch(FILTER_EXPERIENCE("senior"))
+                              }
                               name="experience"
                               type="checkbox"
                               id="Senior"
@@ -298,12 +411,20 @@ const JobListings = () => {
                         <p>Salary:</p>
                         <div className="salaryGroup">
                           <div className="salaryRange">
-                            <p>{"$" + salary[0].toLocaleString() + " CAD"}</p>
+                            <p>
+                              {"$" +
+                                filters.salary[0].toLocaleString() +
+                                " CAD"}
+                            </p>
                             <span>-</span>
                             <p>
-                              {salary[1] === 150000
-                                ? "$" + salary[1].toLocaleString() + " CAD+"
-                                : "$" + salary[1].toLocaleString() + " CAD"}
+                              {filters.salary[1] === 150000
+                                ? "$" +
+                                  filters.salary[1].toLocaleString() +
+                                  " CAD+"
+                                : "$" +
+                                  filters.salary[1].toLocaleString() +
+                                  " CAD"}
                             </p>
                           </div>
                           <Box
@@ -330,7 +451,7 @@ const JobListings = () => {
                           >
                             <Slider
                               getAriaLabel={() => "Salary range"}
-                              value={salary}
+                              value={filters.salary}
                               onChange={handleSalaryChange}
                               // valueLabelDisplay="auto"
                               step={5000}
@@ -344,7 +465,12 @@ const JobListings = () => {
                     </div>
                   </form>
                   <div className="filterButtons">
-                    <button className="buttonRoundClear">clear filters</button>
+                    <button
+                      onClick={handleFilterClear}
+                      className="buttonRoundClear"
+                    >
+                      clear filters
+                    </button>
 
                     <button
                       onClick={handleFilterApply}
@@ -406,96 +532,95 @@ const JobListings = () => {
             </div>
             <ul className="jobsHolder">
               {loader === false
-                ? jobList
-                    .map((item, index) => {
-                      if (
-                        index > pageSelectorCurrent * 10 - 11 &&
-                        index < pageSelectorCurrent * 10
-                      ) {
-                        return (
-                          <Link
-                            onClick={handleJobDetails}
-                            to={`/jobs/${jobList[index].uid}`}
-                            id={jobList[index].uid}
-                            key={jobList[index].uid + "key"}
-                          >
-                            <li className="jobCard">
-                              <div className="jobCardHeading">
-                                <div className="jobCardLogo defaultLoad">
-                                  <img
-                                    onLoad={handleLogoDisplay}
-                                    src={
-                                      item.logo
-                                        ? item.logo
-                                        : "../assets/jobList/batman.gif"
-                                    }
-                                    alt="company logo"
-                                  />
-                                </div>
-                                <div className="jobCardText">
-                                  <h5>{item.title}</h5>
-                                  <h6>
-                                    {item.experience < 2
-                                      ? "junior"
-                                      : item.experience >= 2 &&
-                                        item.experience <= 4
-                                      ? "intermediate"
-                                      : item.experience >= 5
-                                      ? "senior"
-                                      : item.experience}
-                                  </h6>
-                                </div>
-                              </div>
-                              <div className="jobCardType">
-                                <p
-                                  className="topText"
-                                  style={
-                                    item.type === "contract"
-                                      ? { color: "#9CA89D" }
-                                      : item.type === "full-time"
-                                      ? { color: "#00BF58" }
-                                      : item.type === "part-time"
-                                      ? { color: "#FF6060" }
-                                      : null
+                ? jobList.map((item, index) => {
+                    if (
+                      index > pageSelectorCurrent * 10 - 11 &&
+                      index < pageSelectorCurrent * 10
+                    ) {
+                      return (
+                        <Link
+                          onClick={handleJobDetails}
+                          to={`/jobs/${jobList[index].uid}`}
+                          id={jobList[index].uid}
+                          key={jobList[index].uid + "key"}
+                        >
+                          <li className="jobCard">
+                            <div className="jobCardHeading">
+                              <div className="jobCardLogo defaultLoad">
+                                <img
+                                  onLoad={handleLogoDisplay}
+                                  src={
+                                    item.logo
+                                      ? item.logo
+                                      : "../assets/jobList/batman.gif"
                                   }
-                                >
-                                  {item.type}
-                                </p>
-                                <p className="bottomText">
-                                  Salary:{" "}
-                                  <span>
-                                    ${Number(item.salary).toLocaleString("en")}
-                                  </span>
-                                </p>
+                                  alt="company logo"
+                                />
                               </div>
-                              <div className="jobCardLocation">
-                                <p className="topText">
-                                  {item.city}, {item.country}
-                                </p>
-                                <p className="bottomText">{item.category}</p>
+                              <div className="jobCardText">
+                                <h5>{item.title}</h5>
+                                <h6>
+                                  {item.experience < 2
+                                    ? "junior"
+                                    : item.experience >= 2 &&
+                                      item.experience <= 4
+                                    ? "intermediate"
+                                    : item.experience >= 5
+                                    ? "senior"
+                                    : item.experience}
+                                </h6>
                               </div>
-                              <div className="jobCardButtons">
-                                <BookmarkBorderIcon />
-                                <button
-                                  onClick={
-                                    item.companyID &&
-                                    item.companyID === auth.currentUser.uid
-                                      ? handleEdit
-                                      : handleApply
-                                  }
-                                  className="buttonRoundDarkGreen"
-                                >
-                                  {item.companyID &&
+                            </div>
+                            <div className="jobCardType">
+                              <p
+                                className="topText"
+                                style={
+                                  item.type === "contract"
+                                    ? { color: "#9CA89D" }
+                                    : item.type === "full-time"
+                                    ? { color: "#00BF58" }
+                                    : item.type === "part-time"
+                                    ? { color: "#FF6060" }
+                                    : null
+                                }
+                              >
+                                {item.type}
+                              </p>
+                              <p className="bottomText">
+                                Salary:{" "}
+                                <span>
+                                  ${Number(item.salary).toLocaleString("en")}
+                                </span>
+                              </p>
+                            </div>
+                            <div className="jobCardLocation">
+                              <p className="topText">
+                                {item.city}, {item.country}
+                              </p>
+                              <p className="bottomText">{item.category}</p>
+                            </div>
+                            <div className="jobCardButtons">
+                              <BookmarkBorderIcon />
+                              <button
+                                onClick={
+                                  item.companyID &&
                                   item.companyID === auth.currentUser.uid
-                                    ? "edit"
-                                    : "apply"}
-                                </button>
-                              </div>
-                            </li>
-                          </Link>
-                        );
-                      }
-                    })
+                                    ? handleEdit
+                                    : handleApply
+                                }
+                                className="buttonRoundDarkGreen"
+                              >
+                                {item.companyID &&
+                                item.companyID === auth.currentUser.uid
+                                  ? "edit"
+                                  : "apply"}
+                              </button>
+                            </div>
+                          </li>
+                        </Link>
+                      );
+                    }
+                  })
                 : null}
             </ul>
             <div className="pagePagination">

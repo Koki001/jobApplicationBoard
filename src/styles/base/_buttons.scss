@@ -1,10 +1,12 @@
 @use "variables" as *;
-
+.showNavButton {
+  display: none;
+}
 .buttonRoundClear {
   background-color: transparent;
   border: 1px solid black;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -21,7 +23,7 @@
   background-color: transparent;
   border: 1px solid black;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -39,7 +41,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -55,7 +57,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -71,7 +73,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -87,7 +89,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -103,7 +105,7 @@
   border: 1px solid transparent;
   color: black;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -120,7 +122,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 5px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -136,7 +138,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 7px 15px;
   cursor: pointer;
   transition: all 0.1s linear;
@@ -153,7 +155,7 @@
   border: 1px solid transparent;
   color: white;
   border-radius: 30px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   padding: 20px 15px;
   cursor: pointer;
   transition: all 0.1s linear;

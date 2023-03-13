@@ -13,6 +13,8 @@ const JobPost = (props) => {
   // const resRef = useRef()
   const date = new Date()
   const handlePostJob = () => {
+    const companyID = auth.currentUser.uid
+    console.log(companyID)
     if (
       info.title &&
       info.description &&
@@ -47,7 +49,7 @@ const JobPost = (props) => {
         postal: info.postal,
         createdOn: dayjs().format("dddd/MM/YYYY"),
         dateMs: date.getTime(),
-        uid: auth.currentUser.uid
+        id: companyID
       }).then(() => {
         alert("job posted");
         props.posted();

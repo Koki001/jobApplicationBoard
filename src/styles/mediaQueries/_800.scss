@@ -1,0 +1,165 @@
+@use "../base/variables" as *;
+
+@media screen and (max-width: 800px) {
+  .mainHeader {
+    h1 * {
+      font-size: 3rem;
+    }
+    .headerSearchContainer {
+      padding: 5px 10px;
+    }
+    .headerSearchRight {
+      width: 100px;
+      button {
+        padding: 20px 10px;
+      }
+    }
+    .companyUserLogos {
+      flex-wrap: wrap;
+      div {
+        width: calc(100% / 3 - 20px);
+        padding: 0 30px;
+      }
+    }
+  }
+  .howItWorks {
+    .howToTalent {
+      flex-direction: column;
+      padding-bottom: 0;
+    }
+    .howToLeft {
+      width: 100%;
+    }
+    .howToRight {
+      width: 100%;
+      padding: 0;
+      margin-top: 30px;
+    }
+    .whyUs {
+      display: none;
+    }
+  }
+  .jobGuidesBlogs {
+    flex-direction: column;
+    li {
+      width: 100%;
+      margin-bottom: 30px;
+      border-bottom: 1px solid $darkGrey;
+    }
+    .blogLink {
+      padding: 10px 0;
+    }
+    .blogImage {
+      width: 100%;
+    }
+  }
+  .jobGuidesBottom {
+    padding: 50px 0 0 0;
+    flex-direction: column;
+    width: 100%;
+    .cvUploadLeft {
+      width: 100%;
+    }
+    .cvUploadRight {
+      width: 100%;
+      margin-top: 30px;
+    }
+  }
+  .reviewsCarousel {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+  }
+  .reviewsCard {
+    width: 60%;
+    margin-top: 50px;
+  }
+  .jobsHolder {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    a {
+      width: calc(100% / 2 - 10px);
+    }
+  }
+  .jobCard {
+    // flex-wrap: wrap;
+    min-height: 250px;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    .jobCardLogo {
+      display: none;
+      // min-width: 50px;
+      // min-height: 50px;
+    }
+    .jobCardHeading {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+    .jobCardText {
+      // max-width: 200px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      h5 {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 0.9rem;
+        margin-bottom: 0;
+      }
+    }
+    .jobCardType {
+      width: 100%;
+      // margin-left: 70px;
+      // .bottomText {
+      //   display: none;
+      // }
+    }
+    .jobCardLocation {
+      width: 100%;
+      margin-bottom: 0;
+      // margin-left: 70px;
+      .bottomText {
+        display: none;
+      }
+    }
+    .bottomText {
+      font-size: 0.8rem;
+      text-transform: capitalize;
+    }
+    .jobCardButtons {
+      width: 100%;
+      display: flex;
+      flex-direction: row-reverse;
+      button {
+        width: 70%;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .filtersTop {
+    justify-content: space-between;
+
+    input {
+      min-width: 100%;
+    }
+  }
+  .filtersBottom {
+    flex-wrap: wrap;
+    .filtersType,
+    .filtersExperience {
+      width: calc(100% / 2 - 20px);
+      min-width: 270px;
+    }
+    .filtersSalary {
+      width: 100%;
+      justify-content: center;
+      margin-top: 40px;
+    }
+  }
+}

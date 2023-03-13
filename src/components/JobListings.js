@@ -251,6 +251,8 @@ const JobListings = () => {
   const handleJobDetails = (e) => {
     dispatch(JOB_DETAILS(jobObject[e.currentTarget.id]));
   };
+  console.log(jobList)
+  console.log(auth.currentUser.uid)
   return (
     <div>
       <section className="jobListings">
@@ -559,7 +561,7 @@ const JobListings = () => {
                               </div>
                               <div className="jobCardText">
                                 <h5>{item.title}</h5>
-                                <h6>
+                                <p className="bottomText">
                                   {item.experience < 2
                                     ? "junior"
                                     : item.experience >= 2 &&
@@ -568,7 +570,8 @@ const JobListings = () => {
                                     : item.experience >= 5
                                     ? "senior"
                                     : item.experience}
-                                </h6>
+                                </p>
+                                
                               </div>
                             </div>
                             <div className="jobCardType">
@@ -603,15 +606,15 @@ const JobListings = () => {
                               <BookmarkBorderIcon />
                               <button
                                 onClick={
-                                  item.companyID &&
-                                  item.companyID === auth.currentUser.uid
+                                  item.id &&
+                                  item.id === auth.currentUser.uid
                                     ? handleEdit
                                     : handleApply
                                 }
                                 className="buttonRoundDarkGreen"
                               >
-                                {item.companyID &&
-                                item.companyID === auth.currentUser.uid
+                                {item.id &&
+                                item.id === auth.currentUser.uid
                                   ? "edit"
                                   : "apply"}
                               </button>

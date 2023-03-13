@@ -3401,5 +3401,152 @@ h1 {
     text-align: center;
   }
 }
+@media screen and (max-width: 800px) {
+  .mainHeader h1 * {
+    font-size: 3rem;
+  }
+  .mainHeader .headerSearchContainer {
+    padding: 5px 10px;
+  }
+  .mainHeader .headerSearchRight {
+    width: 100px;
+  }
+  .mainHeader .headerSearchRight button {
+    padding: 20px 10px;
+  }
+  .mainHeader .companyUserLogos {
+    flex-wrap: wrap;
+  }
+  .mainHeader .companyUserLogos div {
+    width: calc(33.3333333333% - 20px);
+    padding: 0 30px;
+  }
+  .howItWorks .howToTalent {
+    flex-direction: column;
+    padding-bottom: 0;
+  }
+  .howItWorks .howToLeft {
+    width: 100%;
+  }
+  .howItWorks .howToRight {
+    width: 100%;
+    padding: 0;
+    margin-top: 30px;
+  }
+  .howItWorks .whyUs {
+    display: none;
+  }
+  .jobGuidesBlogs {
+    flex-direction: column;
+  }
+  .jobGuidesBlogs li {
+    width: 100%;
+    margin-bottom: 30px;
+    border-bottom: 1px solid rgb(170, 170, 170);
+  }
+  .jobGuidesBlogs .blogLink {
+    padding: 10px 0;
+  }
+  .jobGuidesBlogs .blogImage {
+    width: 100%;
+  }
+  .jobGuidesBottom {
+    padding: 50px 0 0 0;
+    flex-direction: column;
+    width: 100%;
+  }
+  .jobGuidesBottom .cvUploadLeft {
+    width: 100%;
+  }
+  .jobGuidesBottom .cvUploadRight {
+    width: 100%;
+    margin-top: 30px;
+  }
+  .reviewsCarousel {
+    flex-direction: column;
+    padding: 0;
+    width: 100%;
+  }
+  .reviewsCard {
+    width: 60%;
+    margin-top: 50px;
+  }
+  .jobsHolder {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .jobsHolder a {
+    width: calc(50% - 10px);
+  }
+  .jobCard {
+    min-height: 250px;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .jobCard .jobCardLogo {
+    display: none;
+  }
+  .jobCard .jobCardHeading {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .jobCard .jobCardText {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .jobCard .jobCardText h5 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+  .jobCard .jobCardType {
+    width: 100%;
+  }
+  .jobCard .jobCardLocation {
+    width: 100%;
+    margin-bottom: 0;
+  }
+  .jobCard .jobCardLocation .bottomText {
+    display: none;
+  }
+  .jobCard .bottomText {
+    font-size: 0.8rem;
+    text-transform: capitalize;
+  }
+  .jobCard .jobCardButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  .jobCard .jobCardButtons button {
+    width: 70%;
+    font-size: 0.8rem;
+  }
+  .filtersTop {
+    justify-content: space-between;
+  }
+  .filtersTop input {
+    min-width: 100%;
+  }
+  .filtersBottom {
+    flex-wrap: wrap;
+  }
+  .filtersBottom .filtersType,
+  .filtersBottom .filtersExperience {
+    width: calc(50% - 20px);
+    min-width: 270px;
+  }
+  .filtersBottom .filtersSalary {
+    width: 100%;
+    justify-content: center;
+    margin-top: 40px;
+  }
+}
 
 /*# sourceMappingURL=App.css.map */

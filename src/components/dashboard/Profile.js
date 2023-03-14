@@ -9,6 +9,7 @@ import { ref, child, get, onValue } from "firebase/database";
 import { db, auth } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
+import { useLocation, useNavigate } from "react-router-dom";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -16,7 +17,8 @@ import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
 import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import { useLocation, useNavigate } from "react-router-dom";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
 const Profile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -25,6 +27,7 @@ const Profile = () => {
   const location = useLocation();
   const accountType = useSelector((state) => state.type.type);
   const [dashPage, setDashPage] = useState("dashboard");
+  const [dashNav, setDashNav] = useState(false)
   const [popupLogout, setPopupLogout] = useState(false);
   const handlePost = () => {
     setDashPage("dashboard")
@@ -96,7 +99,24 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <nav className="dashboardNav">
+
+        <nav
+          className={
+            dashNav
+              ? "dashboardNav dashboardNavVisible"
+              : "dashboardNav dashboardNavHidden"
+          }
+        >
+          <button
+            onClick={() => setDashNav(!dashNav)}
+            className={
+              dashNav
+                ? "dashboardNavButton dashClosed"
+                : "dashboardNavButton dashOpen"
+            }
+          >
+            <ArrowRightIcon />
+          </button>
           <div className="avatar">
             <div className="avatarImage">{/* <img src="" alt="" /> */}</div>
             <p>USER</p>

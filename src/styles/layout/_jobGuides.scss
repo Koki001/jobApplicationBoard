@@ -1,7 +1,7 @@
 @use "../base/variables" as *;
 .jobGuides {
   background-color: $greenBg;
-  min-height: 100vh;
+  // min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,7 +88,7 @@
 .jobGuidesBottom {
   display: flex;
   justify-content: space-between;
-  padding: 150px 0;
+  padding-top: 100px;
 }
 .cvUploadLeft {
   width: calc(50% - 30px);

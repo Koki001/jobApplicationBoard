@@ -2,7 +2,7 @@
 
 .dashboardSection {
   background-color: $greenBg;
-  min-height: 100vh;
+  // min-height: 100vh;
   display: flex;
   .dashboardWrapper {
     width: 100%;
@@ -17,6 +17,9 @@
     }
   }
 }
+  .dashboardNavButton {
+    display: none;
+  }
 .dashboardContainer {
   position: relative;
   height: 100%;
@@ -27,6 +30,7 @@
   .dashboardNav {
     position: sticky;
     top: 0;
+    left: 0;
     padding: 30px 5px;
     // border-radius: 20px;
     background-color: white;
@@ -39,6 +43,7 @@
     justify-content: flex-start;
     align-items: center;
   }
+
   .avatar {
     margin: 120px 0 30px 0;
     display: flex;

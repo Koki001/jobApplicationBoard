@@ -9,7 +9,7 @@
   // background-position: center;
   // background-size: contain;
   // background-repeat: no-repeat;
-  min-height: 100vh;
+  // min-height: 100vh;
   padding-bottom: 50px;
   // padding-top: 100px;
 }
@@ -173,7 +173,8 @@ nav {
   }
 }
 .headerCenter {
-  min-height: 50vh;
+  // min-height: 50vh;
+  margin: 100px 0;
   min-width: 60%;
   width: 100%;
   display: flex;

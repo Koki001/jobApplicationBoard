@@ -251,8 +251,6 @@ const JobListings = () => {
   const handleJobDetails = (e) => {
     dispatch(JOB_DETAILS(jobObject[e.currentTarget.id]));
   };
-  console.log(jobList)
-  console.log(auth.currentUser.uid)
   return (
     <div>
       <section className="jobListings">
@@ -607,14 +605,14 @@ const JobListings = () => {
                               <button
                                 onClick={
                                   item.id &&
-                                  item.id === auth.currentUser.uid
+                                  item.id === auth.currentUser?.uid
                                     ? handleEdit
                                     : handleApply
                                 }
                                 className="buttonRoundDarkGreen"
                               >
                                 {item.id &&
-                                item.id === auth.currentUser.uid
+                                item.id === auth.currentUser?.uid
                                   ? "edit"
                                   : "apply"}
                               </button>

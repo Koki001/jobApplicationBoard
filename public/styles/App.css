@@ -3421,6 +3421,21 @@ h1 {
     width: calc(33.3333333333% - 20px);
     padding: 0 30px;
   }
+  .howItWorks .howToSteps {
+    padding-top: 0;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .howItWorks .howToSteps .howToArrow {
+    display: none;
+  }
+  .howItWorks .howToSteps .howToAccount,
+  .howItWorks .howToSteps .howToProfile,
+  .howItWorks .howToSteps .howToApply {
+    width: 80%;
+    margin-top: 50px;
+  }
   .howItWorks .howToTalent {
     flex-direction: column;
     padding-bottom: 0;

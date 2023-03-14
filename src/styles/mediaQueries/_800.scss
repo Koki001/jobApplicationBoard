@@ -23,6 +23,21 @@
     }
   }
   .howItWorks {
+    .howToSteps {
+      padding-top: 0;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .howToArrow {
+        display: none;
+      }
+      .howToAccount,
+      .howToProfile,
+      .howToApply {
+        width: 80%;
+        margin-top: 50px;
+      }
+    }
     .howToTalent {
       flex-direction: column;
       padding-bottom: 0;

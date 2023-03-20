@@ -1,6 +1,6 @@
 import { db, auth, storage } from "../../../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
-import { ref, child, get, onValue, update } from "firebase/database";
+import { ref, set, child, get, onValue, update } from "firebase/database";
 import { uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const CompanyProfile = () => {
   useEffect(() => {
     // if (enableEdit === false) {
     const userID = auth.currentUser.uid;
-    onValue(ref(db, `users/${accountType}/` + userID), (snapshot) => {
+    onValue(ref(db, `users/` + userID), (snapshot) => {
       dispatch(USER(snapshot.val()));
     });
     // }
@@ -37,9 +37,8 @@ const CompanyProfile = () => {
   const handleSaveEdits = () => {
     setEnableEdit(false);
     const userID = auth.currentUser.uid;
-    update(ref(db, `users/${accountType}/` + userID), editInfo);
+    update(ref(db, `users/` + userID), editInfo);
   };
-
   const handlePhotoUpload = (e) => {
     const storageRef = sRef(
       storage,
@@ -50,13 +49,27 @@ const CompanyProfile = () => {
         getDownloadURL(
           sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
         ).then((url) => {
+          update(ref(db, `users/${auth.currentUser.uid}`), {
+            logo: url,
+          });
           dispatch(PHOTO(url));
           setFile(url);
         });
       });
     }
   };
-
+  // CREATE USEFFECT to save storage url to realtime database
+  useEffect(() => {
+    onValue(
+      ref(db, `users/` + auth.currentUser.uid),
+      (snapshot) => {
+        if (snapshot.exists()) {
+          dispatch(PHOTO(snapshot.val().logo));
+          setFile(snapshot.val().logo);
+        }
+      }
+      );
+  }, [auth.currentUser]);
   return (
     <div className="dashboardContent">
       <h2>Profile</h2>

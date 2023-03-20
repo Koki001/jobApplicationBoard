@@ -87,27 +87,24 @@ const Signup = () => {
             storage,
             `companyLogos/${auth.currentUser.uid}/logo`
           );
+
           getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
             dispatch(PHOTO(url));
           });
           updateProfile(user, {
-            displayName: "username",
-            accountType: accountType,
+            displayName: newUser.name,
           });
           if (accountType === "candidate") {
-            set(ref(db, "users/candidates/" + user.uid), {
-              name: newUser.name,
-              email: newUser.email,
-              type: "candidate",
+            getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
+              set(ref(db, "users/" + user.uid), {
+                name: newUser.name,
+                email: newUser.email,
+                type: "candidate",
+                logo: url,
+              });
             });
-            dispatch(ACC_TYPE("candidates"));
-          } else if (accountType === "employer") {
-            set(ref(db, "users/employers/" + user.uid), {
-              name: newUser.name,
-              email: newUser.email,
-              type: "employer",
-            });
-            dispatch(ACC_TYPE("employers"));
+
+            dispatch(ACC_TYPE(accountType));
           }
           setNewUser((prev) => ({
             ...prev,

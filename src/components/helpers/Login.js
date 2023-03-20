@@ -38,16 +38,11 @@ const Login = () => {
         dispatch(POP_UP_LOG(false));
       })
       .then(() => {
-        onValue(
-          ref(db, "users/candidates/" + auth.currentUser.uid),
-          (snapshot) => {
-            if (snapshot.val() !== null) {
-              dispatch(ACC_TYPE("candidates"));
-            } else {
-              dispatch(ACC_TYPE("employers"));
-            }
+        onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
+          if (snapshot.val() !== null) {
+            dispatch(ACC_TYPE(snapshot.val().type));
           }
-        );
+        });
       })
       .then(() => {
         getDownloadURL(
@@ -56,9 +51,7 @@ const Login = () => {
           .then((url) => {
             dispatch(PHOTO(url));
           })
-          .catch((error) => {
-
-          });
+          .catch((error) => {});
       })
       .then(() => {
         navigate("/dashboard");

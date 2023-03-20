@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ref, child, get, onValue } from "firebase/database";
 import { db, auth, storage } from "../../firebase";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
@@ -48,29 +48,23 @@ const Profile = () => {
   };
   //  console.log(sRef(storage));
   useEffect(() => {
-    if (auth.currentUser) {
-      onValue(
-        ref(db, "users/candidates/" + auth.currentUser.uid),
-        (snapshot) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
           if (snapshot.val() !== null) {
-            dispatch(ACC_TYPE("candidates"));
-            setUserInfo(snapshot.val());
             dispatch(USER(snapshot.val()));
-          }
-        }
-      );
-      onValue(
-        ref(db, "users/employers/" + auth.currentUser.uid),
-        (snapshot) => {
-          if (snapshot.val() !== null) {
-            dispatch(ACC_TYPE("employers"));
+            dispatch(ACC_TYPE(snapshot.val().type));
+            dispatch(PHOTO(snapshot.val().logo));
             setUserInfo(snapshot.val());
-            dispatch(USER(snapshot.val()));
           }
-        }
-      );
-    }
+        });
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
   }, [auth.currentUser]);
+
   const handleSignout = () => {
     setPopupLogout(true);
   };
@@ -173,7 +167,7 @@ const Profile = () => {
             <li>
               <label htmlFor="resume">
                 <EventNoteOutlinedIcon sx={{ marginRight: "10px" }} />
-                {accountType === "candidates" ? "resume" : "post job"}
+                {accountType === "candidate" ? "resume" : "post job"}
               </label>
               <input
                 onChange={(e) => {
@@ -189,7 +183,7 @@ const Profile = () => {
             <li>
               <label htmlFor="saved">
                 <BookmarkBorderOutlinedIcon sx={{ marginRight: "10px" }} />
-                {accountType === "candidates" ? "saved jobs" : "applicants"}
+                {accountType === "candidate" ? "saved jobs" : "applicants"}
               </label>
               <input
                 onChange={(e) => {
@@ -234,7 +228,7 @@ const Profile = () => {
         </nav>
         <div className="dashboardWrapper">
           <NavBar />
-          {accountType === "candidates"
+          {accountType === "candidate"
             ? candidateItems[dashPage]
             : employerItems[dashPage]}
         </div>

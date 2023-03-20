@@ -1,6 +1,6 @@
 import { db, auth, storage } from "../../../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
-import { ref, child, get, onValue, update } from "firebase/database";
+import { ref, set, child, get, onValue, update } from "firebase/database";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER, PHOTO } from "../../../redux/slices/userSlice";
@@ -19,7 +19,7 @@ const MyProfile = () => {
   useEffect(() => {
     if (enableEdit === false) {
       const userID = auth.currentUser.uid;
-      onValue(ref(db, `users/${accountType}/` + userID), (snapshot) => {
+      onValue(ref(db, `users/` + userID), (snapshot) => {
         dispatch(USER(snapshot.val()));
       });
     }
@@ -32,18 +32,18 @@ const MyProfile = () => {
   const handleSaveEdits = () => {
     setEnableEdit(false);
     const userID = auth.currentUser.uid;
-    update(ref(db, `users/${accountType}/` + userID), editInfo);
+    update(ref(db, `users/` + userID), editInfo);
   };
   const handlePhotoUpload = (e) => {
-    const storageRef = sRef(
-      storage,
-      `userLogos/${auth.currentUser.uid}/logo`
-    );
+    const storageRef = sRef(storage, `userLogos/${auth.currentUser.uid}/logo`);
     if (e.target.files) {
       uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
         getDownloadURL(
           sRef(storage, `userLogos/${auth.currentUser.uid}/logo`)
         ).then((url) => {
+          update(ref(db, `users/${auth.currentUser.uid}`), {
+            logo: url,
+          });
           dispatch(PHOTO(url));
           setFile(url);
         });
@@ -51,12 +51,15 @@ const MyProfile = () => {
     }
   };
   useEffect(() => {
-    getDownloadURL(
-      sRef(storage, `userLogos/${auth.currentUser.uid}/logo`)
-    ).then((url) => {
-      dispatch(PHOTO(url));
-      setFile(url);
-    });
+    onValue(
+      ref(db, `users/` + auth.currentUser.uid),
+      (snapshot) => {
+        dispatch(PHOTO(snapshot.val().logo));
+        setFile(snapshot.val().logo);
+        console.log(snapshot.val());
+        console.log(snapshot.val());
+      }
+    );
   }, [auth.currentUser]);
   return (
     <div className="dashboardContent">

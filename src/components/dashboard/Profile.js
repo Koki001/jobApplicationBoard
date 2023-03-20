@@ -6,10 +6,13 @@ import JobPost from "./employers/JobPost";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ref, child, get, onValue } from "firebase/database";
-import { db, auth } from "../../firebase";
+import { db, auth, storage } from "../../firebase";
 import { signOut } from "firebase/auth";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 import { useLocation, useNavigate } from "react-router-dom";
+import { uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
+import { ref as sRef } from "firebase/storage";
+import { USER, PHOTO } from "../../redux/slices/userSlice";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -21,17 +24,19 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.user.user);
   const account = useSelector((state) => state.type.type);
   const navigate = useNavigate();
   const location = useLocation();
   const accountType = useSelector((state) => state.type.type);
   const [dashPage, setDashPage] = useState("dashboard");
-  const [dashNav, setDashNav] = useState(false)
+  const [dashNav, setDashNav] = useState(false);
   const [popupLogout, setPopupLogout] = useState(false);
+  const [userInfo, setUserInfo] = useState();
+  // const [file, setFile] = useState(useSelector((state) => state.user.photo));
   const handlePost = () => {
-    setDashPage("dashboard")
-  }
+    setDashPage("dashboard");
+  };
   const candidateItems = {
     dashboard: <Dashboard />,
     profile: <MyProfile />,
@@ -41,22 +46,31 @@ const Profile = () => {
     profile: <CompanyProfile />,
     post: <JobPost posted={handlePost} />,
   };
-
+  //  console.log(sRef(storage));
   useEffect(() => {
-    if (account === "" && auth.currentUser) {
+    if (auth.currentUser) {
       onValue(
         ref(db, "users/candidates/" + auth.currentUser.uid),
         (snapshot) => {
           if (snapshot.val() !== null) {
             dispatch(ACC_TYPE("candidates"));
-          } else {
+            setUserInfo(snapshot.val());
+            dispatch(USER(snapshot.val()));
+          }
+        }
+      );
+      onValue(
+        ref(db, "users/employers/" + auth.currentUser.uid),
+        (snapshot) => {
+          if (snapshot.val() !== null) {
             dispatch(ACC_TYPE("employers"));
+            setUserInfo(snapshot.val());
+            dispatch(USER(snapshot.val()));
           }
         }
       );
     }
   }, [auth.currentUser]);
-
   const handleSignout = () => {
     setPopupLogout(true);
   };
@@ -118,8 +132,10 @@ const Profile = () => {
             <ArrowRightIcon />
           </button>
           <div className="avatar">
-            <div className="avatarImage">{/* <img src="" alt="" /> */}</div>
-            <p>USER</p>
+            <div className="avatarImage">
+              <img src={useSelector((state) => state.user.photo)} alt="" />
+            </div>
+            <p>{userInfo?.name}</p>
           </div>
           <ul className="dashboardOptions">
             <li>

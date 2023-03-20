@@ -1,9 +1,11 @@
-import { db, auth } from "../../../firebase";
+import { db, auth, storage } from "../../../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { ref, child, get, onValue, update } from "firebase/database";
+import { uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref as sRef } from "firebase/storage";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { USER } from "../../../redux/slices/userSlice";
+import { USER, PHOTO } from "../../../redux/slices/userSlice";
 
 // MUI imports
 import EditIcon from "@mui/icons-material/Edit";
@@ -12,9 +14,11 @@ const CompanyProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const accountType = useSelector((state) => state.type.type);
-  const [editInfo, setEditInfo] = useState({});
 
+  const [editInfo, setEditInfo] = useState({});
   const [enableEdit, setEnableEdit] = useState(false);
+  const [file, setFile] = useState(useSelector((state) => state.user.photo));
+  const [upload, setUpload] = useState(false);
 
   useEffect(() => {
     // if (enableEdit === false) {
@@ -24,6 +28,7 @@ const CompanyProfile = () => {
     });
     // }
   }, [enableEdit]);
+  useEffect(() => {}, []);
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
       setEditInfo((prev) => ({ ...prev, bio: prev.bio + " _lnbr " }));
@@ -35,13 +40,42 @@ const CompanyProfile = () => {
     update(ref(db, `users/${accountType}/` + userID), editInfo);
   };
 
+  const handlePhotoUpload = (e) => {
+    const storageRef = sRef(
+      storage,
+      `companyLogos/${auth.currentUser.uid}/logo`
+    );
+    if (e.target.files) {
+      uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
+        getDownloadURL(
+          sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
+        ).then((url) => {
+          dispatch(PHOTO(url));
+          setFile(url);
+        });
+      });
+    }
+  };
+
   return (
     <div className="dashboardContent">
       <h2>Profile</h2>
       <div className="myProfileBio">
         <div className="bioPhoto">
-          <div className="bioImage"></div>
-          <button className="buttonSquareLimeGreen">Upload new photo</button>
+          <div className="bioImage">
+            <img src={file} alt="company logo" />
+          </div>
+          <div className="uploadPhoto">
+            <label className="buttonSquareLimeGreen" htmlFor="upload">
+              Upload new photo
+            </label>
+            <input
+              onChange={handlePhotoUpload}
+              id="upload"
+              type={"file"}
+              className="sr-only"
+            />
+          </div>
           <button className="buttonSquareClear">Delete photo</button>
           <div className="editIcon">
             <EditIcon
@@ -58,7 +92,7 @@ const CompanyProfile = () => {
             <input
               className={enableEdit ? "editable" : ""}
               readOnly={enableEdit ? false : true}
-              defaultValue={user?.name || user?.companyName}
+              defaultValue={user?.name}
               onChange={(e) =>
                 setEditInfo((prev) => ({ ...prev, name: e.target.value }))
               }

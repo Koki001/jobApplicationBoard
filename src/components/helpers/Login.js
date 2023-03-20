@@ -1,11 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
+import { USER, PHOTO } from "../../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 import { ref, child, get, onValue, update } from "firebase/database";
-
+import { getDownloadURL } from "firebase/storage";
+import { ref as sRef } from "firebase/storage";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import { useState } from "react";
@@ -46,6 +48,17 @@ const Login = () => {
             }
           }
         );
+      })
+      .then(() => {
+        getDownloadURL(
+          sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
+        )
+          .then((url) => {
+            dispatch(PHOTO(url));
+          })
+          .catch((error) => {
+
+          });
       })
       .then(() => {
         navigate("/dashboard");

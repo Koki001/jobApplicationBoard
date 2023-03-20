@@ -1,11 +1,13 @@
 import { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
-import { USER } from "../../redux/slices/userSlice";
+import { USER, PHOTO } from "../../redux/slices/userSlice";
+import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 import { ref, child, set, onValue } from "firebase/database";
-
+import { uploadString, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref as sRef } from "firebase/storage";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
@@ -81,6 +83,13 @@ const Signup = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          const storageRef = sRef(
+            storage,
+            `companyLogos/${auth.currentUser.uid}/logo`
+          );
+          getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
+            dispatch(PHOTO(url));
+          });
           updateProfile(user, {
             displayName: "username",
             accountType: accountType,
@@ -89,14 +98,16 @@ const Signup = () => {
             set(ref(db, "users/candidates/" + user.uid), {
               name: newUser.name,
               email: newUser.email,
-              type: "candidate"
-            })
+              type: "candidate",
+            });
+            dispatch(ACC_TYPE("candidates"));
           } else if (accountType === "employer") {
             set(ref(db, "users/employers/" + user.uid), {
-              companyName: newUser.name,
+              name: newUser.name,
               email: newUser.email,
-              type: "employer"
+              type: "employer",
             });
+            dispatch(ACC_TYPE("employers"));
           }
           setNewUser((prev) => ({
             ...prev,
@@ -107,6 +118,7 @@ const Signup = () => {
           setPassConfirm("");
         })
         .then(() => {
+          dispatch(USER(newUser.name));
           dispatch(POP_UP_REG(false));
           navigate("/dashboard");
         })

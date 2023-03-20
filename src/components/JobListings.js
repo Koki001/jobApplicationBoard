@@ -339,7 +339,6 @@ const JobListings = () => {
                               name="type"
                               type="checkbox"
                               id="fulltime"
-                              
                             />
                             <label htmlFor="fulltime">Full-time</label>
                           </div>
@@ -468,6 +467,7 @@ const JobListings = () => {
                     <button
                       onClick={handleFilterClear}
                       className="buttonRoundClear"
+                      disabled
                     >
                       clear filters
                     </button>
@@ -475,6 +475,7 @@ const JobListings = () => {
                     <button
                       onClick={handleFilterApply}
                       className="buttonRoundClear"
+                      disabled
                     >
                       apply filters
                     </button>
@@ -569,7 +570,6 @@ const JobListings = () => {
                                     ? "senior"
                                     : item.experience}
                                 </p>
-                                
                               </div>
                             </div>
                             <div className="jobCardType">
@@ -604,15 +604,13 @@ const JobListings = () => {
                               <BookmarkBorderIcon />
                               <button
                                 onClick={
-                                  item.id &&
-                                  item.id === auth.currentUser?.uid
+                                  item.id && item.id === auth.currentUser?.uid
                                     ? handleEdit
                                     : handleApply
                                 }
                                 className="buttonRoundDarkGreen"
                               >
-                                {item.id &&
-                                item.id === auth.currentUser?.uid
+                                {item.id && item.id === auth.currentUser?.uid
                                   ? "edit"
                                   : "apply"}
                               </button>

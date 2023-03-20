@@ -28,7 +28,7 @@ const Profile = () => {
   const account = useSelector((state) => state.type.type);
   const navigate = useNavigate();
   const location = useLocation();
-  const accountType = useSelector((state) => state.type.type);
+  // const userInfo?.type = useSelector((state) => state.type.type);
   const [dashPage, setDashPage] = useState("dashboard");
   const [dashNav, setDashNav] = useState(false);
   const [popupLogout, setPopupLogout] = useState(false);
@@ -167,7 +167,7 @@ const Profile = () => {
             <li>
               <label htmlFor="resume">
                 <EventNoteOutlinedIcon sx={{ marginRight: "10px" }} />
-                {accountType === "candidate" ? "resume" : "post job"}
+                {userInfo?.type === "candidate" ? "resume" : "post job"}
               </label>
               <input
                 onChange={(e) => {
@@ -177,13 +177,13 @@ const Profile = () => {
                 id="resume"
                 name="dashboard"
                 type="radio"
-                value={accountType === "candidate" ? "resume" : "post"}
+                value={userInfo?.type === "candidate" ? "resume" : "post"}
               />
             </li>
             <li>
               <label htmlFor="saved">
                 <BookmarkBorderOutlinedIcon sx={{ marginRight: "10px" }} />
-                {accountType === "candidate" ? "saved jobs" : "applicants"}
+                {userInfo?.type === "candidate" ? "saved jobs" : "applicants"}
               </label>
               <input
                 onChange={(e) => {
@@ -228,7 +228,7 @@ const Profile = () => {
         </nav>
         <div className="dashboardWrapper">
           <NavBar />
-          {accountType === "candidate"
+          {userInfo?.type === "candidate"
             ? candidateItems[dashPage]
             : employerItems[dashPage]}
         </div>

@@ -80,7 +80,9 @@ const MyProfile = () => {
               className="sr-only"
             />
           </div>
-          <button className="buttonSquareClear">Delete photo</button>
+          <button className="buttonSquareClear deletePhoto">
+            Delete photo
+          </button>
           <div className="editIcon">
             <EditIcon
               onClick={() => setEnableEdit(true)}

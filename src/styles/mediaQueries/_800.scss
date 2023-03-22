@@ -177,4 +177,26 @@
       margin-top: 40px;
     }
   }
+  .dashboardContainer {
+    .dashboardSummary {
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+    .dashboardStats {
+      flex-wrap: wrap;
+      li {
+        // min-width: 200px;
+        width: calc(100% / 2 - 10px);
+      }
+    }
+    
+    .summaryChart,
+    .recentlyApplied {
+      width: 100%;
+      margin: 10px 0 20px 0;
+    }
+  }
+  .postSkills p {
+    display: none;
+  }
 }

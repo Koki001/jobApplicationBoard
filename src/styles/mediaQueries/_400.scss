@@ -1,0 +1,124 @@
+@use "../base/variables" as *;
+
+@media screen and (max-width: 600px) {
+  .mainHeader {
+    h1 * {
+      font-size: 2.3rem;
+    }
+  }
+  .reviewsCard {
+    width: 100%;
+  }
+  .footerLogo {
+    display: none;
+  }
+  .footerTopHalf div:nth-child(3) {
+    display: none;
+  }
+  .footerTop .footerTopHalf {
+    justify-content: space-evenly;
+  }
+  .newsletterInputs input {
+    min-width: 100px;
+  }
+  .faqLink {
+    text-align: center;
+  }
+  .categories .categoriesCards li {
+    min-width: 270px;
+  }
+  .navMenu {
+    width: 170px;
+  }
+  header span {
+    text-align: center;
+  }
+  .filtersTop {
+    flex-direction: column;
+    .filtersKeyword,
+    .filtersCategories,
+    .filtersLocation {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+  }
+  .filtersBottom .typeGroup,
+  .filtersBottom .experienceGroup {
+    width: 200px;
+    div {
+      margin-bottom: 10px;
+    }
+  }
+  .filtersBottom .filtersSalary {
+    flex-direction: column;
+    align-items: center;
+  }
+  .salaryGroup {
+    margin-top: 20px;
+  }
+  .filterButtons {
+    flex-direction: column-reverse;
+    button {
+      margin-top: 20px;
+    }
+  }
+  .filtersBottom {
+    .filtersExperience,
+    .filtersType {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      p {
+        margin-bottom: 20px;
+      }
+    }
+  }
+  .jobsSort p {
+    display: none;
+  }
+  .jobDetailsRight .jobDetailsCompanyBottom .companyDetails div {
+    width: 100%;
+  }
+  .pricingCards li {
+    min-width: 290px;
+  }
+  .pricingCards .cents {
+    right: 0;
+  }
+  .pricingCards .dollarSign {
+    left: 0;
+  }
+  .contactTypes {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    li {
+      margin-bottom: 50px;
+    }
+  }
+  .contactUs .contactUsTop {
+    flex-direction: column;
+  }
+  .contactUs .contactUsName, .contactUs .contactUsEmail {
+    width: 100%;
+  }
+  .dashboardContainer .dashboardContent {
+    padding: 30px 5px;
+  }
+  .popupActive .logoutReminder {
+    width: 310px;
+  }
+  .loginMain, .signupMain {
+    padding: 40px 15px;
+    width: 310px;
+  }
+  .loginMain .loginOptions {
+    flex-direction: column;
+    a {
+      margin-top: 20px;
+    }
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .slideOut {
+    width: 170px;
+  }
+}

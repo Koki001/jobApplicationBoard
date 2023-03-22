@@ -152,7 +152,7 @@ const Profile = () => {
             <li>
               <label htmlFor="dashboard">
                 <ViewComfyOutlinedIcon sx={{ marginRight: "10px" }} />
-                dashboard
+                overview
               </label>
               <input
                 onChange={(e) => {
@@ -168,7 +168,11 @@ const Profile = () => {
             <li>
               <label htmlFor="profile">
                 <PersonOutlineIcon sx={{ marginRight: "10px" }} />
-                my profile
+                {
+                  userInfo?.type === "candidate" ?
+                  "My Profile" :
+                  "Company"
+                }
               </label>
               <input
                 onChange={(e) => {

@@ -1,0 +1,134 @@
+@use "../base/variables" as *;
+
+@media screen and (max-width: 600px) {
+
+  .headerSearchContainer {
+   flex-direction: column;
+    .headerSearchLeft,
+    .headerSearchMiddle,
+    .headerSearchRight {
+      width: 100%;
+      margin: 10px 0;
+    }
+    .headerSearchLeft {
+      border-bottom: 1px solid $darkGrey;
+    }
+    .headerSearchMiddle {
+      border-bottom: 1px solid $darkGrey;
+      padding: 0;
+    }
+    .headerSearchRight button {
+      width: 100%;
+    }
+     select {
+      padding: 10px 0;
+       option {
+        padding: 5px 0;
+       }
+     } 
+     input[type=text] {
+      padding: 10px 0;
+     }
+  }
+  .mainHeader .companyUserLogos div {
+    padding: 0 5px;
+  }
+  .categories .categoriesExplore {
+    text-align: center;
+    justify-content: center;
+    a {
+      display: none;
+    }
+  } 
+  .reviewsCard {
+    width: 80%;
+  }
+  .categories .categoriesCards li {
+    padding: 0;
+    height: 230px;
+  }
+  .footerBottomLeft {
+    display: none;
+  }
+  .footerBottomRight {
+    width: 160px;
+  }
+  .jobsHolder {
+    justify-content: center;
+    a {
+      width: 100%;
+    }
+  }
+  .jobCard .jobCardLogo {
+    display: block;
+  }
+  .filtersBottom {
+    justify-content: center;
+    .filtersType {
+      width: 100%;
+      justify-content: center;
+      margin-bottom: 30px;
+      p {
+        width: 100px;
+      }
+    }
+    .filtersExperience {
+      width: 100%;
+      justify-content: center;
+            p {
+        width: 100px;
+      }
+    }
+    .filtersSalary {
+      width: 100%;
+    }
+    .typeGroup,
+    .experienceGroup {
+      width: 200px;
+      margin-left: 20px;
+    }
+  }
+  .pricingCards .cents {
+    right: 20px;
+  }
+  .pricingCards .dollarSign {
+    left: 20px;
+  }
+  .myProfileBio .bioImage {
+    display: none;
+  }
+  .companyInfo {
+    flex-direction: column;
+  }
+  .companyInfo .companyEmail, .companyInfo .companySite, .companyInfo .companyDate, .companyInfo .companySize, .companyInfo .companyNumber, .companyInfo .companyCategory {
+    width: 100%;
+  }
+  .myProfileBio, .myProfileSocials, .myProfileLocation {
+    max-height: none;
+  }
+  .deletePhoto {
+    display: none;
+  }
+  .myProfileForm .addressMiddle {
+    flex-direction: column;
+    div {
+      width: 100%;
+    }
+  } 
+  .dashboardContainer .dashboardStats li {
+    width: 100%;
+  }
+  .postMix {
+    flex-direction: column;
+    justify-content: center;
+    .postSkills {
+      justify-content: center;
+    }
+    .postCategory,
+    .postType,
+    .postSalary,
+    .postExperience {
+      width: auto;
+    }
+  }
+}

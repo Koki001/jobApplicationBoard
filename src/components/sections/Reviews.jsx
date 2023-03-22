@@ -1,3 +1,4 @@
+import React from "react";
 // MUI imports
 import EastIcon from "@mui/icons-material/East";
 import WestIcon from "@mui/icons-material/West";

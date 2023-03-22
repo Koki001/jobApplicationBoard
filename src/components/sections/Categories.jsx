@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-
+import React from "react";
 const Categories = () => {
   return (
     <section id="jobs" className="categories">

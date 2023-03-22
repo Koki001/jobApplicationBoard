@@ -1,32 +1,37 @@
 import { db, auth, storage } from "../../../firebase";
 import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
 import { ref, set, child, get, onValue, update } from "firebase/database";
-import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { USER, PHOTO } from "../../../redux/slices/userSlice";
 import { uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { USER, PHOTO } from "../../../redux/slices/userSlice";
+
 // MUI imports
 import EditIcon from "@mui/icons-material/Edit";
 
-const MyProfile = () => {
+const CompanyProfile = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
   const accountType = useSelector((state) => state.type.type);
+
   const [editInfo, setEditInfo] = useState({});
-  const [file, setFile] = useState(useSelector((state) => state.user.photo));
   const [enableEdit, setEnableEdit] = useState(false);
+  const [file, setFile] = useState(useSelector((state) => state.user.photo));
+  const [upload, setUpload] = useState(false);
+
   useEffect(() => {
-    if (enableEdit === false) {
-      const userID = auth.currentUser.uid;
-      onValue(ref(db, `users/` + userID), (snapshot) => {
-        dispatch(USER(snapshot.val()));
-      });
-    }
+    // if (enableEdit === false) {
+    const userID = auth.currentUser.uid;
+    onValue(ref(db, `users/` + userID), (snapshot) => {
+      dispatch(USER(snapshot.val()));
+    });
+    // }
   }, [enableEdit]);
+  useEffect(() => {}, []);
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
-      setEditInfo((prev) => ({ ...prev, bio: prev.bio + "\n" }));
+      setEditInfo((prev) => ({ ...prev, bio: prev.bio + " _lnbr " }));
     }
   };
   const handleSaveEdits = () => {
@@ -35,11 +40,14 @@ const MyProfile = () => {
     update(ref(db, `users/` + userID), editInfo);
   };
   const handlePhotoUpload = (e) => {
-    const storageRef = sRef(storage, `userLogos/${auth.currentUser.uid}/logo`);
+    const storageRef = sRef(
+      storage,
+      `companyLogos/${auth.currentUser.uid}/logo`
+    );
     if (e.target.files) {
       uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
         getDownloadURL(
-          sRef(storage, `userLogos/${auth.currentUser.uid}/logo`)
+          sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
         ).then((url) => {
           update(ref(db, `users/${auth.currentUser.uid}`), {
             logo: url,
@@ -50,24 +58,25 @@ const MyProfile = () => {
       });
     }
   };
+  // CREATE USEFFECT to save storage url to realtime database
   useEffect(() => {
     onValue(
       ref(db, `users/` + auth.currentUser.uid),
       (snapshot) => {
-        dispatch(PHOTO(snapshot.val().logo));
-        setFile(snapshot.val().logo);
-        console.log(snapshot.val());
-        console.log(snapshot.val());
+        if (snapshot.exists()) {
+          dispatch(PHOTO(snapshot.val().logo));
+          setFile(snapshot.val().logo);
+        }
       }
-    );
+      );
   }, [auth.currentUser]);
   return (
     <div className="dashboardContent">
-      <h2>My Profile</h2>
+      <h2>Profile</h2>
       <div className="myProfileBio">
         <div className="bioPhoto">
           <div className="bioImage">
-            <img src={file} alt="profile" />
+            <img src={file} alt="company logo" />
           </div>
           <div className="uploadPhoto">
             <label className="buttonSquareLimeGreen" htmlFor="upload">
@@ -92,7 +101,7 @@ const MyProfile = () => {
 
         <div className="bioText">
           <div className="bioName">
-            <label htmlFor="bioName">Full Name </label>
+            <label htmlFor="bioName">Company Name</label>
             <input
               className={enableEdit ? "editable" : ""}
               readOnly={enableEdit ? false : true}
@@ -104,8 +113,88 @@ const MyProfile = () => {
               type="text"
             />
           </div>
+          <div className="companyInfo">
+            <div className="companyEmail">
+              <label htmlFor="companyEmail">Email</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, email: e.target.value }))
+                }
+                defaultValue={user?.email}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyEmail"
+                type="text"
+              />
+            </div>
+            <div className="companySite">
+              <label htmlFor="companySite">Website</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, site: e.target.value }))
+                }
+                defaultValue={user?.site}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companySite"
+                type="text"
+              />
+            </div>
+            <div className="companyDate">
+              <label htmlFor="companyDate">Date Founded</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, founded: e.target.value }))
+                }
+                defaultValue={user?.founded}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyDate"
+                type="text"
+              />
+            </div>
+            <div className="companySize">
+              <label htmlFor="companySize">Number of Employees</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, size: e.target.value }))
+                }
+                defaultValue={user?.size}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companySize"
+                type="text"
+              />
+            </div>
+            <div className="companyNumber">
+              <label htmlFor="companyNumber">Phone Number</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, phone: e.target.value }))
+                }
+                defaultValue={user?.phone}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyNumber"
+                type="text"
+              />
+            </div>
+            <div className="companyCategory">
+              <label htmlFor="companyCategory">Category</label>
+              <input
+                onChange={(e) =>
+                  setEditInfo((prev) => ({ ...prev, category: e.target.value }))
+                }
+                defaultValue={user?.category}
+                readOnly={enableEdit ? false : true}
+                className={enableEdit ? "editable" : ""}
+                id="companyCategory"
+                type="text"
+              />
+            </div>
+          </div>
           <div className="bioBio">
-            <label htmlFor="bioBio">Bio</label>
+            <label htmlFor="bioBio">About</label>
             <textarea
               className={enableEdit ? "editable bioBioText" : "bioBioText"}
               readOnly={enableEdit ? false : true}
@@ -216,4 +305,4 @@ const MyProfile = () => {
   );
 };
 
-export default MyProfile;
+export default CompanyProfile;

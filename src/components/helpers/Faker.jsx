@@ -3,6 +3,7 @@ import { ref, push } from "firebase/database";
 import { faker } from "@faker-js/faker";
 import BuzzWords from "./BuzzWords";
 import * as dayjs from "dayjs";
+
 const Shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));

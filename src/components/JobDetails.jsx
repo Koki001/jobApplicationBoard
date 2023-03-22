@@ -4,7 +4,7 @@ import NavBar from "./NavBar";
 import Footer from "./sections/Footer";
 import { db } from "../firebase";
 import { ref, child, get } from "firebase/database";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 // MUI imports
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
@@ -40,7 +40,7 @@ const JobDetails = () => {
         <NavBar />
         <h1>Job Details</h1>
       </header>
-      {details !== {} && (
+      {details && (
         <div className="jobDetails wrapper">
           <div className="annoyingLink">
             <Link to={"/jobs"}>

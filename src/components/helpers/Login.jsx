@@ -8,9 +8,9 @@ import { auth, db, storage } from "../../firebase";
 import { ref, child, get, onValue, update } from "firebase/database";
 import { getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
+import React, { useState } from "react";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
-import { useState } from "react";
 
 const Login = () => {
   const [userEmail, setUserEmail] = useState("");

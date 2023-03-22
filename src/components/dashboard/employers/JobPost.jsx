@@ -1,5 +1,5 @@
 import { push, ref } from "firebase/database";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { auth, db } from "../../../firebase";
 import jobSectors from "../../helpers/jobSectors";
 import { useSelector } from "react-redux";

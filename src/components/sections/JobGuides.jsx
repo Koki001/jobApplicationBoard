@@ -1,3 +1,4 @@
+import React from "react";
 // MUI imports
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 

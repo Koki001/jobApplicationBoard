@@ -3,7 +3,7 @@ import Dashboard from "./Dashboard";
 import MyProfile from "./candidates/MyProfile";
 import CompanyProfile from "./employers/CompanyProfile";
 import JobPost from "./employers/JobPost";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ref, child, get, onValue } from "firebase/database";
 import { db, auth, storage } from "../../firebase";

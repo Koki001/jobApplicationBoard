@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ParagraphGenerator } from "../helpers/Faker";
 // MUI imports
 import PinterestIcon from "@mui/icons-material/Pinterest";
@@ -101,7 +101,11 @@ const Footer = () => {
                     </DialogContentText>
                   </DialogContent>
                   <DialogActions>
-                    <Button color="success" onClick={handleCloseTerms} autoFocus>
+                    <Button
+                      color="success"
+                      onClick={handleCloseTerms}
+                      autoFocus
+                    >
                       Ok
                     </Button>
                   </DialogActions>
@@ -124,7 +128,6 @@ const Footer = () => {
                     <DialogContentText
                       sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                       id="alert-dialog-description"
-          
                     >
                       <span className="fakeTextBreaks">{text}</span>
                       <span className="fakeTextBreaks">{text}</span>
@@ -157,7 +160,6 @@ const Footer = () => {
                     <DialogContentText
                       sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                       id="alert-dialog-description"
-          
                     >
                       <span className="fakeTextBreaks">{text}</span>
                       <span className="fakeTextBreaks">{text}</span>
@@ -192,7 +194,6 @@ const Footer = () => {
                     <DialogContentText
                       sx={{ fontFamily: "Gordita Regular", fontSize: "0.7rem" }}
                       id="alert-dialog-description"
-          
                     >
                       <span className="fakeTextBreaks">{text}</span>
                       <span className="fakeTextBreaks">{text}</span>

@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
 import { USER, PHOTO } from "../../redux/slices/userSlice";
@@ -8,11 +8,11 @@ import { auth, db, storage } from "../../firebase";
 import { ref, child, set, onValue } from "firebase/database";
 import { uploadString, uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
+import { useNavigate } from "react-router-dom";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
   const sliderRef = useRef();
@@ -88,24 +88,25 @@ const Signup = () => {
             `companyLogos/${auth.currentUser.uid}/logo`
           );
 
-          getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
-            dispatch(PHOTO(url));
-          });
+          // getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
+          //   dispatch(PHOTO(url));
+          // });
           updateProfile(user, {
             displayName: newUser.name,
           });
-          if (accountType === "candidate") {
-            getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
-              set(ref(db, "users/" + user.uid), {
-                name: newUser.name,
-                email: newUser.email,
-                type: "candidate",
-                logo: url,
-              });
+          // if (accountType === "candidate") {
+          getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
+            set(ref(db, "users/" + user.uid), {
+              name: newUser.name,
+              email: newUser.email,
+              type: accountType,
+              logo: url,
             });
+            dispatch(PHOTO(url));
+          });
 
-            dispatch(ACC_TYPE(accountType));
-          }
+          dispatch(ACC_TYPE(accountType));
+          // }
           setNewUser((prev) => ({
             ...prev,
             name: "",

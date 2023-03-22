@@ -5,7 +5,7 @@ import {
   FILTER_CATEGORY,
   FILTER_KEYWORD,
 } from "../../redux/slices/jobFilterSlice";
-import { useState } from "react";
+import React, { useState } from "react";
 // MUI imports
 
 const Header = () => {

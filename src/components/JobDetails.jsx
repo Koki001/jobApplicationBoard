@@ -20,7 +20,7 @@ const JobDetails = () => {
   useEffect(() => {
     const dbRef = ref(db);
     if (Object.keys(jobDetails).length === 0) {
-      console.log("firebase details");
+
       get(child(dbRef, `data/jobs/${id}`))
         .then((snapshot) => {
           if (snapshot.exists()) {
@@ -34,6 +34,7 @@ const JobDetails = () => {
         });
     }
   }, []);
+  console.log(details)
   return (
     <div className="jobDetailsSection">
       <header className="jobDetailsHeader">
@@ -100,7 +101,7 @@ const JobDetails = () => {
           <div className="jobDetailsRight">
             <div className="jobDetailsCompanyTop">
               <div className="companyLogo">
-                <img src={details.logo ? details.logo : ""} alt="company logo" />
+                <img src={details.logo} alt="company logo" />
               </div>
               <h4>{details.company ? details.company : "NO NAME"}</h4>
 

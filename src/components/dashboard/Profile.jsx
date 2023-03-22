@@ -115,7 +115,24 @@ const Profile = () => {
               : "dashboardNav dashboardNavHidden"
           }
         >
-          <button
+          <input
+            className="sr-only dashNavCheckbox"
+            id="dashNav"
+            type="checkbox"
+          />
+          <label
+            onClick={() => setDashNav(!dashNav)}
+            className={
+              dashNav
+                ? "dashboardNavButton dashClosed"
+                : "dashboardNavButton dashOpen"
+            }
+            htmlFor="dashNav"
+          >
+            {/* Dash menu */}
+            <ArrowRightIcon />
+          </label>
+          {/* <button
             onClick={() => setDashNav(!dashNav)}
             className={
               dashNav
@@ -124,7 +141,7 @@ const Profile = () => {
             }
           >
             <ArrowRightIcon />
-          </button>
+          </button> */}
           <div className="avatar">
             <div className="avatarImage">
               <img src={useSelector((state) => state.user.photo)} alt="" />

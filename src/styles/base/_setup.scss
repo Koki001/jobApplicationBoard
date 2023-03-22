@@ -210,6 +210,7 @@ template {
 html {
   font-size: 125%;
   scroll-behavior: smooth;
+  overflow-y: scroll;
   // TEMPORARY TESTING
   // min-width: 950px;
   min-height: 100vh;

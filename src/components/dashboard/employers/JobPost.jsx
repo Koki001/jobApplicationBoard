@@ -1,20 +1,31 @@
 import { push, ref } from "firebase/database";
-import React, { useRef, useState } from "react";
-import { auth, db } from "../../../firebase";
+import React, { useEffect, useRef, useState } from "react";
+import { auth, db, storage } from "../../../firebase";
 import jobSectors from "../../helpers/jobSectors";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import * as dayjs from "dayjs";
+import { getDownloadURL } from "firebase/storage";
+import { ref as sRef } from "firebase/storage";
+import { PHOTO } from "../../../redux/slices/userSlice";
 
 const JobPost = (props) => {
   const user = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const [info, setInfo] = useState({ skills: [] });
   const [currentSkill, setCurrentSkill] = useState("");
+
+  useEffect(() => {
+    getDownloadURL(
+      sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
+    ).then((url) => {
+      dispatch(PHOTO(url));
+    });
+  }, []);
   const regexNum = new RegExp("^[0-9]*$");
   // const resRef = useRef()
-  const date = new Date()
+  const date = new Date();
   const handlePostJob = () => {
-    const companyID = auth.currentUser.uid
-    console.log(companyID)
+    const companyID = auth.currentUser.uid;
     if (
       info.title &&
       info.description &&
@@ -49,7 +60,8 @@ const JobPost = (props) => {
         postal: info.postal,
         createdOn: dayjs().format("dddd/MM/YYYY"),
         dateMs: date.getTime(),
-        id: companyID
+        id: companyID,
+        logo: user.photo,
       }).then(() => {
         alert("job posted");
         props.posted();
@@ -82,10 +94,10 @@ const JobPost = (props) => {
     setCurrentSkill(e.target.value);
   };
   const handleSkillsEnter = (e) => {
-    if (e.code === "Enter"){
-      handleAddSkill()
+    if (e.code === "Enter") {
+      handleAddSkill();
     }
-  }
+  };
   const handleAddSkill = () => {
     if (currentSkill !== "") {
       setCurrentSkill("");
@@ -275,15 +287,22 @@ const JobPost = (props) => {
                 type="text"
               />
             </div>
-            <button className="buttonSquareDarkGreen" onClick={handleAddSkill}>add</button>
-            <p>First 4 skills will be displayed on the job posting's details page.</p>
+            <button className="buttonSquareDarkGreen" onClick={handleAddSkill}>
+              add
+            </button>
+            <p>
+              First 4 skills will be displayed on the job posting's details
+              page.
+            </p>
           </div>
         </div>
         <div className="skillHolder">
           {info.skills.map((item, index) => {
             return (
-              <span className="skillItem" key={index + "skillItem"}>{item}</span>
-            )
+              <span className="skillItem" key={index + "skillItem"}>
+                {item}
+              </span>
+            );
           })}
         </div>
       </div>

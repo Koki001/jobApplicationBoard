@@ -12,7 +12,6 @@ import Profile from './components/dashboard/Profile';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-
 const container = document.getElementById('root');
 const root = createRoot(container);
 const router = createBrowserRouter([

@@ -31,7 +31,6 @@
   flex-direction: column;
   align-items: center;
   width: 450px;
-  height: 600px;
     h2,
     h3,
   p,
@@ -129,7 +128,7 @@
       border: none;
       border-radius: 10px;
       font-size: 0.8rem;
-      padding: 3px 10px;
+      padding: 10px;
       outline: none;
       border: 2px solid transparent;
       &:focus {
@@ -155,7 +154,7 @@
   }
   .accountType {
     width: 100%;
-    height: 30px;
+    height: 35px;
     border-radius: 20px;
     display: flex;
     justify-content: space-between;
@@ -165,7 +164,7 @@
     .slider {
       position: absolute;
       width: 50%;
-      height: 30px;
+      height: 35px;
       border-radius: 20px;
       background-color: $lightGreen;
       z-index: 5;

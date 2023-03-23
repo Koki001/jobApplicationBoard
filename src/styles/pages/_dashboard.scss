@@ -131,8 +131,8 @@
     label {
       font-size: 0.8rem;
       font-weight: bold;
-      // margin-bottom: 20px;
-      margin-bottom: 10px;
+      margin-top: 20px;
+      margin-bottom: 2px;
       padding: 3px;
       display: flex;
       justify-content: space-between;
@@ -355,6 +355,7 @@
   bottom: 40px;
   left: 50%;
   text-transform: uppercase;
+  transform: translate(-50%, 50%);
 }
 .hiddenButton {
   visibility: hidden;
@@ -458,7 +459,31 @@
   .companyCategory {
     width: calc(100% / 2 - 20px);
     label {
-      margin: 10px 0;
+      margin: 20px 0 2px 0;
     }
   }
+}
+.css-zw3mfo-MuiModal-root-MuiDialog-root {
+  padding: 3%;
+  #alert-dialog-title {
+    text-align: center;
+  }
+}
+div.MuiDialogActions-root {
+  display: flex;
+  justify-content: center;
+  button {
+    margin: 30px;
+    padding: 10px 20px;
+    background-color: $darkGreen;
+    color: white;
+    &:hover {
+      background-color: $brown;
+    }
+  }
+}
+span.reviewSpan {
+  font-size: 1rem !important;
+  color: black !important;
+  display: block;
 }

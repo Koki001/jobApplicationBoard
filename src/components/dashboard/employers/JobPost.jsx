@@ -7,12 +7,19 @@ import * as dayjs from "dayjs";
 import { getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
 import { PHOTO } from "../../../redux/slices/userSlice";
-
+import Swal from "sweetalert2";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 const JobPost = (props) => {
   const user = useSelector((state) => state.user);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [info, setInfo] = useState({ skills: [] });
   const [currentSkill, setCurrentSkill] = useState("");
+  const [review, setReview] = useState(false);
 
   useEffect(() => {
     getDownloadURL(
@@ -24,8 +31,10 @@ const JobPost = (props) => {
   const regexNum = new RegExp("^[0-9]*$");
   // const resRef = useRef()
   const date = new Date();
-  const handlePostJob = () => {
-    const companyID = auth.currentUser.uid;
+  const handleCloseReview = () => {
+    setReview(false);
+  };
+  const handleOpenReview = () => {
     if (
       info.title &&
       info.description &&
@@ -42,33 +51,48 @@ const JobPost = (props) => {
       info.city &&
       info.postal
     ) {
-      push(ref(db, "data/jobs"), {
-        company: user.user.name,
-        title: info.title,
-        description: info.description,
-        responsibilities: info.responsibilities,
-        required: info.required,
-        benefits: info.benefits,
-        category: info.category,
-        type: info.type,
-        salary: info.salary,
-        skills: info.skills,
-        experience: info.experience,
-        address: info.address,
-        country: info.country,
-        city: info.city,
-        postal: info.postal,
-        createdOn: dayjs().format("dddd/MM/YYYY"),
-        dateMs: date.getTime(),
-        id: companyID,
-        logo: user.photo,
-      }).then(() => {
-        alert("job posted");
-        props.posted();
-      });
+      setReview(true);
     } else {
-      alert("fill out all fields");
+      Swal.fire({
+        text: "Please fill out all fields",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "green",
+      });
     }
+  };
+  const handlePostJob = () => {
+    const companyID = auth.currentUser.uid;
+    push(ref(db, "data/jobs"), {
+      company: user.user.name,
+      title: info.title,
+      description: info.description,
+      responsibilities: info.responsibilities,
+      required: info.required,
+      benefits: info.benefits,
+      category: info.category,
+      type: info.type,
+      salary: info.salary,
+      skills: info.skills,
+      experience: info.experience,
+      address: info.address,
+      country: info.country,
+      city: info.city,
+      postal: info.postal,
+      createdOn: dayjs().format("dddd/MM/YYYY"),
+      dateMs: date.getTime(),
+      id: companyID,
+      logo: user.photo,
+    }).then(() => {
+      setReview(false);
+      Swal.fire({
+        text: "Job successfully posted",
+        icon: "success",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "green",
+      });
+      props.posted();
+    });
   };
   const handleTextareaFocus = (e) => {
     if (e.target.value === "") {
@@ -366,9 +390,105 @@ const JobPost = (props) => {
         </form>
         <div className="jobPostMap"></div>
       </div>
-      <button onClick={handlePostJob} className="buttonSquareGreen">
+      <button onClick={handleOpenReview} className="buttonSquareGreen">
         review
       </button>
+      <Dialog
+        fullScreen
+        open={review}
+        onClose={handleCloseReview}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Review Job Post"}</DialogTitle>
+        <DialogContent>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "1rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Title:</span>
+            {info.title}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Description:</span>
+            {info.description}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Responsibilities:</span>
+            {info.responsibilities}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Benefits:</span>
+            {info.benefits}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Experience:</span>
+            {info.experience}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Type:</span>
+            {info.type}
+          </DialogContentText>
+          <DialogContentText
+            sx={{
+              fontFamily: "Gordita Regular",
+              fontSize: "0.7rem",
+              marginBottom: "20px",
+            }}
+            id="alert-dialog-description"
+          >
+            <span className="reviewSpan">Salary:</span>
+            {info.salary}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button color="success" onClick={handleCloseReview} autoFocus>
+            Cancel
+          </Button>
+          <Button color="success" onClick={handlePostJob} autoFocus>
+            Post Job
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

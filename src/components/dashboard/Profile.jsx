@@ -13,6 +13,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
 import { USER, PHOTO } from "../../redux/slices/userSlice";
+import Swal from "sweetalert2";
 // MUI imports
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
@@ -66,16 +67,22 @@ const Profile = () => {
   }, [auth.currentUser]);
 
   const handleSignout = () => {
-    setPopupLogout(true);
-  };
-  const handleSignoutFinal = () => {
-    setPopupLogout(false);
-    if (location.pathname === "/dashboard") {
-      navigate("/");
-      signOut(auth);
-    } else {
-      signOut(auth);
-    }
+    Swal.fire({
+      title: "Sign out of your account?",
+      // text: "Do you want to continue",
+      icon: "warning",
+      reverseButtons: true,
+      showCancelButton: true,
+      cancelButtonText: "Cancel",
+      cancelButtonColor: "green",
+      confirmButtonText: "Sign Out",
+      confirmButtonColor: "orange",
+    }).then((choice) => {
+      if (choice.isConfirmed) {
+        signOut(auth);
+        navigate("/");
+      }
+    });
   };
 
   const handlePropagation = (e) => {
@@ -85,29 +92,6 @@ const Profile = () => {
   return (
     <section className="dashboardSection">
       <div className="dashboardContainer navWrapper">
-        <div
-          onClick={() => setPopupLogout(false)}
-          aria-hidden={popupLogout ? false : true}
-          className={
-            popupLogout ? "popupContainer popupActive" : "popupContainer"
-          }
-        >
-          <div onClick={handlePropagation} className="logoutReminder">
-            <p>Are you sure you want to sign out?</p>
-            <div>
-              <button
-                className="buttonRoundClear"
-                onClick={() => setPopupLogout(false)}
-              >
-                Cancel
-              </button>
-              <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
-                Yes, sign out
-              </button>
-            </div>
-          </div>
-        </div>
-
         <nav
           className={
             dashNav
@@ -132,16 +116,6 @@ const Profile = () => {
             {/* Dash menu */}
             <ArrowRightIcon />
           </label>
-          {/* <button
-            onClick={() => setDashNav(!dashNav)}
-            className={
-              dashNav
-                ? "dashboardNavButton dashClosed"
-                : "dashboardNavButton dashOpen"
-            }
-          >
-            <ArrowRightIcon />
-          </button> */}
           <div className="avatar">
             <div className="avatarImage">
               <img src={useSelector((state) => state.user.photo)} alt="" />

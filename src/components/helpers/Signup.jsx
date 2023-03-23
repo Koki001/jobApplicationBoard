@@ -69,7 +69,6 @@ const Signup = () => {
   };
 
   const handleSignup = async () => {
-    // const generateDisplayName = "";
     if (
       regex.test(newUser.password) &&
       newUser.password === passConfirm &&
@@ -81,20 +80,10 @@ const Signup = () => {
         newUser.password
       )
         .then((userCredential) => {
-          // Signed in
           const user = userCredential.user;
-          const storageRef = sRef(
-            storage,
-            `companyLogos/${auth.currentUser.uid}/logo`
-          );
-
-          // getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
-          //   dispatch(PHOTO(url));
-          // });
           updateProfile(user, {
             displayName: newUser.name,
           });
-          // if (accountType === "candidate") {
           getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
             set(ref(db, "users/" + user.uid), {
               name: newUser.name,

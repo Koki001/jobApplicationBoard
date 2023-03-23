@@ -9,6 +9,7 @@ import { ref, child, get, onValue, update } from "firebase/database";
 import { getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 
@@ -57,8 +58,36 @@ const Login = () => {
         navigate("/dashboard");
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error);
+        if (error.code === "auth/invalid-email") {
+          Swal.fire({
+            text: "Please enter a valid email",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "green",
+          });
+        } else if (error.code === "auth/internal-error") {
+          Swal.fire({
+            text: "Please enter your password",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "green",
+          });
+        } else if (error.code === "auth/user-not-found") {
+          Swal.fire({
+            text: "User not found in database",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "green",
+          });
+        } else if (error.code === "auth/wrong-password") {
+          Swal.fire({
+            text: "Wrong password",
+            icon: "error",
+            confirmButtonText: "Ok",
+            confirmButtonColor: "green",
+          });
+        }
       });
   };
   return (

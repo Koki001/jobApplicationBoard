@@ -20,6 +20,7 @@ import {
   FILTER_TYPE,
   FILTER_ACTIVE,
 } from "../redux/slices/jobFilterSlice";
+import Swal from "sweetalert2";
 import { POP_UP_LOG } from "../redux/slices/popupSlice";
 import { JOB_DETAILS, JOB_LIST } from "../redux/slices/jobListSlice";
 // MUI imports
@@ -46,15 +47,6 @@ const JobListings = () => {
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
   const [generalSort, setGeneralSort] = useState(currentSort);
-  // const [filters, setFilters] = useState({
-  //   keyword: "",
-  //   category: "",
-  //   locations: "",
-  //   type: "",
-  //   experience: "",
-  //   salaryMin: "",
-  //   salaryMax: "",
-  // });
   const [jobObject, setJobObject] = useState({});
   const scrollRef = useRef();
   useEffect(() => {
@@ -162,8 +154,12 @@ const JobListings = () => {
     if (auth.currentUser) {
       setLoginReminder(false);
     } else {
-      console.log("no user");
-      setLoginReminder(true);
+      Swal.fire({
+        text: "You must be logged in to apply",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "green",
+      });
     }
   };
   const handleEdit = (e) => {
@@ -504,31 +500,6 @@ const JobListings = () => {
                   <option value="salary">Salary</option>
                   <option value="title">Job Title</option>
                 </select>
-              </div>
-            </div>
-            <div
-              onClick={() => setLoginReminder(false)}
-              aria-hidden={loginReminder ? false : true}
-              className={
-                loginReminder ? "popupContainer popupActive" : "popupContainer"
-              }
-            >
-              <div onClick={handlePropagation} className="loginReminder">
-                <p>You must be logged in to apply.</p>
-                <div>
-                  <button
-                    className="buttonRoundClear"
-                    onClick={() => setLoginReminder(false)}
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    className="buttonRoundGreen"
-                    onClick={handleLoginRedirect}
-                  >
-                    Login
-                  </button>
-                </div>
               </div>
             </div>
             <ul className="jobsHolder">

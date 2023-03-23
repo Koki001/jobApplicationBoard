@@ -3,7 +3,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import Login from "./helpers/Login";
 import Signup from "./helpers/Signup";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
-import { pagination} from "../redux/slices/paginationSlice";
+import { pagination } from "../redux/slices/paginationSlice";
 import { USER_RESET } from "../redux/slices/userSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
@@ -11,6 +11,7 @@ import { auth } from "../firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import MenuIcon from "@mui/icons-material/Menu";
+import Swal from "sweetalert2";
 const NavBar = () => {
   const popups = useSelector((state) => state.popups);
   const [userActive, setUserActive] = useState(false);
@@ -22,7 +23,7 @@ const NavBar = () => {
   const menuRef = useRef(null);
   const navigate = useNavigate();
   const [popupLogout, setPopupLogout] = useState(false);
-  const [showNav, setShowNav] = useState(false)
+  const [showNav, setShowNav] = useState(false);
 
   const handleOpenLinks = (e) => {
     e.stopPropagation();
@@ -84,7 +85,7 @@ const NavBar = () => {
   }, [menuRef]);
 
   useEffect(() => {
-    setShowNav(false)
+    setShowNav(false);
     if (location.pathname === "/" && location.hash !== "") {
       ref.current?.click();
     }
@@ -107,19 +108,22 @@ const NavBar = () => {
   }, [auth.currentUser]);
 
   const handleSignout = () => {
-    setPopupLogout(true);
-  };
-  const handleSignoutFinal = () => {
-    setPopupLogout(false);
-    if (location.pathname === "/dashboard") {
-      navigate("/");
-      signOut(auth);
-    } else {
-      signOut(auth);
-    }
-  };
-  const handlePropagation = (e) => {
-    e.stopPropagation();
+    Swal.fire({
+      title: "Sign out of your account?",
+      // text: "Do you want to continue",
+      icon: "warning",
+      reverseButtons: true,
+      showCancelButton: true,
+      cancelButtonText: "Cancel",
+      cancelButtonColor: "green",
+      confirmButtonText: "Sign Out",
+      confirmButtonColor: "orange",
+    }).then((choice) => {
+      if (choice.isConfirmed) {
+        signOut(auth);
+        navigate("/");
+      }
+    });
   };
   const handleProfile = () => {
     navigate("/dashboard");
@@ -209,28 +213,6 @@ const NavBar = () => {
             </button>
           </div>
         )}
-        <div
-          onClick={() => setPopupLogout(false)}
-          aria-hidden={popupLogout ? false : true}
-          className={
-            popupLogout ? "popupContainer popupActive" : "popupContainer"
-          }
-        >
-          <div onClick={handlePropagation} className="logoutReminder">
-            <p>Are you sure you want to sign out?</p>
-            <div>
-              <button
-                className="buttonRoundClear"
-                onClick={() => setPopupLogout(false)}
-              >
-                Cancel
-              </button>
-              <button className="buttonRoundGreen" onClick={handleSignoutFinal}>
-                Yes, sign out
-              </button>
-            </div>
-          </div>
-        </div>
         <div
           onClick={handleExitLogin}
           aria-hidden={popups.login || popups.signup ? false : true}

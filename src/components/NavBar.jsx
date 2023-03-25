@@ -131,7 +131,8 @@ const NavBar = () => {
   return (
     <div className={"navWrapper"}>
       <button onClick={(e) => setShowNav(!showNav)} className="showNavButton">
-        <MenuIcon />
+        {/* <MenuIcon /> */}
+        menu
       </button>
       <nav tabIndex={0} className={showNav ? "mainNav" : "hideNav"}>
         <a ref={ref} className="sr-only" href={location.hash}></a>
@@ -213,6 +214,7 @@ const NavBar = () => {
             </button>
           </div>
         )}
+      </nav>
         <div
           onClick={handleExitLogin}
           aria-hidden={popups.login || popups.signup ? false : true}
@@ -228,7 +230,6 @@ const NavBar = () => {
             <Signup />
           ) : null}
         </div>
-      </nav>
     </div>
   );
 };

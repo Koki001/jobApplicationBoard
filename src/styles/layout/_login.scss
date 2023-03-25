@@ -18,9 +18,10 @@
   transition: all 0.1s linear;
 }
 .popupActive {
+  position: fixed;
   visibility: visible;
   opacity: 1;
-  z-index: 100;
+  z-index: 10000;
 }
 .loginMain {
   position: relative;

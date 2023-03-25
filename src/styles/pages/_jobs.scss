@@ -52,7 +52,7 @@
   justify-content: center;
   border-top: 1px solid $darkGrey;
   label {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: bold;
   }
 }
@@ -61,17 +61,19 @@
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 .filtersBottom {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   margin: 40px 0;
+  flex-wrap: wrap;
 }
 .filterButtons {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-top: 20px;
   border-top: 1px solid $darkGrey;
   button {
@@ -87,15 +89,16 @@
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: calc(100% / 3 - 30px);
+  // width: calc(100% / 3 - 30px);
+  min-width: 150px;
   input {
     width: 80%;
-    min-width: 230px;
+    min-width: 150px;
     margin-top: 10px;
     border: none;
     border-radius: 10px;
     font-size: 0.8rem;
-    padding: 5px;
+    padding: 10px;
   }
 }
 .filtersCategories select {
@@ -104,7 +107,7 @@
   border: none;
   border-radius: 10px;
   font-size: 0.8rem;
-  padding: 5px;
+  padding: 7px;
   background-color: white;
   width: calc(100% / 3 - 30px);
 }

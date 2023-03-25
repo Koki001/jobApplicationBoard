@@ -1,6 +1,6 @@
 @use "../base/variables" as *;
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
   .mainHeader {
     h1 * {
       font-size: 2.3rem;
@@ -44,9 +44,13 @@
   }
   .filtersBottom .typeGroup,
   .filtersBottom .experienceGroup {
-    width: 200px;
+    width: 250px;
+
     div {
       margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
   }
   .filtersBottom .filtersSalary {
@@ -73,8 +77,11 @@
       }
     }
   }
-  .jobsSort p {
+  .jobsSort p:nth-child(2){
     display: none;
+  }
+  .jobsSort .sortGroup label {
+    margin-right: 0;
   }
   .jobDetailsRight .jobDetailsCompanyBottom .companyDetails div {
     width: 100%;
@@ -110,7 +117,7 @@
   }
   .loginMain, .signupMain {
     padding: 40px 15px;
-    width: 310px;
+    width: 95%;
   }
   .loginMain .loginOptions {
     flex-direction: column;

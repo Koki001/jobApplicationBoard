@@ -22,6 +22,12 @@
       }
     }
   }
+  .categories .categoriesCards li:nth-child(odd) {
+    margin-right: 0;
+  }
+  .categories .categoriesCards li {
+    width: 80%;
+  }
   .howItWorks {
     .howToSteps {
       padding-top: 0;
@@ -168,8 +174,14 @@
     flex-wrap: wrap;
     .filtersType,
     .filtersExperience {
-      width: calc(100% / 2 - 20px);
+      margin-bottom: 20px;
+      width: 70%;
       min-width: 270px;
+      justify-content: space-between;
+    }
+    .typeGroup,
+    .experienceGroup {
+      min-width: 190px;
     }
     .filtersSalary {
       width: 100%;

@@ -13,16 +13,17 @@
     cursor: pointer;
     display: block;
     position: fixed;
-    z-index: 1000;
+    z-index: 210;
     right: 0;
     top: 0;
-    padding: 0;
-    margin: 25px 50px;
+    padding: 15px;
+    margin: 20px 50px;
     // width: 200px;
-    background-color: transparent;
+    background-color: white;
     border-radius: 10px;
-    border: none;
-    color: $lightGreen !important;
+    border: 2px solid $darkGrey !important;
+    color: $green !important;
+    font-size: 1.2rem;
     &:active {
       // background-color: $brown;
       // border: 1px solid transparent;
@@ -30,12 +31,29 @@
     }
     &:hover {
       color: $brown !important;
+      background-color: $greenBg !important;
     }
     svg {
       font-size: 3rem;
     }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 51px;
+      border-bottom: 2px solid $darkGrey;
+      top: 50%;
+      right: -51px;
+    }
   }
-
+  .navLogo {
+    transform: translate(-50%, 0);
+    justify-content: center;
+    min-width: 20%;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    display: flex;
+  }
   div.navWrapper {
     position: relative;
   }
@@ -73,7 +91,6 @@
     svg {
       font-size: 2.5rem;
       transition: all 0.2s linear;
-
     }
     &:hover {
       color: $brown;
@@ -103,10 +120,10 @@
     right: 0;
     top: 0;
     flex-direction: column-reverse;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     transition: all 0.2s linear;
-    padding: 100px 0 50px 0;
+    padding: 120px 0 50px 0;
     // .navLogo {
     //   display: flex;
     //   justify-content: flex-start;
@@ -118,19 +135,22 @@
     // }
     // }
     .navMenu {
-      flex-direction: column;
-      align-items: flex-end;
-      margin: 50px 0;
-      li {
-        margin: 20px 50px;
-      }
+      // flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      margin: 50px;
+      width: 100%;
+      
+      // li {
+      //   margin: 20px 50px;
+      // }
       .subMenu {
         width: 0;
         width: 300px;
         height: 300px;
-        top: -150px;
-        left: 0;
-        transform: translate(-100%);
+        top: -125px;
+        left: -90px;
+        transform: translateY(50%);
         border: none;
         li {
           padding: 0;
@@ -141,24 +161,22 @@
         height: 300px;
         background-color: transparent;
         border: none;
+        justify-content: space-around;
       }
     }
     .subMenuParent {
       padding: 0;
-      &:hover {
-        svg {
-          transform: rotate(270deg);
-        }
-      }
+
     }
     .subMenuTitle {
       flex-direction: row-reverse;
-      svg {
-        transform: rotate(90deg);
-      }
     }
     .navButtons {
-      margin-right: 50px;
+      width: 100%;
+      justify-content: center;
+      button {
+        margin: 0 20px;
+      }
     }
   }
 
@@ -205,23 +223,24 @@
 }
 @media screen and (max-width: 950px) {
   .categories .categoriesCards {
-
     justify-content: center;
     li {
-      width: calc(100% / 2 - 20px);
+      width: calc(100% / 2 - 40px);
       height: 350px;
       min-width: 330px;
       margin-bottom: 40px;
       flex-direction: column;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
       text-align: center;
       .finalCardIcons {
         display: none;
       }
     }
+    li:nth-child(odd) {
+      margin-right: 40px;
+    }
   }
-  
 
   .footerTop {
     flex-direction: column-reverse;

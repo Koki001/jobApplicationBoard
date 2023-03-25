@@ -1528,9 +1528,10 @@ span.fakeTextBreaks {
 }
 
 .popupActive {
+  position: fixed;
   visibility: visible;
   opacity: 1;
-  z-index: 100;
+  z-index: 10000;
 }
 
 .loginMain {
@@ -2317,7 +2318,7 @@ h1 {
   border-top: 1px solid rgb(170, 170, 170);
 }
 .filtersForm label {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 
@@ -2326,6 +2327,7 @@ h1 {
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
 .filtersBottom {
@@ -2333,12 +2335,13 @@ h1 {
   display: flex;
   justify-content: space-evenly;
   margin: 40px 0;
+  flex-wrap: wrap;
 }
 
 .filterButtons {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   padding-top: 20px;
   border-top: 1px solid rgb(170, 170, 170);
 }
@@ -2354,18 +2357,18 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  width: calc(33.3333333333% - 30px);
+  min-width: 150px;
 }
 .filtersKeyword input,
 .filtersCategories input,
 .filtersLocation input {
   width: 80%;
-  min-width: 230px;
+  min-width: 150px;
   margin-top: 10px;
   border: none;
   border-radius: 10px;
   font-size: 0.8rem;
-  padding: 5px;
+  padding: 10px;
 }
 
 .filtersCategories select {
@@ -2374,7 +2377,7 @@ h1 {
   border: none;
   border-radius: 10px;
   font-size: 0.8rem;
-  padding: 5px;
+  padding: 7px;
   background-color: white;
   width: calc(33.3333333333% - 30px);
 }
@@ -3316,24 +3319,43 @@ span.reviewSpan {
     cursor: pointer;
     display: block;
     position: fixed;
-    z-index: 1000;
+    z-index: 210;
     right: 0;
     top: 0;
-    padding: 0;
-    margin: 25px 50px;
-    background-color: transparent;
+    padding: 15px;
+    margin: 20px 50px;
+    background-color: white;
     border-radius: 10px;
-    border: none;
-    color: #00BF58 !important;
+    border: 2px solid rgb(170, 170, 170) !important;
+    color: #31795A !important;
+    font-size: 1.2rem;
   }
   .showNavButton:active {
     color: white;
   }
   .showNavButton:hover {
     color: #755146 !important;
+    background-color: #EFF6F3 !important;
   }
   .showNavButton svg {
     font-size: 3rem;
+  }
+  .showNavButton::after {
+    content: "";
+    position: absolute;
+    width: 51px;
+    border-bottom: 2px solid rgb(170, 170, 170);
+    top: 50%;
+    right: -51px;
+  }
+  .navLogo {
+    transform: translate(-50%, 0);
+    justify-content: center;
+    min-width: 20%;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    display: flex;
   }
   div.navWrapper {
     position: relative;
@@ -3395,26 +3417,24 @@ span.reviewSpan {
     right: 0;
     top: 0;
     flex-direction: column-reverse;
-    align-items: flex-end;
+    align-items: center;
     justify-content: flex-end;
     transition: all 0.2s linear;
-    padding: 100px 0 50px 0;
+    padding: 120px 0 50px 0;
   }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu {
-    flex-direction: column;
-    align-items: flex-end;
-    margin: 50px 0;
-  }
-  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu li {
-    margin: 20px 50px;
+    align-items: center;
+    justify-content: space-around;
+    margin: 50px;
+    width: 100%;
   }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .subMenu {
     width: 0;
     width: 300px;
     height: 300px;
-    top: -150px;
-    left: 0;
-    transform: translate(-100%);
+    top: -125px;
+    left: -90px;
+    transform: translateY(50%);
     border: none;
   }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .subMenu li {
@@ -3425,21 +3445,20 @@ span.reviewSpan {
     height: 300px;
     background-color: transparent;
     border: none;
+    justify-content: space-around;
   }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .subMenuParent {
     padding: 0;
   }
-  nav:not(nav.dashboardNav, nav.MuiPagination-root) .subMenuParent:hover svg {
-    transform: rotate(270deg);
-  }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .subMenuTitle {
     flex-direction: row-reverse;
   }
-  nav:not(nav.dashboardNav, nav.MuiPagination-root) .subMenuTitle svg {
-    transform: rotate(90deg);
-  }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .navButtons {
-    margin-right: 50px;
+    width: 100%;
+    justify-content: center;
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navButtons button {
+    margin: 0 20px;
   }
   .navWrapper nav.hideNav {
     right: -100%;
@@ -3484,17 +3503,20 @@ span.reviewSpan {
     justify-content: center;
   }
   .categories .categoriesCards li {
-    width: calc(50% - 20px);
+    width: calc(50% - 40px);
     height: 350px;
     min-width: 330px;
     margin-bottom: 40px;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     text-align: center;
   }
   .categories .categoriesCards li .finalCardIcons {
     display: none;
+  }
+  .categories .categoriesCards li:nth-child(odd) {
+    margin-right: 40px;
   }
   .footerTop {
     flex-direction: column-reverse;
@@ -3530,6 +3552,12 @@ span.reviewSpan {
   .mainHeader .companyUserLogos div {
     width: calc(33.3333333333% - 20px);
     padding: 0 30px;
+  }
+  .categories .categoriesCards li:nth-child(odd) {
+    margin-right: 0;
+  }
+  .categories .categoriesCards li {
+    width: 80%;
   }
   .howItWorks .howToSteps {
     padding-top: 0;
@@ -3664,8 +3692,14 @@ span.reviewSpan {
   }
   .filtersBottom .filtersType,
   .filtersBottom .filtersExperience {
-    width: calc(50% - 20px);
+    margin-bottom: 20px;
+    width: 70%;
     min-width: 270px;
+    justify-content: space-between;
+  }
+  .filtersBottom .typeGroup,
+  .filtersBottom .experienceGroup {
+    min-width: 190px;
   }
   .filtersBottom .filtersSalary {
     width: 100%;
@@ -3734,8 +3768,8 @@ span.reviewSpan {
     width: 80%;
   }
   .categories .categoriesCards li {
-    padding: 0;
-    height: 230px;
+    padding: 40px 0;
+    height: 300px;
   }
   .footerBottomLeft {
     display: none;
@@ -3751,6 +3785,22 @@ span.reviewSpan {
   }
   .jobCard .jobCardLogo {
     display: block;
+  }
+  .filtersKeyword,
+  .filtersCategories,
+  .filtersLocation {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .jobCard .jobCardLocation {
+    flex-direction: column-reverse;
+  }
+  .jobCard .jobCardLocation .bottomText {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .filtersCategories select {
+    width: 100%;
   }
   .filtersBottom {
     justify-content: center;
@@ -3790,10 +3840,17 @@ span.reviewSpan {
   .companyInfo {
     flex-direction: column;
   }
-  .companyInfo .companyEmail, .companyInfo .companySite, .companyInfo .companyDate, .companyInfo .companySize, .companyInfo .companyNumber, .companyInfo .companyCategory {
+  .companyInfo .companyEmail,
+  .companyInfo .companySite,
+  .companyInfo .companyDate,
+  .companyInfo .companySize,
+  .companyInfo .companyNumber,
+  .companyInfo .companyCategory {
     width: 100%;
   }
-  .myProfileBio, .myProfileSocials, .myProfileLocation {
+  .myProfileBio,
+  .myProfileSocials,
+  .myProfileLocation {
     max-height: none;
   }
   .deletePhoto {
@@ -3821,8 +3878,12 @@ span.reviewSpan {
   .postMix .postExperience {
     width: auto;
   }
+  .loginMain,
+  .signupMain {
+    width: 80%;
+  }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 400px) {
   .mainHeader h1 * {
     font-size: 2.3rem;
   }
@@ -3864,11 +3925,14 @@ span.reviewSpan {
   }
   .filtersBottom .typeGroup,
   .filtersBottom .experienceGroup {
-    width: 200px;
+    width: 250px;
   }
   .filtersBottom .typeGroup div,
   .filtersBottom .experienceGroup div {
     margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .filtersBottom .filtersSalary {
     flex-direction: column;
@@ -3893,8 +3957,11 @@ span.reviewSpan {
   .filtersBottom .filtersType p {
     margin-bottom: 20px;
   }
-  .jobsSort p {
+  .jobsSort p:nth-child(2) {
     display: none;
+  }
+  .jobsSort .sortGroup label {
+    margin-right: 0;
   }
   .jobDetailsRight .jobDetailsCompanyBottom .companyDetails div {
     width: 100%;
@@ -3930,7 +3997,7 @@ span.reviewSpan {
   }
   .loginMain, .signupMain {
     padding: 40px 15px;
-    width: 310px;
+    width: 95%;
   }
   .loginMain .loginOptions {
     flex-direction: column;

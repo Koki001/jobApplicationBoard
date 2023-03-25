@@ -19,6 +19,7 @@ import {
   FILTER_SALARY,
   FILTER_TYPE,
   FILTER_ACTIVE,
+  FILTER_RESET,
 } from "../redux/slices/jobFilterSlice";
 import Swal from "sweetalert2";
 import { POP_UP_LOG } from "../redux/slices/popupSlice";
@@ -39,10 +40,13 @@ const JobListings = () => {
   const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
+
   const filters = useSelector((state) => state.filter);
   const currentSort = useSelector((state) => state.pagination.sort);
   const [expanded, setExpanded] = useState(false);
   const [salary, setSalary] = useState([30000, 70000]);
+  const [jobNum, setJobNum] = useState();
+  const [pageNum, setPageNum] = useState();
   const [jobList, setJobList] = useState([]);
   const [loader, setLoader] = useState(true);
   const [loginReminder, setLoginReminder] = useState(false);
@@ -50,12 +54,12 @@ const JobListings = () => {
   const [jobObject, setJobObject] = useState({});
   const scrollRef = useRef();
   useEffect(() => {
-    if (pageSelectorCurrent > PAGINATION_MAX) {
-      dispatch(pagination(1));
+    if (pageSelectorCurrent > pageNum) {
+      dispatch(pagination(pageNum));
     } else if (!pageSelectorCurrent) {
       dispatch(pagination(1));
     }
-  }, [location]);
+  }, [location, pageNum]);
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
@@ -66,82 +70,83 @@ const JobListings = () => {
     });
   }, [pageSelectorCurrent]);
   useEffect(() => {
-    if (!filters.active) {
-      const dbRef = ref(db);
-      get(child(dbRef, `data/jobs`))
-        .then((snapshot) => {
-          let dataArray = [];
-          if (snapshot.exists()) {
-            let i = 0;
-            setJobObject(snapshot.val());
-            snapshot.forEach((item) => {
-              dataArray.push(item.val());
-              dataArray[i].uid = item.key;
-              i++;
-            });
-            if (currentSort === "title") {
-              dataArray.sort((a, b) => a.title.localeCompare(b.title));
-              setJobList(dataArray);
-              dispatch(JOB_LIST(dataArray));
-              setLoader(false);
-            } else if (currentSort === "latest") {
-              dataArray.sort((a, b) => b.dateMs - a.dateMs);
-              setJobList(dataArray);
-              dispatch(JOB_LIST(dataArray));
-              setLoader(false);
-            } else if (currentSort === "salary") {
-              dataArray.sort((a, b) => b.salary - a.salary);
-              setJobList(dataArray);
-              dispatch(JOB_LIST(dataArray));
-              setLoader(false);
-            }
-          } else {
-            console.log("No data available");
-          }
-        })
-        .then(() => {
-          dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    } else if (filters.active) {
-      const dbRef = ref(db);
-      get(child(dbRef, `data/jobs`))
-        .then((snapshot) => {
-          let dataArray = [];
-          if (snapshot.exists()) {
-            let i = 0;
-            snapshot.forEach((item) => {
-              if (
-                item
-                  .val()
-                  .title.toLowerCase()
-                  .includes(filters.keyword.toLowerCase())
-              ) {
-                dataArray.push(item.val());
-                dataArray[i].uid = item.key;
-                i++;
-              }
-            });
+    // if (!filters.active) {
+    const dbRef = ref(db);
+    get(child(dbRef, `data/jobs`))
+      .then((snapshot) => {
+        let dataArray = [];
+        if (snapshot.exists()) {
+          let i = 0;
+          setJobObject(snapshot.val());
+          snapshot.forEach((item) => {
+            dataArray.push(item.val());
+            dataArray[i].uid = item.key;
+            i++;
+          });
+          if (currentSort === "title") {
+            dataArray.sort((a, b) => a.title.localeCompare(b.title));
             setJobList(dataArray);
-          } else {
-            console.log("No data available");
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
+          } else if (currentSort === "latest") {
+            dataArray.sort((a, b) => b.dateMs - a.dateMs);
+            setJobList(dataArray);
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
+          } else if (currentSort === "salary") {
+            dataArray.sort((a, b) => b.salary - a.salary);
+            setJobList(dataArray);
+            dispatch(JOB_LIST(dataArray));
+            setLoader(false);
           }
-        })
-        .then(() => {
-          dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  }, [filters.active]);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .then(() => {
+        dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    // }
+    // else if (filters.active) {
+    //   const dbRef = ref(db);
+    //   get(child(dbRef, `data/jobs`))
+    //     .then((snapshot) => {
+    //       let dataArray = [];
+    //       if (snapshot.exists()) {
+    //         let i = 0;
+    //         snapshot.forEach((item) => {
+    //           if (
+    //             item
+    //               .val()
+    //               .title.toLowerCase()
+    //               .includes(filters.keyword.toLowerCase())
+    //           ) {
+    //             dataArray.push(item.val());
+    //             dataArray[i].uid = item.key;
+    //             i++;
+    //           }
+    //         });
+    //         setJobList(dataArray);
+    //       } else {
+    //         console.log("No data available");
+    //       }
+    //     })
+    //     .then(() => {
+    //       dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+    //     })
+    //     .catch((error) => {
+    //       console.error(error);
+    //     });
+    // }
+  }, []);
   const handleExpand = () => {
     setExpanded(!expanded);
   };
+
   const handleSalaryChange = (e, val) => {
-    dispatch(FILTER_ACTIVE(true));
     dispatch(FILTER_SALARY(val));
   };
   const handleLogoDisplay = (e) => {
@@ -191,41 +196,42 @@ const JobListings = () => {
       setLoader(false);
     }
   }, [currentSort]);
-  const handleFilterApply = (e) => {
-    dispatch(FILTER_ACTIVE(true));
-    console.log(filters);
-    const dbRef = ref(db);
-    get(child(dbRef, `data/jobs`))
-      .then((snapshot) => {
-        let dataArray = [];
-        if (snapshot.exists()) {
-          let i = 0;
-          snapshot.forEach((item) => {
-            if (
-              item
-                .val()
-                .title.toLowerCase()
-                .includes(filters.keyword.toLowerCase())
-            ) {
-              dataArray.push(item.val());
-              dataArray[i].uid = item.key;
-              i++;
-            }
-          });
-          setJobList(dataArray);
-        } else {
-          console.log("No data available");
-        }
-      })
-      .then(() => {
-        dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+  const categoryFilter = (array) => {
+    return array.filter((item) =>
+      item.category.toLowerCase().includes(filters.category.toLowerCase())
+    );
   };
+  const keywordFilter = (array) => {
+    return array.filter((item) =>
+      item.title.toLowerCase().includes(filters.keyword.toLowerCase())
+    );
+  };
+  const typeFilter = (array) => {
+    return array.filter((item) => item.type.includes(filters.type));
+  };
+  const locationFilter = (array) => {
+    return array.filter(
+      (item) =>
+        item.city.toLowerCase().includes(filters.location.toLowerCase()) ||
+        item.country.toLowerCase().includes(filters.location.toLowerCase())
+    );
+  };
+  // console.log(jobList);
+  // const handleFilterApply = (e) => {
+  //   dispatch(FILTER_ACTIVE(true));
+  //   console.log(filters);
+  //   let result = jobList;
+  //   result = keywordFilter(result);
+  //   result = categoryFilter(result);
+  //   result = typeFilter(result);
+  //   result = locationFilter(result);
+  //   setJobList(result);
+  //   dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
+  // };
   const handleFilterClear = () => {
     dispatch(FILTER_ACTIVE(false));
+    dispatch(FILTER_RESET());
+    dispatch(pagination(1));
   };
   const handlePageChange = (e, val) => {
     dispatch(pagination(Number(val)));
@@ -333,8 +339,10 @@ const JobListings = () => {
                                 dispatch(FILTER_TYPE("full-time"))
                               }
                               name="type"
-                              type="checkbox"
+                              type="radio"
                               id="fulltime"
+                              value={"full-time"}
+                              checked={filters.type === "full-time"}
                             />
                             <label htmlFor="fulltime">Full-time</label>
                           </div>
@@ -344,8 +352,10 @@ const JobListings = () => {
                                 dispatch(FILTER_TYPE("part-time"))
                               }
                               name="type"
-                              type="checkbox"
+                              type="radio"
                               id="parttime"
+                              value={"part-time"}
+                              checked={filters.type === "part-time"}
                             />
                             <label htmlFor="parttime">Part-time</label>
                           </div>
@@ -355,8 +365,10 @@ const JobListings = () => {
                                 dispatch(FILTER_TYPE("contract"))
                               }
                               name="type"
-                              type="checkbox"
+                              type="radio"
                               id="contract"
+                              value={"contract"}
+                              checked={filters.type === "contract"}
                             />
                             <label htmlFor="contract">Contract</label>
                           </div>
@@ -371,8 +383,9 @@ const JobListings = () => {
                                 dispatch(FILTER_EXPERIENCE("junior"))
                               }
                               name="experience"
-                              type="checkbox"
+                              type="radio"
                               id="Junior"
+                              checked={filters.experience === "junior"}
                             />
                             <label htmlFor="Junior">{"Junior (0-2 yrs)"}</label>
                           </div>
@@ -382,8 +395,9 @@ const JobListings = () => {
                                 dispatch(FILTER_EXPERIENCE("intermediate"))
                               }
                               name="experience"
-                              type="checkbox"
+                              type="radio"
                               id="Intermediate"
+                              checked={filters.experience === "intermediate"}
                             />
                             <label htmlFor="Intermediate">
                               {"Intermediate (2-5 yrs)"}
@@ -395,8 +409,9 @@ const JobListings = () => {
                                 dispatch(FILTER_EXPERIENCE("senior"))
                               }
                               name="experience"
-                              type="checkbox"
+                              type="radio"
                               id="Senior"
+                              checked={filters.experience === "senior"}
                             />
                             <label htmlFor="Senior">{"Senior (5+ yrs)"}</label>
                           </div>
@@ -414,9 +429,7 @@ const JobListings = () => {
                             <span>-</span>
                             <p>
                               {filters.salary[1] === 150000
-                                ? "$" +
-                                  filters.salary[1].toLocaleString() +
-                                  " CAD+"
+                                ? " ANY "
                                 : "$" +
                                   filters.salary[1].toLocaleString() +
                                   " CAD"}
@@ -463,18 +476,18 @@ const JobListings = () => {
                     <button
                       onClick={handleFilterClear}
                       className="buttonRoundClear"
-                      disabled
+                      // disabled
                     >
                       clear filters
                     </button>
-
+                    {/* 
                     <button
                       onClick={handleFilterApply}
                       className="buttonRoundClear"
-                      disabled
+                      // disabled
                     >
                       apply filters
-                    </button>
+                    </button> */}
                   </div>
                 </AccordionDetails>
               </Accordion>
@@ -482,11 +495,10 @@ const JobListings = () => {
 
             <div ref={scrollRef} className="jobsSort">
               <p>
-                Total of <span>{jobList.length}</span> jobs found
+                Total of <span>{jobNum}</span> jobs found
               </p>
               <p>
-                Page {pageSelectorCurrent || pageSelectorDefault} of{" "}
-                {Math.ceil(jobList.length / 10)}
+                Page {pageSelectorCurrent || pageSelectorDefault} of {pageNum}
               </p>
               <div className="sortGroup">
                 <label htmlFor="sort">Sort by: </label>
@@ -504,93 +516,133 @@ const JobListings = () => {
             </div>
             <ul className="jobsHolder">
               {loader === false
-                ? jobList.map((item, index) => {
-                    if (
-                      index > pageSelectorCurrent * 10 - 11 &&
-                      index < pageSelectorCurrent * 10
-                    ) {
-                      return (
-                        <Link
-                          onClick={handleJobDetails}
-                          to={`/jobs/${jobList[index].uid}`}
-                          id={jobList[index].uid}
-                          key={jobList[index].uid + "key"}
-                        >
-                          <li className="jobCard">
-                            <div className="jobCardHeading">
-                              <div className="jobCardLogo defaultLoad">
-                                <img
-                                  onLoad={handleLogoDisplay}
-                                  src={
-                                    item.logo
-                                      ? item.logo
-                                      : "../assets/jobList/batman.gif"
-                                  }
-                                  alt="company logo"
-                                />
+                ? jobList
+                    ?.filter((item) =>
+                      item.category
+                        .toLowerCase()
+                        .includes(filters.category.toLowerCase())
+                    )
+                    .filter((item) =>
+                      item.title
+                        .toLowerCase()
+                        .includes(filters.keyword.toLowerCase())
+                    )
+                    .filter(
+                      (item) =>
+                        item.city
+                          .toLowerCase()
+                          .includes(filters.location.toLowerCase()) ||
+                        item.country
+                          .toLowerCase()
+                          .includes(filters.location.toLowerCase())
+                    )
+                    .filter((item) => item.type.includes(filters.type))
+                    .filter((item) =>
+                      item.experience.includes(filters.experience)
+                    )
+                    .filter((item) => {
+                      if (filters.salary[1] === 150000) {
+                        return item;
+                      } else {
+                        return (
+                          item.salaryMin >= filters.salary[0] &&
+                          item.salaryMax <= filters.salary[1]
+                        );
+                      }
+                    })
+                    .map((item, index, arr) => {
+                      if (pageNum !== Math.ceil(arr.length / 10)) {
+                        setPageNum(Math.ceil(arr.length / 10));
+                      }
+                      if (jobNum !== arr.length) {
+                        setJobNum(arr.length);
+                      }
+                      if (
+                        index > pageSelectorCurrent * 10 - 11 &&
+                        index < pageSelectorCurrent * 10
+                      ) {
+                        return (
+                          <Link
+                            onClick={handleJobDetails}
+                            to={`/jobs/${item.uid}`}
+                            id={item.uid}
+                            key={item.uid + "key"}
+                          >
+                            <li className="jobCard">
+                              <div className="jobCardHeading">
+                                <div className="jobCardLogo defaultLoad">
+                                  <img
+                                    onLoad={handleLogoDisplay}
+                                    src={
+                                      item.logo
+                                        ? item.logo
+                                        : "../assets/jobList/batman.gif"
+                                    }
+                                    alt="company logo"
+                                  />
+                                </div>
+                                <div className="jobCardText">
+                                  <h5>{item.title}</h5>
+                                  <p className="bottomText">
+                                    {item.experience < 2
+                                      ? "junior"
+                                      : item.experience >= 2 &&
+                                        item.experience <= 4
+                                      ? "intermediate"
+                                      : item.experience >= 5
+                                      ? "senior"
+                                      : item.experience}
+                                  </p>
+                                </div>
                               </div>
-                              <div className="jobCardText">
-                                <h5>{item.title}</h5>
+                              <div className="jobCardType">
+                                <p
+                                  className="topText"
+                                  style={
+                                    item.type === "contract"
+                                      ? { color: "#9CA89D" }
+                                      : item.type === "full-time"
+                                      ? { color: "#00BF58" }
+                                      : item.type === "part-time"
+                                      ? { color: "#FF6060" }
+                                      : null
+                                  }
+                                >
+                                  {item.type}
+                                </p>
                                 <p className="bottomText">
-                                  {item.experience < 2
-                                    ? "junior"
-                                    : item.experience >= 2 &&
-                                      item.experience <= 4
-                                    ? "intermediate"
-                                    : item.experience >= 5
-                                    ? "senior"
-                                    : item.experience}
+                                  Salary:{" "}
+                                  <span>
+                                    ${Number(item.salary).toLocaleString("en")}
+                                  </span>
                                 </p>
                               </div>
-                            </div>
-                            <div className="jobCardType">
-                              <p
-                                className="topText"
-                                style={
-                                  item.type === "contract"
-                                    ? { color: "#9CA89D" }
-                                    : item.type === "full-time"
-                                    ? { color: "#00BF58" }
-                                    : item.type === "part-time"
-                                    ? { color: "#FF6060" }
-                                    : null
-                                }
-                              >
-                                {item.type}
-                              </p>
-                              <p className="bottomText">
-                                Salary:{" "}
-                                <span>
-                                  ${Number(item.salary).toLocaleString("en")}
-                                </span>
-                              </p>
-                            </div>
-                            <div className="jobCardLocation">
-                              <p className="topText">
-                                {item.city}, {item.country}
-                              </p>
-                              <p className="bottomText">{item.category}</p>
-                            </div>
-                            <div className="jobCardButtons">
-                              <BookmarkBorderIcon />
-                              <button
-                                onClick={
-                                  item.id && item.id === auth.currentUser?.uid
-                                    ? handleEdit
-                                    : handleApply
-                                }
-                                className="buttonRoundDarkGreen"
-                              >
-                                {item.id && item.id === auth.currentUser?.uid
-                                  ? "edit"
-                                  : "apply"}
-                              </button>
-                            </div>
-                          </li>
-                        </Link>
-                      );
-                    }
-                  })
+                              <div className="jobCardLocation">
+                                <p className="topText">
+                                  {item.city}, {item.country}
+                                </p>
+                                <p className="bottomText">{item.category}</p>
+                              </div>
+                              <div className="jobCardButtons">
+                                <BookmarkBorderIcon />
+                                <button
+                                  onClick={
+                                    item.id && item.id === auth.currentUser?.uid
+                                      ? handleEdit
+                                      : handleApply
+                                  }
+                                  className="buttonRoundDarkGreen"
+                                >
+                                  {item.id && item.id === auth.currentUser?.uid
+                                    ? "edit"
+                                    : "apply"}
+                                </button>
+                              </div>
+                            </li>
+                          </Link>
+                        );
+                      }
+                    })
                 : null}
             </ul>
             <div className="pagePagination">
@@ -605,7 +657,7 @@ const JobListings = () => {
                 }}
                 size={"small"}
                 onChange={handlePageChange}
-                count={Math.ceil(jobList.length / 10)}
+                count={pageNum}
                 page={pageSelectorCurrent}
                 variant="outlined"
                 color="success"

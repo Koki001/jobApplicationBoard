@@ -42,12 +42,12 @@ const CompanyProfile = () => {
   const handlePhotoUpload = (e) => {
     const storageRef = sRef(
       storage,
-      `companyLogos/${auth.currentUser.uid}/logo`
+      `avatar/${auth.currentUser.uid}/logo`
     );
     if (e.target.files) {
       uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
         getDownloadURL(
-          sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
+          sRef(storage, `avatar/${auth.currentUser.uid}/logo`)
         ).then((url) => {
           update(ref(db, `users/${auth.currentUser.uid}`), {
             logo: url,

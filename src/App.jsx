@@ -7,6 +7,7 @@ import Reviews from "./components/sections/Reviews";
 import FAQ from "./components/sections/FAQ";
 import JobGuides from "./components/sections/JobGuides";
 import Footer from "./components/sections/Footer";
+import { JobGenerator } from "./components/helpers/Faker";
 // MUI imports
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
@@ -15,6 +16,7 @@ function App() {
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    // JobGenerator(200)
   };
 
   useEffect(() => {

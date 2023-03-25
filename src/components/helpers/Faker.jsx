@@ -50,6 +50,7 @@ const JobGenerator = (num) => {
     let salary = faker.finance.amount(20000, 250000, 0);
     push(ref(db, `/data/jobs`), {
       title: faker.name.jobTitle(),
+      company: faker.company.name(),
       description: faker.lorem.paragraphs(3),
       overview: faker.lorem.paragraphs(1),
       responsibilities: [

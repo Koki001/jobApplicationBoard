@@ -35,11 +35,11 @@ const MyProfile = () => {
     update(ref(db, `users/` + userID), editInfo);
   };
   const handlePhotoUpload = (e) => {
-    const storageRef = sRef(storage, `userLogos/${auth.currentUser.uid}/logo`);
+    const storageRef = sRef(storage, `avatar/${auth.currentUser.uid}/logo`);
     if (e.target.files) {
       uploadBytes(storageRef, e.target.files[0]).then((snapshot) => {
         getDownloadURL(
-          sRef(storage, `userLogos/${auth.currentUser.uid}/logo`)
+          sRef(storage, `avatar/${auth.currentUser.uid}/logo`)
         ).then((url) => {
           update(ref(db, `users/${auth.currentUser.uid}`), {
             logo: url,
@@ -55,9 +55,7 @@ const MyProfile = () => {
       ref(db, `users/` + auth.currentUser.uid),
       (snapshot) => {
         dispatch(PHOTO(snapshot.val().logo));
-        setFile(snapshot.val().logo);
-        console.log(snapshot.val());
-        console.log(snapshot.val());
+        setFile(snapshot.val().logo);;
       }
     );
   }, [auth.currentUser]);

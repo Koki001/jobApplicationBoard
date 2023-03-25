@@ -22,6 +22,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import { async } from "@firebase/util";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const Profile = () => {
   const [dashNav, setDashNav] = useState(false);
   const [popupLogout, setPopupLogout] = useState(false);
   const [userInfo, setUserInfo] = useState();
+  const [avatar, setAvatar] = useState();
   // const [file, setFile] = useState(useSelector((state) => state.user.photo));
   const handlePost = () => {
     setDashPage("dashboard");
@@ -47,15 +49,13 @@ const Profile = () => {
     profile: <CompanyProfile />,
     post: <JobPost posted={handlePost} />,
   };
-  //  console.log(sRef(storage));
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       if (user) {
         onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
           if (snapshot.val() !== null) {
             dispatch(USER(snapshot.val()));
             dispatch(ACC_TYPE(snapshot.val().type));
-            dispatch(PHOTO(snapshot.val().logo));
             setUserInfo(snapshot.val());
           }
         });
@@ -64,7 +64,7 @@ const Profile = () => {
         // ...
       }
     });
-  }, [auth.currentUser]);
+  }, [auth.currentUser?.uid]);
 
   const handleSignout = () => {
     Swal.fire({
@@ -118,7 +118,7 @@ const Profile = () => {
           </label>
           <div className="avatar">
             <div className="avatarImage">
-              <img src={useSelector((state) => state.user.photo)} alt="" />
+              <img src={userInfo?.logo} alt="" />
             </div>
             <p>{userInfo?.name}</p>
           </div>
@@ -142,11 +142,7 @@ const Profile = () => {
             <li>
               <label htmlFor="profile">
                 <PersonOutlineIcon sx={{ marginRight: "10px" }} />
-                {
-                  userInfo?.type === "candidate" ?
-                  "My Profile" :
-                  "Company"
-                }
+                {userInfo?.type === "candidate" ? "My Profile" : "Company"}
               </label>
               <input
                 onChange={(e) => {

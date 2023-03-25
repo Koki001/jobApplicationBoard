@@ -23,7 +23,7 @@ const JobPost = (props) => {
 
   useEffect(() => {
     getDownloadURL(
-      sRef(storage, `companyLogos/${auth.currentUser.uid}/logo`)
+      sRef(storage, `avatar/${auth.currentUser.uid}/logo`)
     ).then((url) => {
       dispatch(PHOTO(url));
     });

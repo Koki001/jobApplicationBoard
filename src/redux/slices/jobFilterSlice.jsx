@@ -5,9 +5,9 @@ const initialState = {
   category: "",
   keyword: "",
   location: "",
-  type: ["", "", ""],
-  experience: ["", "", ""],
-  salary: [30000, 70000],
+  type: "",
+  experience: "",
+  salary: [30000, 150000],
 };
 
 export const jobFilterSlice = createSlice({
@@ -35,6 +35,7 @@ export const jobFilterSlice = createSlice({
     FILTER_ACTIVE: (state, action) => {
       state.active = action.payload;
     },
+    FILTER_RESET: () => initialState,
   },
 });
 
@@ -45,7 +46,8 @@ export const {
   FILTER_TYPE,
   FILTER_EXPERIENCE,
   FILTER_SALARY,
-  FILTER_ACTIVE
+  FILTER_ACTIVE,
+  FILTER_RESET
 } = jobFilterSlice.actions;
 
 export default jobFilterSlice.reducer;

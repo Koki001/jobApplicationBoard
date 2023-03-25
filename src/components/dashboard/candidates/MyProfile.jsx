@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { USER, PHOTO } from "../../../redux/slices/userSlice";
 import { uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
+import TextareaAutosize from "react-textarea-autosize";
 // MUI imports
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -28,6 +29,7 @@ const MyProfile = () => {
     if (e.code === "Enter") {
       setEditInfo((prev) => ({ ...prev, bio: prev.bio + "\n" }));
     }
+
   };
   const handleSaveEdits = () => {
     setEnableEdit(false);
@@ -106,7 +108,19 @@ const MyProfile = () => {
           </div>
           <div className="bioBio">
             <label htmlFor="bioBio">Bio</label>
-            <textarea
+            <TextareaAutosize
+              className={enableEdit ? "editable bioBioText" : "bioBioText"}
+              readOnly={enableEdit ? false : true}
+              onChange={(e) =>
+                setEditInfo((prev) => ({ ...prev, bio: e.target.value }))
+              }
+              onKeyDown={handleLineBreak}
+              name="bio"
+              id="bioBio"
+           
+              defaultValue={user?.bio}
+    />
+            {/* <textarea
               className={enableEdit ? "editable bioBioText" : "bioBioText"}
               readOnly={enableEdit ? false : true}
               onChange={(e) =>
@@ -117,7 +131,7 @@ const MyProfile = () => {
               id="bioBio"
               rows={8}
               defaultValue={user?.bio}
-            ></textarea>
+            ></textarea> */}
           </div>
         </div>
       </div>

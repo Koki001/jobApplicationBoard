@@ -5,15 +5,40 @@ import {
   FILTER_CATEGORY,
   FILTER_KEYWORD,
 } from "../../redux/slices/jobFilterSlice";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { db, auth } from "../../firebase";
+import { ref, child, get } from "firebase/database";
 // MUI imports
 
 const Header = () => {
-
+  const [jobList, setJobList] = useState();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  useEffect(() => {
+    const dbRef = ref(db);
+    get(child(dbRef, `data/jobs`))
+      .then((snapshot) => {
+        let dataArray = [];
+        if (snapshot.exists()) {
+          let i = 0;
+
+          snapshot.forEach((item) => {
+            dataArray.push(item.val());
+            dataArray[i].uid = item.key;
+            i++;
+          });
+          setJobList(dataArray);
+        } else {
+          console.log("No data available");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  });
   return (
     <header id="home" className="mainHeader">
-
       {/* <nav>
         <div className="navLogo">
           <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
@@ -57,13 +82,21 @@ const Header = () => {
               id="category"
             >
               <option value="all">All Categories</option>
-              {jobSectors.map((item, index) => {
-                return (
-                  <option key={index + "jobCategory"} value={item}>
-                    {item}
-                  </option>
-                );
-              })}
+              {jobList &&
+                jobSectors.map((item, index) => {
+                  return (
+                    <option key={index + "jobCategory"} value={item}>
+                      {item +
+                        ` (${
+                          jobList.filter((job) =>
+                            job.category
+                              .toLowerCase()
+                              .includes(item.toLowerCase())
+                          ).length
+                        })`}
+                    </option>
+                  );
+                })}
             </select>
           </div>
           <div className="headerSearchMiddle">
@@ -75,7 +108,12 @@ const Header = () => {
             />
           </div>
           <div className="headerSearchRight">
-            <button className="buttonSquareGreen">Search</button>
+            <button
+              onClick={(e) => navigate("/jobs")}
+              className="buttonSquareGreen"
+            >
+              Search
+            </button>
           </div>
         </div>
         <p className="popularTag">

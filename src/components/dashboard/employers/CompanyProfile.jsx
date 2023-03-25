@@ -6,7 +6,7 @@ import { ref as sRef } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER, PHOTO } from "../../../redux/slices/userSlice";
-
+import TextareaAutosize from "react-textarea-autosize";
 // MUI imports
 import EditIcon from "@mui/icons-material/Edit";
 
@@ -195,7 +195,7 @@ const CompanyProfile = () => {
           </div>
           <div className="bioBio">
             <label htmlFor="bioBio">About</label>
-            <textarea
+            <TextareaAutosize
               className={enableEdit ? "editable bioBioText" : "bioBioText"}
               readOnly={enableEdit ? false : true}
               onChange={(e) =>
@@ -204,9 +204,9 @@ const CompanyProfile = () => {
               onKeyDown={handleLineBreak}
               name="bio"
               id="bioBio"
-              rows={8}
+              
               defaultValue={user?.bio}
-            ></textarea>
+            />
           </div>
         </div>
       </div>

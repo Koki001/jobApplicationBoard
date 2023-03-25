@@ -46,9 +46,7 @@ const Login = () => {
         });
       })
       .then(() => {
-        getDownloadURL(
-          sRef(storage, `avatar/${auth.currentUser.uid}/logo`)
-        )
+        getDownloadURL(sRef(storage, `avatar/${auth.currentUser.uid}/logo`))
           .then((url) => {
             dispatch(PHOTO(url));
           })
@@ -88,6 +86,56 @@ const Login = () => {
             confirmButtonColor: "green",
           });
         }
+      });
+  };
+  const handleUserTest = () => {
+    signInWithEmailAndPassword(auth, "frodo@gmail.com", "Admin123")
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(POP_UP_LOG(false));
+      })
+      .then(() => {
+        onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
+          if (snapshot.val() !== null) {
+            dispatch(ACC_TYPE(snapshot.val().type));
+          }
+        });
+      })
+      .then(() => {
+        getDownloadURL(sRef(storage, `avatar/${auth.currentUser.uid}/logo`))
+          .then((url) => {
+            dispatch(PHOTO(url));
+          })
+          .catch((error) => {});
+      })
+      .then(() => {
+        navigate("/dashboard");
+      });
+  };
+  const handleCompanyTest = () => {
+    signInWithEmailAndPassword(auth, "awesome@gmail.com", "Admin123")
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        dispatch(POP_UP_LOG(false));
+      })
+      .then(() => {
+        onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
+          if (snapshot.val() !== null) {
+            dispatch(ACC_TYPE(snapshot.val().type));
+          }
+        });
+      })
+      .then(() => {
+        getDownloadURL(sRef(storage, `avatar/${auth.currentUser.uid}/logo`))
+          .then((url) => {
+            dispatch(PHOTO(url));
+          })
+          .catch((error) => {});
+      })
+      .then(() => {
+        navigate("/dashboard");
       });
   };
   return (
@@ -133,11 +181,15 @@ const Login = () => {
         login
       </button>
       <div className="loginBreak">
-        <p>or</p>
+        <p>TEST ACCOUNTS</p>
       </div>
       <div className="authLogin">
-        <button className="buttonSquareClear">google</button>
-        <button className="buttonSquareClear">facebook</button>
+        <button onClick={handleUserTest} className="buttonSquareClear">
+          user
+        </button>
+        <button onClick={handleCompanyTest} className="buttonSquareClear">
+          company
+        </button>
       </div>
       <p className="noAcc">
         Don't have an account?{" "}

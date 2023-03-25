@@ -61,6 +61,7 @@
       margin-bottom: 20px;
       img {
         border-radius: 50%;
+        object-fit: cover;
       }
     }
   }
@@ -123,7 +124,8 @@
       font-size: 0.8rem;
       border-radius: 5px;
       border: 1px solid $darkGrey;
-      padding: 5px;
+      padding: 10px;
+      line-height: 1.3rem;
       &:read-only {
         pointer-events: none;
       }
@@ -252,8 +254,6 @@
   padding: 20px;
   background-color: white;
   height: auto;
-  max-height: 800px;
-  
 }
 
 .myProfileBio {
@@ -303,6 +303,7 @@
     height: 50px;
     img {
       border-radius: 50%;
+      object-fit: cover;
     }
   }
   .bioBio {

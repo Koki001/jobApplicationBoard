@@ -3,6 +3,7 @@ import { ref, push } from "firebase/database";
 import { faker } from "@faker-js/faker";
 import BuzzWords from "./BuzzWords";
 import * as dayjs from "dayjs";
+import jobSectors from "./jobSectors";
 
 const Shuffle = (array) => {
   for (let i = array.length - 1; i > 0; i--) {
@@ -71,7 +72,7 @@ const JobGenerator = (num) => {
         faker.lorem.sentences(1),
         faker.lorem.sentences(1),
       ],
-      category: faker.name.jobType(),
+      category: jobSectors[Math.floor(Math.random() * jobSectors.length)],
       type: typeArray[Math.floor(Math.random() * typeArray.length)],
       salary: salary,
       salaryMin: Number(salary) - 5000,

@@ -6,6 +6,7 @@ import { db, auth } from "../firebase";
 import { ref, child, get } from "firebase/database";
 import Pagination from "@mui/material/Pagination";
 import { useSelector, useDispatch } from "react-redux";
+import jobSectors from "./helpers/jobSectors";
 import {
   pagination,
   PAGINATION_MAX,
@@ -43,7 +44,7 @@ const JobListings = () => {
 
   const filters = useSelector((state) => state.filter);
   const currentSort = useSelector((state) => state.pagination.sort);
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
   const [salary, setSalary] = useState([30000, 70000]);
   const [jobNum, setJobNum] = useState();
   const [pageNum, setPageNum] = useState();
@@ -109,38 +110,7 @@ const JobListings = () => {
       .catch((error) => {
         console.error(error);
       });
-    // }
-    // else if (filters.active) {
-    //   const dbRef = ref(db);
-    //   get(child(dbRef, `data/jobs`))
-    //     .then((snapshot) => {
-    //       let dataArray = [];
-    //       if (snapshot.exists()) {
-    //         let i = 0;
-    //         snapshot.forEach((item) => {
-    //           if (
-    //             item
-    //               .val()
-    //               .title.toLowerCase()
-    //               .includes(filters.keyword.toLowerCase())
-    //           ) {
-    //             dataArray.push(item.val());
-    //             dataArray[i].uid = item.key;
-    //             i++;
-    //           }
-    //         });
-    //         setJobList(dataArray);
-    //       } else {
-    //         console.log("No data available");
-    //       }
-    //     })
-    //     .then(() => {
-    //       dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-    //     })
-    //     .catch((error) => {
-    //       console.error(error);
-    //     });
-    // }
+ 
   }, []);
   const handleExpand = () => {
     setExpanded(!expanded);
@@ -308,14 +278,32 @@ const JobListings = () => {
                       </div>
                       <div className="filtersCategories">
                         <label htmlFor="categories">Categories</label>
-                        <input
+                        <select
                           onChange={(e) =>
                             dispatch(FILTER_CATEGORY(e.target.value))
                           }
-                          id="categories"
-                          type="text"
                           value={filters.category}
-                        />
+                          name="category"
+                          id="category"
+                        >
+                          <option defaultChecked value="">
+                            All Categories
+                          </option>
+                          {jobSectors.map((item, index) => {
+                            return (
+                              <option key={index + "jobCategory"} value={item}>
+                                {item +
+                                  ` (${
+                                    jobList.filter((job) =>
+                                      job.category
+                                        .toLowerCase()
+                                        .includes(item.toLowerCase())
+                                    ).length
+                                  })`}
+                              </option>
+                            );
+                          })}
+                        </select>
                       </div>
                       <div className="filtersLocation">
                         <label htmlFor="location">Location</label>

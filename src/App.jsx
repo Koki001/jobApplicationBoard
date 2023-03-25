@@ -16,7 +16,7 @@ function App() {
 
   const handleScrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-    // JobGenerator(200)
+    // JobGenerator(174)
   };
 
   useEffect(() => {

@@ -217,9 +217,10 @@ h1 {
   }
   select {
     cursor: pointer;
-    background-color: transparent;
+    background-color: white;
     border: none;
     border-bottom: 2px solid transparent;
+    
     &:hover {
       color: $lightGreen;
     }
@@ -229,6 +230,11 @@ h1 {
     option {
       font-size: 1rem;
       color: black;
+      &:hover,
+      &:active,
+      &:focus {
+        background-color: $greenBg;
+      }
     }
   }
   input[type="text"] {

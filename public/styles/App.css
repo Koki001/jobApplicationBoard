@@ -851,7 +851,7 @@ h1 span {
 }
 .headerSearchContainer select {
   cursor: pointer;
-  background-color: transparent;
+  background-color: white;
   border: none;
   border-bottom: 2px solid transparent;
 }
@@ -864,6 +864,9 @@ h1 span {
 .headerSearchContainer select option {
   font-size: 1rem;
   color: black;
+}
+.headerSearchContainer select option:hover, .headerSearchContainer select option:active, .headerSearchContainer select option:focus {
+  background-color: #EFF6F3;
 }
 .headerSearchContainer input[type=text] {
   border: none;
@@ -1691,7 +1694,7 @@ span.fakeTextBreaks {
   z-index: 10;
   background-color: white;
   padding: 0 10px;
-  width: 50px;
+  width: 180px;
 }
 
 .loginBreak:after {
@@ -2361,8 +2364,19 @@ h1 {
   margin-top: 10px;
   border: none;
   border-radius: 10px;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   padding: 5px;
+}
+
+.filtersCategories select {
+  min-width: 230px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  padding: 5px;
+  background-color: white;
+  width: calc(33.3333333333% - 30px);
 }
 
 .filtersType,
@@ -2375,7 +2389,7 @@ h1 {
 .filtersType p,
 .filtersExperience p,
 .filtersSalary p {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   font-weight: bold;
 }
 .filtersType input:checked,
@@ -2865,6 +2879,7 @@ h1 {
 }
 .dashboardContainer .avatar .avatarImage img {
   border-radius: 50%;
+  object-fit: cover;
 }
 .dashboardContainer .dashboardOptions {
   width: 100%;
@@ -2926,7 +2941,8 @@ h1 {
   font-size: 0.8rem;
   border-radius: 5px;
   border: 1px solid rgb(170, 170, 170);
-  padding: 5px;
+  padding: 10px;
+  line-height: 1.3rem;
 }
 .dashboardContainer .dashboardContent textarea:read-only {
   pointer-events: none;
@@ -3054,7 +3070,6 @@ h1 {
   padding: 20px;
   background-color: white;
   height: auto;
-  max-height: 800px;
 }
 
 .myProfileBio .bioPhoto {
@@ -3104,6 +3119,7 @@ h1 {
 }
 .myProfileBio .bioImage img {
   border-radius: 50%;
+  object-fit: cover;
 }
 .myProfileBio .bioBio {
   display: flex;

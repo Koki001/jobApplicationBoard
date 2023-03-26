@@ -1,34 +1,30 @@
-import { db, auth, storage } from "../../../firebase";
-import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
-import { ref, set, child, get, onValue, update } from "firebase/database";
-import { uploadBytes, getDownloadURL } from "firebase/storage";
-import { ref as sRef } from "firebase/storage";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER, PHOTO } from "../../../redux/slices/userSlice";
-import TextareaAutosize from "react-textarea-autosize";
-// MUI imports
+import { ref as sRef } from "firebase/storage";
+import { ref, onValue, update } from "firebase/database";
+import { db, auth, storage } from "../../../firebase/firebase";
+import { uploadBytes, getDownloadURL } from "firebase/storage";
+// MUI imports +
 import EditIcon from "@mui/icons-material/Edit";
+import TextareaAutosize from "react-textarea-autosize";
 
 const CompanyProfile = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const accountType = useSelector((state) => state.type.type);
-
   const [editInfo, setEditInfo] = useState({});
   const [enableEdit, setEnableEdit] = useState(false);
   const [file, setFile] = useState(useSelector((state) => state.user.photo));
-  const [upload, setUpload] = useState(false);
+  const user = useSelector((state) => state.user.user);
+  
+  const dispatch = useDispatch();
 
+  // profile edit
   useEffect(() => {
-    // if (enableEdit === false) {
     const userID = auth.currentUser.uid;
     onValue(ref(db, `users/` + userID), (snapshot) => {
       dispatch(USER(snapshot.val()));
     });
-    // }
   }, [enableEdit]);
-  useEffect(() => {}, []);
+  // line break workaround
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
       setEditInfo((prev) => ({ ...prev, bio: prev.bio + " _lnbr " }));
@@ -58,7 +54,6 @@ const CompanyProfile = () => {
       });
     }
   };
-  // CREATE USEFFECT to save storage url to realtime database
   useEffect(() => {
     onValue(
       ref(db, `users/` + auth.currentUser.uid),

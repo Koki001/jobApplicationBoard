@@ -1,20 +1,19 @@
-import NavBar from "../NavBar";
-import Dashboard from "./Dashboard";
-import MyProfile from "./candidates/MyProfile";
-import CompanyProfile from "./employers/CompanyProfile";
-import JobPost from "./employers/JobPost";
+import NavBar from "../../components/NavBar";
+import MyDashboard from "./Candidates/MyDashboard";
+import CompanyDashboard from "./Employers/CompanyDashboard";
+import MyProfile from "./Candidates/MyProfile";
+import CompanyProfile from "./Employers/CompanyProfile";
+import JobPost from "./Employers/JobPost";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ref, child, get, onValue } from "firebase/database";
-import { db, auth, storage } from "../../firebase";
+import { db, auth, storage } from "../../firebase/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
-import { useLocation, useNavigate } from "react-router-dom";
-import { uploadBytes, getDownloadURL, getMetadata } from "firebase/storage";
-import { ref as sRef } from "firebase/storage";
-import { USER, PHOTO } from "../../redux/slices/userSlice";
-import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { USER } from "../../redux/slices/userSlice";
 // MUI imports
+import Swal from "sweetalert2";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import ViewComfyOutlinedIcon from "@mui/icons-material/ViewComfyOutlined";
 import EventNoteOutlinedIcon from "@mui/icons-material/EventNoteOutlined";
@@ -22,39 +21,33 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import { async } from "@firebase/util";
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const account = useSelector((state) => state.type.type);
   const navigate = useNavigate();
-  const location = useLocation();
-  // const userInfo?.type = useSelector((state) => state.type.type);
+
   const [dashPage, setDashPage] = useState("dashboard");
   const [dashNav, setDashNav] = useState(false);
-  const [popupLogout, setPopupLogout] = useState(false);
+
   const [userInfo, setUserInfo] = useState();
-  const [avatar, setAvatar] = useState();
-  // const [file, setFile] = useState(useSelector((state) => state.user.photo));
-  const handlePost = () => {
-    setDashPage("dashboard");
-  };
+
   const handleDashNav = (e) => {
     e.stopPropagation();
     setDashNav(!dashNav);
   };
+  // components specific to candidate accounts
   const candidateItems = {
-    dashboard: <Dashboard />,
+    dashboard: <MyDashboard />,
     profile: <MyProfile />,
   };
+  // components specific to employer accounts
   const employerItems = {
-    dashboard: <Dashboard />,
+    dashboard: <CompanyDashboard />,
     profile: <CompanyProfile />,
-    post: <JobPost posted={handlePost} />,
+    post: <JobPost posted={() => setDashPage("dashboard")} />,
   };
   useEffect(() => {
-    onAuthStateChanged(auth, async (user) => {
+    const unlisten = onAuthStateChanged(auth, async (user) => {
       if (user) {
         onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
           if (snapshot.val() !== null) {
@@ -63,17 +56,16 @@ const Profile = () => {
             setUserInfo(snapshot.val());
           }
         });
-      } else {
-        // User is signed out
-        // ...
       }
+      return () => {
+        unlisten();
+      };
     });
   }, [auth.currentUser?.uid]);
 
   const handleSignout = () => {
     Swal.fire({
       title: "Sign out of your account?",
-      // text: "Do you want to continue",
       icon: "warning",
       reverseButtons: true,
       showCancelButton: true,
@@ -89,16 +81,9 @@ const Profile = () => {
     });
   };
 
-  // const handleCloseDash = (e) => {
-  //   setDashNav(false);
-  // };
-
   return (
     <section className="dashboardSection">
-      <div
-        // onClick={handleCloseDash}
-        className="dashboardContainer navWrapper"
-      >
+      <div className="dashboardContainer navWrapper">
         <nav
           className={
             dashNav
@@ -120,7 +105,6 @@ const Profile = () => {
             }
             htmlFor="dashNav"
           >
-            {/* Dash menu */}
             <ArrowRightIcon />
           </label>
           <div className="avatar">

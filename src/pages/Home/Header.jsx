@@ -1,29 +1,28 @@
-import NavBar from "../NavBar";
-import jobSectors from "../helpers/jobSectors";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../../components/NavBar";
+import jobSectors from "../../components/helpers/jobSectors";
 import { useDispatch } from "react-redux";
 import {
   FILTER_CATEGORY,
   FILTER_KEYWORD,
 } from "../../redux/slices/jobFilterSlice";
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { db, auth } from "../../firebase";
+import { db } from "../../firebase/firebase";
 import { ref, child, get } from "firebase/database";
-// MUI imports
 
 const Header = () => {
   const [jobList, setJobList] = useState();
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // firebase call to show available jobs next to category selector
   useEffect(() => {
     const dbRef = ref(db);
-
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
         if (snapshot.exists()) {
           let i = 0;
-
           snapshot.forEach((item) => {
             dataArray.push(item.val());
             dataArray[i].uid = item.key;
@@ -38,35 +37,9 @@ const Header = () => {
         console.error(error);
       });
   }, []);
+  
   return (
     <header id="home" className="mainHeader">
-      {/* <nav>
-        <div className="navLogo">
-          <img src="../assets/header/jobiLogo.png" alt="jobi company logo" />
-        </div>
-        <ul className="navMenu">
-          <li>
-            <a href="#home">home</a>
-          </li>
-          <li>
-            <a href="#jobs">jobs</a>
-          </li>
-          <li>
-            <a href="#about">about us</a>
-          </li>
-          <li>
-            <a href="#faq">FAQ</a>
-          </li>
-          <li>
-            <a href="#contact">contact</a>
-          </li>
-        </ul>
-        <div className="navButtons">
-          <button className="buttonRoundClear">Login/Sign up</button>
-
-          <button className="buttonRoundGreen">Post a job</button>
-        </div>
-      </nav> */}
       <NavBar />
       <div className="headerCenter wrapper">
         <h1>

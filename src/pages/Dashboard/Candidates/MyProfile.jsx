@@ -1,22 +1,22 @@
-import { db, auth, storage } from "../../../firebase";
-import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
-import { ref, set, child, get, onValue, update } from "firebase/database";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { USER, PHOTO } from "../../../redux/slices/userSlice";
-import { uploadBytes, getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
-import TextareaAutosize from "react-textarea-autosize";
-// MUI imports
+import { ref, onValue, update } from "firebase/database";
+import { db, auth, storage } from "../../../firebase/firebase";
+import { uploadBytes, getDownloadURL } from "firebase/storage";
+// MUI imports +
 import EditIcon from "@mui/icons-material/Edit";
+import TextareaAutosize from "react-textarea-autosize";
 
 const MyProfile = () => {
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user.user);
-  const accountType = useSelector((state) => state.type.type);
   const [editInfo, setEditInfo] = useState({});
   const [file, setFile] = useState(useSelector((state) => state.user.photo));
   const [enableEdit, setEnableEdit] = useState(false);
+  const user = useSelector((state) => state.user.user);
+
+  const dispatch = useDispatch();
+  // edit profile
   useEffect(() => {
     if (enableEdit === false) {
       const userID = auth.currentUser.uid;
@@ -25,11 +25,11 @@ const MyProfile = () => {
       });
     }
   }, [enableEdit]);
+  // workaround for line break
   const handleLineBreak = (e) => {
     if (e.code === "Enter") {
       setEditInfo((prev) => ({ ...prev, bio: prev.bio + "\n" }));
     }
-
   };
   const handleSaveEdits = () => {
     setEnableEdit(false);
@@ -53,13 +53,10 @@ const MyProfile = () => {
     }
   };
   useEffect(() => {
-    onValue(
-      ref(db, `users/` + auth.currentUser.uid),
-      (snapshot) => {
-        dispatch(PHOTO(snapshot.val().logo));
-        setFile(snapshot.val().logo);;
-      }
-    );
+    onValue(ref(db, `users/` + auth.currentUser.uid), (snapshot) => {
+      dispatch(PHOTO(snapshot.val().logo));
+      setFile(snapshot.val().logo);
+    });
   }, [auth.currentUser]);
   return (
     <div className="dashboardContent">
@@ -117,21 +114,8 @@ const MyProfile = () => {
               onKeyDown={handleLineBreak}
               name="bio"
               id="bioBio"
-           
               defaultValue={user?.bio}
-    />
-            {/* <textarea
-              className={enableEdit ? "editable bioBioText" : "bioBioText"}
-              readOnly={enableEdit ? false : true}
-              onChange={(e) =>
-                setEditInfo((prev) => ({ ...prev, bio: e.target.value }))
-              }
-              onKeyDown={handleLineBreak}
-              name="bio"
-              id="bioBio"
-              rows={8}
-              defaultValue={user?.bio}
-            ></textarea> */}
+            />
           </div>
         </div>
       </div>

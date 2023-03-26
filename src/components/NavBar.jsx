@@ -1,29 +1,32 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
-import Login from "./helpers/Login";
-import Signup from "./helpers/Signup";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { auth } from "../firebase/firebase";
+// Component imports
+import Login from "./auth/Login";
+import Signup from "./auth/Signup";
+// redux imports
+import { useSelector, useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../redux/slices/popupSlice";
 import { pagination } from "../redux/slices/paginationSlice";
 import { USER_RESET } from "../redux/slices/userSlice";
-import { useSelector, useDispatch } from "react-redux";
 import { JOB_ACTIVE } from "../redux/slices/jobListSlice";
-import { auth } from "../firebase";
-import { onAuthStateChanged, signOut } from "firebase/auth";
+// MUI +
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import MenuIcon from "@mui/icons-material/Menu";
 import Swal from "sweetalert2";
+
 const NavBar = () => {
-  const popups = useSelector((state) => state.popups);
   const [userActive, setUserActive] = useState(false);
-  const dispatch = useDispatch();
-  const location = useLocation();
   const [submenu, setSubmenu] = useState(false);
   const [lastEvent, setLastEvent] = useState("");
+  const [showNav, setShowNav] = useState(false);
+  const popups = useSelector((state) => state.popups);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
   const ref = useRef(null);
   const menuRef = useRef(null);
-  const navigate = useNavigate();
-  const [popupLogout, setPopupLogout] = useState(false);
-  const [showNav, setShowNav] = useState(false);
 
   const handleOpenLinks = (e) => {
     e.stopPropagation();
@@ -47,23 +50,13 @@ const NavBar = () => {
       setLastEvent("");
     }
   };
-  const handleLogin = () => {
-    dispatch(POP_UP_LOG(true));
-  };
-  const handleSignUp = () => {
-    dispatch(POP_UP_REG(true));
-  };
   const handleExitLogin = (e) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(POP_UP_LOG(false));
     dispatch(POP_UP_REG(false));
   };
-  const handleExitSignup = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(POP_UP_REG(false));
-  };
+  // disable scrolling if popup active
   useEffect(() => {
     if (popups.login || popups.signup) {
       document.body.style.overflow = "hidden";
@@ -71,7 +64,6 @@ const NavBar = () => {
       document.body.style.overflow = "unset";
     }
   }, [popups.login, popups.signup]);
-
   useEffect(() => {
     const handleCloseLinks = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -83,7 +75,6 @@ const NavBar = () => {
       document.removeEventListener("mousedown", handleCloseLinks);
     };
   }, [menuRef]);
-
   useEffect(() => {
     setShowNav(false);
     if (location.pathname === "/" && location.hash !== "") {
@@ -97,7 +88,7 @@ const NavBar = () => {
   }, [location]);
 
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
+    const unlisten = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUserActive(true);
       } else {
@@ -105,6 +96,9 @@ const NavBar = () => {
         dispatch(USER_RESET());
       }
     });
+    return () => {
+      unlisten();
+    };
   }, [auth.currentUser]);
 
   const handleSignout = () => {
@@ -125,13 +119,9 @@ const NavBar = () => {
       }
     });
   };
-  const handleProfile = () => {
-    navigate("/dashboard");
-  };
   return (
     <div className={"navWrapper"}>
-      <button onClick={(e) => setShowNav(!showNav)} className="showNavButton">
-        {/* <MenuIcon /> */}
+      <button onClick={() => setShowNav(!showNav)} className="showNavButton">
         menu
       </button>
       <nav tabIndex={0} className={showNav ? "mainNav" : "hideNav"}>
@@ -197,16 +187,25 @@ const NavBar = () => {
         </ul>
         {!userActive ? (
           <div className="navButtons">
-            <button onClick={handleLogin} className="buttonRoundClear">
+            <button
+              onClick={() => dispatch(POP_UP_LOG(true))}
+              className="buttonRoundClear"
+            >
               Log In
             </button>
-            <button onClick={handleSignUp} className="buttonRoundGreen">
+            <button
+              onClick={() => dispatch(POP_UP_REG(true))}
+              className="buttonRoundGreen"
+            >
               Sign Up
             </button>
           </div>
         ) : (
           <div className="navButtons">
-            <button onClick={handleProfile} className="buttonRoundClear">
+            <button
+              onClick={() => navigate("/dashboard")}
+              className="buttonRoundClear"
+            >
               Profile
             </button>
             <button onClick={handleSignout} className="buttonRoundGreen">
@@ -215,21 +214,21 @@ const NavBar = () => {
           </div>
         )}
       </nav>
-        <div
-          onClick={handleExitLogin}
-          aria-hidden={popups.login || popups.signup ? false : true}
-          className={
-            popups.login === true || popups.signup === true
-              ? "popupContainer popupActive"
-              : "popupContainer"
-          }
-        >
-          {popups.login === true ? (
-            <Login />
-          ) : popups.signup === true ? (
-            <Signup />
-          ) : null}
-        </div>
+      <div
+        onClick={handleExitLogin}
+        aria-hidden={popups.login || popups.signup ? false : true}
+        className={
+          popups.login === true || popups.signup === true
+            ? "popupContainer popupActive"
+            : "popupContainer"
+        }
+      >
+        {popups.login === true ? (
+          <Login />
+        ) : popups.signup === true ? (
+          <Signup />
+        ) : null}
+      </div>
     </div>
   );
 };

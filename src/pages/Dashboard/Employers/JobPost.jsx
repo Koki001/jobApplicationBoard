@@ -1,12 +1,13 @@
-import { push, ref } from "firebase/database";
-import React, { useEffect, useRef, useState } from "react";
-import { auth, db, storage } from "../../../firebase";
-import jobSectors from "../../helpers/jobSectors";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import jobSectors from "../../../components/helpers/jobSectors";
 import * as dayjs from "dayjs";
-import { getDownloadURL } from "firebase/storage";
+import { push, ref } from "firebase/database";
 import { ref as sRef } from "firebase/storage";
+import { getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../../firebase/firebase";
+import { useSelector, useDispatch } from "react-redux";
 import { PHOTO } from "../../../redux/slices/userSlice";
+// MUI +
 import Swal from "sweetalert2";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -14,26 +15,26 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+
 const JobPost = (props) => {
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [info, setInfo] = useState({ skills: [] });
   const [currentSkill, setCurrentSkill] = useState("");
   const [review, setReview] = useState(false);
 
-  useEffect(() => {
-    getDownloadURL(
-      sRef(storage, `avatar/${auth.currentUser.uid}/logo`)
-    ).then((url) => {
-      dispatch(PHOTO(url));
-    });
-  }, []);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const regexNum = new RegExp("^[0-9]*$");
-  // const resRef = useRef()
   const date = new Date();
-  const handleCloseReview = () => {
-    setReview(false);
-  };
+
+  useEffect(() => {
+    getDownloadURL(sRef(storage, `avatar/${auth.currentUser.uid}/logo`)).then(
+      (url) => {
+        dispatch(PHOTO(url));
+      }
+      );
+    }, []);
+
+  // only show review if all information is filled out
   const handleOpenReview = () => {
     if (
       info.title &&
@@ -396,7 +397,7 @@ const JobPost = (props) => {
       <Dialog
         fullScreen
         open={review}
-        onClose={handleCloseReview}
+        onClose={() => setReview(false)}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -481,7 +482,7 @@ const JobPost = (props) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button color="success" onClick={handleCloseReview} autoFocus>
+          <Button color="success" onClick={() => setReview(false)} autoFocus>
             Cancel
           </Button>
           <Button color="success" onClick={handlePostJob} autoFocus>

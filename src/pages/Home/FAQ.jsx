@@ -5,11 +5,12 @@ import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+
 const FAQ = () => {
   const [expanded, setExpanded] = useState("panel1");
+
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
@@ -299,7 +300,8 @@ const FAQ = () => {
         </Accordion>
       </div>
       <p className="faqLink">
-        Didn't find the answer? We can help. <Link to={"/contactUs"}>Click here</Link>
+        Didn't find the answer? We can help.{" "}
+        <Link to={"/contactUs"}>Click here</Link>
       </p>
     </section>
   );

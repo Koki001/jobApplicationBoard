@@ -1,13 +1,15 @@
 import React, { useEffect } from "react";
-import NavBar from "./NavBar";
-import Footer from "./sections/Footer";
 import { useLocation } from "react-router-dom";
+import Footer from "./Home/Footer";
+import NavBar from "../components/NavBar";
 
 const Pricing = () => {
   const location = useLocation();
+
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
+
   return (
     <div>
       <section className="pricing" id="pricing">
@@ -49,7 +51,8 @@ const Pricing = () => {
             <li>
               <h5>Diamond</h5>
               <h4>
-                <span className="dollarSign">$</span> 39.<span className="cents">99</span>
+                <span className="dollarSign">$</span> 39.
+                <span className="cents">99</span>
               </h4>
               <div className="planDetails">
                 <p>Unlimited Domains</p>

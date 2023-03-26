@@ -1,26 +1,28 @@
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useLocation, Link } from "react-router-dom";
-import NavBar from "./NavBar";
-import Footer from "./sections/Footer";
-import { db } from "../firebase";
+import Footer from "./Home/Footer";
+import NavBar from "../components/NavBar";
+import { db } from "../firebase/firebase";
 import { ref, child, get } from "firebase/database";
-import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 // MUI imports
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
 
 const JobDetails = () => {
   const jobDetails = useSelector((state) => state.jobs.details);
-  const location = useLocation();
   const [details, setDetails] = useState(jobDetails);
+
+  const location = useLocation();
+
   const { id } = useParams();
+
   useEffect(() => {
     document.documentElement.scrollTo(0, 0);
   }, [location.key]);
   useEffect(() => {
     const dbRef = ref(db);
     if (Object.keys(jobDetails).length === 0) {
-
       get(child(dbRef, `data/jobs/${id}`))
         .then((snapshot) => {
           if (snapshot.exists()) {
@@ -34,7 +36,7 @@ const JobDetails = () => {
         });
     }
   }, []);
-  console.log(details)
+
   return (
     <div className="jobDetailsSection">
       <header className="jobDetailsHeader">
@@ -58,40 +60,20 @@ const JobDetails = () => {
                 <div className="detailsLogo">Copy</div>
               </div>
             </div>
-            {/* <div className="detailsOverview">
-              <h3>Overview:</h3>
-              <p>{details.overview}</p>
-            </div> */}
             <div className="detailsDescription">
               <h3>Job Description:</h3>
               <p style={{ whiteSpace: "pre-wrap" }}>{details.description}</p>
             </div>
             <div className="detailsResponsibilies">
               <h3>Responsibilities:</h3>
-              {/* <ul>
-                {details.responsibilities?.map((item, index) => {
-                  return <li key={index}>{item}</li>;
-                })}
-              </ul> */}
               <p>{details.responsibilities}</p>
             </div>
-            {/* CHANGE this once implemented, not it copies responsibilities */}
             <div className="detailsRequired">
               <h3>Required Skills:</h3>
-              {/* <ul>
-                {details.responsibilities?.map((item, index) => {
-                  return <li key={index}>{item}</li>;
-                })}
-              </ul> */}
               <p>{details.required}</p>
             </div>
             <div className="detailsBenefits">
               <h3>Benefits:</h3>
-              {/* <ul>
-                {details.benefits?.map((item, index) => {
-                  return <li key={index}>{item}</li>;
-                })}
-              </ul> */}
               <p>{details.benefits}</p>
             </div>
             <Link to={"/jobs"}>

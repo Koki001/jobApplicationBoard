@@ -51,9 +51,21 @@ const JobGuides = () => {
             <img src="../assets/jobGuides/blogPlaceholder.png" alt="" />
           </div>
           <div className="cvUploadRight">
-            <h2><span>Get your</span> <span>Matched Jobs in a</span> few minutes.</h2>
-            <p>Find your dream job & earn from world leading brands. Upload your CV now.</p>
-            <button className="buttonSquareGreen"> <img src="../assets/jobGuides/upload.png" alt="upload CV icon"/> Upload CV</button>
+            <h2>
+              <span>Get your</span> <span>Matched Jobs in a</span> few minutes.
+            </h2>
+            <p>
+              Find your dream job & earn from world leading brands. Upload your
+              CV now.
+            </p>
+            <button className="buttonSquareGreen">
+              {" "}
+              <img
+                src="../assets/jobGuides/upload.png"
+                alt="upload CV icon"
+              />{" "}
+              Upload CV
+            </button>
           </div>
         </div>
       </div>

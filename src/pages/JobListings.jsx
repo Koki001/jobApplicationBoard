@@ -1,12 +1,12 @@
-import { useLocation, Link } from "react-router-dom";
 import React, { useEffect, useRef, useState } from "react";
-import NavBar from "./NavBar";
-import Footer from "./sections/Footer";
-import { db, auth } from "../firebase";
+import { useLocation, Link } from "react-router-dom";
+import Footer from "./Home/Footer";
+import NavBar from "../components/NavBar";
+import jobSectors from "../components/helpers/jobSectors";
+import { db, auth } from "../firebase/firebase";
 import { ref, child, get } from "firebase/database";
-import Pagination from "@mui/material/Pagination";
+// redux imports
 import { useSelector, useDispatch } from "react-redux";
-import jobSectors from "./helpers/jobSectors";
 import {
   pagination,
   PAGINATION_MAX,
@@ -22,30 +22,27 @@ import {
   FILTER_ACTIVE,
   FILTER_RESET,
 } from "../redux/slices/jobFilterSlice";
-import Swal from "sweetalert2";
-import { POP_UP_LOG } from "../redux/slices/popupSlice";
 import { JOB_DETAILS, JOB_LIST } from "../redux/slices/jobListSlice";
-// MUI imports
-import Accordion from "@mui/material/Accordion";
-import AccordionSummary from "@mui/material/AccordionSummary";
-import AccordionDetails from "@mui/material/AccordionDetails";
-import Typography from "@mui/material/Typography";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// MUI imports +
+import Swal from "sweetalert2";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
+import Accordion from "@mui/material/Accordion";
+import Typography from "@mui/material/Typography";
+import Pagination from "@mui/material/Pagination";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
 import CircularProgress from "@mui/material/CircularProgress";
+import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
 
 const JobListings = () => {
-  const location = useLocation();
-  const dispatch = useDispatch();
   const pageSelectorDefault = useSelector((state) => state.pagination.default);
   const pageSelectorCurrent = useSelector((state) => state.pagination.current);
-
-  const filters = useSelector((state) => state.filter);
   const currentSort = useSelector((state) => state.pagination.sort);
+  const filters = useSelector((state) => state.filter);
+
   const [expanded, setExpanded] = useState(true);
-  const [salary, setSalary] = useState([30000, 70000]);
   const [jobNum, setJobNum] = useState();
   const [pageNum, setPageNum] = useState();
   const [jobList, setJobList] = useState([]);
@@ -53,7 +50,11 @@ const JobListings = () => {
   const [loginReminder, setLoginReminder] = useState(false);
   const [generalSort, setGeneralSort] = useState(currentSort);
   const [jobObject, setJobObject] = useState({});
+
+  const location = useLocation();
+  const dispatch = useDispatch();
   const scrollRef = useRef();
+
   useEffect(() => {
     if (pageSelectorCurrent > pageNum) {
       dispatch(pagination(pageNum));
@@ -70,8 +71,8 @@ const JobListings = () => {
       block: "start",
     });
   }, [pageSelectorCurrent]);
+  // get main data and save results to be mapped
   useEffect(() => {
-    // if (!filters.active) {
     const dbRef = ref(db);
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
@@ -110,15 +111,8 @@ const JobListings = () => {
       .catch((error) => {
         console.error(error);
       });
- 
   }, []);
-  const handleExpand = () => {
-    setExpanded(!expanded);
-  };
 
-  const handleSalaryChange = (e, val) => {
-    dispatch(FILTER_SALARY(val));
-  };
   const handleLogoDisplay = (e) => {
     e.target.style.visibility = "visible";
     e.target.parentElement.classList.remove("defaultLoad");
@@ -142,9 +136,7 @@ const JobListings = () => {
     e.preventDefault();
     console.log("EDIT");
   };
-  const handleSort = (e) => {
-    dispatch(SORT(e.target.value));
-  };
+  // remember previous sort order
   useEffect(() => {
     if (currentSort === "title") {
       setGeneralSort("title");
@@ -166,53 +158,12 @@ const JobListings = () => {
       setLoader(false);
     }
   }, [currentSort]);
-  const categoryFilter = (array) => {
-    return array.filter((item) =>
-      item.category.toLowerCase().includes(filters.category.toLowerCase())
-    );
-  };
-  const keywordFilter = (array) => {
-    return array.filter((item) =>
-      item.title.toLowerCase().includes(filters.keyword.toLowerCase())
-    );
-  };
-  const typeFilter = (array) => {
-    return array.filter((item) => item.type.includes(filters.type));
-  };
-  const locationFilter = (array) => {
-    return array.filter(
-      (item) =>
-        item.city.toLowerCase().includes(filters.location.toLowerCase()) ||
-        item.country.toLowerCase().includes(filters.location.toLowerCase())
-    );
-  };
-  // console.log(jobList);
-  // const handleFilterApply = (e) => {
-  //   dispatch(FILTER_ACTIVE(true));
-  //   console.log(filters);
-  //   let result = jobList;
-  //   result = keywordFilter(result);
-  //   result = categoryFilter(result);
-  //   result = typeFilter(result);
-  //   result = locationFilter(result);
-  //   setJobList(result);
-  //   dispatch(PAGINATION_MAX(Math.ceil(jobList.length / 10)));
-  // };
   const handleFilterClear = () => {
     dispatch(FILTER_ACTIVE(false));
     dispatch(FILTER_RESET());
     dispatch(pagination(1));
   };
-  const handlePageChange = (e, val) => {
-    dispatch(pagination(Number(val)));
-  };
-  const handlePropagation = (e) => {
-    e.stopPropagation();
-  };
-  const handleLoginRedirect = () => {
-    setLoginReminder(false);
-    dispatch(POP_UP_LOG(true));
-  };
+
   useEffect(() => {
     if (loginReminder) {
       document.body.style.overflow = "hidden";
@@ -220,9 +171,7 @@ const JobListings = () => {
       document.body.style.overflow = "unset";
     }
   }, [loginReminder]);
-  const handleJobDetails = (e) => {
-    dispatch(JOB_DETAILS(jobObject[e.currentTarget.id]));
-  };
+
   return (
     <div>
       <section className="jobListings">
@@ -236,7 +185,7 @@ const JobListings = () => {
             <div className="jobsFilter">
               <Accordion
                 expanded={expanded}
-                onChange={handleExpand}
+                onChange={() => setExpanded(!expanded)}
                 sx={{
                   boxShadow: "none",
                   backgroundColor: "#EFF6F3",
@@ -448,7 +397,9 @@ const JobListings = () => {
                             <Slider
                               getAriaLabel={() => "Salary range"}
                               value={filters.salary}
-                              onChange={handleSalaryChange}
+                              onChange={(e, val) =>
+                                dispatch(FILTER_SALARY(val))
+                              }
                               // valueLabelDisplay="auto"
                               step={5000}
                               marks
@@ -492,7 +443,7 @@ const JobListings = () => {
                 <label htmlFor="sort">Sort by: </label>
                 <select
                   value={generalSort}
-                  onChange={handleSort}
+                  onChange={(e) => dispatch(SORT(e.target.value))}
                   name="sort"
                   id="sort"
                 >
@@ -551,7 +502,11 @@ const JobListings = () => {
                       ) {
                         return (
                           <Link
-                            onClick={handleJobDetails}
+                            onClick={(e) =>
+                              dispatch(
+                                JOB_DETAILS(jobObject[e.currentTarget.id])
+                              )
+                            }
                             to={`/jobs/${item.uid}`}
                             id={item.uid}
                             key={item.uid + "key"}
@@ -644,7 +599,7 @@ const JobListings = () => {
                   },
                 }}
                 size={"small"}
-                onChange={handlePageChange}
+                onChange={(e, val) => dispatch(pagination(Number(val)))}
                 count={pageNum}
                 page={pageSelectorCurrent}
                 variant="outlined"

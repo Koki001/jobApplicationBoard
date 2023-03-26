@@ -2,19 +2,19 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from './redux/store';
-import App from './App';
-// import "../public/styles/App.css"
-// import Signup from "./components/Signup";
-import Pricing from './components/Pricing';
-import Contact from './components/Contact';
-import JobListings from './components/JobListings';
-import JobDetails from './components/JobDetails';
-import Profile from './components/dashboard/Profile';
-import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import reportWebVitals from './reportWebVitals';
+// Component imports
+import App from './App';
+import Pricing from './pages/Pricing';
+import Contact from './pages/Contact';
+import JobListings from './pages/JobListings';
+import JobDetails from './pages/JobDetails';
+import Profile from './pages/Dashboard/Profile';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+// all paths and their components for react router
 const router = createBrowserRouter([
   {
     path: "/",

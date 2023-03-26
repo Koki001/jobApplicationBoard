@@ -1,14 +1,14 @@
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
-import { USER, PHOTO } from "../../redux/slices/userSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { PHOTO } from "../../redux/slices/userSlice";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db, storage } from "../../firebase";
-import { ref, child, get, onValue, update } from "firebase/database";
+import { auth, db, storage } from "../../firebase/firebase";
+import { ref, onValue } from "firebase/database";
 import { getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
-import React, { useState } from "react";
 import Swal from "sweetalert2";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
@@ -19,26 +19,19 @@ const Login = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
-  const handlePropagation = (e) => {
-    // e.preventDefault();
-    e.stopPropagation();
-  };
-  const handleLoginClose = () => {
-    dispatch(POP_UP_LOG(false));
-  };
+  // popup for sign up
   const handleRegPopup = () => {
     dispatch(POP_UP_LOG(false));
     dispatch(POP_UP_REG(true));
   };
+  // log in function
   const handleLogin = () => {
     signInWithEmailAndPassword(auth, userEmail, userPass)
       .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
         dispatch(POP_UP_LOG(false));
       })
       .then(() => {
+        // get account type of user
         onValue(ref(db, "users/" + auth.currentUser.uid), (snapshot) => {
           if (snapshot.val() !== null) {
             dispatch(ACC_TYPE(snapshot.val().type));
@@ -46,6 +39,7 @@ const Login = () => {
         });
       })
       .then(() => {
+        // get image url for user avatar
         getDownloadURL(sRef(storage, `avatar/${auth.currentUser.uid}/logo`))
           .then((url) => {
             dispatch(PHOTO(url));
@@ -57,6 +51,7 @@ const Login = () => {
       })
       .catch((error) => {
         console.log(error);
+        // sweetalert2 alerts for login error handling
         if (error.code === "auth/invalid-email") {
           Swal.fire({
             text: "Please enter a valid email",
@@ -88,6 +83,7 @@ const Login = () => {
         }
       });
   };
+  // demo candidate login
   const handleUserTest = () => {
     signInWithEmailAndPassword(auth, "frodo@gmail.com", "Admin123")
       .then((userCredential) => {
@@ -113,6 +109,7 @@ const Login = () => {
         navigate("/dashboard");
       });
   };
+  // demo employer login
   const handleCompanyTest = () => {
     signInWithEmailAndPassword(auth, "awesome@gmail.com", "Admin123")
       .then((userCredential) => {
@@ -139,8 +136,8 @@ const Login = () => {
       });
   };
   return (
-    <div onClick={handlePropagation} className="loginMain">
-      <div onClick={handleLoginClose} className="closeIcon">
+    <div onClick={(e) => e.stopPropagation()} className="loginMain">
+      <div onClick={(e) => dispatch(POP_UP_LOG(false))} className="closeIcon">
         <CloseIcon />
       </div>
       <div className="loginHeadings">

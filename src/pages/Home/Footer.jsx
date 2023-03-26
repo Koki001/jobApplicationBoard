@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { ParagraphGenerator } from "../helpers/Faker";
+import { ParagraphGenerator } from "../../components/helpers/Faker";
 // MUI imports
 import PinterestIcon from "@mui/icons-material/Pinterest";
 import FacebookIcon from "@mui/icons-material/Facebook";
@@ -18,18 +18,11 @@ const Footer = () => {
   const [privacy, setPrivacy] = useState(false);
   const [cookies, setCookies] = useState(false);
   const [text, setText] = useState("");
+
   useEffect(() => {
     setText(ParagraphGenerator(5));
   }, []);
 
-  const handleOpenTerms = () => setTerms(true);
-  const handleCloseTerms = () => setTerms(false);
-  const handleOpenConditions = () => setConditions(true);
-  const handleCloseConditions = () => setConditions(false);
-  const handleOpenPrivacy = () => setPrivacy(true);
-  const handleClosePrivacy = () => setPrivacy(false);
-  const handleOpenCookies = () => setCookies(true);
-  const handleCloseCookies = () => setCookies(false);
   return (
     <footer id="contact" className="footerMain navWrapper">
       <div className="footerTop">
@@ -78,12 +71,12 @@ const Footer = () => {
             <h4>Legal</h4>
             <ul className="footerLegal">
               <li>
-                <p className="legalList" onClick={handleOpenTerms}>
+                <p className="legalList" onClick={() => setTerms(true)}>
                   Terms of Use
                 </p>
                 <Dialog
                   open={terms}
-                  onClose={handleCloseTerms}
+                  onClose={() => setTerms(false)}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
@@ -103,7 +96,7 @@ const Footer = () => {
                   <DialogActions>
                     <Button
                       color="success"
-                      onClick={handleCloseTerms}
+                      onClick={() => setTerms(false)}
                       autoFocus
                     >
                       Ok
@@ -112,12 +105,12 @@ const Footer = () => {
                 </Dialog>
               </li>
               <li>
-                <p className="legalList" onClick={handleOpenConditions}>
+                <p className="legalList" onClick={() => setConditions(true)}>
                   Terms & Conditions
                 </p>
                 <Dialog
                   open={conditions}
-                  onClose={handleCloseConditions}
+                  onClose={() => setConditions(false)}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
@@ -137,7 +130,7 @@ const Footer = () => {
                   <DialogActions>
                     <Button
                       color="success"
-                      onClick={handleCloseConditions}
+                      onClick={() => setConditions(false)}
                       autoFocus
                     >
                       Ok
@@ -146,12 +139,12 @@ const Footer = () => {
                 </Dialog>
               </li>
               <li>
-                <p className="legalList" onClick={handleOpenPrivacy}>
+                <p className="legalList" onClick={() => setPrivacy(true)}>
                   Privacy
                 </p>
                 <Dialog
                   open={privacy}
-                  onClose={handleClosePrivacy}
+                  onClose={() => setPrivacy(false)}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
@@ -169,7 +162,7 @@ const Footer = () => {
                   <DialogActions>
                     <Button
                       color="success"
-                      onClick={handleClosePrivacy}
+                      onClick={() => setPrivacy(false)}
                       autoFocus
                     >
                       Ok
@@ -178,12 +171,12 @@ const Footer = () => {
                 </Dialog>
               </li>
               <li>
-                <p className="legalList" onClick={handleOpenCookies}>
+                <p className="legalList" onClick={() => setCookies(true)}>
                   Cookie Policy
                 </p>
                 <Dialog
                   open={cookies}
-                  onClose={handleCloseCookies}
+                  onClose={() => setCookies(false)}
                   aria-labelledby="alert-dialog-title"
                   aria-describedby="alert-dialog-description"
                 >
@@ -203,7 +196,7 @@ const Footer = () => {
                   <DialogActions>
                     <Button
                       color="success"
-                      onClick={handleCloseCookies}
+                      onClick={() => setCookies(false)}
                       autoFocus
                     >
                       Ok

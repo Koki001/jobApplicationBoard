@@ -1,24 +1,26 @@
-import NavBar from "./NavBar";
-import Footer from "./sections/Footer";
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import Footer from "./Home/Footer";
+import NavBar from "../components/NavBar";
 // MUI imports
 import CircularProgress from "@mui/material/CircularProgress";
 
 const Contact = () => {
-  const location = useLocation();
   const [image, setImage] = useState();
+
+  const location = useLocation();
   const apiKey = import.meta.env.VITE_MAP_QUEST_API;
   const imageUrl = `https://www.mapquestapi.com/staticmap/v5/map?key=${apiKey}&locations=483 Queen St, M5V 2A9&defaultMarker=marker-sm-3B5998-22407F&size=1100,500@2x`;
+
   const displayMap = async () => {
     const res = await fetch(imageUrl);
     const imageBlob = await res.blob();
     const imageObjectURL = URL.createObjectURL(imageBlob);
     setImage(imageObjectURL);
   };
-    useEffect(() => {
-      document.documentElement.scrollTo(0, 0);
-    }, [location.key]);
+  useEffect(() => {
+    document.documentElement.scrollTo(0, 0);
+  }, [location.key]);
   useEffect(() => {
     displayMap();
   }, []);

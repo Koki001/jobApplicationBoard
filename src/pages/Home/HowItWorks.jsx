@@ -9,9 +9,11 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const HowItWorks = () => {
   const [expanded, setExpanded] = useState("panel1");
+
   const handleChange = (panel) => (event, newExpanded) => {
     setExpanded(newExpanded ? panel : false);
   };
+
   return (
     <section id="about" className="howItWorks wrapper">
       <h2>How does it work?</h2>

@@ -1,21 +1,20 @@
 import React, { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { POP_UP_LOG, POP_UP_REG } from "../../redux/slices/popupSlice";
 import { USER, PHOTO } from "../../redux/slices/userSlice";
 import { ACC_TYPE } from "../../redux/slices/accTypeSlice";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth, db, storage } from "../../firebase";
-import { ref, child, set, onValue } from "firebase/database";
-import { uploadString, uploadBytes, getDownloadURL } from "firebase/storage";
+import { auth, db, storage } from "../../firebase/firebase";
+import { ref, set } from "firebase/database";
+import { getDownloadURL } from "firebase/storage";
 import { ref as sRef } from "firebase/storage";
-import { useNavigate } from "react-router-dom";
 // MUI imports
 import CloseIcon from "@mui/icons-material/Close";
 import CheckIcon from "@mui/icons-material/Check";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 
 const Signup = () => {
-  const sliderRef = useRef();
   const [passwordPopup, setPasswordPopup] = useState(false);
   const [passConfirm, setPassConfirm] = useState("");
   const [accountType, setAccountType] = useState("candidate");
@@ -25,11 +24,11 @@ const Signup = () => {
     email: "",
     password: "",
   });
+  const sliderRef = useRef();
+  const navigate = useNavigate();
   // pass must be 6 characters
   // include uppercase
-  const navigate = useNavigate();
   const regex = new RegExp("^((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9]))(?=.{8,})");
-  // console.log(regex.test(""))
   const regexLower = new RegExp("^(?=.*[a-z])");
   const regexNum = new RegExp("^(?=.*[0-9])");
   const regexUpper = new RegExp("^(?=.*[A-Z])");
@@ -39,35 +38,7 @@ const Signup = () => {
     dispatch(POP_UP_LOG(true));
     dispatch(POP_UP_REG(false));
   };
-  const handlePropagation = (e) => {
-    e.stopPropagation();
-  };
-  const handleLoginClose = () => {
-    dispatch(POP_UP_REG(false));
-  };
-  const handleName = (e) => {
-    setNewUser((prev) => ({
-      ...prev,
-      name: e.target.value,
-    }));
-  };
-  const handleEmail = (e) => {
-    setNewUser((prev) => ({
-      ...prev,
-      email: e.target.value,
-    }));
-  };
-
-  const handlePass = (e) => {
-    setNewUser((prev) => ({
-      ...prev,
-      password: e.target.value,
-    }));
-  };
-  const handlePassConfirm = (e) => {
-    setPassConfirm(e.target.value);
-  };
-
+  // sign up function
   const handleSignup = async () => {
     if (
       regex.test(newUser.password) &&
@@ -84,6 +55,8 @@ const Signup = () => {
           updateProfile(user, {
             displayName: newUser.name,
           });
+          // set avatar url to placeholder
+          // set initial user database
           getDownloadURL(sRef(storage, `logoPlaceholder.png`)).then((url) => {
             set(ref(db, "users/" + user.uid), {
               name: newUser.name,
@@ -93,9 +66,7 @@ const Signup = () => {
             });
             dispatch(PHOTO(url));
           });
-
           dispatch(ACC_TYPE(accountType));
-          // }
           setNewUser((prev) => ({
             ...prev,
             name: "",
@@ -119,6 +90,8 @@ const Signup = () => {
             alert("invalid email");
           }
         });
+      // regex alerts
+      // will replace with sweetalert or on screen prompts
     } else if (!regex.test(newUser.password)) {
       alert("pass weak");
     } else if (newUser.password !== passConfirm) {
@@ -144,15 +117,9 @@ const Signup = () => {
       sliderRef.current.style.backgroundColor = "#755146";
     }
   };
-  const handleUnfocus = () => {
-    setPasswordPopup(false);
-  };
-  const handlePassVisibility = () => {
-    setPassVisibility(!passVisibility);
-  };
   return (
-    <div onClick={handlePropagation} className="signupMain">
-      <div onClick={handleLoginClose} className="closeIcon">
+    <div onClick={(e) => e.stopPropagation()} className="signupMain">
+      <div onClick={(e) => dispatch(POP_UP_REG(false))} className="closeIcon">
         <CloseIcon />
       </div>
       <h3>Account Type</h3>
@@ -187,7 +154,12 @@ const Signup = () => {
           <div className="signupFName">
             <label htmlFor="signupFName">Name*</label>
             <input
-              onChange={handleName}
+              onChange={(e) =>
+                setNewUser((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
               value={newUser.name}
               id="signupFName"
               type="text"
@@ -197,7 +169,12 @@ const Signup = () => {
           <div className="signupCompanyName">
             <label htmlFor="signupCompanyName">Company Name*</label>
             <input
-              onChange={handleName}
+              onChange={(e) =>
+                setNewUser((prev) => ({
+                  ...prev,
+                  name: e.target.value,
+                }))
+              }
               value={newUser.name}
               id="signupCompanyName"
               type="text"
@@ -207,7 +184,12 @@ const Signup = () => {
         <div className="signupEmail">
           <label htmlFor="signupEmail">Email*</label>
           <input
-            onChange={handleEmail}
+            onChange={(e) =>
+              setNewUser((prev) => ({
+                ...prev,
+                email: e.target.value,
+              }))
+            }
             value={newUser.email}
             id="signupEmail"
             type="text"
@@ -301,13 +283,21 @@ const Signup = () => {
           <label htmlFor="signupPassword">Password*</label>
           <input
             onFocus={() => setPasswordPopup(true)}
-            onBlur={handleUnfocus}
-            onChange={handlePass}
+            onBlur={() => setPasswordPopup(false)}
+            onChange={(e) =>
+              setNewUser((prev) => ({
+                ...prev,
+                password: e.target.value,
+              }))
+            }
             id="signupPassword"
             type={passVisibility ? "text" : "password"}
             value={newUser.password}
           />
-          <div onClick={handlePassVisibility} className="passVisibility">
+          <div
+            onClick={() => setPassVisibility(!passVisibility)}
+            className="passVisibility"
+          >
             <VisibilityIcon
               sx={
                 passVisibility
@@ -332,7 +322,7 @@ const Signup = () => {
           </label>
           <input
             disabled={regex.test(newUser.password) ? false : true}
-            onChange={handlePassConfirm}
+            onChange={(e) => setPassConfirm(e.target.value)}
             id="signupPasswordConfirm"
             type={passVisibility ? "text" : "password"}
             value={passConfirm}

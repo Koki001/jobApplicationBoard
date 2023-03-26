@@ -17,6 +17,7 @@ const Header = () => {
   const navigate = useNavigate();
   useEffect(() => {
     const dbRef = ref(db);
+
     get(child(dbRef, `data/jobs`))
       .then((snapshot) => {
         let dataArray = [];
@@ -36,7 +37,7 @@ const Header = () => {
       .catch((error) => {
         console.error(error);
       });
-  });
+  }, []);
   return (
     <header id="home" className="mainHeader">
       {/* <nav>

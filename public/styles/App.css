@@ -1803,8 +1803,8 @@ span.fakeTextBreaks {
   margin: 0;
   background-color: #F8FDE4;
   border-radius: 5px;
-  top: 10px;
-  left: -180px;
+  top: -50px;
+  left: 100px;
   border: 2px solid black;
 }
 .signupMain .popupForm .signupPassword .passwordPopupItem {
@@ -1822,7 +1822,7 @@ span.fakeTextBreaks {
   top: 0;
   right: 0;
   width: 30px;
-  top: 25px;
+  top: 30px;
   right: 10px;
   cursor: pointer;
   color: rgb(170, 170, 170);
@@ -3158,7 +3158,7 @@ h1 {
 }
 
 .visibleButton {
-  transition: all 0.2s linear;
+  transition: none;
   visibility: visible;
   opacity: 1;
   position: fixed;
@@ -3168,9 +3168,14 @@ h1 {
   transform: translate(-50%, 50%);
 }
 
+.visibleButton:active {
+  transform: translate(-50%, 50%);
+}
+
 .hiddenButton {
+  transition: none;
   visibility: hidden;
-  opacity: 0;
+  opacity: 1;
 }
 
 .myProfileForm div {
@@ -3798,6 +3803,22 @@ span.reviewSpan {
   .jobCard .jobCardLocation .bottomText {
     display: block;
     margin-bottom: 5px;
+  }
+  .subMenuTitle svg {
+    transform: rotate(90deg);
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu {
+    height: 500px;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .subMenuParent:hover svg {
+    transform: rotate(270deg);
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .subMenu {
+    top: -125px;
+    left: 0;
+    transform: translate(-100%);
   }
   .filtersCategories select {
     width: 100%;

@@ -135,7 +135,7 @@
       font-weight: bold;
       margin-top: 20px;
       margin-bottom: 2px;
-      padding: 3px ;
+      padding: 3px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -349,7 +349,7 @@
   margin-top: 15px;
 }
 .visibleButton {
-  transition: all 0.2s linear;
+  transition: none;
   visibility: visible;
   opacity: 1;
   position: fixed;
@@ -358,9 +358,13 @@
   text-transform: uppercase;
   transform: translate(-50%, 50%);
 }
+.visibleButton:active {
+  transform: translate(-50%, 50%);
+}
 .hiddenButton {
+  transition: none;
   visibility: hidden;
-  opacity: 0;
+  opacity: 1;
 }
 .myProfileForm {
   div {

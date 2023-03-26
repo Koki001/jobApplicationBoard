@@ -40,6 +40,10 @@ const Profile = () => {
   const handlePost = () => {
     setDashPage("dashboard");
   };
+  const handleDashNav = (e) => {
+    e.stopPropagation();
+    setDashNav(!dashNav);
+  };
   const candidateItems = {
     dashboard: <Dashboard />,
     profile: <MyProfile />,
@@ -85,13 +89,16 @@ const Profile = () => {
     });
   };
 
-  const handlePropagation = (e) => {
-    e.stopPropagation();
-  };
+  // const handleCloseDash = (e) => {
+  //   setDashNav(false);
+  // };
 
   return (
     <section className="dashboardSection">
-      <div className="dashboardContainer navWrapper">
+      <div
+        // onClick={handleCloseDash}
+        className="dashboardContainer navWrapper"
+      >
         <nav
           className={
             dashNav
@@ -105,7 +112,7 @@ const Profile = () => {
             type="checkbox"
           />
           <label
-            onClick={() => setDashNav(!dashNav)}
+            onClick={handleDashNav}
             className={
               dashNav
                 ? "dashboardNavButton dashClosed"

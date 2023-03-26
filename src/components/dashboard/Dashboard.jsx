@@ -43,8 +43,8 @@ const Dashboard = () => {
         </li>
       </ul>
       <div className="dashboardSummary">
-        <div className="summaryChart">chart</div>
-        <div className="recentlyApplied">recent applications</div>
+        <div className="summaryChart"><img src="../assets/dashboard/graphPlaceholder.png" alt="placeholder for a graph" /></div>
+        <div className="recentlyApplied"></div>
       </div>
     </div>
   );

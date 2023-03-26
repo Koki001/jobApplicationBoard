@@ -73,7 +73,23 @@
       display: block;
       margin-bottom: 5px;
     }
-  } 
+  }
+  .subMenuTitle svg {
+    transform: rotate(90deg);
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu {
+    height: 500px;
+    flex-direction: column;
+    align-items: flex-end;
+    .subMenuParent:hover svg {
+      transform: rotate(270deg);
+    }
+  }
+  nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu .subMenu {
+    top: -125px;
+    left: 0;
+    transform: translate(-100%);
+  }
   .filtersCategories select {
     width: 100%;
   }

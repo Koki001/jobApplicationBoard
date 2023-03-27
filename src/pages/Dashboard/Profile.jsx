@@ -21,6 +21,7 @@ import BookmarkBorderOutlinedIcon from "@mui/icons-material/BookmarkBorderOutlin
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import SavedJobs from "./Candidates/SavedJobs";
 
 const Profile = () => {
   const dispatch = useDispatch();
@@ -39,6 +40,7 @@ const Profile = () => {
   const candidateItems = {
     dashboard: <MyDashboard />,
     profile: <MyProfile />,
+    bookmarks: <SavedJobs />
   };
   // components specific to employer accounts
   const employerItems = {

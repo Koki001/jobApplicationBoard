@@ -196,3 +196,11 @@
 .scrollHidden {
   visibility: hidden;
 }
+.saveJobButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    color: $lightGreen;
+  }
+}

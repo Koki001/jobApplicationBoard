@@ -622,6 +622,15 @@ h1 * {
   visibility: hidden;
 }
 
+.saveJobButton {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.saveJobButton:hover {
+  color: #00BF58;
+}
+
 .mainHeader {
   display: flex;
   flex-direction: column;
@@ -3312,6 +3321,14 @@ span.reviewSpan {
   font-size: 1rem !important;
   color: black !important;
   display: block;
+}
+
+.savedJobs {
+  width: 100%;
+  padding: 30px;
+}
+.savedJobs h2 {
+  margin-bottom: 30px;
 }
 
 @media screen and (max-width: 1100px) {

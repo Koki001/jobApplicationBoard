@@ -4,7 +4,7 @@ import Footer from "./Home/Footer";
 import NavBar from "../components/NavBar";
 import jobSectors from "../components/helpers/jobSectors";
 import { db, auth } from "../firebase/firebase";
-import { ref, child, get } from "firebase/database";
+import { ref, child, get, set } from "firebase/database";
 // redux imports
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -50,10 +50,12 @@ const JobListings = () => {
   const [loginReminder, setLoginReminder] = useState(false);
   const [generalSort, setGeneralSort] = useState(currentSort);
   const [jobObject, setJobObject] = useState({});
+  const [savedKeys, setSavedKeys] = useState();
 
   const location = useLocation();
   const dispatch = useDispatch();
   const scrollRef = useRef();
+  const saveJobRef = useRef();
 
   useEffect(() => {
     if (pageSelectorCurrent > pageNum) {
@@ -136,6 +138,43 @@ const JobListings = () => {
     e.preventDefault();
     console.log("EDIT");
   };
+  const handleSaveJob = (e) => {
+    let id = e.currentTarget.id;
+    e.stopPropagation();
+    e.preventDefault();
+    if (auth.currentUser) {
+      console.log(id);
+      setLoginReminder(false);
+      const dbRef = ref(db);
+      get(child(dbRef, `data/jobs/${id}`)).then((snapshot) => {
+        set(
+          ref(db, `users/${auth.currentUser?.uid}/savedJobs/${id}`),
+          snapshot.val()
+        );
+      });
+    } else {
+      Swal.fire({
+        text: "You must be logged in to save this job",
+        icon: "warning",
+        confirmButtonText: "Ok",
+        confirmButtonColor: "green",
+      });
+    }
+  };
+  // check if jobs are already saved
+  useEffect(() => {
+    const dbRef = ref(db);
+    const keys = [];
+    get(child(dbRef, `users/${auth.currentUser?.uid}/savedJobs`)).then(
+      (snapshot) => {
+        snapshot.forEach((item) => {
+          keys.push(item.key);
+        });
+        setSavedKeys(keys);
+      }
+    );
+    console.log(savedKeys)
+  }, []);
   // remember previous sort order
   useEffect(() => {
     if (currentSort === "title") {
@@ -567,7 +606,15 @@ const JobListings = () => {
                                 <p className="bottomText">{item.category}</p>
                               </div>
                               <div className="jobCardButtons">
-                                <BookmarkBorderIcon />
+                                <button
+                                ref={saveJobRef}
+                                  className="saveJobButton"
+                                  onClick={handleSaveJob}
+                                  id={item.uid}
+                      
+                                >
+                                  <BookmarkBorderIcon />
+                                </button>
                                 <button
                                   onClick={
                                     item.id && item.id === auth.currentUser?.uid

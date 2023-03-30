@@ -173,8 +173,8 @@ const JobListings = () => {
         setSavedKeys(keys);
       }
     );
-    console.log(savedKeys)
   }, []);
+  console.log(savedKeys);
   // remember previous sort order
   useEffect(() => {
     if (currentSort === "title") {
@@ -202,7 +202,7 @@ const JobListings = () => {
     dispatch(FILTER_RESET());
     dispatch(pagination(1));
   };
-
+  console.log(jobList)
   useEffect(() => {
     if (loginReminder) {
       document.body.style.overflow = "hidden";
@@ -607,11 +607,14 @@ const JobListings = () => {
                               </div>
                               <div className="jobCardButtons">
                                 <button
-                                ref={saveJobRef}
-                                  className="saveJobButton"
+                                  ref={saveJobRef}
+                                  className={
+                                    item.uid.includes(savedKeys)
+                                      ? "savedJob saveJobButton"
+                                      : "saveJobButton"
+                                  }
                                   onClick={handleSaveJob}
                                   id={item.uid}
-                      
                                 >
                                   <BookmarkBorderIcon />
                                 </button>

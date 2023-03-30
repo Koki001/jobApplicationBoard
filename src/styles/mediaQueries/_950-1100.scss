@@ -16,8 +16,8 @@
     z-index: 210;
     right: 0;
     top: 0;
-    padding: 15px;
-    margin: 20px 50px;
+    padding: 12px;
+    margin: 15px 30px;
     // width: 200px;
     background-color: white;
     border-radius: 10px;
@@ -35,14 +35,6 @@
     }
     svg {
       font-size: 3rem;
-    }
-    &::after {
-      content: "";
-      position: absolute;
-      width: 51px;
-      border-bottom: 2px solid $darkGrey;
-      top: 50%;
-      right: -51px;
     }
   }
   .navLogo {
@@ -126,7 +118,6 @@
     padding: 120px 0 50px 0;
 
     .navMenu {
-
       align-items: center;
       justify-content: space-around;
       margin: 50px;
@@ -154,7 +145,6 @@
     }
     .subMenuParent {
       padding: 0;
-
     }
     .subMenuTitle {
       flex-direction: row-reverse;
@@ -176,8 +166,17 @@
   .pricingHeader,
   .jobsHeader,
   .jobDetailsHeader {
-    padding-top: 50px;
+    padding-top: 100px;
+    .subMenu {
+      background-color: transparent;
+      transition: none;
+      a {
+        color: white;
+      }
+    }
   }
+ 
+  
   .pricingPlan {
     padding-bottom: 50px;
   }

@@ -256,6 +256,10 @@ html {
   min-height: 100vh;
 }
 
+body {
+  padding-right: 0;
+}
+
 h1,
 h2,
 h3,
@@ -629,6 +633,10 @@ h1 * {
 }
 .saveJobButton:hover {
   color: #00BF58;
+}
+
+.savedJob svg {
+  background-color: #00BF58;
 }
 
 .mainHeader {
@@ -3344,8 +3352,8 @@ span.reviewSpan {
     z-index: 210;
     right: 0;
     top: 0;
-    padding: 15px;
-    margin: 20px 50px;
+    padding: 12px;
+    margin: 15px 30px;
     background-color: white;
     border-radius: 10px;
     border: 2px solid rgb(170, 170, 170) !important;
@@ -3361,14 +3369,6 @@ span.reviewSpan {
   }
   .showNavButton svg {
     font-size: 3rem;
-  }
-  .showNavButton::after {
-    content: "";
-    position: absolute;
-    width: 51px;
-    border-bottom: 2px solid rgb(170, 170, 170);
-    top: 50%;
-    right: -51px;
   }
   .navLogo {
     transform: translate(-50%, 0);
@@ -3490,7 +3490,20 @@ span.reviewSpan {
   .pricingHeader,
   .jobsHeader,
   .jobDetailsHeader {
-    padding-top: 50px;
+    padding-top: 100px;
+  }
+  .contactHeader .subMenu,
+  .pricingHeader .subMenu,
+  .jobsHeader .subMenu,
+  .jobDetailsHeader .subMenu {
+    background-color: transparent;
+    transition: none;
+  }
+  .contactHeader .subMenu a,
+  .pricingHeader .subMenu a,
+  .jobsHeader .subMenu a,
+  .jobDetailsHeader .subMenu a {
+    color: white;
   }
   .pricingPlan {
     padding-bottom: 50px;
@@ -3824,6 +3837,9 @@ span.reviewSpan {
   .subMenuTitle svg {
     transform: rotate(90deg);
   }
+  .navMenu li {
+    margin-right: 30px;
+  }
   nav:not(nav.dashboardNav, nav.MuiPagination-root) .navMenu {
     height: 500px;
     flex-direction: column;
@@ -3918,7 +3934,7 @@ span.reviewSpan {
   }
   .loginMain,
   .signupMain {
-    width: 80%;
+    width: 90%;
   }
 }
 @media screen and (max-width: 400px) {

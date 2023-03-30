@@ -157,6 +157,7 @@ const NavBar = () => {
             onKeyDown={handleOpenLinksKey}
             onMouseEnter={handleOpenLinksHover}
             onMouseLeave={handleCloseLinksHover}
+            onFocus={handleOpenLinks}
           >
             <div className="subMenuTitle">
               Explore <KeyboardArrowDownIcon />

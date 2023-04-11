@@ -879,7 +879,7 @@ h1 span {
   color: black;
 }
 .headerSearchContainer select option:hover, .headerSearchContainer select option:active, .headerSearchContainer select option:focus {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
 }
 .headerSearchContainer input[type=text] {
   border: none;
@@ -968,7 +968,7 @@ h1 span {
 }
 
 .categories {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1152,7 +1152,7 @@ h1 span {
 }
 
 .jobGuides {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1386,7 +1386,7 @@ h1 span {
 
 .faqLink {
   font-size: 0.7rem;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   padding: 8px 25px;
   border-radius: 10px;
 }
@@ -1414,7 +1414,7 @@ h1 span {
 .footerTop {
   padding: 50px 0;
   margin-top: 50px;
-  border-top: 2px solid #EFF6F3;
+  border-top: 2px solid #d2dfd9;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -1630,7 +1630,7 @@ span.fakeTextBreaks {
 .loginMain .popupForm input {
   width: 100%;
   margin-top: 5px;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   border: 2px solid transparent;
   border-radius: 10px;
   font-size: 0.8rem;
@@ -1849,7 +1849,7 @@ span.fakeTextBreaks {
 .signupMain .popupForm input {
   width: 100%;
   margin-top: 5px;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   border: none;
   border-radius: 10px;
   font-size: 0.8rem;
@@ -1884,7 +1884,7 @@ span.fakeTextBreaks {
   justify-content: space-between;
   align-items: center;
   position: relative;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
 }
 .signupMain .accountType .slider {
   position: absolute;
@@ -2125,7 +2125,7 @@ h1 {
 }
 
 .contactUsMap {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   width: 100%;
   min-height: 400px;
   height: 400px;
@@ -2569,7 +2569,7 @@ h1 {
 .jobCard:hover {
   border: 1px solid #244034;
   transform: scale(1.003);
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
 }
 .jobCard .jobCardHeading {
   display: flex;
@@ -2741,7 +2741,7 @@ h1 {
   top: 40px;
   padding: 30px 20px;
   width: 35%;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -2834,14 +2834,14 @@ h1 {
 }
 
 .dashboardSection {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   display: flex;
 }
 .dashboardSection .dashboardWrapper {
   width: 100%;
 }
 .dashboardSection .dashboardWrapper nav {
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
 }
 .dashboardSection .dashboardWrapper .navLogo {
   position: absolute;
@@ -2997,7 +2997,7 @@ h1 {
 }
 .dashboardContainer .dashboardContent .editable {
   border-color: rgb(170, 170, 170);
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
 }
 .dashboardContainer .dashboardContent .editable:focus {
   outline: 2px solid #244034;
@@ -3270,7 +3270,7 @@ h1 {
 }
 .skillHolder span {
   font-size: 0.8rem;
-  background-color: #EFF6F3;
+  background-color: #d2dfd9;
   border-radius: 5px;
   padding: 5px 10px;
   margin-right: 20px;
@@ -3361,7 +3361,7 @@ span.reviewSpan {
   }
   .showNavButton:hover {
     color: #755146 !important;
-    background-color: #EFF6F3 !important;
+    background-color: #d2dfd9 !important;
   }
   .showNavButton svg {
     font-size: 3rem;

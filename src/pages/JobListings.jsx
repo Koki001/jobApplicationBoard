@@ -227,7 +227,7 @@ const JobListings = () => {
                 onChange={() => setExpanded(!expanded)}
                 sx={{
                   boxShadow: "none",
-                  backgroundColor: "#EFF6F3",
+                  backgroundColor: "#d2dfd9",
                   borderRadius: "20px",
                 }}
               >

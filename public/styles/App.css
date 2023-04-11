@@ -635,10 +635,6 @@ h1 * {
   color: #00BF58;
 }
 
-.savedJob svg {
-  background-color: #00BF58;
-}
-
 .mainHeader {
   display: flex;
   flex-direction: column;
